@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Add New Room | Grand Regency Admin</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#d4e3ff",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#040607",
+                        "on-surface": "#1a1c1c",
+                        "surface-container-highest": "#e2e2e2",
+                        "background": "#f9f9f9",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#745c00",
+                        "tertiary-fixed": "#e1e3e4",
+                        "outline": "#74777f",
+                        "inverse-on-surface": "#f0f1f1",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#476083",
+                        "surface-dim": "#dadada",
+                        "on-secondary-fixed-variant": "#574500",
+                        "inverse-primary": "#afc8f0",
+                        "on-surface-variant": "#43474e",
+                        "primary-container": "#001f3f",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#2f486a",
+                        "surface-bright": "#f9f9f9",
+                        "on-tertiary-fixed": "#191c1d",
+                        "surface-container-high": "#e8e8e8",
+                        "secondary-container": "#fed65b",
+                        "inverse-surface": "#2f3131",
+                        "tertiary-container": "#1c1f20",
+                        "on-primary-container": "#6f88ad",
+                        "on-primary-fixed": "#001c3a",
+                        "surface": "#f9f9f9",
+                        "tertiary-fixed-dim": "#c5c7c8",
+                        "secondary-fixed-dim": "#e9c349",
+                        "on-tertiary-fixed-variant": "#454748",
+                        "surface-variant": "#e2e2e2",
+                        "on-tertiary-container": "#848688",
+                        "error-container": "#ffdad6",
+                        "primary": "#000613",
+                        "outline-variant": "#c4c6cf",
+                        "on-background": "#1a1c1c",
+                        "secondary": "#735c00",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#241a00",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#afc8f0",
+                        "surface-container-low": "#f3f3f4",
+                        "surface-container": "#eeeeee",
+                        "secondary-fixed": "#ffe088"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-sm": "24px",
+                        "gutter": "32px",
+                        "unit": "8px",
+                        "container-max": "1280px",
+                        "margin-desktop": "64px",
+                        "stack-md": "48px",
+                        "stack-lg": "80px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "display-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "display-lg-mobile": ["40px", { "lineHeight": "1.2", "letterSpacing": "0.03em", "fontWeight": "300" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "letterSpacing": "0.02em", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "0.05em", "fontWeight": "300" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e2e2e2;
+            border-radius: 10px;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-surface text-on-surface overflow-hidden">
+    <!-- Sidebar Navigation -->
+    <aside
+        class="h-screen w-64 fixed left-0 top-0 bg-primary-container dark:bg-primary-container border-r border-outline-variant/10 flex flex-col py-stack-sm px-unit z-50">
+        <div class="px-4 mb-stack-md">
+            <h1 class="text-headline-md font-headline-md font-bold text-secondary-fixed dark:text-secondary-fixed-dim">
+                Grand Regency</h1>
+        </div>
+        <nav class="flex-1 space-y-2 px-2 overflow-y-auto custom-scrollbar">
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-surface-variant dark:text-surface-variant/70 font-medium hover:bg-surface-tint/5 transition-colors duration-200"
+                href="#">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span class="font-label-md text-label-md">Dashboard</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-surface-variant dark:text-surface-variant/70 font-medium hover:bg-surface-tint/5 transition-colors duration-200"
+                href="#">
+                <span class="material-symbols-outlined">calendar_month</span>
+                <span class="font-label-md text-label-md">Bookings</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-secondary-fixed dark:text-secondary-fixed-dim font-bold border-r-2 border-secondary-fixed bg-surface-tint/10 transition-all duration-200"
+                href="#">
+                <span class="material-symbols-outlined">bed</span>
+                <span class="font-label-md text-label-md">Rooms</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-surface-variant dark:text-surface-variant/70 font-medium hover:bg-surface-tint/5 transition-colors duration-200"
+                href="#">
+                <span class="material-symbols-outlined">group</span>
+                <span class="font-label-md text-label-md">Staff</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-surface-variant dark:text-surface-variant/70 font-medium hover:bg-surface-tint/5 transition-colors duration-200"
+                href="#">
+                <span class="material-symbols-outlined">settings</span>
+                <span class="font-label-md text-label-md">Settings</span>
+            </a>
+        </nav>
+        <div class="mt-auto px-4 py-4 border-t border-outline-variant/10">
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-primary font-bold overflow-hidden">
+                    <img alt="Admin Avatar" class="w-full h-full object-cover"
+                        data-alt="A professional headshot of a sophisticated hotel general manager in a tailored navy suit. He has a warm, confident expression, set against a blurred background of a luxury hotel lobby with warm golden lighting and marble surfaces."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRfKjZLYKL6mSvnF3eF7b5D6M3vSY096z9tHBJgBtHn5F8Tl33QDRw7zIaBtyge-AMtvsCW3Hp1KhsSsCDzBt8glQRcCwGpXNadjNFWOL1tj1jgbrqB74lxnIftT8i7CHUN7p05LBVhe6hF3BFiIrbR98IQvkAUTck6culjytd_XVa4ozr4khangct9Fek2pul-GRLtFKKUItrODfZWtM0mNmki9ije3y937Sv3UMoIqyBvaApkC-4thNS52onpsctyC317gme0Ts" />
+                </div>
+                <div>
+                    <p class="text-label-md font-bold text-on-primary">Alexander Vance</p>
+                    <p class="text-xs text-on-primary-container">General Manager</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- Top App Bar -->
+    <header
+        class="fixed top-0 left-64 right-0 h-20 bg-surface/80 backdrop-blur-md border-b border-surface-container-highest flex justify-between items-center px-margin-desktop z-40">
+        <div>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface">Add New Room</h2>
+            <p class="text-body-md text-on-surface-variant opacity-70">Expand your property inventory</p>
+        </div>
+        <div class="flex items-center gap-6">
+            <button
+                class="relative p-2 text-on-surface-variant hover:bg-surface-container transition-colors rounded-full">
+                <span class="material-symbols-outlined">notifications</span>
+                <span class="absolute top-2 right-2 w-2 h-2 bg-secondary rounded-full"></span>
+            </button>
+            <div class="h-8 w-[1px] bg-outline-variant/30"></div>
+            <div class="flex items-center gap-3">
+                <span class="font-label-md text-label-md text-on-surface">Property: <span
+                        class="text-secondary font-bold">Grand Regency</span></span>
+                <span class="material-symbols-outlined text-secondary">location_on</span>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content Canvas -->
+    <main class="ml-64 pt-20 h-screen overflow-y-auto bg-background custom-scrollbar">
+        <div class="max-w-[900px] mx-auto py-stack-lg px-gutter">
+            <!-- Elegant Form Container -->
+            <div
+                class="glass-card rounded-xl p-stack-md shadow-sm animate-in fade-in slide-in-from-bottom-4 duration-700">
+                <form method="POST" class="space-y-stack-md" id="addRoomForm">
+                    <!-- Section: Basic Information -->
+                    <div class="space-y-gutter">
+                        <div class="border-l-4 border-secondary pl-4">
+                            <h3 class="font-headline-md text-headline-md text-primary">Room Details</h3>
+                            <p class="text-body-md text-on-surface-variant">Essential information about the
+                                accommodation.</p>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+                            <div class="space-y-2">
+                                <label
+                                    class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Room
+                                    Name</label>
+                                <input
+                                    name= "name" class="w-full bg-white/50 border-b-2 border-outline-variant focus:border-secondary focus:ring-0 transition-all py-3 px-1 text-body-lg placeholder:text-outline-variant"
+                                    placeholder="e.g. Royal Ocean Suite 402" type="text" />
+                            </div>
+                            <div class="space-y-2">
+                                <label
+                                    class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Room
+                                    Type</label>
+                                <select
+                                    class="w-full bg-white/50 border-b-2 border-outline-variant focus:border-secondary focus:ring-0 transition-all py-3 px-1 text-body-lg appearance-none">
+                                    <option>Deluxe Room</option>
+                                    <option>Executive Suite</option>
+                                    <option>Penthouse Suite</option>
+                                    <option>Junior Suite</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+                            <div class="space-y-2">
+                                <label
+                                    class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Price
+                                    Per Night</label>
+                                <div class="relative">
+                                    <span
+                                        class="absolute left-0 top-1/2 -translate-y-1/2 text-on-surface font-bold">$</span>
+                                    <input
+                                        name="price" class="w-full bg-white/50 border-b-2 border-outline-variant focus:border-secondary focus:ring-0 transition-all py-3 pl-5 pr-1 text-body-lg"
+                                        placeholder="0.00" type="number" />
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <label
+                                    class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Capacity</label>
+                                <input
+                                    class="w-full bg-white/50 border-b-2 border-outline-variant focus:border-secondary focus:ring-0 transition-all py-3 px-1 text-body-lg"
+                                    placeholder="2" type="number" />
+                            </div>
+                            <div class="space-y-2">
+                                <label
+                                    class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Bed
+                                    Type</label>
+                                <select
+                                    class="w-full bg-white/50 border-b-2 border-outline-variant focus:border-secondary focus:ring-0 transition-all py-3 px-1 text-body-lg">
+                                    <option>King Size</option>
+                                    <option>Queen Size</option>
+                                    <option>Twin Beds</option>
+                                    <option>Double Bed</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Section: Status & Facilities -->
+                    <div class="space-y-gutter pt-stack-sm">
+                        <div class="space-y-4">
+                            <label
+                                class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Room
+                                Status</label>
+                            <div class="flex flex-wrap gap-3">
+                                <label class="cursor-pointer group">
+                                    <input checked="" class="hidden peer" name="status" type="radio"
+                                        value="available" />
+                                    <div
+                                        class="px-6 py-2 rounded-full border border-outline-variant peer-checked:border-secondary peer-checked:bg-secondary/10 peer-checked:text-secondary font-label-md text-label-md transition-all group-hover:bg-surface-container">
+                                        Available
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer group">
+                                    <input class="hidden peer" name="status" type="radio" value="occupied" />
+                                    <div
+                                        class="px-6 py-2 rounded-full border border-outline-variant peer-checked:border-primary peer-checked:bg-primary/5 peer-checked:text-primary font-label-md text-label-md transition-all group-hover:bg-surface-container">
+                                        Occupied
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer group">
+                                    <input class="hidden peer" name="status" type="radio" value="maintenance" />
+                                    <div
+                                        class="px-6 py-2 rounded-full border border-outline-variant peer-checked:border-error peer-checked:bg-error/5 peer-checked:text-error font-label-md text-label-md transition-all group-hover:bg-surface-container">
+                                        Maintenance
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label
+                                class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Facilities
+                                &amp; Amenities</label>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <div
+                                        class="w-5 h-5 border-2 border-outline rounded flex items-center justify-center group-hover:border-secondary transition-colors">
+                                        <input checked="" class="hidden peer" type="checkbox" />
+                                        <span
+                                            class="material-symbols-outlined text-[16px] text-secondary scale-0 peer-checked:scale-100 transition-transform">check</span>
+                                    </div>
+                                    <span class="text-body-md text-on-surface">High-speed WiFi</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <div
+                                        class="w-5 h-5 border-2 border-outline rounded flex items-center justify-center group-hover:border-secondary transition-colors">
+                                        <input checked="" class="hidden peer" type="checkbox" />
+                                        <span
+                                            class="material-symbols-outlined text-[16px] text-secondary scale-0 peer-checked:scale-100 transition-transform">check</span>
+                                    </div>
+                                    <span class="text-body-md text-on-surface">Climate Control</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <div
+                                        class="w-5 h-5 border-2 border-outline rounded flex items-center justify-center group-hover:border-secondary transition-colors">
+                                        <input class="hidden peer" type="checkbox" />
+                                        <span
+                                            class="material-symbols-outlined text-[16px] text-secondary scale-0 peer-checked:scale-100 transition-transform">check</span>
+                                    </div>
+                                    <span class="text-body-md text-on-surface">Mini Bar</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <div
+                                        class="w-5 h-5 border-2 border-outline rounded flex items-center justify-center group-hover:border-secondary transition-colors">
+                                        <input checked="" class="hidden peer" type="checkbox" />
+                                        <span
+                                            class="material-symbols-outlined text-[16px] text-secondary scale-0 peer-checked:scale-100 transition-transform">check</span>
+                                    </div>
+                                    <span class="text-body-md text-on-surface">Private Balcony</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label
+                                class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Description</label>
+                            <textarea
+                                name="description" class="w-full bg-white/50 border border-outline-variant focus:border-secondary focus:ring-0 rounded-lg transition-all p-4 text-body-md placeholder:text-outline-variant/60"
+                                placeholder="Describe the ambiance, view, and unique features of the room..."
+                                rows="4"></textarea>
+                        </div>
+                    </div>
+                    <!-- Section: Media Upload -->
+                    <div class="space-y-gutter pt-stack-sm">
+                        <label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Room
+                            Gallery</label>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <!-- Main Image Upload -->
+                            <div
+                                class="md:col-span-2 relative group cursor-pointer overflow-hidden rounded-xl border-2 border-dashed border-outline-variant hover:border-secondary transition-all aspect-video flex flex-col items-center justify-center bg-white/30">
+                                <img class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500"
+                                    data-alt="A high-definition photograph of a sun-drenched luxury hotel suite with floor-to-ceiling windows overlooking a crystal clear turquoise ocean. The interior features contemporary gold-trimmed furniture, plush white linens, and elegant minimalist decor that perfectly encapsulates high-end coastal living and modern architectural serenity."
+                                    id="mainPreview" />
+                                <div class="z-10 flex flex-col items-center text-center p-6">
+                                    <span
+                                        class="material-symbols-outlined text-[48px] text-secondary mb-2 group-hover:scale-110 transition-transform">add_a_photo</span>
+                                    <p class="font-label-md text-label-md text-primary">Upload Primary Image</p>
+                                    <p class="text-xs text-on-surface-variant mt-1">Recommended: 1920x1080px, Max 5MB
+                                    </p>
+                                </div>
+                                <input class="absolute inset-0 opacity-0 cursor-pointer"
+                                    onchange="previewImage(this, 'mainPreview')" type="file" />
+                            </div>
+                            <!-- Secondary Placeholder -->
+                            <div class="flex flex-col gap-4">
+                                <div
+                                    class="flex-1 relative group cursor-pointer overflow-hidden rounded-xl border-2 border-dashed border-outline-variant hover:border-secondary transition-all flex flex-col items-center justify-center bg-white/30">
+                                    <span
+                                        class="material-symbols-outlined text-[24px] text-outline-variant">image</span>
+                                    <input class="absolute inset-0 opacity-0 cursor-pointer" type="file" />
+                                </div>
+                                <div
+                                    class="flex-1 relative group cursor-pointer overflow-hidden rounded-xl border-2 border-dashed border-outline-variant hover:border-secondary transition-all flex flex-col items-center justify-center bg-white/30">
+                                    <span
+                                        class="material-symbols-outlined text-[24px] text-outline-variant">image</span>
+                                    <input class="absolute inset-0 opacity-0 cursor-pointer" type="file" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Actions -->
+                    <div
+                        class="pt-stack-md flex items-center justify-end gap-gutter border-t border-outline-variant/20">
+                        <button
+                            class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors px-6 py-3 uppercase tracking-widest"
+                            type="button">
+                            Cancel
+                        </button>
+                        <button
+                            class="bg-secondary hover:bg-on-secondary-container text-primary font-bold px-10 py-4 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all active:scale-95 flex items-center gap-3 uppercase tracking-widest text-label-md"
+                            type="submit">
+                            <span>Save Room</span>
+                            <span class="material-symbols-outlined text-[20px]">save</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <!-- Footer Note -->
+            <div class="mt-8 text-center">
+                <p class="text-xs text-on-surface-variant/50">Property management standards require all fields for
+                    regulatory compliance in the UAE region.</p>
+            </div>
+        </div>
+    </main>
+    <script>
+        // Micro-interactions & Image Preview Logic
+        function previewImage(input, previewId) {
+            const preview = document.getElementById(previewId);
+            const container = preview.parentElement;
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.classList.remove('opacity-0');
+                    container.querySelector('div').classList.add('opacity-0');
+
+                    // Add a subtle success pulse
+                    container.classList.add('ring-2', 'ring-secondary');
+                    setTimeout(() => container.classList.remove('ring-2'), 1000);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Form Submit Simulation
+        
+
+        // Add subtle hover effect for glass cards
+        document.querySelector('.glass-card').addEventListener('mousemove', (e) => {
+            const card = e.currentTarget;
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            card.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.7) 60%)`;
+        });
+
+        document.querySelector('.glass-card').addEventListener('mouseleave', (e) => {
+            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.7)';
+        });
+    </script>
+</body>
+
+</html>
