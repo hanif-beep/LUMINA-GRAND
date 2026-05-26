@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Bookings Management | Grand Regency Admin</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#040607",
+                        "inverse-primary": "#afc8f0",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#574500",
+                        "primary-fixed": "#d4e3ff",
+                        "surface-dim": "#dadada",
+                        "surface-container": "#eeeeee",
+                        "outline-variant": "#c4c6cf",
+                        "surface-container-highest": "#e2e2e2",
+                        "outline": "#74777f",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#1c1f20",
+                        "on-tertiary": "#ffffff",
+                        "background": "#f9f9f9",
+                        "on-primary-container": "#6f88ad",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#454748",
+                        "tertiary-fixed-dim": "#c5c7c8",
+                        "inverse-on-surface": "#f0f1f1",
+                        "tertiary-fixed": "#e1e3e4",
+                        "on-tertiary-container": "#848688",
+                        "primary-container": "#001f3f",
+                        "on-secondary-container": "#745c00",
+                        "primary": "#000613",
+                        "secondary-container": "#fed65b",
+                        "error": "#ba1a1a",
+                        "on-surface": "#1a1c1c",
+                        "secondary-fixed-dim": "#e9c349",
+                        "surface-tint": "#476083",
+                        "primary-fixed-dim": "#afc8f0",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#f9f9f9",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e2e2e2",
+                        "surface-container-high": "#e8e8e8",
+                        "on-primary-fixed-variant": "#2f486a",
+                        "secondary-fixed": "#ffe088",
+                        "on-secondary-fixed": "#241a00",
+                        "on-background": "#1a1c1c",
+                        "on-surface-variant": "#43474e",
+                        "on-primary-fixed": "#001c3a",
+                        "surface": "#f9f9f9",
+                        "secondary": "#735c00",
+                        "on-tertiary-fixed": "#191c1d",
+                        "inverse-surface": "#2f3131"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "gutter": "32px",
+                        "stack-md": "48px",
+                        "stack-sm": "24px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "64px",
+                        "container-max": "1280px",
+                        "stack-lg": "80px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "display-lg-mobile": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "0.05em", "fontWeight": "300" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "letterSpacing": "0.02em", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "display-lg-mobile": ["40px", { "lineHeight": "1.2", "letterSpacing": "0.03em", "fontWeight": "300" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(240, 240, 240, 0.8);
+        }
+
+        .sidebar-item-active {
+            border-right: 2px solid #ffe088;
+            background: rgba(71, 96, 131, 0.1);
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-surface">
+    <!-- NavigationDrawer: Shared Component -->
+    <aside
+        class="h-screen w-64 fixed left-0 top-0 bg-primary-container flex flex-col py-stack-sm px-unit border-r border-outline-variant/10 z-50">
+        <div class="px-4 mb-stack-lg">
+            <h1 class="text-headline-md font-headline-md font-bold text-secondary-fixed">Grand Regency</h1>
+            <p class="text-label-sm text-on-primary-container/60 tracking-widest mt-1">MANAGEMENT PORTAL</p>
+        </div>
+        <nav class="flex-1 space-y-2">
+            <!-- Dashboard -->
+            <a class="flex items-center gap-4 px-4 py-3 text-surface-variant/70 font-medium hover:bg-surface-tint/5 transition-colors duration-200"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                <span class="font-label-md text-label-md">Dashboard</span>
+            </a>
+            <!-- Bookings - ACTIVE -->
+            <a class="flex items-center gap-4 px-4 py-3 text-secondary-fixed font-bold border-r-2 border-secondary-fixed bg-surface-tint/10 transition-all duration-200"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+                <span class="font-label-md text-label-md">Bookings</span>
+            </a>
+            <!-- Rooms -->
+            <a class="flex items-center gap-4 px-4 py-3 text-surface-variant/70 font-medium hover:bg-surface-tint/5 transition-colors duration-200"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="bed">bed</span>
+                <span class="font-label-md text-label-md">Rooms</span>
+            </a>
+            <!-- Staff -->
+            <a class="flex items-center gap-4 px-4 py-3 text-surface-variant/70 font-medium hover:bg-surface-tint/5 transition-colors duration-200"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="group">group</span>
+                <span class="font-label-md text-label-md">Staff</span>
+            </a>
+            <!-- Settings -->
+            <a class="flex items-center gap-4 px-4 py-3 text-surface-variant/70 font-medium hover:bg-surface-tint/5 transition-colors duration-200"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="settings">settings</span>
+                <span class="font-label-md text-label-md">Settings</span>
+            </a>
+        </nav>
+        <div class="mt-auto px-4 pt-stack-sm border-t border-outline-variant/10">
+            <div class="flex items-center gap-3">
+                <img alt="Admin Avatar" class="w-10 h-10 rounded-full object-cover border border-secondary-fixed/30"
+                    data-alt="A professional headshot of a mature male hotel general manager with short graying hair and a confident, warm expression. He is wearing a tailored navy blue suit and a crisp white shirt. The background is a blurred, high-end luxury hotel lobby with warm golden lighting and marble accents, reflecting a sophisticated hospitality environment."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNhB6ReScDQ1eW0Nt-iTn8_uIwpr-_5trHe2EF1aLTkcXP6lQptznLSrPzxo2aKNAJhUpZGDvXSQWhoK8Q3UqzeICVB2UkXX_jYXk1flxOGUNkpx9no7wI-gcX-CUAtK0LILprItgeuCBKipMJqC2eDi4eQSpEZHIX69EM7guoMsJpmBUWPiLtLvO1GxuQEFtXxxgDxvYqHSO11E9d0BVAIBt6Ujt3AGr555_FyrbbiJjleCrl1lTMvVS0UH9Rsw4miJMdsOIyMu0" />
+                <div>
+                    <p class="text-label-md font-bold text-secondary-fixed">Alexander Vance</p>
+                    <p class="text-label-sm text-on-primary-container/60">General Manager</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- Main Content Wrapper -->
+    <main class="ml-64 min-h-screen">
+        <!-- TopAppBar -->
+        <header
+            class="flex justify-between items-center w-full h-20 pl-7 pr-margin-desktop sticky top-0 bg-surface/80 backdrop-blur-md z-40 border-b border-surface-container-highest">
+            <div>
+                <h2 class="font-headline-lg text-headline-lg text-on-surface">Bookings Management</h2>
+                <p class="text-body-md text-on-surface-variant">Monitor and manage hotel reservations efficiently</p>
+            </div>
+            <div class="flex items-center gap-gutter">
+                <div class="relative cursor-pointer hover:opacity-80 transition-opacity">
+                    <span class="material-symbols-outlined text-on-surface text-2xl"
+                        data-icon="notifications">notifications</span>
+                    <span class="absolute -top-1 -right-1 w-2 h-2 bg-secondary rounded-full"></span>
+                </div>
+                <div class="flex items-center gap-3 cursor-pointer group">
+                    <div class="text-right">
+                        <p class="text-label-md font-bold group-hover:text-secondary transition-colors">Admin Panel</p>
+                        <p class="text-label-sm text-on-surface-variant">Regency Global</p>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center">
+                        <span class="material-symbols-outlined text-on-secondary-container"
+                            data-icon="person">person</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Content Canvas -->
+        <div class="p-margin-desktop space-y-stack-lg max-w-container-max mx-auto">
+            <!-- Statistics Section: Bento Grid Glassmorphism -->
+            <section class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+                <div class="glass-card p-stack-sm rounded-xl transition-transform hover:-translate-y-1">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-secondary/10 rounded-lg">
+                            <span class="material-symbols-outlined text-secondary"
+                                data-icon="book_online">book_online</span>
+                        </div>
+                        <span class="text-label-sm text-green-600 font-bold">+12%</span>
+                    </div>
+                    <p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Total Bookings</p>
+                    <h3 class="text-headline-md font-bold text-on-surface">1,284</h3>
+                </div>
+                <div class="glass-card p-stack-sm rounded-xl transition-transform hover:-translate-y-1">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-surface-tint/10 rounded-lg">
+                            <span class="material-symbols-outlined text-surface-tint"
+                                data-icon="person_check">person_check</span>
+                        </div>
+                        <span class="text-label-sm text-green-600 font-bold">+5%</span>
+                    </div>
+                    <p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Active Guests</p>
+                    <h3 class="text-headline-md font-bold text-on-surface">342</h3>
+                </div>
+                <div
+                    class="glass-card p-stack-sm rounded-xl transition-transform hover:-translate-y-1 border-secondary-fixed/30">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-secondary-fixed/20 rounded-lg">
+                            <span class="material-symbols-outlined text-on-secondary-fixed-variant"
+                                data-icon="pending_actions">pending_actions</span>
+                        </div>
+                        <span class="text-label-sm text-on-secondary-fixed-variant font-bold">Priority</span>
+                    </div>
+                    <p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Pending Res.</p>
+                    <h3 class="text-headline-md font-bold text-on-surface">18</h3>
+                </div>
+                <div class="glass-card p-stack-sm rounded-xl transition-transform hover:-translate-y-1">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-tertiary/10 rounded-lg">
+                            <span class="material-symbols-outlined text-tertiary" data-icon="payments">payments</span>
+                        </div>
+                        <span class="text-label-sm text-green-600 font-bold">+24%</span>
+                    </div>
+                    <p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Monthly Revenue</p>
+                    <h3 class="text-headline-md font-bold text-on-surface">$142,500</h3>
+                </div>
+            </section>
+            <!-- Search & Filters -->
+            <section class="space-y-stack-sm">
+                <div class="flex flex-col md:flex-row gap-gutter items-center">
+                    <div class="relative w-full md:w-1/3">
+                        <span
+                            class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant/50"
+                            data-icon="search">search</span>
+                        <input
+                            class="w-full pl-12 pr-4 py-4 bg-white border border-outline-variant rounded-full focus:border-secondary focus:ring-0 text-body-md outline-none transition-all"
+                            placeholder="Search by guest name, email or booking ID..." type="text" />
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <div
+                            class="px-5 py-2 rounded-full border border-secondary bg-secondary/5 text-secondary text-label-md font-bold cursor-pointer hover:bg-secondary/10 transition-all flex items-center gap-2">
+                            All Statuses
+                        </div>
+                        <div
+                            class="px-5 py-2 rounded-full border border-outline-variant text-on-surface-variant text-label-md font-medium cursor-pointer hover:border-secondary transition-all flex items-center gap-2">
+                            Room Type <span class="material-symbols-outlined text-sm"
+                                data-icon="expand_more">expand_more</span>
+                        </div>
+                        <div
+                            class="px-5 py-2 rounded-full border border-outline-variant text-on-surface-variant text-label-md font-medium cursor-pointer hover:border-secondary transition-all flex items-center gap-2">
+                            Date Range <span class="material-symbols-outlined text-sm"
+                                data-icon="calendar_today">calendar_today</span>
+                        </div>
+                    </div>
+                    <button
+                        class="ml-auto bg-primary text-white px-8 py-4 rounded-full font-label-md text-label-md uppercase tracking-widest hover:bg-primary/90 active:scale-95 transition-all shadow-lg flex items-center gap-3">
+                        <span class="material-symbols-outlined" data-icon="add">add</span>
+                        New Reservation
+                    </button>
+                </div>
+            </section>
+            <!-- Bookings List: Compact Data Table Pattern -->
+            <section class="bg-white rounded-xl shadow-sm border border-outline-variant/30 overflow-hidden">
+                <table class="w-full text-left border-collapse">
+                    <thead class="bg-surface-container-low border-b border-outline-variant/50">
+                        <tr>
+                            <th
+                                class="px-margin-mobile py-5 text-label-sm font-bold text-on-surface-variant uppercase tracking-wider">
+                                Guest</th>
+                            <th
+                                class="px-margin-mobile py-5 text-label-sm font-bold text-on-surface-variant uppercase tracking-wider">
+                                Booking ID</th>
+                            <th
+                                class="px-margin-mobile py-5 text-label-sm font-bold text-on-surface-variant uppercase tracking-wider">
+                                Room</th>
+                            <th
+                                class="px-margin-mobile py-5 text-label-sm font-bold text-on-surface-variant uppercase tracking-wider">
+                                Check-in/Out</th>
+                            <th
+                                class="px-margin-mobile py-5 text-label-sm font-bold text-on-surface-variant uppercase tracking-wider">
+                                Payment</th>
+                            <th
+                                class="px-margin-mobile py-5 text-label-sm font-bold text-on-surface-variant uppercase tracking-wider">
+                                Status</th>
+                            <th
+                                class="px-margin-mobile py-5 text-label-sm font-bold text-on-surface-variant uppercase tracking-wider text-right">
+                                Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-outline-variant/20">
+                        <!-- Row 1 -->
+                        {% for booking in bookings %}
+
+                        <tr class="hover:bg-surface-bright transition-colors group">
+
+                            <td class="px-margin-mobile py-4">
+
+                                <div class="flex items-center gap-4">
+
+                                    <img alt="Guest Avatar" class="w-10 h-10 rounded-full object-cover"
+                                        src="https://i.pravatar.cc/100" />
+
+                                    <div>
+
+                                        <p class="text-body-md font-bold text-on-surface">
+                                            {{ booking.guest_name }}
+                                        </p>
+
+                                        <p class="text-label-sm text-on-surface-variant">
+                                            guest@email.com
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td class="px-margin-mobile py-4 text-label-md font-medium text-surface-tint">
+
+                                #REG-{{ booking.id }}
+
+                            </td>
+
+                            <td class="px-margin-mobile py-4">
+
+                                <span class="text-body-md font-medium">
+                                    {{ booking.room_name }}
+                                </span>
+
+                                <p class="text-label-sm text-on-surface-variant">
+                                    Ocean View
+                                </p>
+
+                            </td>
+
+                            <td class="px-margin-mobile py-4">
+
+                                <p class="text-body-md font-medium">
+                                    {{ booking.check_in }} - {{ booking.check_out }}
+                                </p>
+
+                            </td>
+
+                            <td class="px-margin-mobile py-4 font-bold text-on-surface">
+
+                                ${{ booking.total_payment }}
+
+                            </td>
+
+                            <td class="px-margin-mobile py-4">
+
+                                <span
+                                    class="px-3 py-1 rounded-full bg-secondary-fixed/30 text-on-secondary-fixed-variant text-label-sm font-bold border border-secondary-fixed">
+
+                                    {{ booking.status }}
+
+                                </span>
+
+                            </td>
+
+                            <td class="px-margin-mobile py-4 text-right">
+
+                                <button class="p-2 hover:bg-surface-container rounded-lg transition-colors">
+
+                                    <span class="material-symbols-outlined text-on-surface-variant">
+                                        more_vert
+                                    </span>
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+                        
+                    </tbody>
+                </table>
+                <div class="px-margin-mobile py-6 bg-surface-container-lowest flex justify-between items-center">
+                    <p class="text-label-sm text-on-surface-variant">Showing 4 of 1,284 reservations</p>
+                    <div class="flex gap-2">
+                        <button
+                            class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container transition-all">
+                            <span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+                        </button>
+                        <button
+                            class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold">1</button>
+                        <button
+                            class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container transition-all">2</button>
+                        <button
+                            class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container transition-all">3</button>
+                        <button
+                            class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container transition-all">
+                            <span class="material-symbols-outlined text-sm"
+                                data-icon="chevron_right">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <!-- Contextual FAB (Hidden on Mobile/Table View, but defined for logic) -->
+    <button
+        class="fixed bottom-margin-desktop right-margin-desktop bg-secondary text-on-secondary-fixed p-6 rounded-full shadow-2xl hover:scale-105 active:scale-95 transition-all z-50 flex items-center justify-center">
+        <span class="material-symbols-outlined text-2xl" data-icon="add_box">add_box</span>
+    </button>
+    <script>
+        // Micro-interactions for hover effects
+        document.querySelectorAll('tr').forEach(row => {
+            row.addEventListener('click', () => {
+                // Future implementation: Open details modal
+                console.log('Row clicked');
+            });
+        });
+
+        // Search Bar focus effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('shadow-md');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('shadow-md');
+        });
+    </script>
+</body>
+
+</html>

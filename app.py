@@ -3,8 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template, request, redirect
 from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin
 from flask import request, redirect
+from flask_login import current_user
 
 app = Flask(__name__)
+app.secret_key = 'lumina-grand-secret-key'
 
 # KONFIGURASI DATABASE
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///hotel.db'
@@ -31,6 +33,19 @@ class Room(db.Model):
     description = db.Column(db.Text, nullable=False)
     image = db.Column(db.String(255))
     status = db.Column(db.String(20), default='available')
+
+class Booking(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    guest_name = db.Column(db.String(100))
+    room_name = db.Column(db.String(100))
+
+    check_in = db.Column(db.String(50))
+    check_out = db.Column(db.String(50))
+
+    total_payment = db.Column(db.Integer)
+
+    status = db.Column(db.String(50))
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -76,12 +91,25 @@ def login():
     return render_template('login.html')
 
 @app.route('/dashboard')
+@login_required
 def dashboard():
+
+    if current_user.role not in ['admin', 'super_admin']:
+        return "Access Denied"
+
     rooms = Room.query.all()
-    return render_template('Dashboard.html', rooms=rooms)
+
+    return render_template(
+        'Dashboard.html',
+        rooms=rooms
+    )
 
 @app.route('/add_room', methods=['GET', 'POST'])
+@login_required
 def add_room():
+
+    if current_user.role not in ['admin', 'super_admin']:
+        return "Access Denied"
 
     if request.method == 'POST':
 
@@ -106,9 +134,54 @@ def add_room():
 
     return render_template('add_room.html')
 
+@app.route('/bookings')
+@login_required
+def bookings():
+
+    if current_user.role not in ['admin', 'super_admin']:
+        return "Access Denied"
+
+    bookings = Booking.query.all()
+
+    return render_template(
+        'booking.html',
+        bookings=bookings
+    )
+
+@app.route('/staff')
+@login_required
+def staff():
+
+    if current_user.role != 'super_admin':
+        return "Access Denied"
+
+    staff_members = User.query.filter(User.role.in_(['admin', 'staff'])).all()
+
+    return render_template(
+        'staff.html',
+        staff_members=staff_members
+    )
+
 # MEMBUAT DATABASE
 with app.app_context():
+
     db.create_all()
+
+    existing_booking = Booking.query.first()
+
+    if not existing_booking:
+
+        sample = Booking(
+            guest_name='Fajri',
+            room_name='Deluxe Room',
+            check_in='2026-05-20',
+            check_out='2026-05-25',
+            total_payment=500,
+            status='Confirmed'
+        )
+
+        db.session.add(sample)
+        db.session.commit()
 
 if __name__ == '__main__':
     app.run(debug=True)

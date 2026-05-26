@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Staff Management | LUMINA GRAND</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#6f88ad",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#f0f1f1",
+                        "background": "#f9f9f9",
+                        "on-primary-fixed-variant": "#2f486a",
+                        "on-primary-fixed": "#001c3a",
+                        "on-tertiary-fixed": "#191c1d",
+                        "tertiary": "#040607",
+                        "error": "#ba1a1a",
+                        "secondary": "#735c00",
+                        "on-tertiary-fixed-variant": "#454748",
+                        "inverse-surface": "#2f3131",
+                        "tertiary-fixed": "#e1e3e4",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#241a00",
+                        "tertiary-container": "#1c1f20",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#745c00",
+                        "surface-container": "#eeeeee",
+                        "primary-fixed": "#d4e3ff",
+                        "surface-dim": "#dadada",
+                        "primary-fixed-dim": "#afc8f0",
+                        "surface-variant": "#e2e2e2",
+                        "surface-tint": "#476083",
+                        "surface-container-high": "#e8e8e8",
+                        "surface-bright": "#f9f9f9",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#fed65b",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-secondary-fixed-variant": "#574500",
+                        "surface": "#f9f9f9",
+                        "outline": "#74777f",
+                        "primary-container": "#001f3f",
+                        "on-surface": "#1a1c1c",
+                        "primary": "#000613",
+                        "outline-variant": "#c4c6cf",
+                        "surface-container-low": "#f3f3f4",
+                        "on-tertiary-container": "#848688",
+                        "secondary-fixed": "#ffe088",
+                        "inverse-primary": "#afc8f0",
+                        "tertiary-fixed-dim": "#c5c7c8",
+                        "secondary-fixed-dim": "#e9c349",
+                        "on-background": "#1a1c1c",
+                        "on-surface-variant": "#43474e",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "48px",
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "gutter": "32px",
+                        "container-max": "1280px",
+                        "stack-sm": "24px",
+                        "margin-mobile": "20px",
+                        "stack-lg": "80px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "display-lg-mobile": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "letterSpacing": "0.02em", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "display-lg-mobile": ["40px", { "lineHeight": "1.2", "letterSpacing": "0.03em", "fontWeight": "300" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "0.05em", "fontWeight": "300" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(240, 240, 240, 0.8);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="text-on-surface">
+    <!-- NavigationDrawer (Shared Component) -->
+    <aside
+        class="fixed left-0 top-0 h-full w-64 bg-primary dark:bg-primary-container border-r border-outline-variant/10 dark:border-outline/20 shadow-sm flex flex-col z-50">
+        <div class="px-6 py-10">
+            <h1
+                class="font-headline-md text-headline-md font-bold tracking-widest text-secondary dark:text-secondary-fixed">
+                LUMINA GRAND</h1>
+        </div>
+        <nav class="flex-grow">
+            <ul class="space-y-1">
+                <li>
+                    <a class="flex items-center gap-4 px-6 py-4 text-on-primary dark:text-on-primary-fixed-variant hover:bg-on-primary-fixed-variant/5 hover:text-secondary transition-colors duration-300"
+                        href="#">
+                        <span class="material-symbols-outlined">dashboard</span>
+                        <span class="font-label-md text-label-md">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex items-center gap-4 px-6 py-4 text-on-primary dark:text-on-primary-fixed-variant hover:bg-on-primary-fixed-variant/5 hover:text-secondary transition-colors duration-300"
+                        href="#">
+                        <span class="material-symbols-outlined">calendar_month</span>
+                        <span class="font-label-md text-label-md">Bookings</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex items-center gap-4 px-6 py-4 text-on-primary dark:text-on-primary-fixed-variant hover:bg-on-primary-fixed-variant/5 hover:text-secondary transition-colors duration-300"
+                        href="#">
+                        <span class="material-symbols-outlined">bed</span>
+                        <span class="font-label-md text-label-md">Rooms</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex items-center gap-4 px-6 py-4 text-secondary dark:text-secondary-fixed bg-on-primary-fixed-variant/10 border-r-4 border-secondary"
+                        href="#">
+                        <span class="material-symbols-outlined">group</span>
+                        <span class="font-label-md text-label-md">Staff</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex items-center gap-4 px-6 py-4 text-on-primary dark:text-on-primary-fixed-variant hover:bg-on-primary-fixed-variant/5 hover:text-secondary transition-colors duration-300"
+                        href="#">
+                        <span class="material-symbols-outlined">payments</span>
+                        <span class="font-label-md text-label-md">Payments</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex items-center gap-4 px-6 py-4 text-on-primary dark:text-on-primary-fixed-variant hover:bg-on-primary-fixed-variant/5 hover:text-secondary transition-colors duration-300"
+                        href="#">
+                        <span class="material-symbols-outlined">analytics</span>
+                        <span class="font-label-md text-label-md">Reports</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex items-center gap-4 px-6 py-4 text-on-primary dark:text-on-primary-fixed-variant hover:bg-on-primary-fixed-variant/5 hover:text-secondary transition-colors duration-300"
+                        href="#">
+                        <span class="material-symbols-outlined">settings</span>
+                        <span class="font-label-md text-label-md">Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+    <!-- Main Content Canvas -->
+    <main class="ml-64 min-h-screen pb-stack-lg">
+        <!-- TopAppBar (Shared Component) -->
+        <header
+            class="fixed top-0 right-0 w-[calc(100%-16rem)] z-40 bg-surface/80 dark:bg-surface-container/80 backdrop-blur-md border-b border-surface-variant/30 flex justify-between items-center px-margin-desktop h-20">
+            <div class="flex items-center gap-4">
+                <span
+                    class="material-symbols-outlined text-primary cursor-pointer active:opacity-70 transition-opacity">menu</span>
+                <h2 class="font-headline-md text-headline-md text-primary dark:text-on-primary-fixed">Concierge Overview
+                </h2>
+            </div>
+            <div class="flex items-center gap-6">
+                <button
+                    class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors cursor-pointer active:opacity-70">Search</button>
+                <button
+                    class="font-label-sm text-label-sm text-secondary font-bold hover:text-secondary transition-colors cursor-pointer active:opacity-70">Profile</button>
+            </div>
+        </header>
+        <!-- Page Content -->
+        <div class="pt-32 px-margin-desktop max-w-container-max mx-auto">
+            <!-- Header Section -->
+            <div class="mb-stack-md flex justify-between items-end">
+                <div>
+                    <h1 class="font-headline-lg text-headline-lg text-primary mb-2">Staff Management</h1>
+                    <p class="font-body-md text-body-md text-on-surface-variant">Manage hotel employees, departments,
+                        and operational staff</p>
+                </div>
+                <button
+                    class="bg-secondary text-on-secondary px-6 py-3 rounded shadow-sm hover:brightness-110 transition-all flex items-center gap-2 group">
+                    <span class="material-symbols-outlined text-[20px]">add</span>
+                    <span class="font-label-md text-label-md">ADD STAFF MEMBER</span>
+                </button>
+            </div>
+            <!-- Statistics Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-stack-md">
+                <div class="glass-card p-6 rounded shadow-sm hover:shadow-md transition-shadow">
+                    <p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-2">Total Staff</p>
+                    <h3 class="font-headline-lg text-headline-lg text-primary">124</h3>
+                    <div class="w-full h-1 bg-surface-variant mt-4 rounded-full overflow-hidden">
+                        <div class="w-full h-full bg-primary"></div>
+                    </div>
+                </div>
+                <div
+                    class="glass-card p-6 rounded shadow-sm hover:shadow-md transition-shadow border-l-4 border-secondary">
+                    <p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-2">Active Employees</p>
+                    <h3 class="font-headline-lg text-headline-lg text-primary">118</h3>
+                    <div class="w-full h-1 bg-surface-variant mt-4 rounded-full overflow-hidden">
+                        <div class="w-[95%] h-full bg-secondary"></div>
+                    </div>
+                </div>
+                <div class="glass-card p-6 rounded shadow-sm hover:shadow-md transition-shadow">
+                    <p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-2">Departments</p>
+                    <h3 class="font-headline-lg text-headline-lg text-primary">8</h3>
+                    <div class="flex gap-1 mt-4">
+                        <span class="w-2 h-2 rounded-full bg-secondary"></span>
+                        <span class="w-2 h-2 rounded-full bg-secondary"></span>
+                        <span class="w-2 h-2 rounded-full bg-secondary"></span>
+                        <span class="w-2 h-2 rounded-full bg-surface-variant"></span>
+                    </div>
+                </div>
+                <div class="glass-card p-6 rounded shadow-sm hover:shadow-md transition-shadow">
+                    <p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-2">Staff Attendance</p>
+                    <h3 class="font-headline-lg text-headline-lg text-secondary">95%</h3>
+                    <div class="flex items-end gap-1 h-8 mt-2">
+                        <div class="w-2 h-4 bg-surface-variant rounded-t"></div>
+                        <div class="w-2 h-6 bg-surface-variant rounded-t"></div>
+                        <div class="w-2 h-8 bg-secondary rounded-t"></div>
+                        <div class="w-2 h-7 bg-secondary rounded-t"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Filters Section -->
+            <div class="glass-card p-6 rounded-xl mb-stack-sm flex flex-wrap items-center gap-6">
+                <div class="flex-grow relative">
+                    <span
+                        class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+                    <input
+                        class="w-full bg-surface border border-outline-variant/50 pl-12 pr-4 py-3 rounded focus:border-secondary focus:ring-0 transition-colors font-body-md text-body-md"
+                        placeholder="Search by name, ID or role..." type="text" />
+                </div>
+                <div class="flex items-center gap-4">
+                    <select
+                        class="bg-surface border border-outline-variant/50 px-4 py-3 rounded focus:border-secondary focus:ring-0 transition-colors font-label-md text-label-md appearance-none min-w-[160px]">
+                        <option>All Departments</option>
+                        <option>Housekeeping</option>
+                        <option>Concierge</option>
+                        <option>Front Desk</option>
+                        <option>F&amp;B</option>
+                    </select>
+                    <select
+                        class="bg-surface border border-outline-variant/50 px-4 py-3 rounded focus:border-secondary focus:ring-0 transition-colors font-label-md text-label-md appearance-none min-w-[140px]">
+                        <option>Role</option>
+                        <option>Management</option>
+                        <option>Senior Staff</option>
+                        <option>Junior Staff</option>
+                    </select>
+                    <select
+                        class="bg-surface border border-outline-variant/50 px-4 py-3 rounded focus:border-secondary focus:ring-0 transition-colors font-label-md text-label-md appearance-none min-w-[140px]">
+                        <option>Status</option>
+                        <option>Active</option>
+                        <option>On Leave</option>
+                        <option>Off Duty</option>
+                    </select>
+                </div>
+            </div>
+            <!-- Staff Directory Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+                <!-- Staff Card 1 -->
+                <div
+                    class="glass-card p-6 rounded-xl flex items-center gap-6 hover:shadow-lg transition-all duration-300 group border-l border-transparent hover:border-secondary">
+                    <div class="relative">
+                        <img class="w-24 h-24 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                            data-alt="A professional portrait of a woman in a high-end hospitality uniform, standing in a brightly lit, minimalist hotel lobby. The setting is clean and modern, with soft natural light enhancing the professional and serene atmosphere. The overall aesthetic is one of quiet luxury and architectural clarity, using a palette of soft whites and deep navy accents."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVnmgK_X5BGnxR_9VnzoASCNCHtATabodh7fRzLKdymlin4wlXWk8OQCbzjD0hJtQ162qO0A9735D--T84hYPE2S7ufQyng3nf5dW0DIlFJEKHc8Z0__1boThhh55kXDUx6ynTCtNHB614b_-L2vTcVCUHZHm1o15wEPvcqJb15L0jvb2CP6EUL9ERJL5yMOHYkR14NzQSl8BwX1TLCGRG4LkfqrqMoTo8MsOS0HMk8WdSW7q8J-UaRAL1WYBcD1XoxO1Mu0wK1EI" />
+                        <span
+                            class="absolute bottom-1 right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></span>
+                    </div>
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 class="font-headline-md text-headline-md text-primary">Sarah Jenkins</h4>
+                                <p class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">Head of
+                                    Housekeeping</p>
+                            </div>
+                            <span
+                                class="px-3 py-1 bg-green-100 text-green-700 rounded-full font-label-sm text-label-sm">Active</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 mt-4 text-on-surface-variant">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[18px]">domain</span>
+                                <span class="font-body-md text-body-md">Housekeeping</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[18px]">mail</span>
+                                <span class="font-body-md text-body-md">s.jenkins@lumina.com</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex gap-3">
+                            <button
+                                class="flex-grow py-2 border border-primary text-primary font-label-md text-label-md hover:bg-primary hover:text-on-primary transition-all rounded">VIEW
+                                PROFILE</button>
+                            <button
+                                class="p-2 border border-outline-variant text-on-surface-variant hover:text-secondary rounded transition-colors">
+                                <span class="material-symbols-outlined">edit</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Staff Card 2 -->
+                <div
+                    class="glass-card p-6 rounded-xl flex items-center gap-6 hover:shadow-lg transition-all duration-300 group border-l border-transparent hover:border-secondary">
+                    <div class="relative">
+                        <img class="w-24 h-24 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                            data-alt="A professional male concierge in a sharp navy suit, posing in a luxurious hotel environment with warm gold lighting and minimalist architectural features. The mood is sophisticated and exclusive, reflecting high-end hospitality service. The image uses high contrast and clear focus to emphasize a premium, effortless luxury brand personality."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBb701rj0eiigpT2As1W5JRrh5ILkQuwWFeT0dEmJhkI9xnWO1Id1ZBvPj-3esNYYbAhnKKeLmKGJ1R65QO3RyWUsw086n_VY5lko_TopKPTi6i7hUAaAEWQHYGsbBz-LgRubgiRUXx6NCpFu-kTEdpRYXhbzTkO7wthPJ1kOQ_Vix3QXicTIwKD2xFTXMv7IqNj0T_MG0fTW4Nh7Y7YoAnTE1wV--yBfhuWsAI8HkJsPTcUkmx4eyLcEst7YEz0Yh_ErbW3wxrrcQ" />
+                        <span
+                            class="absolute bottom-1 right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></span>
+                    </div>
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 class="font-headline-md text-headline-md text-primary">Marcus Thorne</h4>
+                                <p class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">Senior
+                                    Concierge</p>
+                            </div>
+                            <span
+                                class="px-3 py-1 bg-green-100 text-green-700 rounded-full font-label-sm text-label-sm">Active</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 mt-4 text-on-surface-variant">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[18px]">domain</span>
+                                <span class="font-body-md text-body-md">Concierge</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[18px]">mail</span>
+                                <span class="font-body-md text-body-md">m.thorne@lumina.com</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex gap-3">
+                            <button
+                                class="flex-grow py-2 border border-primary text-primary font-label-md text-label-md hover:bg-primary hover:text-on-primary transition-all rounded">VIEW
+                                PROFILE</button>
+                            <button
+                                class="p-2 border border-outline-variant text-on-surface-variant hover:text-secondary rounded transition-colors">
+                                <span class="material-symbols-outlined">edit</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Staff Card 3 -->
+                <div
+                    class="glass-card p-6 rounded-xl flex items-center gap-6 hover:shadow-lg transition-all duration-300 group border-l border-transparent hover:border-secondary">
+                    <div class="relative">
+                        <img class="w-24 h-24 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                            data-alt="A portrait of a front desk professional in a high-end resort setting. The background features expansive white space and cinematic soft-focus lighting that emphasizes tranquility and luxury. The aesthetic follows a modern minimalist philosophy with high-contrast elements and a disciplined palette of navy and white, creating a sense of serene, professional service."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEEIOQisda3X_TkqltMs8VOAJFoF4VBO9n6jwKl06N2qyhwmIealDzw6b-TOeYJxSzPM25kdfxdADu4VvT-1OGgOlucC_V7MspMNoVCU550wXMldnPU7mrARYk-6uPc44GUlkxVvNDepLl21yxo0sSP2PlZfs99KeZxJfrpBeW9g2e2Wwdi8AS05Oo70horrfQb3AmGJsvDQ4YPkEFhA825Ii2A_rDiEcsNbBxc-MrmBitwWZD_hDGywYArMTRgcEOi_FOBQ_uk-0" />
+                        <span
+                            class="absolute bottom-1 right-1 w-4 h-4 bg-amber-500 border-2 border-white rounded-full"></span>
+                    </div>
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 class="font-headline-md text-headline-md text-primary">Elena Rodriguez</h4>
+                                <p class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">Front
+                                    Desk Lead</p>
+                            </div>
+                            <span
+                                class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full font-label-sm text-label-sm">On
+                                Leave</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 mt-4 text-on-surface-variant">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[18px]">domain</span>
+                                <span class="font-body-md text-body-md">Front Desk</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[18px]">mail</span>
+                                <span class="font-body-md text-body-md">e.rod@lumina.com</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex gap-3">
+                            <button
+                                class="flex-grow py-2 border border-primary text-primary font-label-md text-label-md hover:bg-primary hover:text-on-primary transition-all rounded">VIEW
+                                PROFILE</button>
+                            <button
+                                class="p-2 border border-outline-variant text-on-surface-variant hover:text-secondary rounded transition-colors">
+                                <span class="material-symbols-outlined">edit</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Staff Card 4 -->
+                <div
+                    class="glass-card p-6 rounded-xl flex items-center gap-6 hover:shadow-lg transition-all duration-300 group border-l border-transparent hover:border-secondary">
+                    <div class="relative">
+                        <img class="w-24 h-24 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                            data-alt="A portrait of a senior F&amp;B manager in an upscale restaurant environment. The background shows blurred details of a luxury dining room with gold accents and high-end materials. The lighting is low and cinematic, creating a sense of exclusivity and architectural clarity. The professional's poise reflects the brand's disciplined and premium personality."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUndAXDyeou8DOvu6TvGSQEWibytcqk9vunZwrYbfwwwA8VM9i_JtVfOaT9hscIijoxtiJhgQ4qzhvXLLYlLXzB_EKrAvF8y5ueGZgT0UqUYkhOXmeOMCLRvCWwdo_0f-5vZ6gGTVo8MYz017w3m6xZMzghW1EOEzCfnaiI911kvGXLnr39JrJGevgD7f_UxCgQz6_2clMEw3XDep3dgb1Z7rTvVttfVaugF6xquz7iapUqDBWDZG1YTa7XV4mgZBo6EQr6zQAZA4" />
+                        <span
+                            class="absolute bottom-1 right-1 w-4 h-4 bg-gray-400 border-2 border-white rounded-full"></span>
+                    </div>
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 class="font-headline-md text-headline-md text-primary">Julian Sorel</h4>
+                                <p class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">F&amp;B
+                                    Director</p>
+                            </div>
+                            <span
+                                class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full font-label-sm text-label-sm">Off
+                                Duty</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 mt-4 text-on-surface-variant">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[18px]">domain</span>
+                                <span class="font-body-md text-body-md">F&amp;B</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[18px]">mail</span>
+                                <span class="font-body-md text-body-md">j.sorel@lumina.com</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex gap-3">
+                            <button
+                                class="flex-grow py-2 border border-primary text-primary font-label-md text-label-md hover:bg-primary hover:text-on-primary transition-all rounded">VIEW
+                                PROFILE</button>
+                            <button
+                                class="p-2 border border-outline-variant text-on-surface-variant hover:text-secondary rounded transition-colors">
+                                <span class="material-symbols-outlined">edit</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Pagination -->
+            <div class="mt-stack-md flex justify-between items-center px-6">
+                <p class="font-body-md text-body-md text-on-surface-variant">Showing 4 of 124 staff members</p>
+                <div class="flex items-center gap-2">
+                    <button
+                        class="w-10 h-10 flex items-center justify-center border border-outline-variant rounded hover:border-secondary transition-colors text-on-surface-variant">
+                        <span class="material-symbols-outlined">chevron_left</span>
+                    </button>
+                    <button
+                        class="w-10 h-10 flex items-center justify-center bg-primary text-on-primary rounded font-label-md text-label-md">1</button>
+                    <button
+                        class="w-10 h-10 flex items-center justify-center border border-outline-variant rounded hover:border-secondary transition-colors font-label-md text-label-md">2</button>
+                    <button
+                        class="w-10 h-10 flex items-center justify-center border border-outline-variant rounded hover:border-secondary transition-colors font-label-md text-label-md">3</button>
+                    <span class="px-2 text-outline-variant">...</span>
+                    <button
+                        class="w-10 h-10 flex items-center justify-center border border-outline-variant rounded hover:border-secondary transition-colors font-label-md text-label-md">31</button>
+                    <button
+                        class="w-10 h-10 flex items-center justify-center border border-outline-variant rounded hover:border-secondary transition-colors text-on-surface-variant">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Contextual FAB (Shared Component Strategy) -->
+    <button
+        class="fixed bottom-10 right-10 w-16 h-16 bg-secondary text-on-secondary rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all flex items-center justify-center z-50 group">
+        <span class="material-symbols-outlined text-[32px]">person_add</span>
+        <span
+            class="absolute right-full mr-4 px-4 py-2 bg-primary text-on-primary text-label-md rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Add
+            New Employee</span>
+    </button>
+    <script>
+        // Simple micro-interaction for cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-4px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Search highlight effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-[1.01]');
+            searchInput.parentElement.style.transition = 'all 0.3s ease';
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-[1.01]');
+        });
+    </script>
+</body>
+
+</html>
