@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Aurelian Reserve | Admin Dashboard</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#dadada",
+                        "surface-tint": "#476083",
+                        "surface-container-low": "#f3f3f4",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f0f1f1",
+                        "surface-bright": "#f9f9f9",
+                        "on-surface": "#1a1c1c",
+                        "background": "#f9f9f9",
+                        "tertiary-container": "#1c1f20",
+                        "tertiary": "#040607",
+                        "surface-container-highest": "#e2e2e2",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e2e2e2",
+                        "on-background": "#1a1c1c",
+                        "surface-container": "#eeeeee",
+                        "inverse-primary": "#afc8f0",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#ffe088",
+                        "tertiary-fixed-dim": "#c5c7c8",
+                        "primary-container": "#001f3f",
+                        "secondary": "#735c00",
+                        "on-primary-fixed-variant": "#2f486a",
+                        "on-primary-fixed": "#001c3a",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#2f3131",
+                        "on-secondary-container": "#745c00",
+                        "surface-container-high": "#e8e8e8",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#000613",
+                        "on-tertiary-fixed": "#191c1d",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-secondary-fixed": "#241a00",
+                        "primary-fixed": "#d4e3ff",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#afc8f0",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#e1e3e4",
+                        "on-primary-container": "#6f88ad",
+                        "secondary-fixed-dim": "#e9c349",
+                        "on-surface-variant": "#43474e",
+                        "on-tertiary-container": "#848688",
+                        "surface": "#f9f9f9",
+                        "on-tertiary-fixed-variant": "#454748",
+                        "outline": "#74777f",
+                        "secondary-container": "#fed65b",
+                        "outline-variant": "#c4c6cf"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "48px",
+                        "unit": "8px",
+                        "stack-sm": "24px",
+                        "stack-lg": "80px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "64px",
+                        "gutter": "32px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "display-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "letterSpacing": "0.02em", "fontWeight": "400" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "0.05em", "fontWeight": "300" }],
+                        "display-lg-mobile": ["40px", { "lineHeight": "1.2", "letterSpacing": "0.03em", "fontWeight": "300" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .scroll-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(240, 240, 240, 0.8);
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-surface overflow-x-hidden">
+    <!-- NavigationDrawer Shell -->
+    <aside
+        class="bg-primary-container dark:bg-primary-container h-screen w-64 fixed left-0 top-0 border-r border-outline-variant/10 flex flex-col h-full py-stack-sm px-unit z-50">
+        <div class="px-4 mb-stack-md">
+            <h1 class="text-headline-md font-headline-md font-bold text-secondary-fixed dark:text-secondary-fixed-dim">
+                Aurelian</h1>
+            <p class="text-label-sm font-label-sm text-on-primary-container/60 tracking-widest mt-1">RESERVE</p>
+        </div>
+        <nav class="flex-1 space-y-1">
+            <!-- Active Tab: Dashboard -->
+            <div
+                class="flex items-center gap-3 px-4 py-3 text-secondary-fixed dark:text-secondary-fixed-dim font-bold border-r-2 border-secondary-fixed bg-surface-tint/10 cursor-pointer transition-all duration-200">
+                <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                <span class="font-label-md text-label-md">Dashboard</span>
+            </div>
+            <!-- Inactive Tabs -->
+            <div
+                class="flex items-center gap-3 px-4 py-3 text-surface-variant dark:text-surface-variant/70 font-medium hover:bg-surface-tint/5 transition-colors duration-200 cursor-pointer">
+                <span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+                <span class="font-label-md text-label-md">Bookings</span>
+            </div>
+            <div
+                class="flex items-center gap-3 px-4 py-3 text-surface-variant dark:text-surface-variant/70 font-medium hover:bg-surface-tint/5 transition-colors duration-200 cursor-pointer">
+                <span class="material-symbols-outlined" data-icon="bed">bed</span>
+                <span class="font-label-md text-label-md">Rooms</span>
+            </div>
+            <div
+                class="flex items-center gap-3 px-4 py-3 text-surface-variant dark:text-surface-variant/70 font-medium hover:bg-surface-tint/5 transition-colors duration-200 cursor-pointer">
+                <span class="material-symbols-outlined" data-icon="group">group</span>
+                <span class="font-label-md text-label-md">Staff</span>
+            </div>
+            <div
+                class="flex items-center gap-3 px-4 py-3 text-surface-variant dark:text-surface-variant/70 font-medium hover:bg-surface-tint/5 transition-colors duration-200 cursor-pointer">
+                <span class="material-symbols-outlined" data-icon="settings">settings</span>
+                <span class="font-label-md text-label-md">Settings</span>
+            </div>
+        </nav>
+        <div class="mt-auto px-4 py-6 border-t border-outline-variant/10">
+            <div class="flex items-center gap-3">
+                <img alt="Admin Avatar" class="w-10 h-10 rounded-full object-cover grayscale"
+                    data-alt="A professional, high-end portrait of a general manager in his 40s wearing a bespoke navy suit. The lighting is dramatic yet soft, characteristic of a luxury hotel brand's marketing materials. The background is a blurred elegant lobby with gold accents and architectural precision. The overall mood is sophisticated and reliable."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOZW9aXT8l6APSt5UyYxLIf5QfJwb2oikkbN88W0BuTJVDmytPvPrx0yjX8FNDsMTIn-oVaVKDF-gy6gEsaKFRMmEsgzxW3zfngZ9EBP7hpjH4ociys1SVEEs78fNt3G-Ub5sRJmK0WD22qrUnu7rUBvGBt-94voxH4trvH3DmU1mMS7hKpMcODW8UxZerGlLZduWwR37X1XaD1ZrYcLPSMQ_xY7fmUBxvjCVePBnjT8j9REaPTup9rR_Lfmrv9IJZvt48WJH_KBI" />
+                <div>
+                    <p class="font-label-md text-label-md text-secondary-fixed">Alexander Vance</p>
+                    <p class="text-[10px] text-on-primary-container/80 uppercase tracking-wider">General Manager</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- Main Canvas -->
+    <main class="ml-64 min-h-screen">
+        <!-- TopAppBar -->
+        <header
+            class="bg-surface/80 backdrop-blur-md dark:bg-surface-container/80 border-b border-surface-container-highest dark:border-outline-variant/20 flex justify-between items-center w-full h-20 pl-unit pr-margin-desktop sticky top-0 z-40">
+            <div class="flex items-center gap-4 px-6">
+                <span class="material-symbols-outlined text-on-surface cursor-pointer" data-icon="menu">menu</span>
+                <h2 class="font-headline-md text-headline-md text-on-surface">Dashboard Overview</h2>
+            </div>
+            <div class="flex items-center gap-6">
+                <div class="relative group">
+                    <span
+                        class="material-symbols-outlined text-on-surface-variant hover:text-secondary transition-colors cursor-pointer"
+                        data-icon="notifications">notifications</span>
+                    <span class="absolute top-0 right-0 w-2 h-2 bg-secondary rounded-full"></span>
+                </div>
+                <div class="h-8 w-[1px] bg-outline-variant/30"></div>
+                <div class="flex items-center gap-3 cursor-pointer group">
+                    <div class="text-right">
+                        <p class="text-label-sm font-label-sm text-on-surface-variant">Grand Regency</p>
+                        <p class="text-[10px] text-outline uppercase tracking-tighter">London, UK</p>
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-on-surface-variant group-hover:translate-y-0.5 transition-transform"
+                        data-icon="expand_more">expand_more</span>
+                </div>
+            </div>
+        </header>
+        <!-- Content Area -->
+        <div class="p-margin-desktop space-y-stack-lg max-w-[1400px] mx-auto">
+            <!-- Statistics Cards -->
+            <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+                <!-- Total Bookings -->
+                <div
+                    class="glass-card p-6 rounded-xl flex flex-col justify-between h-40 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                    <div class="flex justify-between items-start">
+                        <div class="p-2 rounded-lg bg-secondary-fixed/20 text-secondary">
+                            <span class="material-symbols-outlined" data-icon="book_online">book_online</span>
+                        </div>
+                        <span class="text-label-sm font-label-sm text-secondary">+12.5%</span>
+                    </div>
+                    <div>
+                        <p class="text-label-md font-label-md text-on-surface-variant uppercase tracking-widest">Total
+                            Bookings</p>
+                        <h3 class="text-headline-lg font-headline-lg mt-1">1,284</h3>
+                    </div>
+                </div>
+                <!-- Total Rooms -->
+                <div
+                    class="glass-card p-6 rounded-xl flex flex-col justify-between h-40 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                    <div class="flex justify-between items-start">
+                        <div class="p-2 rounded-lg bg-surface-container text-on-surface-variant">
+                            <span class="material-symbols-outlined" data-icon="meeting_room">meeting_room</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-label-md font-label-md text-on-surface-variant uppercase tracking-widest">Total
+                            Rooms</p>
+                        <h3 class="text-headline-lg font-headline-lg mt-1">250</h3>
+                    </div>
+                </div>
+                <!-- Available Rooms -->
+                <div
+                    class="glass-card p-6 rounded-xl flex flex-col justify-between h-40 border-l-4 border-secondary transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                    <div class="flex justify-between items-start">
+                        <div class="p-2 rounded-lg bg-secondary/10 text-secondary">
+                            <span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+                        </div>
+                        <span class="text-label-sm font-label-sm text-secondary">Live</span>
+                    </div>
+                    <div>
+                        <p class="text-label-md font-label-md text-on-surface-variant uppercase tracking-widest">
+                            Available Rooms</p>
+                        <h3 class="text-headline-lg font-headline-lg mt-1">42</h3>
+                    </div>
+                </div>
+                <!-- Total Users -->
+                <div
+                    class="glass-card p-6 rounded-xl flex flex-col justify-between h-40 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                    <div class="flex justify-between items-start">
+                        <div class="p-2 rounded-lg bg-surface-container text-on-surface-variant">
+                            <span class="material-symbols-outlined" data-icon="person">person</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-label-md font-label-md text-on-surface-variant uppercase tracking-widest">Total
+                            Users</p>
+                        <h3 class="text-headline-lg font-headline-lg mt-1">8,942</h3>
+                    </div>
+                </div>
+            </section>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+                <!-- Booking Table (2/3 width) -->
+                <section class="lg:col-span-2 space-y-6">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-headline-md text-headline-md">Recent Bookings</h4>
+                        <button
+                            class="text-label-md font-label-md text-secondary border-b border-secondary/30 hover:border-secondary transition-all pb-0.5">View
+                            All Transactions</button>
+                    </div>
+                    <div class="glass-card rounded-xl overflow-hidden">
+                        <table class="w-full text-left border-collapse">
+                            <thead class="bg-surface-container-low border-b border-outline-variant/10">
+                                <tr>
+                                    <th class="px-6 py-4 text-label-sm font-label-sm text-outline uppercase">Guest Name
+                                    </th>
+                                    <th class="px-6 py-4 text-label-sm font-label-sm text-outline uppercase">Room Type
+                                    </th>
+                                    <th class="px-6 py-4 text-label-sm font-label-sm text-outline uppercase">Check-in
+                                    </th>
+                                    <th
+                                        class="px-6 py-4 text-label-sm font-label-sm text-outline uppercase text-center">
+                                        Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-outline-variant/10">
+                                <tr class="hover:bg-surface-bright transition-colors cursor-pointer">
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="w-8 h-8 rounded-full bg-primary-container text-secondary-fixed flex items-center justify-center text-[10px] font-bold">
+                                                JD</div>
+                                            <span class="text-body-md font-medium">Julianne Deville</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-body-md text-on-surface-variant">Royal Penthouse</td>
+                                    <td class="px-6 py-4 text-body-md text-on-surface-variant">Oct 12, 2023</td>
+                                    <td class="px-6 py-4 text-center">
+                                        <span
+                                            class="px-3 py-1 rounded-full bg-secondary-fixed/30 text-secondary text-[10px] font-bold uppercase tracking-wider">Confirmed</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-surface-bright transition-colors cursor-pointer">
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center text-[10px] font-bold">
+                                                RK</div>
+                                            <span class="text-body-md font-medium">Robert Kincaid</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-body-md text-on-surface-variant">Deluxe Suite</td>
+                                    <td class="px-6 py-4 text-body-md text-on-surface-variant">Oct 14, 2023</td>
+                                    <td class="px-6 py-4 text-center">
+                                        <span
+                                            class="px-3 py-1 rounded-full bg-surface-container-highest text-on-surface-variant text-[10px] font-bold uppercase tracking-wider">Pending</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-surface-bright transition-colors cursor-pointer">
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center text-[10px] font-bold">
+                                                MS</div>
+                                            <span class="text-body-md font-medium">Marcus Sterling</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-body-md text-on-surface-variant">Classic King</td>
+                                    <td class="px-6 py-4 text-body-md text-on-surface-variant">Oct 11, 2023</td>
+                                    <td class="px-6 py-4 text-center">
+                                        <span
+                                            class="px-3 py-1 rounded-full bg-error-container text-error text-[10px] font-bold uppercase tracking-wider">Cancelled</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-surface-bright transition-colors cursor-pointer">
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="w-8 h-8 rounded-full bg-primary-container text-secondary-fixed flex items-center justify-center text-[10px] font-bold">
+                                                EW</div>
+                                            <span class="text-body-md font-medium">Elena Wright</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-body-md text-on-surface-variant">Executive Suite</td>
+                                    <td class="px-6 py-4 text-body-md text-on-surface-variant">Oct 15, 2023</td>
+                                    <td class="px-6 py-4 text-center">
+                                        <span
+                                            class="px-3 py-1 rounded-full bg-secondary-fixed/30 text-secondary text-[10px] font-bold uppercase tracking-wider">Confirmed</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                <!-- Recent Activity (1/3 width) -->
+                <section class="space-y-6">
+                    <h4 class="font-headline-md text-headline-md">Recent Activity</h4>
+                    <div class="glass-card p-6 rounded-xl space-y-6 h-full max-h-[460px] overflow-y-auto scroll-hide">
+                        <div class="flex gap-4">
+                            <div class="relative">
+                                <div class="w-2 h-2 rounded-full bg-secondary mt-2"></div>
+                                <div class="absolute top-4 left-[3px] w-[1px] h-12 bg-outline-variant/30"></div>
+                            </div>
+                            <div>
+                                <p class="text-label-md font-label-md text-on-surface">New Concierge Request</p>
+                                <p class="text-body-md text-on-surface-variant text-sm">Room 402 requested spa booking
+                                    at 2:00 PM.</p>
+                                <p class="text-[10px] text-outline mt-1 uppercase">12 Minutes Ago</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="relative">
+                                <div class="w-2 h-2 rounded-full bg-outline-variant mt-2"></div>
+                                <div class="absolute top-4 left-[3px] w-[1px] h-12 bg-outline-variant/30"></div>
+                            </div>
+                            <div>
+                                <p class="text-label-md font-label-md text-on-surface">System Update</p>
+                                <p class="text-body-md text-on-surface-variant text-sm">Nightly audit completed for Oct
+                                    10th.</p>
+                                <p class="text-[10px] text-outline mt-1 uppercase">2 Hours Ago</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="relative">
+                                <div class="w-2 h-2 rounded-full bg-secondary mt-2"></div>
+                                <div class="absolute top-4 left-[3px] w-[1px] h-12 bg-outline-variant/30"></div>
+                            </div>
+                            <div>
+                                <p class="text-label-md font-label-md text-on-surface">Check-out Complete</p>
+                                <p class="text-body-md text-on-surface-variant text-sm">Guest in Room 215 has departed.
+                                </p>
+                                <p class="text-[10px] text-outline mt-1 uppercase">3 Hours Ago</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="relative">
+                                <div class="w-2 h-2 rounded-full bg-error mt-2"></div>
+                            </div>
+                            <div>
+                                <p class="text-label-md font-label-md text-on-surface">Maintenance Alert</p>
+                                <p class="text-body-md text-on-surface-variant text-sm">HVAC issue reported in Room 108.
+                                </p>
+                                <p class="text-[10px] text-outline mt-1 uppercase">5 Hours Ago</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- Room Management Grid -->
+            <section class="space-y-6 pb-stack-lg">
+                <div class="flex justify-between items-end">
+                    <div>
+                        <h4 class="font-headline-md text-headline-md">Room Management</h4>
+                        <p class="text-body-md text-on-surface-variant">Real-time status of current inventory.</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button
+                            class="px-4 py-2 bg-surface-container rounded-lg text-label-md font-label-md hover:bg-surface-container-high transition-colors">Filters</button>
+                        <button
+                            class="px-4 py-2 bg-primary text-on-primary rounded-lg text-label-md font-label-md hover:opacity-90 transition-opacity">Add
+                            Room</button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+                    <!-- Room Card 1 -->
+                    <div
+                        class="bg-surface-container-lowest rounded-xl overflow-hidden group border border-outline-variant/10 hover:shadow-xl transition-all duration-300">
+                        <div class="relative h-40 overflow-hidden">
+                            <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                data-alt="A luxurious minimalist hotel room featuring a king-size bed with crisp white linens and a gold-colored velvet throw. The room is bathed in warm, soft afternoon sunlight from a large floor-to-ceiling window. The furniture is mid-century modern with dark wood accents and clean lines. The overall aesthetic is one of quiet luxury and architectural serenity."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7A8sTy3Q_5xaoOxyAmTFwq23NtW6EcFeyQldIiJpa5wmaS__7v07EKd94C6SoXR6zZ3T4WMB7T-9BBiH9hQDK2r0QzCOFpvke55evIRZj-KMEXnb4WgL88dTP6kuHjgfzgchkc-NyKaHSs5lUkxrbtO4blcNtxhEzPxJ5KEBlJKm-RXdRB1ZbAzH9EL4xGMhvYwJmIuB9CyDiQ17qMOQH6ezvMbowrFTsHbZBRddqFDUTiyj8XJG0ZgTFpQym8VDjtuCqEYrHzVM" />
+                            <div
+                                class="absolute top-4 right-4 px-3 py-1 rounded bg-secondary text-on-primary text-[10px] font-bold uppercase tracking-widest shadow-lg">
+                                Occupied</div>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start mb-2">
+                                <h5 class="font-label-md text-label-md">Suite 401</h5>
+                                <span class="text-label-sm font-label-sm text-secondary">Premium</span>
+                            </div>
+                            <p class="text-body-md text-on-surface-variant text-sm mb-4">City View King Bed</p>
+                            <div class="flex items-center gap-2 text-outline">
+                                <span class="material-symbols-outlined text-sm"
+                                    data-icon="cleaning_services">cleaning_services</span>
+                                <span class="text-[10px] uppercase font-bold tracking-tighter">Scheduled: 10:00
+                                    AM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Room Card 2 -->
+                    <div
+                        class="bg-surface-container-lowest rounded-xl overflow-hidden group border border-outline-variant/10 hover:shadow-xl transition-all duration-300">
+                        <div class="relative h-40 overflow-hidden">
+                            <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                data-alt="An ultra-modern hotel suite bathroom featuring white marble walls and a standalone oval soaking tub. Polished gold fixtures catch the light from an unseen window. The space is minimalist, airy, and exemplifies high-end spa-like luxury. The lighting is bright and even, highlighting the pristine textures and clean geometric forms."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfpkBeu-sCsoJQ6Zo69s1rZVBw8Gys7S2c_Zo8GquhoQSSZKn9hgqyLFnlWzdC5HBNU2lKNXV6xL3b5FnjQUMqbDHtyyjhdwLQgNO-t5mqowqyADqxEUvumq5bAhydPtNMDY1lrKVh8GmyhoOXJj4-TX_FTxNyz-o72uf-DKqQssyk6ggAMta0d7I4wSVaQO9KRcrBRvzB7N2zckhaau5nGc7fJO1kG199M1SLJodqlEe5UZqmqGDZMyQ2S1o6F-a5QGWRIpKVIqE" />
+                            <div
+                                class="absolute top-4 right-4 px-3 py-1 rounded bg-error text-on-primary text-[10px] font-bold uppercase tracking-widest shadow-lg">
+                                Cleaning</div>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start mb-2">
+                                <h5 class="font-label-md text-label-md">Suite 215</h5>
+                                <span class="text-label-sm font-label-sm text-secondary">Deluxe</span>
+                            </div>
+                            <p class="text-body-md text-on-surface-variant text-sm mb-4">Garden Terrace Suite</p>
+                            <div class="flex items-center gap-2 text-secondary">
+                                <span class="material-symbols-outlined text-sm" data-icon="timer">timer</span>
+                                <span class="text-[10px] uppercase font-bold tracking-tighter">ETA: 15 Mins</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Room Card 3 -->
+                    <div
+                        class="bg-surface-container-lowest rounded-xl overflow-hidden group border border-outline-variant/10 hover:shadow-xl transition-all duration-300">
+                        <div class="relative h-40 overflow-hidden">
+                            <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                data-alt="A sophisticated boutique hotel lobby lounge with plush velvet armchairs in deep navy and gold-rimmed circular coffee tables. Abstract art with gold leaf accents hangs on the neutral-toned walls. The space is dimly lit with designer pendant lights, creating a moody, exclusive atmosphere. High-quality photography style with shallow depth of field."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFMcLOODn4J0OjbblWK8vu5vUPfKxmSBzvyBbMo4BlVxRlmZrR53ZuvQfmtzlbp3pYSGpQHfNIQ1uxeHAL86VozwmvtlURGxuPU7fC9zPJiZhiQj1bHRxnablSFgshpI8EYHlxWUFRg-45mnC2TxLvnr4phigU2ZF4crEveK2r4bnSVhoZtXBnCEiRrjmveQcY50kVqZclwLte5I0tlm2tG6_cMqZJ6rzvQzCVn9Hz1g7JRUrIMgL-VgAPdENXBkbK8iBI8ca8o9M" />
+                            <div
+                                class="absolute top-4 right-4 px-3 py-1 rounded bg-primary-container text-secondary-fixed text-[10px] font-bold uppercase tracking-widest shadow-lg">
+                                Available</div>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start mb-2">
+                                <h5 class="font-label-md text-label-md">Suite 308</h5>
+                                <span class="text-label-sm font-label-sm text-secondary">Royal</span>
+                            </div>
+                            <p class="text-body-md text-on-surface-variant text-sm mb-4">Grand Presidential</p>
+                            <div class="flex items-center gap-2 text-on-primary-container">
+                                <span class="material-symbols-outlined text-sm"
+                                    data-icon="check_circle">check_circle</span>
+                                <span class="text-[10px] uppercase font-bold tracking-tighter">Ready for Check-in</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Room Card 4 -->
+                    <div
+                        class="bg-surface-container-lowest rounded-xl overflow-hidden group border border-outline-variant/10 hover:shadow-xl transition-all duration-300">
+                        <div class="relative h-40 overflow-hidden">
+                            <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                data-alt="A close-up shot of high-end hotel amenities arranged on a tray, including designer toiletries and a rolled white towel. The background shows a portion of a sleek, modern bathroom vanity. The lighting is bright and clean, emphasizing a sense of hygiene and meticulous preparation. The color palette is composed of neutrals and subtle gold accents."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBGfd4tzH1INkWpSc2jOa4C9vPwuXXZlklLyD5iymjenGfV-xfRXuKAM91y53BLossQVS2UAl27KKFvYKjDSZFM_kLFw_2I5XVvzl3MUslkBeICpS6FvXy3ZVlHZHMFkKhWO-syQTyTxUbKeCp5Q9bog5LHV3fsRijt9_Ti2N8fF8yiS9l48VqnITQQ_xAeI0dp7rQkKBs9Tr2c0pMllNt8YNxp0nrgXsN2uRWasBE1u7HSTTR4syV4zKlVh42ETDk4gxbtEm6Pgs" />
+                            <div
+                                class="absolute top-4 right-4 px-3 py-1 rounded bg-secondary text-on-primary text-[10px] font-bold uppercase tracking-widest shadow-lg">
+                                Occupied</div>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start mb-2">
+                                <h5 class="font-label-md text-label-md">Suite 502</h5>
+                                <span class="text-label-sm font-label-sm text-secondary">Executive</span>
+                            </div>
+                            <p class="text-body-md text-on-surface-variant text-sm mb-4">Corner Studio King</p>
+                            <div class="flex items-center gap-2 text-outline">
+                                <span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+                                <span class="text-[10px] uppercase font-bold tracking-tighter">Check-out in 2h</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <!-- Interactions Script -->
+    <script>
+        // Simple hover lift effect for cards handled by Tailwind
+        // Active tab switching simulation
+        const navItems = document.querySelectorAll('nav > div');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navItems.forEach(i => {
+                    i.classList.remove('text-secondary-fixed', 'dark:text-secondary-fixed-dim', 'font-bold', 'border-r-2', 'border-secondary-fixed', 'bg-surface-tint/10');
+                    i.classList.add('text-surface-variant', 'dark:text-surface-variant/70', 'font-medium');
+                });
+                item.classList.add('text-secondary-fixed', 'dark:text-secondary-fixed-dim', 'font-bold', 'border-r-2', 'border-secondary-fixed', 'bg-surface-tint/10');
+                item.classList.remove('text-surface-variant', 'dark:text-surface-variant/70', 'font-medium');
+            });
+        });
+    </script>
+</body>
+
+</html>
