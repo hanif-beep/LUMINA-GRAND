@@ -142,12 +142,12 @@
                     GRAND</span>
             </div>
             <div class="hidden md:flex gap-gutter items-center">
-                <a class="font-label-md text-label-md text-secondary-fixed border-b border-secondary-fixed cursor-pointer"
-                    href="#">ROOMS</a>
                 <a class="font-label-md text-label-md text-on-primary hover:text-secondary-fixed transition-colors cursor-pointer"
-                    href="#">FACILITIES</a>
+                    href="#rooms">ROOMS</a>
                 <a class="font-label-md text-label-md text-on-primary hover:text-secondary-fixed transition-colors cursor-pointer"
-                    href="#">EXPERIENCES</a>
+                    href="#facilities">FACILITIES</a>
+                <a class="font-label-md text-label-md text-on-primary hover:text-secondary-fixed transition-colors cursor-pointer"
+                    href="#experiences">EXPERIENCES</a>
             </div>
             <div class="flex items-center">
                 <button
@@ -184,7 +184,7 @@
         </div>
     </header>
     <!-- Exquisite Stays (Rooms) -->
-    <section class="py-stack-lg bg-surface">
+    <section class="py-stack-lg bg-surface" id="rooms">
         <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
             <div class="flex flex-col md:flex-row md:justify-between md:items-end mb-stack-md gap-gutter">
                 <div class="space-y-2">
@@ -251,7 +251,7 @@
         </div>
     </section>
     <!-- Facilities (Bento Grid) -->
-    <section class="py-stack-lg bg-primary text-on-primary">
+    <section class="py-stack-lg bg-primary text-on-primary" id="facilities">
         <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
             <div class="mb-stack-md text-center">
                 <span class="text-secondary-fixed font-label-sm text-label-sm tracking-[0.2em] uppercase">Our
@@ -371,6 +371,41 @@
         </div>
     </footer>
     <script>
+
+        const navLinks = document.querySelectorAll('a[href="#rooms"], a[href="#facilities"], a[href="#experiences"]');
+
+        // ── Fungsi set active ─────────────────────────────────────
+        function setActive(activeLink) {
+            navLinks.forEach(link => {
+            link.classList.remove('text-secondary-fixed', 'border-b', 'border-secondary-fixed');
+            link.classList.add('text-on-primary');
+            });
+            activeLink.classList.add('text-secondary-fixed', 'border-b', 'border-secondary-fixed');
+            activeLink.classList.remove('text-on-primary');
+        }
+
+        // ── Klik manual ───────────────────────────────────────────
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => setActive(link));
+        });
+
+        // ── Auto-highlight saat scroll ────────────────────────────
+        const sections = ['rooms', 'facilities', 'experiences'];
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(id => {
+            const section = document.getElementById(id);
+            if (section && section.getBoundingClientRect().top <= 120) {
+                current = id;
+            }
+            });
+            if (current) {
+            const activeLink = document.querySelector(`a[href="#${current}"]`);
+            if (activeLink) setActive(activeLink);
+            }
+        });
+
         // Subtle scroll reveal effect for headers
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
