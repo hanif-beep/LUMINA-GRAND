@@ -183,7 +183,7 @@
                         suite.</p>
                 </header>
                 <!-- Form -->
-                <form action="#" class="space-y-stack-sm" method="POST" onsubmit="return false;">
+                <form class="space-y-stack-sm" id="login-form">
                     <!-- Email Field -->
                     <div class="flex flex-col gap-2">
                         <label class="font-label-sm text-on-surface-variant uppercase tracking-wider" for="email">Email
@@ -255,42 +255,7 @@
         </section>
     </main>
     <!-- Hidden Background Micro-interaction Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Smooth reveal effect for the image section
-            const imageSection = document.querySelector('section:first-child img');
-            if (imageSection) {
-                setTimeout(() => {
-                    imageSection.style.transition = 'transform 10s ease-out';
-                    imageSection.style.transform = 'scale(1)';
-                }, 100);
-            }
-
-            // Input interactions
-            const inputs = document.querySelectorAll('.form-input-minimal');
-            inputs.forEach(input => {
-                input.addEventListener('focus', () => {
-                    const label = input.parentElement.previousElementSibling;
-                    if (label) label.style.color = '#735c00';
-                });
-                input.addEventListener('blur', () => {
-                    const label = input.parentElement.previousElementSibling;
-                    if (label) label.style.color = '#43474e';
-                });
-            });
-
-            // Toggle Password Visibility
-            const togglePass = document.querySelector('button[type="button"]');
-            const passInput = document.querySelector('#password');
-            if (togglePass && passInput) {
-                togglePass.addEventListener('click', () => {
-                    const type = passInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                    passInput.setAttribute('type', type);
-                    togglePass.querySelector('span').innerText = type === 'password' ? 'visibility_off' : 'visibility';
-                });
-            }
-        });
-    </script>
+    <script src="/static/login.js"></script>
 </body>
 
 </html>

@@ -274,40 +274,7 @@
             </div>
         </section>
     </main>
-    <!-- Micro-interaction script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const inputs = document.querySelectorAll('input');
-            const form = document.getElementById('registrationForm');
-
-            // Simple input ripple effect simulation
-            inputs.forEach(input => {
-                input.addEventListener('focus', () => {
-                    input.parentElement.querySelector('.material-symbols-outlined').style.transform = 'scale(1.1)';
-                    input.parentElement.querySelector('.material-symbols-outlined').style.transition = 'transform 0.3s ease';
-                });
-                input.addEventListener('blur', () => {
-                    input.parentElement.querySelector('.material-symbols-outlined').style.transform = 'scale(1)';
-                });
-            });
-
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const btn = e.target.querySelector('button');
-                const originalText = btn.innerText;
-
-                // Visual feedback for click
-                btn.innerText = 'Creating Account...';
-                btn.classList.add('opacity-80');
-
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.classList.remove('opacity-80');
-                    alert('Experience the Grandeur. Your registration is being processed.');
-                }, 1500);
-            });
-        });
-    </script>
+    <script src="/static/register.js"></script>
 </body>
 
 </html>
