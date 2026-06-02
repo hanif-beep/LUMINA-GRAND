@@ -54,7 +54,7 @@ def load_user(user_id):
 # ROUTE HOME
 @app.route('/')
 def home():
-    return render_template('Index.html')
+    return render_template('/user/Index.html')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -74,7 +74,7 @@ def register():
 
         return redirect('/')
 
-    return render_template('register.html')
+    return render_template('/user/Register.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -88,7 +88,7 @@ def login():
             login_user(user)
             return redirect('/')
 
-    return render_template('login.html')
+    return render_template('/user/Login.html')
 
 @app.route('/dashboard')
 @login_required
