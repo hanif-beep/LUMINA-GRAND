@@ -1,0 +1,509 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Superior Room | LUMINA GRAND</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .hero-zoom:hover img {
+            transform: scale(1.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #735c00;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#040607",
+                        "on-primary-fixed-variant": "#2f486a",
+                        "surface-container": "#eeeeee",
+                        "on-surface": "#1a1c1c",
+                        "inverse-primary": "#afc8f0",
+                        "inverse-on-surface": "#f0f1f1",
+                        "on-tertiary-fixed": "#191c1d",
+                        "on-secondary-container": "#745c00",
+                        "outline-variant": "#c4c6cf",
+                        "surface-tint": "#476083",
+                        "on-background": "#1a1c1c",
+                        "surface-container-low": "#f3f3f4",
+                        "primary-container": "#001f3f",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e2e2e2",
+                        "secondary": "#735c00",
+                        "primary": "#000613",
+                        "on-secondary-fixed-variant": "#574500",
+                        "surface-variant": "#e2e2e2",
+                        "secondary-container": "#fed65b",
+                        "on-secondary-fixed": "#241a00",
+                        "secondary-fixed": "#ffe088",
+                        "on-surface-variant": "#43474e",
+                        "tertiary-fixed": "#e1e3e4",
+                        "on-tertiary-fixed-variant": "#454748",
+                        "inverse-surface": "#2f3131",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#001c3a",
+                        "surface-bright": "#f9f9f9",
+                        "primary-fixed": "#d4e3ff",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#afc8f0",
+                        "outline": "#74777f",
+                        "surface-dim": "#dadada",
+                        "surface-container-high": "#e8e8e8",
+                        "surface": "#f9f9f9",
+                        "secondary-fixed-dim": "#e9c349",
+                        "tertiary-fixed-dim": "#c5c7c8",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#1c1f20",
+                        "on-tertiary-container": "#848688",
+                        "on-primary-container": "#6f88ad",
+                        "background": "#f9f9f9",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-sm": "24px",
+                        "margin-desktop": "64px",
+                        "unit": "8px",
+                        "margin-mobile": "20px",
+                        "stack-lg": "80px",
+                        "container-max": "1280px",
+                        "stack-md": "48px",
+                        "gutter": "32px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.2", "letterSpacing": "0.03em", "fontWeight": "300"}],
+                        "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.3", "letterSpacing": "0.02em", "fontWeight": "400"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "0.05em", "fontWeight": "300"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-20 bg-surface/80 dark:bg-primary/95 backdrop-blur-md border-b border-outline-variant/30">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary cursor-pointer">menu</span>
+<span class="font-display-lg text-[24px] md:text-display-lg-mobile tracking-widest text-secondary uppercase font-light">LUMINA GRAND</span>
+</div>
+<nav class="hidden md:flex gap-8">
+<a class="font-label-md text-secondary font-bold uppercase transition-colors duration-300" href="#">Rooms</a>
+<a class="font-label-md text-on-surface-variant hover:text-secondary uppercase transition-colors duration-300" href="#">Dining</a>
+<a class="font-label-md text-on-surface-variant hover:text-secondary uppercase transition-colors duration-300" href="#">Wellness</a>
+<a class="font-label-md text-on-surface-variant hover:text-secondary uppercase transition-colors duration-300" href="#">Offers</a>
+</nav>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary cursor-pointer">shopping_bag</span>
+</div>
+</header>
+<main class="pt-24 pb-stack-lg px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<!-- Breadcrumb -->
+<nav class="mb-6">
+<ol class="flex items-center gap-2 font-label-sm text-on-surface-variant tracking-wider uppercase">
+<li class=""><a class="hover:text-secondary" href="#">Home</a></li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px]">chevron_right</span> <a class="hover:text-secondary" href="#">Rooms</a></li>
+<li class="flex items-center gap-2 text-secondary font-semibold"><span class="material-symbols-outlined text-[14px]">chevron_right</span> Superior Room</li>
+</ol>
+</nav>
+<!-- Header Section -->
+<section class="mb-stack-sm md:mb-stack-md">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="font-headline-lg text-headline-lg md:text-[48px] text-primary mb-2">Superior Room</h1>
+<p class="font-body-lg text-on-surface-variant max-w-2xl">Comfort, convenience, and elegance for the modern traveler.</p>
+</div>
+<div class="flex flex-wrap gap-3">
+<span class="px-4 py-1.5 bg-primary text-white font-label-sm rounded-full tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span> LUXURY ROOM
+                    </span>
+<span class="px-4 py-1.5 border border-outline text-on-surface font-label-sm rounded-full flex items-center gap-1">
+                        4.7 <span class="material-symbols-outlined text-[14px] text-secondary">star</span> <span class="opacity-50">/ 5</span>
+</span>
+<span class="px-4 py-1.5 bg-secondary/10 text-secondary border border-secondary/20 font-label-sm rounded-full font-bold">
+                        AVAILABLE
+                    </span>
+</div>
+</div>
+</section>
+<!-- Room Gallery Grid -->
+<section class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-[400px] md:h-[600px] mb-stack-md">
+<div class="md:col-span-2 md:row-span-2 overflow-hidden rounded-xl hero-zoom relative group cursor-pointer">
+<img alt="Superior Room Main View" class="w-full h-full object-cover transition-transform duration-700" src="https://lh3.googleusercontent.com/aida/ADBb0uhivCtf76RBYYmZAf_CEtOnhIMj-K-3J_pU4ke9nyvFVw-oX4MhG6aOxAAHfxyBIFxA1uJRZQ2i8E1C9NoLnSbFO-63g-Q9vk18Bh_w1Pn68u7Tl94XPx6WUXjuBQweykPRNvTw08xqYwp5kr9FCNL6lfNZvqMQcQ5ZiwAMnKlWZuE-YlxQSbjDDtFEqeTBdgr9m8lCfRl37oHkOxX7zGdWUuHzeOijt7DGSpzp1IRJ3osTKiSZzuRoqXo">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+</div>
+<div class="hidden md:block overflow-hidden rounded-xl hero-zoom relative cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-700" data-alt="A modern and minimalist hotel bathroom featuring a large walk-in rain shower with slate tiles and glass partitions. The lighting is soft and recessed, creating a spa-like atmosphere. White marble accents and gold hardware reflect a premium luxury aesthetic in a high-end suite." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCy6j92dLnt2X1bNKudiMZCuPokKFYDjYH1zYR4M5b22QyIh9WTRp7KaKSQG-2CecOjuC8JrK75R7XfYHeO6B_jSdcRl0MEpZgEfn8wagtRACzxyX4LRgL4m9s986xgbIHEVW8vzRFHqAzPZeo-s9B0E78TzoVDotEMTZUz99w6kovPTXPAsNs9yxyk066ZD2dk17Oph84tIUJg-OjrvmtLPjm7KGhcop7fbWl0KGtaCQqkQFTnlg2SBk_YQuLz22-V92xNxxHCICo">
+</div>
+<div class="hidden md:block overflow-hidden rounded-xl hero-zoom relative cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-700" data-alt="An elegant and ergonomic hotel workspace with a dark wood desk, a leather executive chair, and a high-end designer table lamp. Large floor-to-ceiling windows show a blurred city skyline at dusk. The room is styled with minimalist luxury in mind, using navy blue and gold accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFpGxgvb0-L-g_SGgC9DVeCjQVhbCULCSY7KFhyXc1VYxNfZP317url9uiO2q3FLXxv4tAAxcTZrzf69TT88N-WhDwp5bHw-DwqIFObtTIFGEGuP3whu5JAgvaGqYAA4bp0oJvkk5i8WbFN6g7YXLKPrKufWvPFnDePlDmykRkAEQV9oo5RrPRT4fGyXrQIG8p2NN3wRjhdoBf5p9p5A3touYt4SsuEwYf6nOgnKBvtPCWQ5uJ1o-Xeahcg-lFnA2SIUN93PqYLLo">
+</div>
+<div class="hidden md:block overflow-hidden rounded-xl hero-zoom relative cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-700" data-alt="A cozy seating area in a luxury hotel room with a plush velvet navy blue armchair and a small circular marble side table. A soft warm light glows from a nearby designer lamp. The atmosphere is quiet, serene, and sophisticated, embodying modern high-end hospitality design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFpag4y2H5C2h_2ZIGbasCMkWSF1CQMbtBoaVHmR6gf1mHMjYdAu513AdJOT-aBOIrddnche-fx9G5WzJjPbON7ouJULPDvo02je1tKzxGr2usbxX7YQPh4GUJlVhWecyQNaUFMAIaHmX1XoK2zn9dcr2BbatE7yiw7kDx5M-AVgiCR2HlnezQEgs48KX3fb0VehIE416fkvvpM1X9gSwxhhpOdh7lUv0UTqwIE__FWERnB-sSMZYoLnaBkrlGYChqAKu5Qa4SouU">
+</div>
+<div class="hidden md:block overflow-hidden rounded-xl hero-zoom relative cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-700" data-alt="A stunning view of a modern city skyline at night through a large floor-to-ceiling hotel window. The city lights twinkle in the distance under a deep blue twilight sky. The window reflects the warm, luxurious interior lighting of the room, creating a sense of height and exclusivity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSKdrSf42vj6oWfhwyTrFTiIqoIN6l7F02fADhKgHyJnVaNtjqiYINRL03EdFDn-duXnt-o-5ueXEOg98-16XFJgUCEFT4CPnPY4YY8T3E3OjAbr6m3ZcTVT098HTDwL7lvZSaL9EJiFl4mcGT-N3X8qRM__N3wo3CX2r4OwEfAmjzeHPIzy4qUyg_5duQcdPPGadGRkOPsJKGPvYzmUKw67vxLVRHDQe1SGTYEIB_u3U3AeWNMoQIVLlX19JwPtycCjFkdOGZ0wo">
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter items-start">
+<!-- Left Content Area -->
+<div class="lg:col-span-2 space-y-stack-md">
+<!-- Specifications Grid -->
+<div class="grid grid-cols-2 md:grid-cols-5 border-y border-outline-variant/30 py-8 gap-6">
+<div class="flex flex-col">
+<span class="font-label-sm text-on-surface-variant uppercase tracking-widest mb-1">Price</span>
+<span class="font-headline-md text-secondary font-bold">$55.00</span>
+<span class="text-label-sm text-on-surface-variant opacity-60">/ Night</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-on-surface-variant uppercase tracking-widest mb-1">Size</span>
+<span class="font-headline-md text-primary">28 m²</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-on-surface-variant uppercase tracking-widest mb-1">Capacity</span>
+<span class="font-headline-md text-primary">2 Guests</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-on-surface-variant uppercase tracking-widest mb-1">Bed</span>
+<span class="font-headline-md text-primary">Queen</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-on-surface-variant uppercase tracking-widest mb-1">View</span>
+<span class="font-headline-md text-primary">City</span>
+</div>
+</div>
+<!-- Description -->
+<article>
+<h2 class="font-headline-md text-primary mb-4">Room Overview</h2>
+<p class="font-body-lg text-on-surface-variant leading-relaxed">
+                        The Superior Room offers a perfect blend of comfort and functionality. Featuring contemporary interiors, premium bedding, a dedicated workspace, and beautiful city views, it is ideal for both business and leisure travelers seeking a relaxing and memorable stay. Every detail has been curated to provide a sanctuary from the bustling city below, using a palette of calming navy and warm gold accents.
+                    </p>
+</article>
+<!-- Facilities Grid -->
+<section>
+<h2 class="font-headline-md text-primary mb-8">Room Facilities</h2>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+<!-- Facility Items -->
+<div class="glass-card p-6 rounded-xl flex flex-col items-center text-center group hover:bg-secondary transition-all duration-300">
+<span class="material-symbols-outlined text-secondary text-[32px] mb-3 group-hover:text-white transition-colors">wifi</span>
+<span class="font-label-md text-on-surface group-hover:text-white transition-colors">Free WiFi</span>
+</div>
+<div class="glass-card p-6 rounded-xl flex flex-col items-center text-center group hover:bg-secondary transition-all duration-300">
+<span class="material-symbols-outlined text-secondary text-[32px] mb-3 group-hover:text-white transition-colors">smart_display</span>
+<span class="font-label-md text-on-surface group-hover:text-white transition-colors">Smart TV</span>
+</div>
+<div class="glass-card p-6 rounded-xl flex flex-col items-center text-center group hover:bg-secondary transition-all duration-300">
+<span class="material-symbols-outlined text-secondary text-[32px] mb-3 group-hover:text-white transition-colors">ac_unit</span>
+<span class="font-label-md text-on-surface group-hover:text-white transition-colors">Air Conditioning</span>
+</div>
+<div class="glass-card p-6 rounded-xl flex flex-col items-center text-center group hover:bg-secondary transition-all duration-300">
+<span class="material-symbols-outlined text-secondary text-[32px] mb-3 group-hover:text-white transition-colors">desk</span>
+<span class="font-label-md text-on-surface group-hover:text-white transition-colors">Workspace</span>
+</div>
+<div class="glass-card p-6 rounded-xl flex flex-col items-center text-center group hover:bg-secondary transition-all duration-300">
+<span class="material-symbols-outlined text-secondary text-[32px] mb-3 group-hover:text-white transition-colors">kitchen</span>
+<span class="font-label-md text-on-surface group-hover:text-white transition-colors">Mini Fridge</span>
+</div>
+<div class="glass-card p-6 rounded-xl flex flex-col items-center text-center group hover:bg-secondary transition-all duration-300">
+<span class="material-symbols-outlined text-secondary text-[32px] mb-3 group-hover:text-white transition-colors">water_drop</span>
+<span class="font-label-md text-on-surface group-hover:text-white transition-colors">Water Bottle</span>
+</div>
+<div class="glass-card p-6 rounded-xl flex flex-col items-center text-center group hover:bg-secondary transition-all duration-300">
+<span class="material-symbols-outlined text-secondary text-[32px] mb-3 group-hover:text-white transition-colors">restaurant</span>
+<span class="font-label-md text-on-surface group-hover:text-white transition-colors">Room Service</span>
+</div>
+<div class="glass-card p-6 rounded-xl flex flex-col items-center text-center group hover:bg-secondary transition-all duration-300">
+<span class="material-symbols-outlined text-secondary text-[32px] mb-3 group-hover:text-white transition-colors">shower</span>
+<span class="font-label-md text-on-surface group-hover:text-white transition-colors">Rain Shower</span>
+</div>
+</div>
+</section>
+<!-- Why Choose This Room -->
+<section>
+<h2 class="font-headline-md text-primary mb-8">Why Choose This Room</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="p-8 border border-outline-variant/30 rounded-2xl flex gap-6 items-start">
+<div class="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary">payments</span>
+</div>
+<div>
+<h3 class="font-label-md text-primary mb-2 uppercase tracking-wider">Affordable Luxury</h3>
+<p class="text-on-surface-variant font-body-md">High-end amenities and service at an accessible price point.</p>
+</div>
+</div>
+<div class="p-8 border border-outline-variant/30 rounded-2xl flex gap-6 items-start">
+<div class="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary">king_bed</span>
+</div>
+<div>
+<h3 class="font-label-md text-primary mb-2 uppercase tracking-wider">Premium Bedding</h3>
+<p class="text-on-surface-variant font-body-md">Features our signature Aurelian Reserve 600-thread count sheets.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Booking Hub - Sticky Sidebar -->
+<aside class="sticky top-28 space-y-6">
+<div class="bg-white border border-outline-variant/40 rounded-2xl p-8 shadow-sm">
+<div class="flex items-center justify-between mb-8">
+<div>
+<span class="font-display-lg text-[32px] text-secondary font-bold">$55.00</span>
+<span class="text-on-surface-variant opacity-60">/ Night</span>
+</div>
+<span class="material-symbols-outlined text-secondary">info</span>
+</div>
+<div class="space-y-4 mb-8">
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-on-surface-variant uppercase">Check-in / Out</label>
+<div class="p-4 border border-outline-variant rounded-lg flex items-center justify-between cursor-pointer hover:border-secondary transition-colors">
+<span class="text-body-md">Oct 24 - Oct 27</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">calendar_today</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-on-surface-variant uppercase">Guests</label>
+<div class="p-4 border border-outline-variant rounded-lg flex items-center justify-between cursor-pointer hover:border-secondary transition-colors">
+<span class="text-body-md">2 Adults</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">group</span>
+</div>
+</div>
+</div>
+<div class="space-y-3 mb-8 border-t border-outline-variant/20 pt-6">
+<div class="flex justify-between text-body-md">
+<span class="text-on-surface-variant">3 Nights x $55.00</span>
+<span class="text-primary">$165.00</span>
+</div>
+<div class="flex justify-between text-body-md">
+<span class="text-on-surface-variant">Service Charge</span>
+<span class="text-primary">$15.00</span>
+</div>
+<div class="flex justify-between font-headline-md text-primary pt-4 border-t border-outline-variant/30">
+<span class="">Total</span>
+<span class="font-bold">$180.00</span>
+</div>
+</div>
+<button class="w-full py-5 bg-secondary hover:bg-secondary/90 text-white font-label-md uppercase tracking-[0.2em] rounded-xl shadow-lg shadow-secondary/20 transition-all duration-300 active:scale-95">
+                        Book Now
+                    </button>
+<p class="text-center text-label-sm text-on-surface-variant mt-4 opacity-60">You won't be charged yet</p>
+</div>
+<div class="bg-primary p-8 rounded-2xl text-white">
+<h4 class="font-label-md uppercase tracking-widest mb-4">Concierge Support</h4>
+<p class="text-on-primary-container mb-6 opacity-80">Our dedicated team is ready to assist you with any special requests.</p>
+<button class="w-full py-4 border border-white/20 hover:bg-white/10 rounded-xl flex items-center justify-center gap-2 font-label-sm uppercase transition-colors">
+<span class="material-symbols-outlined text-[18px]">chat_bubble</span> Contact Agent
+                    </button>
+</div>
+</aside>
+</div>
+<!-- Guest Reviews -->
+<section class="mt-stack-lg">
+<div class="flex items-center justify-between mb-10">
+<h2 class="font-headline-md text-primary">Guest Reviews</h2>
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-secondary font-bold">4.7</span>
+<div class="flex text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0.5;">star_half</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<div class="p-8 border border-outline-variant/30 rounded-2xl relative">
+<div class="flex text-secondary mb-4">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-body-md text-on-surface mb-6 italic">"The view from the room was breathtaking. The bed felt like a cloud, and the concierge was incredibly helpful with our dinner reservations."</p>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center font-bold text-secondary">JD</div>
+<div>
+<p class="font-label-md text-primary">Julianna Duarte</p>
+<p class="text-label-sm text-on-surface-variant uppercase opacity-60">Verified Guest</p>
+</div>
+</div>
+</div>
+<div class="p-8 border border-outline-variant/30 rounded-2xl relative">
+<div class="flex text-secondary mb-4">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 0;">star</span>
+</div>
+<p class="text-body-md text-on-surface mb-6 italic">"Perfect for my business trip. The workspace was ergonomically designed and the high-speed internet was flawless."</p>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center font-bold text-secondary">MK</div>
+<div>
+<p class="font-label-md text-primary">Marcus Karlsson</p>
+<p class="text-label-sm text-on-surface-variant uppercase opacity-60">Verified Guest</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Similar Rooms -->
+<section class="mt-stack-lg">
+<h2 class="font-headline-md text-primary mb-10">Similar Accommodations</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="group cursor-pointer">
+<div class="relative overflow-hidden rounded-2xl aspect-[4/3] mb-4">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A spacious deluxe hotel room with a warm beige and cream color scheme. The lighting is ambient and sophisticated, featuring hidden LED strips and designer lamps. A large king bed with multiple pillows sits at the center, overlooking a modern city view. The aesthetic is clean, minimalist luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuF3Rm69e35-dP_PQynFK3YMFjMkRNYzfSMG2wnLalJzFcqDtYwuZCp2t9ANy2mDK5sE4PBONH3kF-Xxx5ZRKV7ohINQ-KTDqGFoSlP4zO2tp1_NM6TTm-FWMGmgrDeyWpC067mqdNCyNgJzSwmsEi7Y-Pyv31GJTsxotYqrifjM54lHowXpBlj_aqmKUjkIReCWXijw12cmIiv9F8Eh8X0vr4c2OXpiP8nitx7yuCT5T6maD3g3rn-kgN8Z5HxdxZv67sz9Dlvd4">
+</div>
+<h3 class="font-headline-md text-primary mb-1">Deluxe Room</h3>
+<p class="text-secondary font-bold mb-4">$75.00 <span class="text-label-sm text-on-surface-variant font-normal">/ Night</span></p>
+<button class="px-6 py-3 border border-outline hover:bg-primary hover:text-white transition-all duration-300 font-label-sm uppercase">View Details</button>
+</div>
+<div class="group cursor-pointer">
+<div class="relative overflow-hidden rounded-2xl aspect-[4/3] mb-4">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="An executive hotel suite with a separate living and sleeping area. The furniture is high-end mid-century modern with navy blue velvet and dark wood. Large windows illuminate the room with soft morning light. The environment feels professional, luxurious, and spacious." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWY-FfonKSCgiA0B6oDkNCJvo9hUiDAbT_JaXmaSPkcUImghece4DSvP-meHD595mMoX29-8o-FpNxdYUq_3VVH_C7kFbLZVDXJesZ8dmGJ-nH-OfWtQ98W9eug9AQMdZhQYUqBZvT8vk6VRuAqQdy2G484tfGrXeh3ScjJwFgt_3Bk5crXgx6RqwqI9EyyhPSyCYm18-zFVEQmlv0RY-NQ9TBy7GE1VY6xYVnxHrS2ZO6drIIEiYdHDGerDA1hytBrwRjvVZF9EI">
+</div>
+<h3 class="font-headline-md text-primary mb-1">Executive Room</h3>
+<p class="text-secondary font-bold mb-4">$100.00 <span class="text-label-sm text-on-surface-variant font-normal">/ Night</span></p>
+<button class="px-6 py-3 border border-outline hover:bg-primary hover:text-white transition-all duration-300 font-label-sm uppercase">View Details</button>
+</div>
+<div class="group cursor-pointer">
+<div class="relative overflow-hidden rounded-2xl aspect-[4/3] mb-4">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A junior suite featuring a modern open-concept layout with a small lounge area and a premium king bed. Minimalist art hangs on the walls, and gold light fixtures add a touch of glamour. The color palette is a mix of cool grays, deep blues, and warm gold accents, perfect for luxury hospitality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMN9ZuCURapkiLLETQBfFciAIFp7vnbVQabuBpdt5qktKJWCpqZx6q-1jODkme87kdBpu7DJBzZMhUISQz2bJNGUVCMKgmnoCPJXEk1gpKio1ERTbImm4cP-ZEUZwdh72Y6IslXIby5ukIqFnUk1I8yvNj4H7m_Sk6KRpgNVuEOeXsC5pKeJaf2LBcsH17G_q_97V7Ym5X4XZiX3HMWGl7BUKyz9lNBcSoOuTQevoItwXCHEicZMIdq_0a5VhfoI6aLvkcQ4bMqk0">
+</div>
+<h3 class="font-headline-md text-primary mb-1">Junior Suite</h3>
+<p class="text-secondary font-bold mb-4">$135.00 <span class="text-label-sm text-on-surface-variant font-normal">/ Night</span></p>
+<button class="px-6 py-3 border border-outline hover:bg-primary hover:text-white transition-all duration-300 font-label-sm uppercase">View Details</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="hidden md:block w-full py-stack-md px-margin-desktop mt-stack-lg bg-tertiary dark:bg-primary border-t border-outline/10 text-on-tertiary">
+<div class="grid grid-cols-4 gap-gutter mb-16">
+<div class="col-span-1">
+<span class="font-headline-lg text-secondary tracking-tighter mb-6 block uppercase">LUMINA GRAND</span>
+<p class="text-on-tertiary-fixed-variant font-body-md opacity-60">A standard of excellence in global luxury hospitality since 1924.</p>
+</div>
+<div>
+<h5 class="font-label-md text-white uppercase tracking-widest mb-6">Navigation</h5>
+<ul class="space-y-4">
+<li class=""><a class="text-on-tertiary-fixed-variant hover:text-secondary-fixed transition-all" href="#">Rooms &amp; Suites</a></li>
+<li class=""><a class="text-on-tertiary-fixed-variant hover:text-secondary-fixed transition-all" href="#">Dining Experiences</a></li>
+<li class=""><a class="text-on-tertiary-fixed-variant hover:text-secondary-fixed transition-all" href="#">Aurelian Spa</a></li>
+<li class=""><a class="text-on-tertiary-fixed-variant hover:text-secondary-fixed transition-all" href="#">Meetings &amp; Events</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-md text-white uppercase tracking-widest mb-6">Support</h5>
+<ul class="space-y-4">
+<li class=""><a class="text-on-tertiary-fixed-variant hover:text-secondary-fixed transition-all" href="#">Privacy Policy</a></li>
+<li class=""><a class="text-on-tertiary-fixed-variant hover:text-secondary-fixed transition-all" href="#">Terms of Service</a></li>
+<li class=""><a class="text-on-tertiary-fixed-variant hover:text-secondary-fixed transition-all" href="#">Sustainability</a></li>
+<li class=""><a class="text-on-tertiary-fixed-variant hover:text-secondary-fixed transition-all" href="#">Press Kit</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-md text-white uppercase tracking-widest mb-6">Newsletter</h5>
+<p class="text-on-tertiary-fixed-variant mb-4 opacity-60">Join our mailing list for exclusive benefits and offers.</p>
+<div class="flex">
+<input class="bg-white/5 border border-white/10 px-4 py-2 w-full text-white placeholder:text-white/30 focus:outline-none focus:border-secondary transition-colors" placeholder="Email address" type="email">
+<button class="bg-secondary text-white px-4 py-2 hover:bg-secondary/80 transition-colors">JOIN</button>
+</div>
+</div>
+</div>
+<div class="pt-8 border-t border-white/5 flex justify-between items-center text-on-tertiary-fixed-variant text-[12px] uppercase tracking-widest opacity-50">
+<span class="">© 2024 LUMINA GRAND HOTEL. ALL RIGHTS RESERVED.</span>
+<div class="flex gap-8">
+<a href="#" class="">Instagram</a>
+<a href="#" class="">LinkedIn</a>
+<a href="#" class="">Facebook</a>
+</div>
+</div>
+</footer>
+<!-- BottomNavBar Mobile -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center py-3 pb-safe px-4 md:hidden bg-surface/90 dark:bg-primary/95 backdrop-blur-lg border-t border-outline-variant/20 shadow-sm rounded-t-xl">
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:bg-secondary/5 transition-colors">
+<span class="material-symbols-outlined text-[24px]">explore</span>
+<span class="font-label-sm text-label-sm">Explore</span>
+</div>
+<div class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed font-semibold hover:bg-secondary/5 transition-colors">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<span class="font-label-sm text-label-sm">Book</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:bg-secondary/5 transition-colors">
+<span class="material-symbols-outlined text-[24px]">dry_cleaning</span>
+<span class="font-label-sm text-label-sm">Concierge</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:bg-secondary/5 transition-colors">
+<span class="material-symbols-outlined text-[24px]">person</span>
+<span class="font-label-sm text-label-sm">Account</span>
+</div>
+</nav>
+<script>
+        // Simple micro-interaction for booking button
+        const bookBtn = document.querySelector('button.bg-secondary');
+        if(bookBtn) {
+            bookBtn.addEventListener('mousedown', () => bookBtn.style.transform = 'scale(0.95)');
+            bookBtn.addEventListener('mouseup', () => bookBtn.style.transform = 'scale(1)');
+        }
+
+        // Gallery image modal potential expansion
+        const galleryImgs = document.querySelectorAll('.hero-zoom img');
+        galleryImgs.forEach(img => {
+            img.addEventListener('click', () => {
+                console.log('Image expansion triggered for:', img.src);
+            });
+        });
+    </script>
+
+
+</body>
+</html>

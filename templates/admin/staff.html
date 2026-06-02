@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Staff Management | Grand Regency</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        body {
+            background-color: #f9f9f9;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#c5c7c8",
+                    "tertiary-container": "#1c1f20",
+                    "inverse-primary": "#afc8f0",
+                    "on-tertiary-fixed-variant": "#454748",
+                    "surface-container-highest": "#e2e2e2",
+                    "surface-dim": "#dadada",
+                    "on-primary-container": "#6f88ad",
+                    "surface-bright": "#f9f9f9",
+                    "surface-container-low": "#f3f3f4",
+                    "primary-fixed-dim": "#afc8f0",
+                    "outline-variant": "#c4c6cf",
+                    "secondary-fixed-dim": "#e9c349",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#001c3a",
+                    "primary-fixed": "#d4e3ff",
+                    "surface-variant": "#e2e2e2",
+                    "on-error-container": "#93000a",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#2f3131",
+                    "on-background": "#1a1c1c",
+                    "tertiary-fixed": "#e1e3e4",
+                    "on-tertiary-fixed": "#191c1d",
+                    "surface-tint": "#476083",
+                    "background": "#f9f9f9",
+                    "surface-container": "#eeeeee",
+                    "primary-container": "#001f3f",
+                    "on-secondary-fixed": "#241a00",
+                    "on-secondary-container": "#745c00",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-on-surface": "#f0f1f1",
+                    "secondary-container": "#fed65b",
+                    "secondary": "#735c00",
+                    "secondary-fixed": "#ffe088",
+                    "outline": "#74777f",
+                    "surface": "#f9f9f9",
+                    "on-surface-variant": "#43474e",
+                    "on-primary-fixed-variant": "#2f486a",
+                    "surface-container-high": "#e8e8e8",
+                    "primary": "#001f3f",
+                    "on-tertiary": "#ffffff",
+                    "tertiary": "#040607",
+                    "error-container": "#ffdad6",
+                    "error": "#ba1a1a",
+                    "on-tertiary-container": "#848688",
+                    "on-surface": "#1a1c1c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "label-md": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Navigation Drawer (Fixed Sidebar) -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-primary text-secondary-fixed border-r border-outline-variant/10 shadow-sm flex flex-col z-50">
+<div class="p-8">
+<h1 class="text-headline-md font-headline-md font-bold text-secondary-fixed dark:text-secondary-fixed-dim">Grand Regency</h1>
+</div>
+<nav class="flex-1">
+<ul class="flex flex-col">
+<li>
+<a class="flex items-center gap-4 px-6 py-4 text-on-primary/60 hover:bg-white/5 hover:text-on-primary transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md uppercase tracking-widest">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-6 py-4 text-on-primary/60 hover:bg-white/5 hover:text-on-primary transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md uppercase tracking-widest">Bookings</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-6 py-4 text-on-primary/60 hover:bg-white/5 hover:text-on-primary transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">bed</span>
+<span class="font-label-md text-label-md uppercase tracking-widest">Rooms</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-6 py-4 text-secondary-fixed bg-white/5 border-r-4 border-secondary-fixed" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md uppercase tracking-widest">Staff</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-6 py-4 text-on-primary/60 hover:bg-white/5 hover:text-on-primary transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md uppercase tracking-widest">Settings</span>
+</a>
+</li>
+</ul>
+</nav>
+<div class="p-6 border-t border-white/5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-secondary-container rounded-full flex items-center justify-center text-on-secondary-container font-bold">AD</div>
+<div>
+<p class="text-label-md text-on-secondary font-semibold">Admin Panel</p>
+<p class="text-xs text-on-primary/40">Super User</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen">
+<!-- Top App Bar -->
+<header class="sticky top-0 right-0 w-full backdrop-blur-md bg-surface-container-lowest/80 border-b border-surface-variant flex justify-between items-center h-24 px-10 z-40">
+<div>
+<h2 class="font-headline-md text-headline-md text-primary font-bold">Staff Management</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage hotel employees, departments, and operational teams</p>
+</div>
+<div class="flex items-center gap-6">
+<button class="relative p-2 text-on-surface-variant hover:text-secondary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-secondary rounded-full"></span>
+</button>
+<div class="h-8 w-px bg-surface-variant"></div>
+<div class="flex items-center gap-2 cursor-pointer hover:opacity-80">
+<span class="material-symbols-outlined text-primary">search</span>
+<span class="font-label-md text-label-md text-primary uppercase">Quick Find</span>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-10 max-w-7xl mx-auto space-y-12">
+<!-- Statistics Cards (Glassmorphism Bento) -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="glass-card p-6 rounded-xl flex items-center gap-5 shadow-sm border border-outline-variant/20">
+<div class="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">badge</span>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase">Total Staff</p>
+<p class="text-headline-md font-headline-md text-primary">124</p>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl flex items-center gap-5 shadow-sm border border-outline-variant/20">
+<div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">person_check</span>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase">Active Employees</p>
+<p class="text-headline-md font-headline-md text-primary">118</p>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl flex items-center gap-5 shadow-sm border border-outline-variant/20">
+<div class="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">domain</span>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase">Departments</p>
+<p class="text-headline-md font-headline-md text-primary">8</p>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl flex items-center gap-5 shadow-sm border border-outline-variant/20">
+<div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">event_available</span>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase">Attendance</p>
+<p class="text-headline-md font-headline-md text-primary">95%</p>
+</div>
+</div>
+</section>
+<!-- Search & Filters -->
+<section class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-surface-variant flex flex-col md:flex-row gap-4 items-center">
+<div class="relative flex-1 w-full">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-background border-none ring-1 ring-outline-variant/30 rounded-lg focus:ring-2 focus:ring-secondary/50 transition-all text-body-md font-body-md" placeholder="Search by name, ID or department..." type="text"/>
+</div>
+<div class="flex gap-4 w-full md:w-auto">
+<select class="bg-background border-none ring-1 ring-outline-variant/30 rounded-lg px-4 py-3 text-label-md font-label-md text-on-surface-variant focus:ring-2 focus:ring-secondary/50 min-w-[140px]">
+<option>Role</option>
+<option>Lead</option>
+<option>Manager</option>
+<option>Staff</option>
+</select>
+<select class="bg-background border-none ring-1 ring-outline-variant/30 rounded-lg px-4 py-3 text-label-md font-label-md text-on-surface-variant focus:ring-2 focus:ring-secondary/50 min-w-[160px]">
+<option>Department</option>
+<option>Housekeeping</option>
+<option>Front Desk</option>
+<option>Concierge</option>
+<option>F&amp;B</option>
+</select>
+<select class="bg-background border-none ring-1 ring-outline-variant/30 rounded-lg px-4 py-3 text-label-md font-label-md text-on-surface-variant focus:ring-2 focus:ring-secondary/50 min-w-[140px]">
+<option>Status</option>
+<option>Active</option>
+<option>On Leave</option>
+<option>Off Duty</option>
+</select>
+</div>
+</section>
+<!-- Staff List (Cards) -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Sarah Jenkins -->
+<div class="bg-surface-container-lowest p-8 rounded-xl border border-surface-variant shadow-sm hover:shadow-md transition-shadow group">
+<div class="flex items-start justify-between mb-6">
+<div class="flex items-center gap-5">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-secondary/20">
+<img alt="Sarah Jenkins" class="w-full h-full object-cover" data-alt="A professional portrait of a woman in her 40s with a warm and capable expression, wearing a refined hotel management uniform. The background is a soft-focus interior of a luxury hotel lobby with warm, golden ambient lighting. The overall aesthetic is clean, high-end, and follows the Aurelian Reserve brand's minimalist and premium visual identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPItGnsU-ePf8-QxYxnu7KfLhiV_yZ72u0RUxBi721dmzUJvvWrtGhkP5NXYJl2hwCASEEmIKigamVbm9qYV0KbJcXsLxrh8emOi40I9s0G1Z7zWTQ9ktuZE6M6Yv9LLIHWw_fwKBRlc9gHYcaxrRhheOfxhjkhYBAcdV8i26LHPZUXBu8_Uc1xJvlNGRFh3r0TvQjRtDq2TZK2AKZoX0q_c6Lefb8NmH3fiWO-BXeZtqc7LK8fLT6bxPl3rCr4dc7ikq1-JrIqnY"/>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary">Sarah Jenkins</h3>
+<p class="text-label-md font-label-md text-on-surface-variant/70 uppercase">ID: AR-001</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-green-50 text-green-700 text-label-sm font-label-sm uppercase rounded-full">Active</span>
+</div>
+<div class="space-y-4 mb-8">
+<div class="flex justify-between items-center py-2 border-b border-surface-variant/50">
+<span class="text-label-md font-label-md text-on-surface-variant uppercase">Role</span>
+<span class="text-body-md font-body-md text-primary font-medium">Head of Housekeeping</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-surface-variant/50">
+<span class="text-label-md font-label-md text-on-surface-variant uppercase">Department</span>
+<span class="text-body-md font-body-md text-primary">Housekeeping</span>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="flex-1 py-3 border border-primary text-primary font-label-md text-label-md uppercase tracking-wider hover:bg-primary hover:text-white transition-colors">View Profile</button>
+<button class="flex-1 py-3 border border-secondary text-secondary font-label-md text-label-md uppercase tracking-wider hover:bg-secondary hover:text-white transition-colors">Edit</button>
+</div>
+</div>
+<!-- Marcus Thorne -->
+<div class="bg-surface-container-lowest p-8 rounded-xl border border-surface-variant shadow-sm hover:shadow-md transition-shadow group">
+<div class="flex items-start justify-between mb-6">
+<div class="flex items-center gap-5">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-secondary/20">
+<img alt="Marcus Thorne" class="w-full h-full object-cover" data-alt="A sophisticated portrait of a senior man with a refined, welcoming smile, dressed in a classic navy blue concierge suit with gold trim. The lighting is soft and cinematic, emphasizing a professional yet approachable hospitality expert. The backdrop hints at a quiet, elegant library or hotel reception area, maintaining a luxury minimalist atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjCs8p_sx5n0e7LknvJctVVeg_gPqkR2XFMbfcBzD8I8lhfrxI5teAA8wNSnkaAuC5vd3pmptkj26lF4j9wZEyQms0ipKyKcwopEGaYvM2r69Wots6_QRMcihOgeGQan5qrCPWhmGcFaA1h2tM_9gHsLmWTOuoqN-_VSP00oYG-dHSdsqta4n1BvrnKm0E6wWAqlndP__5WdEf3vWNi11KN0Gkqb6kxuHGJnbG1NRNUmK7fDhNJ_-npYg-HwNKzboQt1lv0ey_VSA"/>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary">Marcus Thorne</h3>
+<p class="text-label-md font-label-md text-on-surface-variant/70 uppercase">ID: AR-042</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-green-50 text-green-700 text-label-sm font-label-sm uppercase rounded-full">Active</span>
+</div>
+<div class="space-y-4 mb-8">
+<div class="flex justify-between items-center py-2 border-b border-surface-variant/50">
+<span class="text-label-md font-label-md text-on-surface-variant uppercase">Role</span>
+<span class="text-body-md font-body-md text-primary font-medium">Senior Concierge</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-surface-variant/50">
+<span class="text-label-md font-label-md text-on-surface-variant uppercase">Department</span>
+<span class="text-body-md font-body-md text-primary">Concierge</span>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="flex-1 py-3 border border-primary text-primary font-label-md text-label-md uppercase tracking-wider hover:bg-primary hover:text-white transition-colors">View Profile</button>
+<button class="flex-1 py-3 border border-secondary text-secondary font-label-md text-label-md uppercase tracking-wider hover:bg-secondary hover:text-white transition-colors">Edit</button>
+</div>
+</div>
+<!-- Elena Rodriguez -->
+<div class="bg-surface-container-lowest p-8 rounded-xl border border-surface-variant shadow-sm hover:shadow-md transition-shadow group">
+<div class="flex items-start justify-between mb-6">
+<div class="flex items-center gap-5">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-secondary/20">
+<img alt="Elena Rodriguez" class="w-full h-full object-cover" data-alt="A modern professional portrait of a woman in her 30s with a focused and intelligent expression. She is wearing high-end business attire in deep navy tones. The lighting is bright and even, reflecting a professional office or hotel management setting. The style is airy and minimalist, fitting the clean aesthetic of the Aurelian Reserve brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbK3yfBfXIwCXoCPbuYh77cdGdQ6gzQQfggOoVOtkezoF_L9meJsErqORkJaZxk6bSCj6YTnmeE9TTAwi4fTkbMQQA93W6JEGw-Ze_YdWAzHCgNJ4Ilp-B3r2b4NeP0Wx6of_iSmiUkxsNrLEaWnfYe6IDS-38FHfPn5kLmzH16_xu5dkmvGPznwOUQs4Ab8AGWeDtV2OX1KkWDmLKZJ-FCGNooQp8kCL3x9jWk1nzYsqAUQuO_nuW5xLRCLsqDkn_Vb48c2xAR8c"/>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary">Elena Rodriguez</h3>
+<p class="text-label-md font-label-md text-on-surface-variant/70 uppercase">ID: AR-088</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-yellow-50 text-yellow-700 text-label-sm font-label-sm uppercase rounded-full">On Leave</span>
+</div>
+<div class="space-y-4 mb-8">
+<div class="flex justify-between items-center py-2 border-b border-surface-variant/50">
+<span class="text-label-md font-label-md text-on-surface-variant uppercase">Role</span>
+<span class="text-body-md font-body-md text-primary font-medium">Front Desk Lead</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-surface-variant/50">
+<span class="text-label-md font-label-md text-on-surface-variant uppercase">Department</span>
+<span class="text-body-md font-body-md text-primary">Front Desk</span>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="flex-1 py-3 border border-primary text-primary font-label-md text-label-md uppercase tracking-wider hover:bg-primary hover:text-white transition-colors">View Profile</button>
+<button class="flex-1 py-3 border border-secondary text-secondary font-label-md text-label-md uppercase tracking-wider hover:bg-secondary hover:text-white transition-colors">Edit</button>
+</div>
+</div>
+<!-- Julian Sorel -->
+<div class="bg-surface-container-lowest p-8 rounded-xl border border-surface-variant shadow-sm hover:shadow-md transition-shadow group">
+<div class="flex items-start justify-between mb-6">
+<div class="flex items-center gap-5">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-secondary/20">
+<img alt="Julian Sorel" class="w-full h-full object-cover" data-alt="A portrait of a distinguished man in his late 40s with a confident and composed demeanor, dressed in a sharp, tailored dark charcoal suit. The lighting is dramatic yet soft, creating a sense of luxury and authority. The background is a blurred view of a high-end restaurant interior with warm lighting, aligning with his role as F&amp;B Director in a premium resort." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZb7VGzieTZk_kylFrtx0ZAhqHWm2FKChpXWgtQCrPtQua_gGT08zLUwQfFD7wczd1yagSoR5skHhjRd5fAcKr4Ic2JuBf0yI4s1yk_P1IdwgWedJnAc2rkkDbWKrWjzsSxr29qwYPy-rqcC8xa7gFNFk9cLr_oBMLbGhUEt0go6RdPz3ADAwhElSKZBrurkEv4e1Xez8bSfhQCGlL1uK883nkNKFZw6bvOt3Mq7y9O5eySNObt0tHyjBFU52rSYU75p7_S0jtXLk"/>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary">Julian Sorel</h3>
+<p class="text-label-md font-label-md text-on-surface-variant/70 uppercase">ID: AR-105</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-surface-variant text-on-surface-variant text-label-sm font-label-sm uppercase rounded-full">Off Duty</span>
+</div>
+<div class="space-y-4 mb-8">
+<div class="flex justify-between items-center py-2 border-b border-surface-variant/50">
+<span class="text-label-md font-label-md text-on-surface-variant uppercase">Role</span>
+<span class="text-body-md font-body-md text-primary font-medium">F&amp;B Director</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-surface-variant/50">
+<span class="text-label-md font-label-md text-on-surface-variant uppercase">Department</span>
+<span class="text-body-md font-body-md text-primary">F&amp;B</span>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="flex-1 py-3 border border-primary text-primary font-label-md text-label-md uppercase tracking-wider hover:bg-primary hover:text-white transition-colors">View Profile</button>
+<button class="flex-1 py-3 border border-secondary text-secondary font-label-md text-label-md uppercase tracking-wider hover:bg-secondary hover:text-white transition-colors">Edit</button>
+</div>
+</div>
+</section>
+<!-- Pagination -->
+<section class="flex items-center justify-center pt-8 border-t border-surface-variant">
+<nav class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-surface-variant text-on-surface-variant hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary font-label-md text-label-md">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-transparent text-on-surface-variant hover:border-surface-variant font-label-md text-label-md transition-all">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-transparent text-on-surface-variant hover:border-surface-variant font-label-md text-label-md transition-all">3</button>
+<span class="mx-2 text-on-surface-variant">...</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-surface-variant text-on-surface-variant hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</nav>
+</section>
+</div>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-10 right-10 w-16 h-16 bg-secondary-container text-on-secondary-container rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all flex items-center justify-center group z-50">
+<span class="material-symbols-outlined text-[32px]">add</span>
+<span class="absolute right-full mr-4 bg-primary text-secondary-fixed px-4 py-2 rounded-lg text-label-md font-label-md uppercase tracking-widest opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity shadow-sm pointer-events-none">Add Staff</span>
+</button>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const statusBadges = document.querySelectorAll('.rounded-full');
+            statusBadges.forEach(badge => {
+                const text = badge.textContent.trim();
+                if (text === 'Active') {
+                    badge.className = 'px-3 py-1 bg-green-50 text-green-700 text-label-sm font-label-sm uppercase rounded-full';
+                } else if (text === 'On Leave') {
+                    badge.className = 'px-3 py-1 bg-yellow-50 text-yellow-700 text-label-sm font-label-sm uppercase rounded-full';
+                } else if (text === 'Off Duty') {
+                    badge.className = 'px-3 py-1 bg-surface-variant text-on-surface-variant text-label-sm font-label-sm uppercase rounded-full';
+                }
+            });
+        });
+    </script>
+</body></html>
