@@ -1,467 +1,608 @@
 <!DOCTYPE html>
-
-<html class="light" lang="en">
-
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Bookings Management | Grand Regency Admin</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "tertiary": "#040607",
-                        "inverse-primary": "#afc8f0",
-                        "on-secondary": "#ffffff",
-                        "on-secondary-fixed-variant": "#574500",
-                        "primary-fixed": "#d4e3ff",
-                        "surface-dim": "#dadada",
-                        "surface-container": "#eeeeee",
-                        "outline-variant": "#c4c6cf",
-                        "surface-container-highest": "#e2e2e2",
-                        "outline": "#74777f",
-                        "surface-container-lowest": "#ffffff",
-                        "on-error": "#ffffff",
-                        "tertiary-container": "#1c1f20",
-                        "on-tertiary": "#ffffff",
-                        "background": "#f9f9f9",
-                        "on-primary-container": "#6f88ad",
-                        "error-container": "#ffdad6",
-                        "on-tertiary-fixed-variant": "#454748",
-                        "tertiary-fixed-dim": "#c5c7c8",
-                        "inverse-on-surface": "#f0f1f1",
-                        "tertiary-fixed": "#e1e3e4",
-                        "on-tertiary-container": "#848688",
-                        "primary-container": "#001f3f",
-                        "on-secondary-container": "#745c00",
-                        "primary": "#000613",
-                        "secondary-container": "#fed65b",
-                        "error": "#ba1a1a",
-                        "on-surface": "#1a1c1c",
-                        "secondary-fixed-dim": "#e9c349",
-                        "surface-tint": "#476083",
-                        "primary-fixed-dim": "#afc8f0",
-                        "on-error-container": "#93000a",
-                        "surface-bright": "#f9f9f9",
-                        "on-primary": "#ffffff",
-                        "surface-variant": "#e2e2e2",
-                        "surface-container-high": "#e8e8e8",
-                        "on-primary-fixed-variant": "#2f486a",
-                        "secondary-fixed": "#ffe088",
-                        "on-secondary-fixed": "#241a00",
-                        "on-background": "#1a1c1c",
-                        "on-surface-variant": "#43474e",
-                        "on-primary-fixed": "#001c3a",
-                        "surface": "#f9f9f9",
-                        "secondary": "#735c00",
-                        "on-tertiary-fixed": "#191c1d",
-                        "inverse-surface": "#2f3131"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
-                    },
-                    "spacing": {
-                        "unit": "8px",
-                        "gutter": "32px",
-                        "stack-md": "48px",
-                        "stack-sm": "24px",
-                        "margin-mobile": "20px",
-                        "margin-desktop": "64px",
-                        "container-max": "1280px",
-                        "stack-lg": "80px"
-                    },
-                    "fontFamily": {
-                        "headline-md": ["Plus Jakarta Sans"],
-                        "body-md": ["Plus Jakarta Sans"],
-                        "display-lg": ["Plus Jakarta Sans"],
-                        "headline-lg": ["Plus Jakarta Sans"],
-                        "body-lg": ["Plus Jakarta Sans"],
-                        "label-sm": ["Plus Jakarta Sans"],
-                        "display-lg-mobile": ["Plus Jakarta Sans"],
-                        "label-md": ["Plus Jakarta Sans"]
-                    },
-                    "fontSize": {
-                        "headline-md": ["24px", { "lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500" }],
-                        "body-md": ["16px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
-                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "0.05em", "fontWeight": "300" }],
-                        "headline-lg": ["32px", { "lineHeight": "1.3", "letterSpacing": "0.02em", "fontWeight": "400" }],
-                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
-                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500" }],
-                        "display-lg-mobile": ["40px", { "lineHeight": "1.2", "letterSpacing": "0.03em", "fontWeight": "300" }],
-                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600" }]
-                    }
-                },
-            },
-        }
-    </script>
-    <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumina Grand — Bookings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:#0F172A; --navy-mid:#1E293B; --navy-light:#273549;
+    --gold:#D4AF37; --gold-light:#E8CC6A;
+    --gold-dim:rgba(212,175,55,0.15); --gold-border:rgba(212,175,55,0.3);
+    --white:#FFFFFF; --surface:#F8F7F4; --surface-2:#F0EDE6;
+    --text-primary:#0F172A; --text-secondary:#64748B; --text-muted:#94A3B8;
+    --green:#059669; --yellow:#D97706; --blue:#2563EB; --red:#DC2626;
+    --sidebar-w:260px; --header-h:80px; --radius:16px; --radius-sm:10px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--surface);color:var(--text-primary);display:flex;min-height:100vh;}
 
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
+  /* SIDEBAR */
+  .sidebar{width:var(--sidebar-w);background:var(--navy);min-height:100vh;position:fixed;top:0;left:0;display:flex;flex-direction:column;z-index:100;border-right:1px solid rgba(212,175,55,0.12);}
+  .sidebar-logo{padding:32px 24px 28px;border-bottom:1px solid rgba(212,175,55,0.12);}
+  .sidebar-logo .wordmark{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--white);letter-spacing:0.08em;text-transform:uppercase;}
+  .sidebar-logo .wordmark span{color:var(--gold);}
+  .sidebar-logo .tagline{font-size:10px;color:var(--text-muted);letter-spacing:0.2em;text-transform:uppercase;margin-top:4px;}
+  .sidebar-nav{flex:1;padding:24px 16px;display:flex;flex-direction:column;gap:4px;}
+  .nav-section-label{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-muted);padding:12px 8px 6px;margin-top:8px;}
+  .nav-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:var(--radius-sm);cursor:pointer;transition:all 0.2s;color:rgba(255,255,255,0.55);font-size:13.5px;font-weight:500;position:relative;text-decoration:none;}
+  .nav-item:hover{color:rgba(255,255,255,0.9);background:rgba(212,175,55,0.08);}
+  .nav-item.active{color:var(--gold);background:var(--gold-dim);}
+  .nav-item.active::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:60%;background:var(--gold);border-radius:0 3px 3px 0;}
+  .nav-item svg{flex-shrink:0;width:18px;height:18px;}
+  .sidebar-bottom{padding:16px;border-top:1px solid rgba(212,175,55,0.12);}
+  .admin-profile{display:flex;align-items:center;gap:10px;padding:10px;border-radius:var(--radius-sm);cursor:pointer;transition:background 0.2s;}
+  .admin-profile:hover{background:rgba(255,255,255,0.05);}
+  .avatar-circle{width:36px;height:36px;background:linear-gradient(135deg,var(--gold),#B8960C);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--navy);flex-shrink:0;}
+  .admin-info .name{font-size:13px;font-weight:600;color:var(--white);}
+  .admin-info .role{font-size:11px;color:var(--text-muted);}
+  .logout-btn{display:flex;align-items:center;gap:8px;margin-top:8px;padding:8px 10px;border-radius:var(--radius-sm);cursor:pointer;color:rgba(255,255,255,0.4);font-size:13px;transition:color 0.2s;}
+  .logout-btn:hover{color:#F87171;}
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(240, 240, 240, 0.8);
-        }
+  /* MAIN */
+  .main{margin-left:var(--sidebar-w);flex:1;display:flex;flex-direction:column;}
+  .header{height:var(--header-h);background:rgba(248,247,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--surface-2);display:flex;align-items:center;justify-content:space-between;padding:0 36px;position:sticky;top:0;z-index:50;}
+  .header-left .greeting{font-size:20px;font-weight:700;color:var(--navy);letter-spacing:-0.02em;}
+  .header-left .subtitle{font-size:13px;color:var(--text-secondary);margin-top:2px;}
+  .header-right{display:flex;align-items:center;gap:16px;}
+  .search-bar{display:flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--surface-2);border-radius:40px;padding:8px 16px;width:220px;transition:border-color 0.2s,box-shadow 0.2s;}
+  .search-bar:focus-within{border-color:var(--gold-border);box-shadow:0 0 0 3px rgba(212,175,55,0.1);}
+  .search-bar input{border:none;outline:none;font-size:13px;background:transparent;color:var(--text-primary);width:100%;font-family:inherit;}
+  .search-bar input::placeholder{color:var(--text-muted);}
+  .icon-btn{width:38px;height:38px;background:var(--white);border:1px solid var(--surface-2);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-secondary);transition:all 0.2s;position:relative;}
+  .icon-btn:hover{border-color:var(--gold-border);color:var(--gold);}
+  .notif-dot{width:8px;height:8px;background:var(--gold);border-radius:50%;position:absolute;top:5px;right:5px;border:2px solid var(--white);}
+  .header-avatar{width:38px;height:38px;background:linear-gradient(135deg,var(--gold),#B8960C);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--navy);cursor:pointer;}
 
-        .sidebar-item-active {
-            border-right: 2px solid #ffe088;
-            background: rgba(71, 96, 131, 0.1);
-        }
-    </style>
-    <style>
-        body {
-            min-height: max(884px, 100dvh);
-        }
-    </style>
+  /* CONTENT */
+  .content{padding:32px 36px 48px;display:flex;flex-direction:column;gap:24px;}
+  .section-title{font-size:16px;font-weight:700;color:var(--navy);letter-spacing:-0.01em;margin-bottom:16px;}
+  .section-title span{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold);font-size:18px;}
+
+  /* SUMMARY CARDS */
+  .summary-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .summary-card{background:var(--white);border:1px solid rgba(15,23,42,0.06);border-radius:var(--radius-sm);padding:16px 20px;display:flex;align-items:center;gap:14px;box-shadow:0 1px 3px rgba(15,23,42,0.05);animation:fadeUp 0.4s ease both;}
+  .summary-card:nth-child(1){animation-delay:0.05s}.summary-card:nth-child(2){animation-delay:0.10s}.summary-card:nth-child(3){animation-delay:0.15s}.summary-card:nth-child(4){animation-delay:0.20s}
+  .s-icon{width:40px;height:40px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .si-all{background:rgba(15,23,42,0.06);color:var(--navy);}
+  .si-confirmed{background:rgba(5,150,105,0.1);color:#059669;}
+  .si-pending{background:rgba(217,119,6,0.1);color:#D97706;}
+  .si-cancelled{background:rgba(220,38,38,0.08);color:#DC2626;}
+  .s-info .s-val{font-size:22px;font-weight:800;color:var(--navy);letter-spacing:-0.03em;}
+  .s-info .s-lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);margin-top:2px;}
+
+  /* TOOLBAR */
+  .toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .toolbar-left{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .filter-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;font-family:inherit;border:1px solid var(--surface-2);background:var(--white);color:var(--text-secondary);transition:all 0.2s;}
+  .filter-btn:hover{border-color:var(--gold-border);color:var(--navy);}
+  .filter-btn.active{background:var(--gold-dim);border-color:var(--gold-border);color:var(--gold);font-weight:600;}
+  .fdot{width:7px;height:7px;border-radius:50%;}
+  .toolbar-right{display:flex;align-items:center;gap:10px;}
+
+  /* DATE RANGE */
+  .date-range{display:flex;align-items:center;gap:6px;background:var(--white);border:1px solid var(--surface-2);border-radius:8px;padding:8px 14px;font-size:13px;color:var(--text-secondary);cursor:pointer;transition:border-color 0.2s;}
+  .date-range:hover{border-color:var(--gold-border);}
+
+  .btn-gold{font-size:13px;font-weight:600;background:linear-gradient(135deg,var(--gold),#C9A227);color:var(--navy);border:none;padding:9px 20px;border-radius:8px;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:opacity 0.2s;}
+  .btn-gold:hover{opacity:0.85;}
+
+  /* MAIN TABLE CARD */
+  .table-card{background:var(--white);border:1px solid rgba(15,23,42,0.06);border-radius:var(--radius);overflow:hidden;box-shadow:0 1px 3px rgba(15,23,42,0.06);animation:fadeUp 0.45s 0.25s ease both;}
+  .table-card-header{padding:20px 24px 16px;border-bottom:1px solid var(--surface-2);display:flex;align-items:center;justify-content:space-between;}
+  .table-meta{font-size:12px;color:var(--text-muted);margin-top:3px;}
+
+  table{width:100%;border-collapse:collapse;}
+  thead th{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);text-align:left;padding:10px 20px;background:var(--surface);border-bottom:1px solid var(--surface-2);white-space:nowrap;}
+  thead th.sortable{cursor:pointer;user-select:none;}
+  thead th.sortable:hover{color:var(--navy);}
+  thead th .sort-icon{margin-left:4px;opacity:0.4;}
+  tbody tr{border-bottom:1px solid var(--surface-2);transition:background 0.15s;cursor:pointer;}
+  tbody tr:last-child{border-bottom:none;}
+  tbody tr:hover{background:#FAFAF8;}
+  tbody td{padding:14px 20px;font-size:13px;color:var(--text-primary);vertical-align:middle;}
+
+  .booking-id{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:var(--navy);}
+  .guest-cell{display:flex;align-items:center;gap:10px;}
+  .guest-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--navy-mid));display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gold);flex-shrink:0;}
+  .guest-name{font-weight:600;color:var(--navy);}
+  .guest-email{font-size:11px;color:var(--text-muted);margin-top:1px;}
+  .room-pill{display:inline-block;background:var(--surface);color:var(--text-secondary);font-size:12px;font-weight:500;padding:3px 9px;border-radius:6px;}
+  .date-cell{font-size:13px;color:var(--text-primary);}
+  .date-cell .nights{font-size:11px;color:var(--text-muted);margin-top:1px;}
+  .price-cell{font-weight:700;color:var(--navy);}
+
+  .status-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;letter-spacing:0.04em;white-space:nowrap;}
+  .sdot{width:5px;height:5px;border-radius:50%;}
+  .s-confirmed{background:rgba(5,150,105,0.1);color:#059669;} .s-confirmed .sdot{background:#059669;}
+  .s-pending{background:rgba(217,119,6,0.1);color:#D97706;} .s-pending .sdot{background:#D97706;}
+  .s-completed{background:rgba(37,99,235,0.1);color:#2563EB;} .s-completed .sdot{background:#2563EB;}
+  .s-cancelled{background:rgba(220,38,38,0.1);color:#DC2626;} .s-cancelled .sdot{background:#DC2626;}
+
+  .action-btns{display:flex;gap:6px;}
+  .btn-icon{width:30px;height:30px;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;border:1px solid var(--surface-2);background:transparent;color:var(--text-muted);transition:all 0.2s;}
+  .btn-icon:hover{border-color:var(--gold-border);color:var(--gold);background:var(--gold-dim);}
+  .btn-icon.danger:hover{border-color:rgba(220,38,38,0.3);color:#DC2626;background:rgba(220,38,38,0.06);}
+
+  /* PAGINATION */
+  .pagination{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;border-top:1px solid var(--surface-2);}
+  .page-info{font-size:13px;color:var(--text-muted);}
+  .page-btns{display:flex;gap:6px;}
+  .page-btn{width:32px;height:32px;border-radius:7px;border:1px solid var(--surface-2);background:var(--white);cursor:pointer;font-size:13px;font-weight:500;color:var(--text-secondary);display:flex;align-items:center;justify-content:center;transition:all 0.2s;font-family:inherit;}
+  .page-btn:hover{border-color:var(--gold-border);color:var(--navy);}
+  .page-btn.active{background:var(--navy);color:var(--gold);border-color:var(--navy);}
+
+  /* MODAL */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,0.6);backdrop-filter:blur(4px);z-index:200;align-items:center;justify-content:center;}
+  .modal-overlay.open{display:flex;}
+  .modal{background:var(--white);border-radius:var(--radius);width:580px;max-width:95vw;max-height:90vh;overflow-y:auto;box-shadow:0 24px 60px rgba(15,23,42,0.25);animation:modalIn 0.25s ease;}
+  @keyframes modalIn{from{opacity:0;transform:translateY(20px) scale(0.97)}to{opacity:1;transform:none}}
+  .modal-header{padding:24px 28px 20px;border-bottom:1px solid var(--surface-2);display:flex;align-items:center;justify-content:space-between;}
+  .modal-title{font-size:17px;font-weight:700;color:var(--navy);}
+  .modal-subtitle{font-size:12px;color:var(--text-muted);margin-top:2px;}
+  .modal-close{width:32px;height:32px;border-radius:8px;border:1px solid var(--surface-2);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-muted);transition:all 0.2s;}
+  .modal-close:hover{background:var(--surface);color:var(--navy);}
+  .modal-body{padding:24px 28px;display:flex;flex-direction:column;gap:18px;}
+  .form-section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-muted);padding-bottom:10px;border-bottom:1px solid var(--surface-2);}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .form-group{display:flex;flex-direction:column;gap:6px;}
+  .form-group.full{grid-column:1/-1;}
+  .form-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:0.04em;}
+  .form-input,.form-select{padding:9px 12px;border-radius:8px;border:1px solid var(--surface-2);background:var(--white);font-size:13px;font-family:inherit;color:var(--text-primary);outline:none;transition:border-color 0.2s,box-shadow 0.2s;}
+  .form-input:focus,.form-select:focus{border-color:var(--gold-border);box-shadow:0 0 0 3px rgba(212,175,55,0.1);}
+  .modal-footer{padding:16px 28px 24px;display:flex;gap:10px;justify-content:flex-end;border-top:1px solid var(--surface-2);}
+  .btn-cancel{padding:9px 20px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;font-family:inherit;border:1px solid var(--surface-2);background:transparent;color:var(--text-secondary);transition:all 0.2s;}
+  .btn-cancel:hover{background:var(--surface);}
+
+  /* DETAIL MODAL */
+  .detail-modal{width:620px;}
+  .detail-header-info{display:flex;align-items:center;gap:16px;padding:20px 28px;background:var(--navy);border-radius:var(--radius) var(--radius) 0 0;}
+  .detail-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#B8960C);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:var(--navy);}
+  .detail-guest-name{font-size:17px;font-weight:700;color:var(--white);}
+  .detail-booking-id{font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--gold);margin-top:2px;}
+  .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:4px;}
+  .detail-item{}
+  .detail-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);margin-bottom:4px;}
+  .detail-value{font-size:14px;font-weight:600;color:var(--navy);}
+  .detail-divider{height:1px;background:var(--surface-2);margin:4px 0;}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+</style>
 </head>
+<body>
 
-<body class="bg-background text-on-surface">
-    <!-- NavigationDrawer: Shared Component -->
-    <aside
-        class="h-screen w-64 fixed left-0 top-0 bg-primary-container flex flex-col py-stack-sm px-unit border-r border-outline-variant/10 z-50">
-        <div class="px-4 mb-stack-lg">
-            <h1 class="text-headline-md font-headline-md font-bold text-secondary-fixed">Grand Regency</h1>
-            <p class="text-label-sm text-on-primary-container/60 tracking-widest mt-1">MANAGEMENT PORTAL</p>
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="wordmark">Lumina <span>Grand</span></div>
+    <div class="tagline">Hotel Management System</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Operations</div>
+    <a class="nav-item" href="lumina-grand-dashboard.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      Dashboard
+    </a>
+    <a class="nav-item" href="lumina-grand-rooms.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Rooms
+    </a>
+    <a class="nav-item active" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+      Bookings
+    </a>
+    <a class="nav-item" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      Staff
+    </a>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="admin-profile">
+      <div class="avatar-circle">AD</div>
+      <div class="admin-info">
+        <div class="name">Administrator</div>
+        <div class="role">General Manager</div>
+      </div>
+    </div>
+    <div class="logout-btn">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      Logout
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+  <header class="header">
+    <div class="header-left">
+      <div class="greeting">Booking Management</div>
+      <div class="subtitle">View, create, and manage all guest reservations.</div>
+    </div>
+    <div class="header-right">
+      <div class="search-bar">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" placeholder="Search bookings, guests…" id="searchInput" oninput="filterBookings()">
+      </div>
+      <div class="icon-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        <div class="notif-dot"></div>
+      </div>
+      <div class="header-avatar">AD</div>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <!-- SUMMARY -->
+    <div class="summary-row">
+      <div class="summary-card">
+        <div class="s-icon si-all">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
         </div>
-        <nav class="flex-1 space-y-2">
-            <!-- Dashboard -->
-            <a class="flex items-center gap-4 px-4 py-3 text-surface-variant/70 font-medium hover:bg-surface-tint/5 transition-colors duration-200"
-                href="#">
-                <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
-                <span class="font-label-md text-label-md">Dashboard</span>
-            </a>
-            <!-- Bookings - ACTIVE -->
-            <a class="flex items-center gap-4 px-4 py-3 text-secondary-fixed font-bold border-r-2 border-secondary-fixed bg-surface-tint/10 transition-all duration-200"
-                href="#">
-                <span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
-                <span class="font-label-md text-label-md">Bookings</span>
-            </a>
-            <!-- Rooms -->
-            <a class="flex items-center gap-4 px-4 py-3 text-surface-variant/70 font-medium hover:bg-surface-tint/5 transition-colors duration-200"
-                href="#">
-                <span class="material-symbols-outlined" data-icon="bed">bed</span>
-                <span class="font-label-md text-label-md">Rooms</span>
-            </a>
-            <!-- Staff -->
-            <a class="flex items-center gap-4 px-4 py-3 text-surface-variant/70 font-medium hover:bg-surface-tint/5 transition-colors duration-200"
-                href="#">
-                <span class="material-symbols-outlined" data-icon="group">group</span>
-                <span class="font-label-md text-label-md">Staff</span>
-            </a>
-            <!-- Settings -->
-            <a class="flex items-center gap-4 px-4 py-3 text-surface-variant/70 font-medium hover:bg-surface-tint/5 transition-colors duration-200"
-                href="#">
-                <span class="material-symbols-outlined" data-icon="settings">settings</span>
-                <span class="font-label-md text-label-md">Settings</span>
-            </a>
-        </nav>
-        <div class="mt-auto px-4 pt-stack-sm border-t border-outline-variant/10">
-            <div class="flex items-center gap-3">
-                <img alt="Admin Avatar" class="w-10 h-10 rounded-full object-cover border border-secondary-fixed/30"
-                    data-alt="A professional headshot of a mature male hotel general manager with short graying hair and a confident, warm expression. He is wearing a tailored navy blue suit and a crisp white shirt. The background is a blurred, high-end luxury hotel lobby with warm golden lighting and marble accents, reflecting a sophisticated hospitality environment."
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNhB6ReScDQ1eW0Nt-iTn8_uIwpr-_5trHe2EF1aLTkcXP6lQptznLSrPzxo2aKNAJhUpZGDvXSQWhoK8Q3UqzeICVB2UkXX_jYXk1flxOGUNkpx9no7wI-gcX-CUAtK0LILprItgeuCBKipMJqC2eDi4eQSpEZHIX69EM7guoMsJpmBUWPiLtLvO1GxuQEFtXxxgDxvYqHSO11E9d0BVAIBt6Ujt3AGr555_FyrbbiJjleCrl1lTMvVS0UH9Rsw4miJMdsOIyMu0" />
-                <div>
-                    <p class="text-label-md font-bold text-secondary-fixed">Alexander Vance</p>
-                    <p class="text-label-sm text-on-primary-container/60">General Manager</p>
-                </div>
-            </div>
+        <div class="s-info"><div class="s-val">86</div><div class="s-lbl">Total Bookings</div></div>
+      </div>
+      <div class="summary-card">
+        <div class="s-icon si-confirmed">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
-    </aside>
-    <!-- Main Content Wrapper -->
-    <main class="ml-64 min-h-screen">
-        <!-- TopAppBar -->
-        <header
-            class="flex justify-between items-center w-full h-20 pl-7 pr-margin-desktop sticky top-0 bg-surface/80 backdrop-blur-md z-40 border-b border-surface-container-highest">
-            <div>
-                <h2 class="font-headline-lg text-headline-lg text-on-surface">Bookings Management</h2>
-                <p class="text-body-md text-on-surface-variant">Monitor and manage hotel reservations efficiently</p>
-            </div>
-            <div class="flex items-center gap-gutter">
-                <div class="relative cursor-pointer hover:opacity-80 transition-opacity">
-                    <span class="material-symbols-outlined text-on-surface text-2xl"
-                        data-icon="notifications">notifications</span>
-                    <span class="absolute -top-1 -right-1 w-2 h-2 bg-secondary rounded-full"></span>
-                </div>
-                <div class="flex items-center gap-3 cursor-pointer group">
-                    <div class="text-right">
-                        <p class="text-label-md font-bold group-hover:text-secondary transition-colors">Admin Panel</p>
-                        <p class="text-label-sm text-on-surface-variant">Regency Global</p>
-                    </div>
-                    <div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center">
-                        <span class="material-symbols-outlined text-on-secondary-container"
-                            data-icon="person">person</span>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <!-- Content Canvas -->
-        <div class="p-margin-desktop space-y-stack-lg max-w-container-max mx-auto">
-            <!-- Statistics Section: Bento Grid Glassmorphism -->
-            <section class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
-                <div class="glass-card p-stack-sm rounded-xl transition-transform hover:-translate-y-1">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="p-2 bg-secondary/10 rounded-lg">
-                            <span class="material-symbols-outlined text-secondary"
-                                data-icon="book_online">book_online</span>
-                        </div>
-                        <span class="text-label-sm text-green-600 font-bold">+12%</span>
-                    </div>
-                    <p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Total Bookings</p>
-                    <h3 class="text-headline-md font-bold text-on-surface">1,284</h3>
-                </div>
-                <div class="glass-card p-stack-sm rounded-xl transition-transform hover:-translate-y-1">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="p-2 bg-surface-tint/10 rounded-lg">
-                            <span class="material-symbols-outlined text-surface-tint"
-                                data-icon="person_check">person_check</span>
-                        </div>
-                        <span class="text-label-sm text-green-600 font-bold">+5%</span>
-                    </div>
-                    <p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Active Guests</p>
-                    <h3 class="text-headline-md font-bold text-on-surface">342</h3>
-                </div>
-                <div
-                    class="glass-card p-stack-sm rounded-xl transition-transform hover:-translate-y-1 border-secondary-fixed/30">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="p-2 bg-secondary-fixed/20 rounded-lg">
-                            <span class="material-symbols-outlined text-on-secondary-fixed-variant"
-                                data-icon="pending_actions">pending_actions</span>
-                        </div>
-                        <span class="text-label-sm text-on-secondary-fixed-variant font-bold">Priority</span>
-                    </div>
-                    <p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Pending Res.</p>
-                    <h3 class="text-headline-md font-bold text-on-surface">18</h3>
-                </div>
-                <div class="glass-card p-stack-sm rounded-xl transition-transform hover:-translate-y-1">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="p-2 bg-tertiary/10 rounded-lg">
-                            <span class="material-symbols-outlined text-tertiary" data-icon="payments">payments</span>
-                        </div>
-                        <span class="text-label-sm text-green-600 font-bold">+24%</span>
-                    </div>
-                    <p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Monthly Revenue</p>
-                    <h3 class="text-headline-md font-bold text-on-surface">$142,500</h3>
-                </div>
-            </section>
-            <!-- Search & Filters -->
-            <section class="space-y-stack-sm">
-                <div class="flex flex-col md:flex-row gap-gutter items-center">
-                    <div class="relative w-full md:w-1/3">
-                        <span
-                            class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant/50"
-                            data-icon="search">search</span>
-                        <input
-                            class="w-full pl-12 pr-4 py-4 bg-white border border-outline-variant rounded-full focus:border-secondary focus:ring-0 text-body-md outline-none transition-all"
-                            placeholder="Search by guest name, email or booking ID..." type="text" />
-                    </div>
-                    <div class="flex flex-wrap gap-3">
-                        <div
-                            class="px-5 py-2 rounded-full border border-secondary bg-secondary/5 text-secondary text-label-md font-bold cursor-pointer hover:bg-secondary/10 transition-all flex items-center gap-2">
-                            All Statuses
-                        </div>
-                        <div
-                            class="px-5 py-2 rounded-full border border-outline-variant text-on-surface-variant text-label-md font-medium cursor-pointer hover:border-secondary transition-all flex items-center gap-2">
-                            Room Type <span class="material-symbols-outlined text-sm"
-                                data-icon="expand_more">expand_more</span>
-                        </div>
-                        <div
-                            class="px-5 py-2 rounded-full border border-outline-variant text-on-surface-variant text-label-md font-medium cursor-pointer hover:border-secondary transition-all flex items-center gap-2">
-                            Date Range <span class="material-symbols-outlined text-sm"
-                                data-icon="calendar_today">calendar_today</span>
-                        </div>
-                    </div>
-                    <button
-                        class="ml-auto bg-primary text-white px-8 py-4 rounded-full font-label-md text-label-md uppercase tracking-widest hover:bg-primary/90 active:scale-95 transition-all shadow-lg flex items-center gap-3">
-                        <span class="material-symbols-outlined" data-icon="add">add</span>
-                        New Reservation
-                    </button>
-                </div>
-            </section>
-            <!-- Bookings List: Compact Data Table Pattern -->
-            <section class="bg-white rounded-xl shadow-sm border border-outline-variant/30 overflow-hidden">
-                <table class="w-full text-left border-collapse">
-                    <thead class="bg-surface-container-low border-b border-outline-variant/50">
-                        <tr>
-                            <th
-                                class="px-margin-mobile py-5 text-label-sm font-bold text-on-surface-variant uppercase tracking-wider">
-                                Guest</th>
-                            <th
-                                class="px-margin-mobile py-5 text-label-sm font-bold text-on-surface-variant uppercase tracking-wider">
-                                Booking ID</th>
-                            <th
-                                class="px-margin-mobile py-5 text-label-sm font-bold text-on-surface-variant uppercase tracking-wider">
-                                Room</th>
-                            <th
-                                class="px-margin-mobile py-5 text-label-sm font-bold text-on-surface-variant uppercase tracking-wider">
-                                Check-in/Out</th>
-                            <th
-                                class="px-margin-mobile py-5 text-label-sm font-bold text-on-surface-variant uppercase tracking-wider">
-                                Payment</th>
-                            <th
-                                class="px-margin-mobile py-5 text-label-sm font-bold text-on-surface-variant uppercase tracking-wider">
-                                Status</th>
-                            <th
-                                class="px-margin-mobile py-5 text-label-sm font-bold text-on-surface-variant uppercase tracking-wider text-right">
-                                Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-outline-variant/20">
-                        <!-- Row 1 -->
-                        {% for booking in bookings %}
-
-                        <tr class="hover:bg-surface-bright transition-colors group">
-
-                            <td class="px-margin-mobile py-4">
-
-                                <div class="flex items-center gap-4">
-
-                                    <img alt="Guest Avatar" class="w-10 h-10 rounded-full object-cover"
-                                        src="https://i.pravatar.cc/100" />
-
-                                    <div>
-
-                                        <p class="text-body-md font-bold text-on-surface">
-                                            {{ booking.guest_name }}
-                                        </p>
-
-                                        <p class="text-label-sm text-on-surface-variant">
-                                            guest@email.com
-                                        </p>
-
-                                    </div>
-
-                                </div>
-
-                            </td>
-
-                            <td class="px-margin-mobile py-4 text-label-md font-medium text-surface-tint">
-
-                                #REG-{{ booking.id }}
-
-                            </td>
-
-                            <td class="px-margin-mobile py-4">
-
-                                <span class="text-body-md font-medium">
-                                    {{ booking.room_name }}
-                                </span>
-
-                                <p class="text-label-sm text-on-surface-variant">
-                                    Ocean View
-                                </p>
-
-                            </td>
-
-                            <td class="px-margin-mobile py-4">
-
-                                <p class="text-body-md font-medium">
-                                    {{ booking.check_in }} - {{ booking.check_out }}
-                                </p>
-
-                            </td>
-
-                            <td class="px-margin-mobile py-4 font-bold text-on-surface">
-
-                                ${{ booking.total_payment }}
-
-                            </td>
-
-                            <td class="px-margin-mobile py-4">
-
-                                <span
-                                    class="px-3 py-1 rounded-full bg-secondary-fixed/30 text-on-secondary-fixed-variant text-label-sm font-bold border border-secondary-fixed">
-
-                                    {{ booking.status }}
-
-                                </span>
-
-                            </td>
-
-                            <td class="px-margin-mobile py-4 text-right">
-
-                                <button class="p-2 hover:bg-surface-container rounded-lg transition-colors">
-
-                                    <span class="material-symbols-outlined text-on-surface-variant">
-                                        more_vert
-                                    </span>
-
-                                </button>
-
-                            </td>
-
-                        </tr>
-
-                        {% endfor %}
-                        
-                    </tbody>
-                </table>
-                <div class="px-margin-mobile py-6 bg-surface-container-lowest flex justify-between items-center">
-                    <p class="text-label-sm text-on-surface-variant">Showing 4 of 1,284 reservations</p>
-                    <div class="flex gap-2">
-                        <button
-                            class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container transition-all">
-                            <span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
-                        </button>
-                        <button
-                            class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold">1</button>
-                        <button
-                            class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container transition-all">2</button>
-                        <button
-                            class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container transition-all">3</button>
-                        <button
-                            class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container transition-all">
-                            <span class="material-symbols-outlined text-sm"
-                                data-icon="chevron_right">chevron_right</span>
-                        </button>
-                    </div>
-                </div>
-            </section>
+        <div class="s-info"><div class="s-val">54</div><div class="s-lbl">Confirmed</div></div>
+      </div>
+      <div class="summary-card">
+        <div class="s-icon si-pending">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
-    </main>
-    <!-- Contextual FAB (Hidden on Mobile/Table View, but defined for logic) -->
-    <button
-        class="fixed bottom-margin-desktop right-margin-desktop bg-secondary text-on-secondary-fixed p-6 rounded-full shadow-2xl hover:scale-105 active:scale-95 transition-all z-50 flex items-center justify-center">
-        <span class="material-symbols-outlined text-2xl" data-icon="add_box">add_box</span>
-    </button>
-    <script>
-        // Micro-interactions for hover effects
-        document.querySelectorAll('tr').forEach(row => {
-            row.addEventListener('click', () => {
-                // Future implementation: Open details modal
-                console.log('Row clicked');
-            });
-        });
+        <div class="s-info"><div class="s-val">18</div><div class="s-lbl">Pending</div></div>
+      </div>
+      <div class="summary-card">
+        <div class="s-icon si-cancelled">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        </div>
+        <div class="s-info"><div class="s-val">14</div><div class="s-lbl">Cancelled</div></div>
+      </div>
+    </div>
 
-        // Search Bar focus effect
-        const searchInput = document.querySelector('input[type="text"]');
-        searchInput.addEventListener('focus', () => {
-            searchInput.parentElement.classList.add('shadow-md');
-        });
-        searchInput.addEventListener('blur', () => {
-            searchInput.parentElement.classList.remove('shadow-md');
-        });
-    </script>
-</body>
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+        <button class="filter-btn" onclick="setFilter('confirmed',this)"><span class="fdot" style="background:#059669"></span>Confirmed</button>
+        <button class="filter-btn" onclick="setFilter('pending',this)"><span class="fdot" style="background:#D97706"></span>Pending</button>
+        <button class="filter-btn" onclick="setFilter('completed',this)"><span class="fdot" style="background:#2563EB"></span>Completed</button>
+        <button class="filter-btn" onclick="setFilter('cancelled',this)"><span class="fdot" style="background:#DC2626"></span>Cancelled</button>
+      </div>
+      <div class="toolbar-right">
+        <div class="date-range">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Jun 2025
+        </div>
+        <button class="btn-gold" onclick="openCreateModal()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          New Booking
+        </button>
+      </div>
+    </div>
 
+    <!-- TABLE -->
+    <div class="table-card">
+      <div class="table-card-header">
+        <div>
+          <div class="section-title" style="margin-bottom:0"><span>All</span> Reservations</div>
+          <div class="table-meta">Showing <span id="rowCount">8</span> bookings</div>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th class="sortable">Booking ID <span class="sort-icon">↕</span></th>
+            <th>Guest</th>
+            <th>Room</th>
+            <th class="sortable">Check-In <span class="sort-icon">↕</span></th>
+            <th class="sortable">Check-Out <span class="sort-icon">↕</span></th>
+            <th class="sortable">Total <span class="sort-icon">↕</span></th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="bookingTableBody">
+
+          <tr data-status="confirmed" onclick="openDetailModal('LG-4801','Aryan Pratama','AP','Grand Suite','02 Jun 2025','06 Jun 2025','4 nights','$2,480','confirmed','aryan.pratama@email.com','+62 812-3456-7890')">
+            <td><span class="booking-id">#LG-4801</span></td>
+            <td><div class="guest-cell"><div class="guest-avatar">AP</div><div><div class="guest-name">Aryan Pratama</div><div class="guest-email">aryan.pratama@email.com</div></div></div></td>
+            <td><span class="room-pill">Grand Suite · 202</span></td>
+            <td><div class="date-cell">02 Jun 2025<div class="nights">Check-in</div></div></td>
+            <td><div class="date-cell">06 Jun 2025<div class="nights">4 nights</div></div></td>
+            <td><span class="price-cell">$2,480</span></td>
+            <td><span class="status-badge s-confirmed"><span class="sdot"></span>Confirmed</span></td>
+            <td onclick="event.stopPropagation()"><div class="action-btns">
+              <button class="btn-icon" title="Edit" onclick="openCreateModal()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+              <button class="btn-icon danger" title="Cancel"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></button>
+            </div></td>
+          </tr>
+
+          <tr data-status="pending" onclick="openDetailModal('LG-4800','Siti Rahmawati','SR','Deluxe Ocean View','03 Jun 2025','07 Jun 2025','4 nights','$1,680','pending','siti.rahmawati@email.com','+62 813-9876-5432')">
+            <td><span class="booking-id">#LG-4800</span></td>
+            <td><div class="guest-cell"><div class="guest-avatar">SR</div><div><div class="guest-name">Siti Rahmawati</div><div class="guest-email">siti.rahmawati@email.com</div></div></div></td>
+            <td><span class="room-pill">Deluxe Ocean · 305</span></td>
+            <td><div class="date-cell">03 Jun 2025<div class="nights">Check-in</div></div></td>
+            <td><div class="date-cell">07 Jun 2025<div class="nights">4 nights</div></div></td>
+            <td><span class="price-cell">$1,680</span></td>
+            <td><span class="status-badge s-pending"><span class="sdot"></span>Pending</span></td>
+            <td onclick="event.stopPropagation()"><div class="action-btns">
+              <button class="btn-icon" title="Edit" onclick="openCreateModal()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+              <button class="btn-icon danger" title="Cancel"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></button>
+            </div></td>
+          </tr>
+
+          <tr data-status="completed" onclick="openDetailModal('LG-4799','David Chen','DC','Presidential Suite','28 May 2025','01 Jun 2025','4 nights','$3,400','completed','david.chen@email.com','+65 9123-4567')">
+            <td><span class="booking-id">#LG-4799</span></td>
+            <td><div class="guest-cell"><div class="guest-avatar">DC</div><div><div class="guest-name">David Chen</div><div class="guest-email">david.chen@email.com</div></div></div></td>
+            <td><span class="room-pill">Presidential · 101</span></td>
+            <td><div class="date-cell">28 May 2025<div class="nights">Check-in</div></div></td>
+            <td><div class="date-cell">01 Jun 2025<div class="nights">4 nights</div></div></td>
+            <td><span class="price-cell">$3,400</span></td>
+            <td><span class="status-badge s-completed"><span class="sdot"></span>Completed</span></td>
+            <td onclick="event.stopPropagation()"><div class="action-btns">
+              <button class="btn-icon" title="Edit" onclick="openCreateModal()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+              <button class="btn-icon danger" title="Delete"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></button>
+            </div></td>
+          </tr>
+
+          <tr data-status="confirmed" onclick="openDetailModal('LG-4798','Maria Santos','MS','Superior Room','30 May 2025','03 Jun 2025','4 nights','$1,120','confirmed','maria.santos@email.com','+63 917-234-5678')">
+            <td><span class="booking-id">#LG-4798</span></td>
+            <td><div class="guest-cell"><div class="guest-avatar">MS</div><div><div class="guest-name">Maria Santos</div><div class="guest-email">maria.santos@email.com</div></div></div></td>
+            <td><span class="room-pill">Superior · 412</span></td>
+            <td><div class="date-cell">30 May 2025<div class="nights">Check-in</div></div></td>
+            <td><div class="date-cell">03 Jun 2025<div class="nights">4 nights</div></div></td>
+            <td><span class="price-cell">$1,120</span></td>
+            <td><span class="status-badge s-confirmed"><span class="sdot"></span>Confirmed</span></td>
+            <td onclick="event.stopPropagation()"><div class="action-btns">
+              <button class="btn-icon" title="Edit" onclick="openCreateModal()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+              <button class="btn-icon danger" title="Cancel"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></button>
+            </div></td>
+          </tr>
+
+          <tr data-status="cancelled" onclick="openDetailModal('LG-4797','Budi Santoso','BS','Classic Room','25 May 2025','28 May 2025','3 nights','$540','cancelled','budi.santoso@email.com','+62 856-7890-1234')">
+            <td><span class="booking-id">#LG-4797</span></td>
+            <td><div class="guest-cell"><div class="guest-avatar">BS</div><div><div class="guest-name">Budi Santoso</div><div class="guest-email">budi.santoso@email.com</div></div></div></td>
+            <td><span class="room-pill">Classic · 508</span></td>
+            <td><div class="date-cell">25 May 2025<div class="nights">Check-in</div></div></td>
+            <td><div class="date-cell">28 May 2025<div class="nights">3 nights</div></div></td>
+            <td><span class="price-cell">$540</span></td>
+            <td><span class="status-badge s-cancelled"><span class="sdot"></span>Cancelled</span></td>
+            <td onclick="event.stopPropagation()"><div class="action-btns">
+              <button class="btn-icon" title="Edit" onclick="openCreateModal()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+              <button class="btn-icon danger" title="Delete"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></button>
+            </div></td>
+          </tr>
+
+          <tr data-status="confirmed" onclick="openDetailModal('LG-4796','Yuki Tanaka','YT','Grand Suite','05 Jun 2025','09 Jun 2025','4 nights','$2,480','confirmed','yuki.tanaka@email.com','+81 90-1234-5678')">
+            <td><span class="booking-id">#LG-4796</span></td>
+            <td><div class="guest-cell"><div class="guest-avatar">YT</div><div><div class="guest-name">Yuki Tanaka</div><div class="guest-email">yuki.tanaka@email.com</div></div></div></td>
+            <td><span class="room-pill">Grand Suite · 601</span></td>
+            <td><div class="date-cell">05 Jun 2025<div class="nights">Check-in</div></div></td>
+            <td><div class="date-cell">09 Jun 2025<div class="nights">4 nights</div></div></td>
+            <td><span class="price-cell">$2,480</span></td>
+            <td><span class="status-badge s-confirmed"><span class="sdot"></span>Confirmed</span></td>
+            <td onclick="event.stopPropagation()"><div class="action-btns">
+              <button class="btn-icon" title="Edit" onclick="openCreateModal()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+              <button class="btn-icon danger" title="Cancel"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></button>
+            </div></td>
+          </tr>
+
+          <tr data-status="pending" onclick="openDetailModal('LG-4795','Rahul Sharma','RS','Deluxe Ocean View','08 Jun 2025','12 Jun 2025','4 nights','$1,680','pending','rahul.sharma@email.com','+91 98765-43210')">
+            <td><span class="booking-id">#LG-4795</span></td>
+            <td><div class="guest-cell"><div class="guest-avatar">RS</div><div><div class="guest-name">Rahul Sharma</div><div class="guest-email">rahul.sharma@email.com</div></div></div></td>
+            <td><span class="room-pill">Deluxe Ocean · 305</span></td>
+            <td><div class="date-cell">08 Jun 2025<div class="nights">Check-in</div></div></td>
+            <td><div class="date-cell">12 Jun 2025<div class="nights">4 nights</div></div></td>
+            <td><span class="price-cell">$1,680</span></td>
+            <td><span class="status-badge s-pending"><span class="sdot"></span>Pending</span></td>
+            <td onclick="event.stopPropagation()"><div class="action-btns">
+              <button class="btn-icon" title="Edit" onclick="openCreateModal()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+              <button class="btn-icon danger" title="Cancel"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></button>
+            </div></td>
+          </tr>
+
+          <tr data-status="completed" onclick="openDetailModal('LG-4794','Sophie Laurent','SL','Presidential Suite','20 May 2025','25 May 2025','5 nights','$4,250','completed','sophie.laurent@email.com','+33 6 12 34 56 78')">
+            <td><span class="booking-id">#LG-4794</span></td>
+            <td><div class="guest-cell"><div class="guest-avatar">SL</div><div><div class="guest-name">Sophie Laurent</div><div class="guest-email">sophie.laurent@email.com</div></div></div></td>
+            <td><span class="room-pill">Presidential · 101</span></td>
+            <td><div class="date-cell">20 May 2025<div class="nights">Check-in</div></div></td>
+            <td><div class="date-cell">25 May 2025<div class="nights">5 nights</div></div></td>
+            <td><span class="price-cell">$4,250</span></td>
+            <td><span class="status-badge s-completed"><span class="sdot"></span>Completed</span></td>
+            <td onclick="event.stopPropagation()"><div class="action-btns">
+              <button class="btn-icon" title="Edit" onclick="openCreateModal()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+              <button class="btn-icon danger" title="Delete"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></button>
+            </div></td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <!-- PAGINATION -->
+      <div class="pagination">
+        <div class="page-info">Showing 1–8 of 86 bookings</div>
+        <div class="page-btns">
+          <button class="page-btn">‹</button>
+          <button class="page-btn active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <button class="page-btn">…</button>
+          <button class="page-btn">11</button>
+          <button class="page-btn">›</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- CREATE BOOKING MODAL -->
+<div class="modal-overlay" id="createModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Create New Booking</div>
+        <div class="modal-subtitle">Fill in guest and room details below</div>
+      </div>
+      <button class="modal-close" onclick="closeCreateModal()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-section-label">Guest Information</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">First Name</label><input type="text" class="form-input" placeholder="e.g. John"></div>
+        <div class="form-group"><label class="form-label">Last Name</label><input type="text" class="form-input" placeholder="e.g. Doe"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" placeholder="guest@email.com"></div>
+        <div class="form-group"><label class="form-label">Phone Number</label><input type="text" class="form-input" placeholder="+62 8xx-xxxx-xxxx"></div>
+      </div>
+      <div class="form-section-label">Room & Stay Details</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Room Type</label>
+          <select class="form-select">
+            <option>Presidential Suite</option><option>Grand Suite</option><option>Deluxe Ocean View</option><option>Superior Room</option><option>Classic Room</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">Room Number</label>
+          <select class="form-select">
+            <option>101</option><option>202</option><option>305</option><option>412</option><option>601</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Check-In Date</label><input type="date" class="form-input"></div>
+        <div class="form-group"><label class="form-label">Check-Out Date</label><input type="date" class="form-input"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Number of Guests</label><input type="number" class="form-input" placeholder="e.g. 2" min="1"></div>
+        <div class="form-group"><label class="form-label">Status</label>
+          <select class="form-select"><option>Confirmed</option><option>Pending</option></select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full"><label class="form-label">Special Requests</label><input type="text" class="form-input" placeholder="e.g. Early check-in, extra pillows…"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeCreateModal()">Cancel</button>
+      <button class="btn-gold" onclick="closeCreateModal()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Create Booking
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL MODAL -->
+<div class="modal-overlay" id="detailModal">
+  <div class="modal detail-modal">
+    <div class="detail-header-info">
+      <div class="detail-avatar" id="d-avatar"></div>
+      <div>
+        <div class="detail-guest-name" id="d-name"></div>
+        <div class="detail-booking-id" id="d-id"></div>
+      </div>
+      <div style="margin-left:auto">
+        <button class="modal-close" onclick="closeDetailModal()" style="border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.6)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="detail-grid">
+        <div class="detail-item"><div class="detail-label">Room</div><div class="detail-value" id="d-room"></div></div>
+        <div class="detail-item"><div class="detail-label">Status</div><div id="d-status"></div></div>
+        <div class="detail-item"><div class="detail-label">Check-In</div><div class="detail-value" id="d-checkin"></div></div>
+        <div class="detail-item"><div class="detail-label">Check-Out</div><div class="detail-value" id="d-checkout"></div></div>
+        <div class="detail-item"><div class="detail-label">Duration</div><div class="detail-value" id="d-nights"></div></div>
+        <div class="detail-item"><div class="detail-label">Total Price</div><div class="detail-value" id="d-price"></div></div>
+      </div>
+      <div class="detail-divider"></div>
+      <div class="detail-grid">
+        <div class="detail-item"><div class="detail-label">Email</div><div class="detail-value" id="d-email" style="font-size:13px;font-weight:500"></div></div>
+        <div class="detail-item"><div class="detail-label">Phone</div><div class="detail-value" id="d-phone" style="font-size:13px;font-weight:500"></div></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeDetailModal()">Close</button>
+      <button class="btn-gold" onclick="closeDetailModal();openCreateModal()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        Edit Booking
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Filter
+  function setFilter(status, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const rows = document.querySelectorAll('#bookingTableBody tr');
+    let count = 0;
+    rows.forEach(r=>{
+      const show = status==='all' || r.dataset.status===status;
+      r.style.display = show ? '' : 'none';
+      if(show) count++;
+    });
+    document.getElementById('rowCount').textContent = count;
+  }
+
+  // Search
+  function filterBookings() {
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    const rows = document.querySelectorAll('#bookingTableBody tr');
+    let count = 0;
+    rows.forEach(r=>{
+      const show = r.innerText.toLowerCase().includes(q);
+      r.style.display = show ? '' : 'none';
+      if(show) count++;
+    });
+    document.getElementById('rowCount').textContent = count;
+  }
+
+  // Create modal
+  function openCreateModal() { document.getElementById('createModal').classList.add('open'); }
+  function closeCreateModal() { document.getElementById('createModal').classList.remove('open'); }
+  document.getElementById('createModal').addEventListener('click',function(e){ if(e.target===this)closeCreateModal(); });
+
+  // Detail modal
+  const statusMap = {
+    confirmed: '<span class="status-badge s-confirmed"><span class="sdot"></span>Confirmed</span>',
+    pending:   '<span class="status-badge s-pending"><span class="sdot"></span>Pending</span>',
+    completed: '<span class="status-badge s-completed"><span class="sdot"></span>Completed</span>',
+    cancelled: '<span class="status-badge s-cancelled"><span class="sdot"></span>Cancelled</span>',
+  };
+  function openDetailModal(id, name, initials, room, checkin, checkout, nights, price, status, email, phone) {
+    document.getElementById('d-avatar').textContent = initials;
+    document.getElementById('d-name').textContent = name;
+    document.getElementById('d-id').textContent = '#' + id;
+    document.getElementById('d-room').textContent = room;
+    document.getElementById('d-checkin').textContent = checkin;
+    document.getElementById('d-checkout').textContent = checkout;
+    document.getElementById('d-nights').textContent = nights;
+    document.getElementById('d-price').textContent = price;
+    document.getElementById('d-status').innerHTML = statusMap[status] || status;
+    document.getElementById('d-email').textContent = email;
+    document.getElementById('d-phone').textContent = phone;
+    document.getElementById('detailModal').classList.add('open');
+  }
+  function closeDetailModal() { document.getElementById('detailModal').classList.remove('open'); }
+  document.getElementById('detailModal').addEventListener('click',function(e){ if(e.target===this)closeDetailModal(); });
+
+  // Pagination buttons (visual only)
+  document.querySelectorAll('.page-btn').forEach(btn=>{
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.page-btn').forEach(b=>b.classList.remove('active'));
+      if(!['‹','›','…'].includes(this.textContent)) this.classList.add('active');
+    });
+  });
+</script></body>
 </html>
