@@ -1,398 +1,828 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumina Grand — Staff Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:#0F172A; --navy-mid:#1E293B; --navy-light:#273549;
+    --gold:#D4AF37; --gold-light:#E8CC6A;
+    --gold-dim:rgba(212,175,55,0.15); --gold-border:rgba(212,175,55,0.3);
+    --white:#FFFFFF; --surface:#F8F7F4; --surface-2:#F0EDE6;
+    --text-primary:#0F172A; --text-secondary:#64748B; --text-muted:#94A3B8;
+    --green:#059669; --yellow:#D97706; --blue:#2563EB; --red:#DC2626;
+    --sidebar-w:260px; --header-h:80px; --radius:16px; --radius-sm:10px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--surface);color:var(--text-primary);display:flex;min-height:100vh;}
 
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Staff Management | Grand Regency</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-        }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        body {
-            background-color: #f9f9f9;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-    </style>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "on-secondary": "#ffffff",
-                    "tertiary-fixed-dim": "#c5c7c8",
-                    "tertiary-container": "#1c1f20",
-                    "inverse-primary": "#afc8f0",
-                    "on-tertiary-fixed-variant": "#454748",
-                    "surface-container-highest": "#e2e2e2",
-                    "surface-dim": "#dadada",
-                    "on-primary-container": "#6f88ad",
-                    "surface-bright": "#f9f9f9",
-                    "surface-container-low": "#f3f3f4",
-                    "primary-fixed-dim": "#afc8f0",
-                    "outline-variant": "#c4c6cf",
-                    "secondary-fixed-dim": "#e9c349",
-                    "on-secondary-fixed-variant": "#574500",
-                    "on-primary": "#ffffff",
-                    "on-primary-fixed": "#001c3a",
-                    "primary-fixed": "#d4e3ff",
-                    "surface-variant": "#e2e2e2",
-                    "on-error-container": "#93000a",
-                    "on-error": "#ffffff",
-                    "inverse-surface": "#2f3131",
-                    "on-background": "#1a1c1c",
-                    "tertiary-fixed": "#e1e3e4",
-                    "on-tertiary-fixed": "#191c1d",
-                    "surface-tint": "#476083",
-                    "background": "#f9f9f9",
-                    "surface-container": "#eeeeee",
-                    "primary-container": "#001f3f",
-                    "on-secondary-fixed": "#241a00",
-                    "on-secondary-container": "#745c00",
-                    "surface-container-lowest": "#ffffff",
-                    "inverse-on-surface": "#f0f1f1",
-                    "secondary-container": "#fed65b",
-                    "secondary": "#735c00",
-                    "secondary-fixed": "#ffe088",
-                    "outline": "#74777f",
-                    "surface": "#f9f9f9",
-                    "on-surface-variant": "#43474e",
-                    "on-primary-fixed-variant": "#2f486a",
-                    "surface-container-high": "#e8e8e8",
-                    "primary": "#001f3f",
-                    "on-tertiary": "#ffffff",
-                    "tertiary": "#040607",
-                    "error-container": "#ffdad6",
-                    "error": "#ba1a1a",
-                    "on-tertiary-container": "#848688",
-                    "on-surface": "#1a1c1c"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.125rem",
-                    "lg": "0.25rem",
-                    "xl": "0.5rem",
-                    "full": "0.75rem"
-            },
-            "fontFamily": {
-                    "body-lg": ["Plus Jakarta Sans"],
-                    "label-sm": ["Plus Jakarta Sans"],
-                    "label-md": ["Plus Jakarta Sans"],
-                    "headline-lg": ["Plus Jakarta Sans"],
-                    "headline-md": ["Plus Jakarta Sans"],
-                    "display-lg": ["Plus Jakarta Sans"],
-                    "body-md": ["Plus Jakarta Sans"]
-            }
-          }
-        }
-      }
-    </script>
-<style>
-        body {
-            min-height: max(884px, 100dvh);
-        }
-    </style>
+  /* ── SIDEBAR ── */
+  .sidebar{width:var(--sidebar-w);background:var(--navy);min-height:100vh;position:fixed;top:0;left:0;display:flex;flex-direction:column;z-index:100;border-right:1px solid rgba(212,175,55,0.12);}
+  .sidebar-logo{padding:32px 24px 28px;border-bottom:1px solid rgba(212,175,55,0.12);}
+  .sidebar-logo .wordmark{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--white);letter-spacing:0.08em;text-transform:uppercase;}
+  .sidebar-logo .wordmark span{color:var(--gold);}
+  .sidebar-logo .tagline{font-size:10px;color:var(--text-muted);letter-spacing:0.2em;text-transform:uppercase;margin-top:4px;}
+  .sidebar-nav{flex:1;padding:24px 16px;display:flex;flex-direction:column;gap:4px;}
+  .nav-section-label{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-muted);padding:12px 8px 6px;margin-top:8px;}
+  .nav-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:var(--radius-sm);cursor:pointer;transition:all 0.2s;color:rgba(255,255,255,0.55);font-size:13.5px;font-weight:500;position:relative;text-decoration:none;}
+  .nav-item:hover{color:rgba(255,255,255,0.9);background:rgba(212,175,55,0.08);}
+  .nav-item.active{color:var(--gold);background:var(--gold-dim);}
+  .nav-item.active::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:60%;background:var(--gold);border-radius:0 3px 3px 0;}
+  .nav-item svg{flex-shrink:0;width:18px;height:18px;}
+  .nav-item .lock-icon{margin-left:auto;opacity:0.4;font-size:10px;}
+  .sidebar-bottom{padding:16px;border-top:1px solid rgba(212,175,55,0.12);}
+  .admin-profile{display:flex;align-items:center;gap:10px;padding:10px;border-radius:var(--radius-sm);cursor:pointer;transition:background 0.2s;}
+  .admin-profile:hover{background:rgba(255,255,255,0.05);}
+  .avatar-circle{width:36px;height:36px;background:linear-gradient(135deg,var(--gold),#B8960C);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--navy);flex-shrink:0;}
+  .admin-info .name{font-size:13px;font-weight:600;color:var(--white);}
+  .admin-info .role{font-size:11px;color:var(--gold);font-weight:600;}
+  .superadmin-badge{display:inline-flex;align-items:center;gap:4px;background:var(--gold-dim);border:1px solid var(--gold-border);color:var(--gold);font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;letter-spacing:0.06em;margin-top:4px;}
+  .logout-btn{display:flex;align-items:center;gap:8px;margin-top:8px;padding:8px 10px;border-radius:var(--radius-sm);cursor:pointer;color:rgba(255,255,255,0.4);font-size:13px;transition:color 0.2s;}
+  .logout-btn:hover{color:#F87171;}
+
+  /* ── MAIN ── */
+  .main{margin-left:var(--sidebar-w);flex:1;display:flex;flex-direction:column;}
+
+  /* ── HEADER ── */
+  .header{height:var(--header-h);background:rgba(248,247,244,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--surface-2);display:flex;align-items:center;justify-content:space-between;padding:0 36px;position:sticky;top:0;z-index:50;}
+  .header-left .greeting{font-size:20px;font-weight:700;color:var(--navy);letter-spacing:-0.02em;display:flex;align-items:center;gap:10px;}
+  .header-left .subtitle{font-size:13px;color:var(--text-secondary);margin-top:2px;}
+  .superadmin-pill{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,var(--gold),#C9A227);color:var(--navy);font-size:10px;font-weight:800;padding:3px 10px;border-radius:20px;letter-spacing:0.08em;text-transform:uppercase;}
+  .header-right{display:flex;align-items:center;gap:16px;}
+  .search-bar{display:flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--surface-2);border-radius:40px;padding:8px 16px;width:220px;transition:border-color 0.2s,box-shadow 0.2s;}
+  .search-bar:focus-within{border-color:var(--gold-border);box-shadow:0 0 0 3px rgba(212,175,55,0.1);}
+  .search-bar input{border:none;outline:none;font-size:13px;background:transparent;color:var(--text-primary);width:100%;font-family:inherit;}
+  .search-bar input::placeholder{color:var(--text-muted);}
+  .icon-btn{width:38px;height:38px;background:var(--white);border:1px solid var(--surface-2);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-secondary);transition:all 0.2s;position:relative;}
+  .icon-btn:hover{border-color:var(--gold-border);color:var(--gold);}
+  .notif-dot{width:8px;height:8px;background:var(--gold);border-radius:50%;position:absolute;top:5px;right:5px;border:2px solid var(--white);}
+  .header-avatar{width:38px;height:38px;background:linear-gradient(135deg,var(--gold),#B8960C);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--navy);cursor:pointer;position:relative;}
+  .header-avatar::after{content:'★';position:absolute;bottom:-2px;right:-2px;width:14px;height:14px;background:var(--gold);border-radius:50%;font-size:8px;display:flex;align-items:center;justify-content:center;border:2px solid var(--surface);color:var(--navy);line-height:14px;text-align:center;}
+
+  /* ── CONTENT ── */
+  .content{padding:32px 36px 48px;display:flex;flex-direction:column;gap:24px;}
+  .section-title{font-size:16px;font-weight:700;color:var(--navy);letter-spacing:-0.01em;margin-bottom:16px;}
+  .section-title span{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold);font-size:18px;}
+
+  /* ACCESS NOTICE */
+  .access-notice{background:linear-gradient(135deg,rgba(15,23,42,0.04),rgba(212,175,55,0.06));border:1px solid var(--gold-border);border-radius:var(--radius-sm);padding:14px 18px;display:flex;align-items:center;gap:12px;animation:fadeUp 0.3s ease both;}
+  .access-notice-icon{width:32px;height:32px;background:var(--gold-dim);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--gold);flex-shrink:0;}
+  .access-notice-text{font-size:13px;color:var(--text-secondary);}
+  .access-notice-text strong{color:var(--navy);}
+
+  /* SUMMARY */
+  .summary-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .summary-card{background:var(--white);border:1px solid rgba(15,23,42,0.06);border-radius:var(--radius-sm);padding:16px 20px;display:flex;align-items:center;gap:14px;box-shadow:0 1px 3px rgba(15,23,42,0.05);animation:fadeUp 0.4s ease both;}
+  .summary-card:nth-child(1){animation-delay:0.05s}.summary-card:nth-child(2){animation-delay:0.10s}.summary-card:nth-child(3){animation-delay:0.15s}.summary-card:nth-child(4){animation-delay:0.20s}
+  .s-icon{width:40px;height:40px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .si-total{background:rgba(15,23,42,0.06);color:var(--navy);}
+  .si-active{background:rgba(5,150,105,0.1);color:#059669;}
+  .si-dept{background:var(--gold-dim);color:#A08020;}
+  .si-new{background:rgba(37,99,235,0.1);color:#2563EB;}
+  .s-info .s-val{font-size:22px;font-weight:800;color:var(--navy);letter-spacing:-0.03em;}
+  .s-info .s-lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);margin-top:2px;}
+
+  /* TOOLBAR */
+  .toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .toolbar-left{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .filter-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;font-family:inherit;border:1px solid var(--surface-2);background:var(--white);color:var(--text-secondary);transition:all 0.2s;}
+  .filter-btn:hover{border-color:var(--gold-border);color:var(--navy);}
+  .filter-btn.active{background:var(--gold-dim);border-color:var(--gold-border);color:var(--gold);font-weight:600;}
+  .btn-gold{font-size:13px;font-weight:600;background:linear-gradient(135deg,var(--gold),#C9A227);color:var(--navy);border:none;padding:9px 20px;border-radius:8px;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:opacity 0.2s;}
+  .btn-gold:hover{opacity:0.85;}
+  .btn-danger{font-size:13px;font-weight:600;background:rgba(220,38,38,0.08);color:#DC2626;border:1px solid rgba(220,38,38,0.2);padding:9px 16px;border-radius:8px;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:all 0.2s;}
+  .btn-danger:hover{background:rgba(220,38,38,0.14);}
+
+  /* STAFF GRID */
+  .staff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .staff-card{background:var(--white);border:1px solid rgba(15,23,42,0.06);border-radius:var(--radius);padding:22px 22px 18px;box-shadow:0 1px 4px rgba(15,23,42,0.06);transition:transform 0.2s,box-shadow 0.2s;animation:fadeUp 0.45s ease both;position:relative;overflow:hidden;}
+  .staff-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(15,23,42,0.09);}
+  .staff-card:nth-child(1){animation-delay:0.05s}.staff-card:nth-child(2){animation-delay:0.10s}.staff-card:nth-child(3){animation-delay:0.15s}
+  .staff-card:nth-child(4){animation-delay:0.20s}.staff-card:nth-child(5){animation-delay:0.25s}.staff-card:nth-child(6){animation-delay:0.30s}
+
+  /* superadmin card gold accent */
+  .staff-card.is-superadmin{border-color:var(--gold-border);}
+  .staff-card.is-superadmin::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));}
+
+  .staff-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;}
+  .staff-avatar-wrap{position:relative;}
+  .staff-avatar{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:var(--white);flex-shrink:0;}
+  .av-navy{background:linear-gradient(135deg,#0F172A,#1E293B);}
+  .av-gold{background:linear-gradient(135deg,var(--gold),#B8960C);color:var(--navy)!important;}
+  .av-blue{background:linear-gradient(135deg,#1D4ED8,#2563EB);}
+  .av-green{background:linear-gradient(135deg,#047857,#059669);}
+  .av-purple{background:linear-gradient(135deg,#6D28D9,#7C3AED);}
+  .av-rose{background:linear-gradient(135deg,#BE185D,#DB2777);}
+
+  .online-dot{width:11px;height:11px;border-radius:50%;position:absolute;bottom:1px;right:1px;border:2px solid var(--white);}
+  .dot-online{background:#22C55E;}
+  .dot-offline{background:#94A3B8;}
+  .dot-leave{background:#F59E0B;}
+
+  .staff-role-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;letter-spacing:0.06em;text-transform:uppercase;white-space:nowrap;}
+  .role-superadmin{background:linear-gradient(135deg,var(--gold),#C9A227);color:var(--navy);}
+  .role-manager{background:rgba(15,23,42,0.08);color:var(--navy);}
+  .role-frontdesk{background:rgba(37,99,235,0.1);color:#1D4ED8;}
+  .role-housekeeping{background:rgba(5,150,105,0.1);color:#047857;}
+  .role-finance{background:rgba(109,40,217,0.1);color:#6D28D9;}
+  .role-security{background:rgba(190,24,93,0.1);color:#BE185D;}
+
+  .staff-name{font-size:15px;font-weight:700;color:var(--navy);margin-top:12px;}
+  .staff-position{font-size:12px;color:var(--text-secondary);margin-top:2px;}
+  .staff-dept{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--text-muted);margin-top:6px;}
+
+  .staff-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0;padding:12px 0;border-top:1px solid var(--surface-2);border-bottom:1px solid var(--surface-2);}
+  .meta-item{}
+  .meta-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);}
+  .meta-value{font-size:12px;font-weight:600;color:var(--navy);margin-top:2px;}
+
+  .staff-card-footer{display:flex;gap:8px;}
+  .btn-sm-outline{flex:1;padding:7px;border-radius:7px;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit;border:1px solid var(--surface-2);background:transparent;color:var(--text-secondary);transition:all 0.2s;text-align:center;}
+  .btn-sm-outline:hover{border-color:var(--gold-border);color:var(--navy);}
+  .btn-sm-navy{flex:1;padding:7px;border-radius:7px;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit;border:none;background:var(--navy);color:var(--gold);transition:opacity 0.2s;text-align:center;}
+  .btn-sm-navy:hover{opacity:0.85;}
+  .btn-sm-danger{padding:7px 10px;border-radius:7px;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit;border:1px solid rgba(220,38,38,0.2);background:transparent;color:#DC2626;transition:all 0.2s;}
+  .btn-sm-danger:hover{background:rgba(220,38,38,0.06);}
+
+  /* PERMISSIONS PANEL */
+  .permissions-card{background:var(--white);border:1px solid rgba(15,23,42,0.06);border-radius:var(--radius);box-shadow:0 1px 4px rgba(15,23,42,0.06);overflow:hidden;animation:fadeUp 0.45s 0.3s ease both;}
+  .permissions-header{padding:20px 24px 16px;border-bottom:1px solid var(--surface-2);display:flex;align-items:center;justify-content:space-between;}
+  .permissions-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
+  .perm-col{padding:16px 20px;border-right:1px solid var(--surface-2);}
+  .perm-col:last-child{border-right:none;}
+  .perm-col-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--surface-2);}
+  .perm-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(15,23,42,0.03);}
+  .perm-row:last-child{border-bottom:none;}
+  .perm-name{font-size:12px;color:var(--text-secondary);font-weight:500;}
+  .perm-toggle{width:32px;height:18px;border-radius:20px;position:relative;cursor:pointer;transition:background 0.2s;flex-shrink:0;}
+  .perm-toggle.on{background:var(--gold);}
+  .perm-toggle.off{background:#E2E8F0;}
+  .perm-toggle.on.locked{background:rgba(212,175,55,0.5);cursor:not-allowed;}
+  .perm-toggle::after{content:'';position:absolute;top:2px;width:14px;height:14px;border-radius:50%;background:var(--white);box-shadow:0 1px 3px rgba(0,0,0,0.2);transition:left 0.2s;}
+  .perm-toggle.on::after{left:16px;}
+  .perm-toggle.off::after{left:2px;}
+
+  /* AUDIT LOG */
+  .audit-card{background:var(--white);border:1px solid rgba(15,23,42,0.06);border-radius:var(--radius);box-shadow:0 1px 4px rgba(15,23,42,0.06);overflow:hidden;animation:fadeUp 0.45s 0.35s ease both;}
+  .audit-header{padding:20px 24px 16px;border-bottom:1px solid var(--surface-2);display:flex;align-items:center;justify-content:space-between;}
+  .audit-list{padding:4px 0;}
+  .audit-item{display:flex;align-items:flex-start;gap:14px;padding:13px 24px;border-bottom:1px solid var(--surface-2);transition:background 0.15s;}
+  .audit-item:last-child{border-bottom:none;}
+  .audit-item:hover{background:#FAFAF8;}
+  .audit-icon{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .ai-add{background:rgba(5,150,105,0.1);color:#059669;}
+  .ai-edit{background:var(--gold-dim);color:#A08020;}
+  .ai-delete{background:rgba(220,38,38,0.08);color:#DC2626;}
+  .ai-perm{background:rgba(37,99,235,0.1);color:#2563EB;}
+  .audit-body{flex:1;}
+  .audit-action{font-size:13px;font-weight:600;color:var(--navy);}
+  .audit-detail{font-size:12px;color:var(--text-secondary);margin-top:2px;}
+  .audit-time{font-size:11px;color:var(--text-muted);margin-left:auto;white-space:nowrap;padding-top:2px;}
+
+  /* MODAL */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,0.6);backdrop-filter:blur(4px);z-index:200;align-items:center;justify-content:center;}
+  .modal-overlay.open{display:flex;}
+  .modal{background:var(--white);border-radius:var(--radius);width:560px;max-width:95vw;max-height:90vh;overflow-y:auto;box-shadow:0 24px 60px rgba(15,23,42,0.25);animation:modalIn 0.25s ease;}
+  @keyframes modalIn{from{opacity:0;transform:translateY(20px) scale(0.97)}to{opacity:1;transform:none}}
+  .modal-header{padding:24px 28px 20px;border-bottom:1px solid var(--surface-2);display:flex;align-items:center;justify-content:space-between;}
+  .modal-title{font-size:17px;font-weight:700;color:var(--navy);}
+  .modal-subtitle{font-size:12px;color:var(--text-muted);margin-top:2px;}
+  .modal-close{width:32px;height:32px;border-radius:8px;border:1px solid var(--surface-2);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-muted);transition:all 0.2s;}
+  .modal-close:hover{background:var(--surface);color:var(--navy);}
+  .modal-body{padding:24px 28px;display:flex;flex-direction:column;gap:18px;}
+  .form-section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-muted);padding-bottom:10px;border-bottom:1px solid var(--surface-2);}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .form-group{display:flex;flex-direction:column;gap:6px;}
+  .form-group.full{grid-column:1/-1;}
+  .form-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:0.04em;}
+  .form-input,.form-select{padding:9px 12px;border-radius:8px;border:1px solid var(--surface-2);background:var(--white);font-size:13px;font-family:inherit;color:var(--text-primary);outline:none;transition:border-color 0.2s,box-shadow 0.2s;}
+  .form-input:focus,.form-select:focus{border-color:var(--gold-border);box-shadow:0 0 0 3px rgba(212,175,55,0.1);}
+  .perm-check-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .perm-check{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:7px;background:var(--surface);cursor:pointer;}
+  .perm-check input[type=checkbox]{accent-color:var(--gold);width:14px;height:14px;cursor:pointer;}
+  .perm-check label{font-size:12px;font-weight:500;color:var(--text-secondary);cursor:pointer;}
+  .modal-footer{padding:16px 28px 24px;display:flex;gap:10px;justify-content:flex-end;border-top:1px solid var(--surface-2);}
+  .btn-cancel{padding:9px 20px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;font-family:inherit;border:1px solid var(--surface-2);background:transparent;color:var(--text-secondary);transition:all 0.2s;}
+  .btn-cancel:hover{background:var(--surface);}
+
+  /* DELETE CONFIRM MODAL */
+  .delete-modal{width:420px;}
+  .delete-icon-wrap{width:56px;height:56px;background:rgba(220,38,38,0.08);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;color:#DC2626;}
+  .delete-title{font-size:17px;font-weight:700;color:var(--navy);text-align:center;margin-bottom:8px;}
+  .delete-desc{font-size:13px;color:var(--text-secondary);text-align:center;line-height:1.6;}
+  .delete-name{font-weight:700;color:var(--navy);}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+</style>
 </head>
-<body class="bg-background text-on-surface">
-<!-- Navigation Drawer (Fixed Sidebar) -->
-<aside class="fixed left-0 top-0 h-full w-64 bg-primary text-secondary-fixed border-r border-outline-variant/10 shadow-sm flex flex-col z-50">
-<div class="p-8">
-<h1 class="text-headline-md font-headline-md font-bold text-secondary-fixed dark:text-secondary-fixed-dim">Grand Regency</h1>
-</div>
-<nav class="flex-1">
-<ul class="flex flex-col">
-<li>
-<a class="flex items-center gap-4 px-6 py-4 text-on-primary/60 hover:bg-white/5 hover:text-on-primary transition-colors duration-300" href="#">
-<span class="material-symbols-outlined">dashboard</span>
-<span class="font-label-md text-label-md uppercase tracking-widest">Dashboard</span>
-</a>
-</li>
-<li>
-<a class="flex items-center gap-4 px-6 py-4 text-on-primary/60 hover:bg-white/5 hover:text-on-primary transition-colors duration-300" href="#">
-<span class="material-symbols-outlined">calendar_month</span>
-<span class="font-label-md text-label-md uppercase tracking-widest">Bookings</span>
-</a>
-</li>
-<li>
-<a class="flex items-center gap-4 px-6 py-4 text-on-primary/60 hover:bg-white/5 hover:text-on-primary transition-colors duration-300" href="#">
-<span class="material-symbols-outlined">bed</span>
-<span class="font-label-md text-label-md uppercase tracking-widest">Rooms</span>
-</a>
-</li>
-<li>
-<a class="flex items-center gap-4 px-6 py-4 text-secondary-fixed bg-white/5 border-r-4 border-secondary-fixed" href="#">
-<span class="material-symbols-outlined">group</span>
-<span class="font-label-md text-label-md uppercase tracking-widest">Staff</span>
-</a>
-</li>
-<li>
-<a class="flex items-center gap-4 px-6 py-4 text-on-primary/60 hover:bg-white/5 hover:text-on-primary transition-colors duration-300" href="#">
-<span class="material-symbols-outlined">settings</span>
-<span class="font-label-md text-label-md uppercase tracking-widest">Settings</span>
-</a>
-</li>
-</ul>
-</nav>
-<div class="p-6 border-t border-white/5">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 bg-secondary-container rounded-full flex items-center justify-center text-on-secondary-container font-bold">AD</div>
-<div>
-<p class="text-label-md text-on-secondary font-semibold">Admin Panel</p>
-<p class="text-xs text-on-primary/40">Super User</p>
-</div>
-</div>
-</div>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="wordmark">Lumina <span>Grand</span></div>
+    <div class="tagline">Hotel Management System</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Operations</div>
+    <a class="nav-item" href="lumina-grand-dashboard.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      Dashboard
+    </a>
+    <a class="nav-item" href="lumina-grand-rooms.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Rooms
+    </a>
+    <a class="nav-item" href="lumina-grand-bookings.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+      Bookings
+    </a>
+    <a class="nav-item active" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      Staff
+      <span class="lock-icon">🔒</span>
+    </a>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="admin-profile">
+      <div class="avatar-circle">SA</div>
+      <div class="admin-info">
+        <div class="name">Super Admin</div>
+        <div class="role">System Administrator</div>
+        <div class="superadmin-badge">
+          <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Superadmin
+        </div>
+      </div>
+    </div>
+    <div class="logout-btn">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      Logout
+    </div>
+  </div>
 </aside>
-<!-- Main Content Canvas -->
-<main class="ml-64 min-h-screen">
-<!-- Top App Bar -->
-<header class="sticky top-0 right-0 w-full backdrop-blur-md bg-surface-container-lowest/80 border-b border-surface-variant flex justify-between items-center h-24 px-10 z-40">
-<div>
-<h2 class="font-headline-md text-headline-md text-primary font-bold">Staff Management</h2>
-<p class="font-body-md text-body-md text-on-surface-variant">Manage hotel employees, departments, and operational teams</p>
-</div>
-<div class="flex items-center gap-6">
-<button class="relative p-2 text-on-surface-variant hover:text-secondary transition-colors">
-<span class="material-symbols-outlined">notifications</span>
-<span class="absolute top-1 right-1 w-2 h-2 bg-secondary rounded-full"></span>
-</button>
-<div class="h-8 w-px bg-surface-variant"></div>
-<div class="flex items-center gap-2 cursor-pointer hover:opacity-80">
-<span class="material-symbols-outlined text-primary">search</span>
-<span class="font-label-md text-label-md text-primary uppercase">Quick Find</span>
-</div>
-</div>
-</header>
-<!-- Page Content -->
-<div class="p-10 max-w-7xl mx-auto space-y-12">
-<!-- Statistics Cards (Glassmorphism Bento) -->
-<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-<div class="glass-card p-6 rounded-xl flex items-center gap-5 shadow-sm border border-outline-variant/20">
-<div class="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center text-primary">
-<span class="material-symbols-outlined">badge</span>
-</div>
-<div>
-<p class="text-label-sm font-label-sm text-on-surface-variant uppercase">Total Staff</p>
-<p class="text-headline-md font-headline-md text-primary">124</p>
-</div>
-</div>
-<div class="glass-card p-6 rounded-xl flex items-center gap-5 shadow-sm border border-outline-variant/20">
-<div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center text-secondary">
-<span class="material-symbols-outlined">person_check</span>
-</div>
-<div>
-<p class="text-label-sm font-label-sm text-on-surface-variant uppercase">Active Employees</p>
-<p class="text-headline-md font-headline-md text-primary">118</p>
-</div>
-</div>
-<div class="glass-card p-6 rounded-xl flex items-center gap-5 shadow-sm border border-outline-variant/20">
-<div class="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center text-primary">
-<span class="material-symbols-outlined">domain</span>
-</div>
-<div>
-<p class="text-label-sm font-label-sm text-on-surface-variant uppercase">Departments</p>
-<p class="text-headline-md font-headline-md text-primary">8</p>
-</div>
-</div>
-<div class="glass-card p-6 rounded-xl flex items-center gap-5 shadow-sm border border-outline-variant/20">
-<div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center text-secondary">
-<span class="material-symbols-outlined">event_available</span>
-</div>
-<div>
-<p class="text-label-sm font-label-sm text-on-surface-variant uppercase">Attendance</p>
-<p class="text-headline-md font-headline-md text-primary">95%</p>
-</div>
-</div>
-</section>
-<!-- Search & Filters -->
-<section class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-surface-variant flex flex-col md:flex-row gap-4 items-center">
-<div class="relative flex-1 w-full">
-<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
-<input class="w-full pl-12 pr-4 py-3 bg-background border-none ring-1 ring-outline-variant/30 rounded-lg focus:ring-2 focus:ring-secondary/50 transition-all text-body-md font-body-md" placeholder="Search by name, ID or department..." type="text"/>
-</div>
-<div class="flex gap-4 w-full md:w-auto">
-<select class="bg-background border-none ring-1 ring-outline-variant/30 rounded-lg px-4 py-3 text-label-md font-label-md text-on-surface-variant focus:ring-2 focus:ring-secondary/50 min-w-[140px]">
-<option>Role</option>
-<option>Lead</option>
-<option>Manager</option>
-<option>Staff</option>
-</select>
-<select class="bg-background border-none ring-1 ring-outline-variant/30 rounded-lg px-4 py-3 text-label-md font-label-md text-on-surface-variant focus:ring-2 focus:ring-secondary/50 min-w-[160px]">
-<option>Department</option>
-<option>Housekeeping</option>
-<option>Front Desk</option>
-<option>Concierge</option>
-<option>F&amp;B</option>
-</select>
-<select class="bg-background border-none ring-1 ring-outline-variant/30 rounded-lg px-4 py-3 text-label-md font-label-md text-on-surface-variant focus:ring-2 focus:ring-secondary/50 min-w-[140px]">
-<option>Status</option>
-<option>Active</option>
-<option>On Leave</option>
-<option>Off Duty</option>
-</select>
-</div>
-</section>
-<!-- Staff List (Cards) -->
-<section class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<!-- Sarah Jenkins -->
-<div class="bg-surface-container-lowest p-8 rounded-xl border border-surface-variant shadow-sm hover:shadow-md transition-shadow group">
-<div class="flex items-start justify-between mb-6">
-<div class="flex items-center gap-5">
-<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-secondary/20">
-<img alt="Sarah Jenkins" class="w-full h-full object-cover" data-alt="A professional portrait of a woman in her 40s with a warm and capable expression, wearing a refined hotel management uniform. The background is a soft-focus interior of a luxury hotel lobby with warm, golden ambient lighting. The overall aesthetic is clean, high-end, and follows the Aurelian Reserve brand's minimalist and premium visual identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPItGnsU-ePf8-QxYxnu7KfLhiV_yZ72u0RUxBi721dmzUJvvWrtGhkP5NXYJl2hwCASEEmIKigamVbm9qYV0KbJcXsLxrh8emOi40I9s0G1Z7zWTQ9ktuZE6M6Yv9LLIHWw_fwKBRlc9gHYcaxrRhheOfxhjkhYBAcdV8i26LHPZUXBu8_Uc1xJvlNGRFh3r0TvQjRtDq2TZK2AKZoX0q_c6Lefb8NmH3fiWO-BXeZtqc7LK8fLT6bxPl3rCr4dc7ikq1-JrIqnY"/>
-</div>
-<div>
-<h3 class="font-headline-md text-headline-md text-primary">Sarah Jenkins</h3>
-<p class="text-label-md font-label-md text-on-surface-variant/70 uppercase">ID: AR-001</p>
-</div>
-</div>
-<span class="px-3 py-1 bg-green-50 text-green-700 text-label-sm font-label-sm uppercase rounded-full">Active</span>
-</div>
-<div class="space-y-4 mb-8">
-<div class="flex justify-between items-center py-2 border-b border-surface-variant/50">
-<span class="text-label-md font-label-md text-on-surface-variant uppercase">Role</span>
-<span class="text-body-md font-body-md text-primary font-medium">Head of Housekeeping</span>
-</div>
-<div class="flex justify-between items-center py-2 border-b border-surface-variant/50">
-<span class="text-label-md font-label-md text-on-surface-variant uppercase">Department</span>
-<span class="text-body-md font-body-md text-primary">Housekeeping</span>
-</div>
-</div>
-<div class="flex gap-4">
-<button class="flex-1 py-3 border border-primary text-primary font-label-md text-label-md uppercase tracking-wider hover:bg-primary hover:text-white transition-colors">View Profile</button>
-<button class="flex-1 py-3 border border-secondary text-secondary font-label-md text-label-md uppercase tracking-wider hover:bg-secondary hover:text-white transition-colors">Edit</button>
-</div>
-</div>
-<!-- Marcus Thorne -->
-<div class="bg-surface-container-lowest p-8 rounded-xl border border-surface-variant shadow-sm hover:shadow-md transition-shadow group">
-<div class="flex items-start justify-between mb-6">
-<div class="flex items-center gap-5">
-<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-secondary/20">
-<img alt="Marcus Thorne" class="w-full h-full object-cover" data-alt="A sophisticated portrait of a senior man with a refined, welcoming smile, dressed in a classic navy blue concierge suit with gold trim. The lighting is soft and cinematic, emphasizing a professional yet approachable hospitality expert. The backdrop hints at a quiet, elegant library or hotel reception area, maintaining a luxury minimalist atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjCs8p_sx5n0e7LknvJctVVeg_gPqkR2XFMbfcBzD8I8lhfrxI5teAA8wNSnkaAuC5vd3pmptkj26lF4j9wZEyQms0ipKyKcwopEGaYvM2r69Wots6_QRMcihOgeGQan5qrCPWhmGcFaA1h2tM_9gHsLmWTOuoqN-_VSP00oYG-dHSdsqta4n1BvrnKm0E6wWAqlndP__5WdEf3vWNi11KN0Gkqb6kxuHGJnbG1NRNUmK7fDhNJ_-npYg-HwNKzboQt1lv0ey_VSA"/>
-</div>
-<div>
-<h3 class="font-headline-md text-headline-md text-primary">Marcus Thorne</h3>
-<p class="text-label-md font-label-md text-on-surface-variant/70 uppercase">ID: AR-042</p>
-</div>
-</div>
-<span class="px-3 py-1 bg-green-50 text-green-700 text-label-sm font-label-sm uppercase rounded-full">Active</span>
-</div>
-<div class="space-y-4 mb-8">
-<div class="flex justify-between items-center py-2 border-b border-surface-variant/50">
-<span class="text-label-md font-label-md text-on-surface-variant uppercase">Role</span>
-<span class="text-body-md font-body-md text-primary font-medium">Senior Concierge</span>
-</div>
-<div class="flex justify-between items-center py-2 border-b border-surface-variant/50">
-<span class="text-label-md font-label-md text-on-surface-variant uppercase">Department</span>
-<span class="text-body-md font-body-md text-primary">Concierge</span>
-</div>
-</div>
-<div class="flex gap-4">
-<button class="flex-1 py-3 border border-primary text-primary font-label-md text-label-md uppercase tracking-wider hover:bg-primary hover:text-white transition-colors">View Profile</button>
-<button class="flex-1 py-3 border border-secondary text-secondary font-label-md text-label-md uppercase tracking-wider hover:bg-secondary hover:text-white transition-colors">Edit</button>
-</div>
-</div>
-<!-- Elena Rodriguez -->
-<div class="bg-surface-container-lowest p-8 rounded-xl border border-surface-variant shadow-sm hover:shadow-md transition-shadow group">
-<div class="flex items-start justify-between mb-6">
-<div class="flex items-center gap-5">
-<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-secondary/20">
-<img alt="Elena Rodriguez" class="w-full h-full object-cover" data-alt="A modern professional portrait of a woman in her 30s with a focused and intelligent expression. She is wearing high-end business attire in deep navy tones. The lighting is bright and even, reflecting a professional office or hotel management setting. The style is airy and minimalist, fitting the clean aesthetic of the Aurelian Reserve brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbK3yfBfXIwCXoCPbuYh77cdGdQ6gzQQfggOoVOtkezoF_L9meJsErqORkJaZxk6bSCj6YTnmeE9TTAwi4fTkbMQQA93W6JEGw-Ze_YdWAzHCgNJ4Ilp-B3r2b4NeP0Wx6of_iSmiUkxsNrLEaWnfYe6IDS-38FHfPn5kLmzH16_xu5dkmvGPznwOUQs4Ab8AGWeDtV2OX1KkWDmLKZJ-FCGNooQp8kCL3x9jWk1nzYsqAUQuO_nuW5xLRCLsqDkn_Vb48c2xAR8c"/>
-</div>
-<div>
-<h3 class="font-headline-md text-headline-md text-primary">Elena Rodriguez</h3>
-<p class="text-label-md font-label-md text-on-surface-variant/70 uppercase">ID: AR-088</p>
-</div>
-</div>
-<span class="px-3 py-1 bg-yellow-50 text-yellow-700 text-label-sm font-label-sm uppercase rounded-full">On Leave</span>
-</div>
-<div class="space-y-4 mb-8">
-<div class="flex justify-between items-center py-2 border-b border-surface-variant/50">
-<span class="text-label-md font-label-md text-on-surface-variant uppercase">Role</span>
-<span class="text-body-md font-body-md text-primary font-medium">Front Desk Lead</span>
-</div>
-<div class="flex justify-between items-center py-2 border-b border-surface-variant/50">
-<span class="text-label-md font-label-md text-on-surface-variant uppercase">Department</span>
-<span class="text-body-md font-body-md text-primary">Front Desk</span>
-</div>
-</div>
-<div class="flex gap-4">
-<button class="flex-1 py-3 border border-primary text-primary font-label-md text-label-md uppercase tracking-wider hover:bg-primary hover:text-white transition-colors">View Profile</button>
-<button class="flex-1 py-3 border border-secondary text-secondary font-label-md text-label-md uppercase tracking-wider hover:bg-secondary hover:text-white transition-colors">Edit</button>
-</div>
-</div>
-<!-- Julian Sorel -->
-<div class="bg-surface-container-lowest p-8 rounded-xl border border-surface-variant shadow-sm hover:shadow-md transition-shadow group">
-<div class="flex items-start justify-between mb-6">
-<div class="flex items-center gap-5">
-<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-secondary/20">
-<img alt="Julian Sorel" class="w-full h-full object-cover" data-alt="A portrait of a distinguished man in his late 40s with a confident and composed demeanor, dressed in a sharp, tailored dark charcoal suit. The lighting is dramatic yet soft, creating a sense of luxury and authority. The background is a blurred view of a high-end restaurant interior with warm lighting, aligning with his role as F&amp;B Director in a premium resort." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZb7VGzieTZk_kylFrtx0ZAhqHWm2FKChpXWgtQCrPtQua_gGT08zLUwQfFD7wczd1yagSoR5skHhjRd5fAcKr4Ic2JuBf0yI4s1yk_P1IdwgWedJnAc2rkkDbWKrWjzsSxr29qwYPy-rqcC8xa7gFNFk9cLr_oBMLbGhUEt0go6RdPz3ADAwhElSKZBrurkEv4e1Xez8bSfhQCGlL1uK883nkNKFZw6bvOt3Mq7y9O5eySNObt0tHyjBFU52rSYU75p7_S0jtXLk"/>
-</div>
-<div>
-<h3 class="font-headline-md text-headline-md text-primary">Julian Sorel</h3>
-<p class="text-label-md font-label-md text-on-surface-variant/70 uppercase">ID: AR-105</p>
-</div>
-</div>
-<span class="px-3 py-1 bg-surface-variant text-on-surface-variant text-label-sm font-label-sm uppercase rounded-full">Off Duty</span>
-</div>
-<div class="space-y-4 mb-8">
-<div class="flex justify-between items-center py-2 border-b border-surface-variant/50">
-<span class="text-label-md font-label-md text-on-surface-variant uppercase">Role</span>
-<span class="text-body-md font-body-md text-primary font-medium">F&amp;B Director</span>
-</div>
-<div class="flex justify-between items-center py-2 border-b border-surface-variant/50">
-<span class="text-label-md font-label-md text-on-surface-variant uppercase">Department</span>
-<span class="text-body-md font-body-md text-primary">F&amp;B</span>
-</div>
-</div>
-<div class="flex gap-4">
-<button class="flex-1 py-3 border border-primary text-primary font-label-md text-label-md uppercase tracking-wider hover:bg-primary hover:text-white transition-colors">View Profile</button>
-<button class="flex-1 py-3 border border-secondary text-secondary font-label-md text-label-md uppercase tracking-wider hover:bg-secondary hover:text-white transition-colors">Edit</button>
-</div>
-</div>
-</section>
-<!-- Pagination -->
-<section class="flex items-center justify-center pt-8 border-t border-surface-variant">
-<nav class="flex items-center gap-2">
-<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-surface-variant text-on-surface-variant hover:bg-surface-variant transition-colors">
-<span class="material-symbols-outlined text-[20px]">chevron_left</span>
-</button>
-<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary font-label-md text-label-md">1</button>
-<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-transparent text-on-surface-variant hover:border-surface-variant font-label-md text-label-md transition-all">2</button>
-<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-transparent text-on-surface-variant hover:border-surface-variant font-label-md text-label-md transition-all">3</button>
-<span class="mx-2 text-on-surface-variant">...</span>
-<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-surface-variant text-on-surface-variant hover:bg-surface-variant transition-colors">
-<span class="material-symbols-outlined text-[20px]">chevron_right</span>
-</button>
-</nav>
-</section>
-</div>
+
+<!-- MAIN -->
+<main class="main">
+  <header class="header">
+    <div class="header-left">
+      <div class="greeting">
+        Staff Management
+        <span class="superadmin-pill">
+          <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Superadmin Only
+        </span>
+      </div>
+      <div class="subtitle">Manage staff accounts, roles, permissions, and activity logs.</div>
+    </div>
+    <div class="header-right">
+      <div class="search-bar">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" placeholder="Search staff…" id="searchInput" oninput="filterStaff()">
+      </div>
+      <div class="icon-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        <div class="notif-dot"></div>
+      </div>
+      <div class="header-avatar">SA</div>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <!-- ACCESS NOTICE -->
+    <div class="access-notice">
+      <div class="access-notice-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      </div>
+      <div class="access-notice-text">
+        <strong>Restricted Access —</strong> This page is only accessible to Superadmin accounts. All actions here are logged and audited in real time.
+      </div>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="summary-row">
+      <div class="summary-card">
+        <div class="s-icon si-total">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="s-info"><div class="s-val">24</div><div class="s-lbl">Total Staff</div></div>
+      </div>
+      <div class="summary-card">
+        <div class="s-icon si-active">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="s-info"><div class="s-val">19</div><div class="s-lbl">Active Today</div></div>
+      </div>
+      <div class="summary-card">
+        <div class="s-icon si-dept">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="s-info"><div class="s-val">6</div><div class="s-lbl">Departments</div></div>
+      </div>
+      <div class="summary-card">
+        <div class="s-icon si-new">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        </div>
+        <div class="s-info"><div class="s-val">3</div><div class="s-lbl">New This Month</div></div>
+      </div>
+    </div>
+
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <button class="filter-btn active" onclick="setFilter('all',this)">All Staff</button>
+        <button class="filter-btn" onclick="setFilter('superadmin',this)">Superadmin</button>
+        <button class="filter-btn" onclick="setFilter('manager',this)">Manager</button>
+        <button class="filter-btn" onclick="setFilter('frontdesk',this)">Front Desk</button>
+        <button class="filter-btn" onclick="setFilter('housekeeping',this)">Housekeeping</button>
+        <button class="filter-btn" onclick="setFilter('finance',this)">Finance</button>
+      </div>
+      <button class="btn-gold" onclick="openAddModal()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add Staff
+      </button>
+    </div>
+
+    <!-- STAFF GRID -->
+    <div class="staff-grid" id="staffGrid">
+
+      <!-- SUPERADMIN -->
+      <div class="staff-card is-superadmin" data-dept="superadmin">
+        <div class="staff-card-top">
+          <div class="staff-avatar-wrap">
+            <div class="staff-avatar av-gold">SA</div>
+            <div class="online-dot dot-online"></div>
+          </div>
+          <span class="staff-role-badge role-superadmin">★ Superadmin</span>
+        </div>
+        <div class="staff-name">Super Admin</div>
+        <div class="staff-position">System Administrator</div>
+        <div class="staff-dept">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11H3z"/></svg>
+          All Departments
+        </div>
+        <div class="staff-meta">
+          <div class="meta-item"><div class="meta-label">Joined</div><div class="meta-value">Jan 2023</div></div>
+          <div class="meta-item"><div class="meta-label">Last Active</div><div class="meta-value">Now</div></div>
+          <div class="meta-item"><div class="meta-label">Email</div><div class="meta-value" style="font-size:11px">superadmin@lumina.com</div></div>
+          <div class="meta-item"><div class="meta-label">Access Level</div><div class="meta-value">Full</div></div>
+        </div>
+        <div class="staff-card-footer">
+          <button class="btn-sm-outline" onclick="openPermModal('Super Admin','Superadmin')">Permissions</button>
+          <button class="btn-sm-navy" onclick="openEditModal('Super Admin')">Edit</button>
+        </div>
+      </div>
+
+      <!-- MANAGER -->
+      <div class="staff-card" data-dept="manager">
+        <div class="staff-card-top">
+          <div class="staff-avatar-wrap">
+            <div class="staff-avatar av-navy">RP</div>
+            <div class="online-dot dot-online"></div>
+          </div>
+          <span class="staff-role-badge role-manager">Manager</span>
+        </div>
+        <div class="staff-name">Rizky Putranto</div>
+        <div class="staff-position">General Manager</div>
+        <div class="staff-dept">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11H3z"/></svg>
+          Operations
+        </div>
+        <div class="staff-meta">
+          <div class="meta-item"><div class="meta-label">Joined</div><div class="meta-value">Mar 2023</div></div>
+          <div class="meta-item"><div class="meta-label">Last Active</div><div class="meta-value">2h ago</div></div>
+          <div class="meta-item"><div class="meta-label">Email</div><div class="meta-value" style="font-size:11px">r.putranto@lumina.com</div></div>
+          <div class="meta-item"><div class="meta-label">Access Level</div><div class="meta-value">High</div></div>
+        </div>
+        <div class="staff-card-footer">
+          <button class="btn-sm-outline" onclick="openPermModal('Rizky Putranto','Manager')">Permissions</button>
+          <button class="btn-sm-navy" onclick="openEditModal('Rizky Putranto')">Edit</button>
+          <button class="btn-sm-danger" onclick="openDeleteModal('Rizky Putranto')">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- FRONT DESK -->
+      <div class="staff-card" data-dept="frontdesk">
+        <div class="staff-card-top">
+          <div class="staff-avatar-wrap">
+            <div class="staff-avatar av-blue">DW</div>
+            <div class="online-dot dot-online"></div>
+          </div>
+          <span class="staff-role-badge role-frontdesk">Front Desk</span>
+        </div>
+        <div class="staff-name">Dewi Wulandari</div>
+        <div class="staff-position">Senior Receptionist</div>
+        <div class="staff-dept">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11H3z"/></svg>
+          Guest Services
+        </div>
+        <div class="staff-meta">
+          <div class="meta-item"><div class="meta-label">Joined</div><div class="meta-value">Jun 2023</div></div>
+          <div class="meta-item"><div class="meta-label">Last Active</div><div class="meta-value">5m ago</div></div>
+          <div class="meta-item"><div class="meta-label">Email</div><div class="meta-value" style="font-size:11px">d.wulandari@lumina.com</div></div>
+          <div class="meta-item"><div class="meta-label">Access Level</div><div class="meta-value">Medium</div></div>
+        </div>
+        <div class="staff-card-footer">
+          <button class="btn-sm-outline" onclick="openPermModal('Dewi Wulandari','Front Desk')">Permissions</button>
+          <button class="btn-sm-navy" onclick="openEditModal('Dewi Wulandari')">Edit</button>
+          <button class="btn-sm-danger" onclick="openDeleteModal('Dewi Wulandari')">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- HOUSEKEEPING -->
+      <div class="staff-card" data-dept="housekeeping">
+        <div class="staff-card-top">
+          <div class="staff-avatar-wrap">
+            <div class="staff-avatar av-green">BH</div>
+            <div class="online-dot dot-leave"></div>
+          </div>
+          <span class="staff-role-badge role-housekeeping">Housekeeping</span>
+        </div>
+        <div class="staff-name">Bayu Hermawan</div>
+        <div class="staff-position">Housekeeping Supervisor</div>
+        <div class="staff-dept">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11H3z"/></svg>
+          Housekeeping
+        </div>
+        <div class="staff-meta">
+          <div class="meta-item"><div class="meta-label">Joined</div><div class="meta-value">Feb 2023</div></div>
+          <div class="meta-item"><div class="meta-label">Last Active</div><div class="meta-value">On Leave</div></div>
+          <div class="meta-item"><div class="meta-label">Email</div><div class="meta-value" style="font-size:11px">b.hermawan@lumina.com</div></div>
+          <div class="meta-item"><div class="meta-label">Access Level</div><div class="meta-value">Limited</div></div>
+        </div>
+        <div class="staff-card-footer">
+          <button class="btn-sm-outline" onclick="openPermModal('Bayu Hermawan','Housekeeping')">Permissions</button>
+          <button class="btn-sm-navy" onclick="openEditModal('Bayu Hermawan')">Edit</button>
+          <button class="btn-sm-danger" onclick="openDeleteModal('Bayu Hermawan')">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- FINANCE -->
+      <div class="staff-card" data-dept="finance">
+        <div class="staff-card-top">
+          <div class="staff-avatar-wrap">
+            <div class="staff-avatar av-purple">NF</div>
+            <div class="online-dot dot-online"></div>
+          </div>
+          <span class="staff-role-badge role-finance">Finance</span>
+        </div>
+        <div class="staff-name">Nadia Fitriani</div>
+        <div class="staff-position">Finance Manager</div>
+        <div class="staff-dept">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11H3z"/></svg>
+          Finance & Accounting
+        </div>
+        <div class="staff-meta">
+          <div class="meta-item"><div class="meta-label">Joined</div><div class="meta-value">Apr 2023</div></div>
+          <div class="meta-item"><div class="meta-label">Last Active</div><div class="meta-value">1h ago</div></div>
+          <div class="meta-item"><div class="meta-label">Email</div><div class="meta-value" style="font-size:11px">n.fitriani@lumina.com</div></div>
+          <div class="meta-item"><div class="meta-label">Access Level</div><div class="meta-value">High</div></div>
+        </div>
+        <div class="staff-card-footer">
+          <button class="btn-sm-outline" onclick="openPermModal('Nadia Fitriani','Finance')">Permissions</button>
+          <button class="btn-sm-navy" onclick="openEditModal('Nadia Fitriani')">Edit</button>
+          <button class="btn-sm-danger" onclick="openDeleteModal('Nadia Fitriani')">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- SECURITY -->
+      <div class="staff-card" data-dept="security">
+        <div class="staff-card-top">
+          <div class="staff-avatar-wrap">
+            <div class="staff-avatar av-rose">AK</div>
+            <div class="online-dot dot-offline"></div>
+          </div>
+          <span class="staff-role-badge role-security">Security</span>
+        </div>
+        <div class="staff-name">Andi Kurniawan</div>
+        <div class="staff-position">Head of Security</div>
+        <div class="staff-dept">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11H3z"/></svg>
+          Security
+        </div>
+        <div class="staff-meta">
+          <div class="meta-item"><div class="meta-label">Joined</div><div class="meta-value">May 2024</div></div>
+          <div class="meta-item"><div class="meta-label">Last Active</div><div class="meta-value">Yesterday</div></div>
+          <div class="meta-item"><div class="meta-label">Email</div><div class="meta-value" style="font-size:11px">a.kurniawan@lumina.com</div></div>
+          <div class="meta-item"><div class="meta-label">Access Level</div><div class="meta-value">Medium</div></div>
+        </div>
+        <div class="staff-card-footer">
+          <button class="btn-sm-outline" onclick="openPermModal('Andi Kurniawan','Security')">Permissions</button>
+          <button class="btn-sm-navy" onclick="openEditModal('Andi Kurniawan')">Edit</button>
+          <button class="btn-sm-danger" onclick="openDeleteModal('Andi Kurniawan')">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PERMISSIONS TABLE -->
+    <div class="permissions-card">
+      <div class="permissions-header">
+        <div>
+          <div class="section-title" style="margin-bottom:0"><span>Role</span> Permissions</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:3px">Access control per role — only editable by Superadmin</div>
+        </div>
+        <button class="btn-gold" style="font-size:12px;padding:7px 14px">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          Edit Permissions
+        </button>
+      </div>
+      <div class="permissions-grid">
+        <div class="perm-col">
+          <div class="perm-col-title">Superadmin</div>
+          <div class="perm-row"><span class="perm-name">View Dashboard</span><div class="perm-toggle on locked"></div></div>
+          <div class="perm-row"><span class="perm-name">Manage Staff</span><div class="perm-toggle on locked"></div></div>
+          <div class="perm-row"><span class="perm-name">Manage Rooms</span><div class="perm-toggle on locked"></div></div>
+          <div class="perm-row"><span class="perm-name">Manage Bookings</span><div class="perm-toggle on locked"></div></div>
+          <div class="perm-row"><span class="perm-name">View Reports</span><div class="perm-toggle on locked"></div></div>
+          <div class="perm-row"><span class="perm-name">Edit Permissions</span><div class="perm-toggle on locked"></div></div>
+          <div class="perm-row"><span class="perm-name">Delete Records</span><div class="perm-toggle on locked"></div></div>
+        </div>
+        <div class="perm-col">
+          <div class="perm-col-title">Manager</div>
+          <div class="perm-row"><span class="perm-name">View Dashboard</span><div class="perm-toggle on" onclick="togglePerm(this)"></div></div>
+          <div class="perm-row"><span class="perm-name">Manage Staff</span><div class="perm-toggle off" onclick="togglePerm(this)"></div></div>
+          <div class="perm-row"><span class="perm-name">Manage Rooms</span><div class="perm-toggle on" onclick="togglePerm(this)"></div></div>
+          <div class="perm-row"><span class="perm-name">Manage Bookings</span><div class="perm-toggle on" onclick="togglePerm(this)"></div></div>
+          <div class="perm-row"><span class="perm-name">View Reports</span><div class="perm-toggle on" onclick="togglePerm(this)"></div></div>
+          <div class="perm-row"><span class="perm-name">Edit Permissions</span><div class="perm-toggle off" onclick="togglePerm(this)"></div></div>
+          <div class="perm-row"><span class="perm-name">Delete Records</span><div class="perm-toggle off" onclick="togglePerm(this)"></div></div>
+        </div>
+        <div class="perm-col">
+          <div class="perm-col-title">Front Desk</div>
+          <div class="perm-row"><span class="perm-name">View Dashboard</span><div class="perm-toggle on" onclick="togglePerm(this)"></div></div>
+          <div class="perm-row"><span class="perm-name">Manage Staff</span><div class="perm-toggle off" onclick="togglePerm(this)"></div></div>
+          <div class="perm-row"><span class="perm-name">Manage Rooms</span><div class="perm-toggle off" onclick="togglePerm(this)"></div></div>
+          <div class="perm-row"><span class="perm-name">Manage Bookings</span><div class="perm-toggle on" onclick="togglePerm(this)"></div></div>
+          <div class="perm-row"><span class="perm-name">View Reports</span><div class="perm-toggle off" onclick="togglePerm(this)"></div></div>
+          <div class="perm-row"><span class="perm-name">Edit Permissions</span><div class="perm-toggle off" onclick="togglePerm(this)"></div></div>
+          <div class="perm-row"><span class="perm-name">Delete Records</span><div class="perm-toggle off" onclick="togglePerm(this)"></div></div>
+        </div>
+        <div class="perm-col">
+          <div class="perm-col-title">Housekeeping / Others</div>
+          <div class="perm-row"><span class="perm-name">View Dashboard</span><div class="perm-toggle on" onclick="togglePerm(this)"></div></div>
+          <div class="perm-row"><span class="perm-name">Manage Staff</span><div class="perm-toggle off" onclick="togglePerm(this)"></div></div>
+          <div class="perm-row"><span class="perm-name">Manage Rooms</span><div class="perm-toggle on" onclick="togglePerm(this)"></div></div>
+          <div class="perm-row"><span class="perm-name">Manage Bookings</span><div class="perm-toggle off" onclick="togglePerm(this)"></div></div>
+          <div class="perm-row"><span class="perm-name">View Reports</span><div class="perm-toggle off" onclick="togglePerm(this)"></div></div>
+          <div class="perm-row"><span class="perm-name">Edit Permissions</span><div class="perm-toggle off" onclick="togglePerm(this)"></div></div>
+          <div class="perm-row"><span class="perm-name">Delete Records</span><div class="perm-toggle off" onclick="togglePerm(this)"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUDIT LOG -->
+    <div class="audit-card">
+      <div class="audit-header">
+        <div>
+          <div class="section-title" style="margin-bottom:0"><span>Audit</span> Log</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:3px">All staff-related actions — visible to Superadmin only</div>
+        </div>
+      </div>
+      <div class="audit-list">
+        <div class="audit-item">
+          <div class="audit-icon ai-add"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+          <div class="audit-body">
+            <div class="audit-action">New Staff Added</div>
+            <div class="audit-detail">Andi Kurniawan added as Head of Security by Super Admin</div>
+          </div>
+          <div class="audit-time">Today, 09:14</div>
+        </div>
+        <div class="audit-item">
+          <div class="audit-icon ai-perm"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+          <div class="audit-body">
+            <div class="audit-action">Permission Updated</div>
+            <div class="audit-detail">Front Desk — "Manage Bookings" toggled ON by Super Admin</div>
+          </div>
+          <div class="audit-time">Today, 08:47</div>
+        </div>
+        <div class="audit-item">
+          <div class="audit-icon ai-edit"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+          <div class="audit-body">
+            <div class="audit-action">Staff Profile Edited</div>
+            <div class="audit-detail">Nadia Fitriani's access level updated to High by Super Admin</div>
+          </div>
+          <div class="audit-time">Yesterday, 16:30</div>
+        </div>
+        <div class="audit-item">
+          <div class="audit-icon ai-delete"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg></div>
+          <div class="audit-body">
+            <div class="audit-action">Staff Account Removed</div>
+            <div class="audit-detail">Hendra Saputra (Front Desk) removed by Super Admin</div>
+          </div>
+          <div class="audit-time">Yesterday, 11:05</div>
+        </div>
+        <div class="audit-item">
+          <div class="audit-icon ai-perm"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+          <div class="audit-body">
+            <div class="audit-action">Role Changed</div>
+            <div class="audit-detail">Rizky Putranto promoted from Supervisor to General Manager</div>
+          </div>
+          <div class="audit-time">2 days ago</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </main>
-<!-- Floating Action Button -->
-<button class="fixed bottom-10 right-10 w-16 h-16 bg-secondary-container text-on-secondary-container rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all flex items-center justify-center group z-50">
-<span class="material-symbols-outlined text-[32px]">add</span>
-<span class="absolute right-full mr-4 bg-primary text-secondary-fixed px-4 py-2 rounded-lg text-label-md font-label-md uppercase tracking-widest opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity shadow-sm pointer-events-none">Add Staff</span>
-</button>
+
+<!-- ADD STAFF MODAL -->
+<div class="modal-overlay" id="addModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div><div class="modal-title">Add New Staff</div><div class="modal-subtitle">Fill in the staff member's details and assign a role</div></div>
+      <button class="modal-close" onclick="closeModal('addModal')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-section-label">Personal Information</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">First Name</label><input type="text" class="form-input" placeholder="e.g. Budi"></div>
+        <div class="form-group"><label class="form-label">Last Name</label><input type="text" class="form-input" placeholder="e.g. Santoso"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" placeholder="staff@lumina.com"></div>
+        <div class="form-group"><label class="form-label">Phone Number</label><input type="text" class="form-input" placeholder="+62 8xx-xxxx-xxxx"></div>
+      </div>
+      <div class="form-section-label">Role & Access</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Department</label>
+          <select class="form-select"><option>Operations</option><option>Guest Services</option><option>Housekeeping</option><option>Finance & Accounting</option><option>Security</option></select>
+        </div>
+        <div class="form-group"><label class="form-label">Role</label>
+          <select class="form-select"><option>Manager</option><option>Front Desk</option><option>Housekeeping</option><option>Finance</option><option>Security</option></select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Position Title</label><input type="text" class="form-input" placeholder="e.g. Senior Receptionist"></div>
+        <div class="form-group"><label class="form-label">Access Level</label>
+          <select class="form-select"><option>Limited</option><option>Medium</option><option>High</option></select>
+        </div>
+      </div>
+      <div class="form-section-label">Permissions</div>
+      <div class="perm-check-grid">
+        <div class="perm-check"><input type="checkbox" id="p1" checked><label for="p1">View Dashboard</label></div>
+        <div class="perm-check"><input type="checkbox" id="p2"><label for="p2">Manage Staff</label></div>
+        <div class="perm-check"><input type="checkbox" id="p3"><label for="p3">Manage Rooms</label></div>
+        <div class="perm-check"><input type="checkbox" id="p4" checked><label for="p4">Manage Bookings</label></div>
+        <div class="perm-check"><input type="checkbox" id="p5"><label for="p5">View Reports</label></div>
+        <div class="perm-check"><input type="checkbox" id="p6"><label for="p6">Delete Records</label></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModal('addModal')">Cancel</button>
+      <button class="btn-gold" onclick="closeModal('addModal')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Add Staff
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT MODAL -->
+<div class="modal-overlay" id="editModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div><div class="modal-title">Edit Staff — <span id="editName"></span></div><div class="modal-subtitle">Update staff profile and access</div></div>
+      <button class="modal-close" onclick="closeModal('editModal')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-section-label">Personal Information</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Full Name</label><input type="text" class="form-input" id="editNameInput"></div>
+        <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="staff@lumina.com"></div>
+      </div>
+      <div class="form-section-label">Role & Access</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Role</label>
+          <select class="form-select"><option>Manager</option><option>Front Desk</option><option>Housekeeping</option><option>Finance</option><option>Security</option></select>
+        </div>
+        <div class="form-group"><label class="form-label">Access Level</label>
+          <select class="form-select"><option>Limited</option><option>Medium</option><option selected>High</option></select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full"><label class="form-label">Status</label>
+          <select class="form-select"><option>Active</option><option>On Leave</option><option>Inactive</option></select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModal('editModal')">Cancel</button>
+      <button class="btn-gold" onclick="closeModal('editModal')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Save Changes
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- PERMISSIONS MODAL -->
+<div class="modal-overlay" id="permModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div><div class="modal-title">Permissions — <span id="permName"></span></div><div class="modal-subtitle" id="permRoleLabel"></div></div>
+      <button class="modal-close" onclick="closeModal('permModal')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-section-label">Access Controls</div>
+      <div class="perm-check-grid">
+        <div class="perm-check"><input type="checkbox" id="mp1" checked><label for="mp1">View Dashboard</label></div>
+        <div class="perm-check"><input type="checkbox" id="mp2"><label for="mp2">Manage Staff</label></div>
+        <div class="perm-check"><input type="checkbox" id="mp3" checked><label for="mp3">Manage Rooms</label></div>
+        <div class="perm-check"><input type="checkbox" id="mp4" checked><label for="mp4">Manage Bookings</label></div>
+        <div class="perm-check"><input type="checkbox" id="mp5" checked><label for="mp5">View Reports</label></div>
+        <div class="perm-check"><input type="checkbox" id="mp6"><label for="mp6">Edit Permissions</label></div>
+        <div class="perm-check"><input type="checkbox" id="mp7"><label for="mp7">Delete Records</label></div>
+        <div class="perm-check"><input type="checkbox" id="mp8"><label for="mp8">Export Data</label></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModal('permModal')">Cancel</button>
+      <button class="btn-gold" onclick="closeModal('permModal')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Save Permissions
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- DELETE MODAL -->
+<div class="modal-overlay" id="deleteModal">
+  <div class="modal delete-modal">
+    <div class="modal-body" style="padding:32px 28px 8px;text-align:center">
+      <div class="delete-icon-wrap">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
+      </div>
+      <div class="delete-title">Remove Staff Member?</div>
+      <div class="delete-desc">You are about to permanently remove <span class="delete-name" id="deleteName"></span> from the system. This action cannot be undone and will revoke all access immediately.</div>
+    </div>
+    <div class="modal-footer" style="justify-content:center;gap:12px;padding-top:20px">
+      <button class="btn-cancel" onclick="closeModal('deleteModal')">Cancel</button>
+      <button class="btn-danger" onclick="closeModal('deleteModal')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>
+        Yes, Remove Staff
+      </button>
+    </div>
+  </div>
+</div>
+
 <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const statusBadges = document.querySelectorAll('.rounded-full');
-            statusBadges.forEach(badge => {
-                const text = badge.textContent.trim();
-                if (text === 'Active') {
-                    badge.className = 'px-3 py-1 bg-green-50 text-green-700 text-label-sm font-label-sm uppercase rounded-full';
-                } else if (text === 'On Leave') {
-                    badge.className = 'px-3 py-1 bg-yellow-50 text-yellow-700 text-label-sm font-label-sm uppercase rounded-full';
-                } else if (text === 'Off Duty') {
-                    badge.className = 'px-3 py-1 bg-surface-variant text-on-surface-variant text-label-sm font-label-sm uppercase rounded-full';
-                }
-            });
-        });
-    </script>
-</body></html>
+  function setFilter(dept, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('#staffGrid .staff-card').forEach(c=>{
+      c.style.display = (dept==='all' || c.dataset.dept===dept) ? '' : 'none';
+    });
+  }
+
+  function filterStaff() {
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    document.querySelectorAll('#staffGrid .staff-card').forEach(c=>{
+      c.style.display = c.innerText.toLowerCase().includes(q) ? '' : 'none';
+    });
+  }
+
+  function openAddModal() { document.getElementById('addModal').classList.add('open'); }
+  function openEditModal(name) {
+    document.getElementById('editName').textContent = name;
+    document.getElementById('editNameInput').value = name;
+    document.getElementById('editModal').classList.add('open');
+  }
+  function openPermModal(name, role) {
+    document.getElementById('permName').textContent = name;
+    document.getElementById('permRoleLabel').textContent = 'Role: ' + role;
+    document.getElementById('permModal').classList.add('open');
+  }
+  function openDeleteModal(name) {
+    document.getElementById('deleteName').textContent = name;
+    document.getElementById('deleteModal').classList.add('open');
+  }
+  function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+  // Close on backdrop click
+  document.querySelectorAll('.modal-overlay').forEach(overlay=>{
+    overlay.addEventListener('click', function(e){ if(e.target===this) this.classList.remove('open'); });
+  });
+
+  // Permission toggles
+  function togglePerm(el) {
+    el.classList.toggle('on');
+    el.classList.toggle('off');
+  }
+</script>
+</body>
+</html>
