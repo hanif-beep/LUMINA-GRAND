@@ -1,554 +1,648 @@
 <!DOCTYPE html>
 <html class="scroll-smooth" lang="en">
-
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Our Rooms | LUMINA GRAND</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet" />
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#000613", "secondary": "#735c00", "secondary-fixed": "#ffe088",
-                        "on-secondary-fixed": "#241a00", "surface": "#f9f9f9", "background": "#f9f9f9",
-                        "on-surface": "#1a1c1c", "outline-variant": "#c4c6cf", "surface-container-low": "#f3f3f4",
-                        "surface-container-high": "#e8e8e8", "on-surface-variant": "#43474e"
-                    },
-                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "100px" },
-                    spacing: {
-                        "container-max": "1280px", "stack-sm": "32px", "stack-md": "64px", "stack-lg": "120px",
-                        "margin-mobile": "24px", "margin-desktop": "80px"
-                    },
-                    fontFamily: { "body-md": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"] }
-                }
-            }
-        }
-    </script>
-    <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24
-        }
-
-        .font-serif {
-            font-family: 'Playfair Display', serif
-        }
-
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px)
-        }
-
-        .luxury-shadow {
-            box-shadow: 0 20px 50px -12px rgba(0, 0, 0, .15)
-        }
-
-        .card-enter {
-            animation: cardEnter .5s ease forwards
-        }
-
-        @keyframes cardEnter {
-            from {
-                opacity: 0;
-                transform: translateY(20px)
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0)
-            }
-        }
-
-        .no-scrollbar::-webkit-scrollbar {
-            display: none
-        }
-
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none
-        }
-
-        /* Modal backdrop */
-        #bookingModal.hidden {
-            display: none
-        }
-
-        #bookingModal {
-            display: flex
-        }
-    </style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Our Rooms | LUMINA GRAND</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode:"class",
+    theme:{
+      extend:{
+        colors:{
+          "primary":"#000613","secondary":"#735c00","secondary-fixed":"#ffe088",
+          "on-secondary-fixed":"#241a00","surface":"#f9f9f9","background":"#f9f9f9",
+          "on-surface":"#1a1c1c","outline-variant":"#c4c6cf","surface-container-low":"#f3f3f4",
+          "surface-container-high":"#e8e8e8","on-surface-variant":"#43474e"
+        },
+        borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"100px"},
+        spacing:{
+          "container-max":"1280px","stack-sm":"32px","stack-md":"64px","stack-lg":"120px",
+          "margin-mobile":"24px","margin-desktop":"80px"
+        },
+        fontFamily:{"body-md":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"]}
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 200,'GRAD' 0,'opsz' 24}
+  .font-serif{font-family:'Playfair Display',serif}
+  .glass-panel{background:rgba(255,255,255,0.75);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+  .luxury-shadow{box-shadow:0 20px 50px -12px rgba(0,0,0,.15)}
+  .card-enter{animation:cardEnter .5s ease forwards}
+  @keyframes cardEnter{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  .no-scrollbar::-webkit-scrollbar{display:none}
+  .no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
+  /* Modal backdrop */
+  #bookingModal.hidden{display:none}
+  #bookingModal{display:flex}
+</style>
 </head>
 
 <body class="bg-background text-on-surface font-body-md overflow-x-hidden">
 
-    <!-- ── TOP NAV ─────────────────────────────────────────────── -->
-    <nav
-        class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl border-b border-primary/5 px-6 md:px-20 py-4 flex justify-between items-center">
-        <div class="flex items-center gap-6">
-            <a href="#" onclick="window.location.reload(); return false;" class="font-serif text-xl tracking-[0.2em] text-primary font-semibold">LUMINA GRAND</a>
-        </div>
-        <div class="flex items-center gap-4">
-            <span class="hidden md:block text-xs text-on-surface-variant uppercase tracking-widest">
-                Welcome, <span id="nav-username" class="text-secondary font-semibold">{{ user.username }}</span>
-            </span>
-            <a href="/logout"
-                class="flex items-center gap-1 text-xs text-on-surface-variant hover:text-secondary transition-colors uppercase tracking-widest">
-                <span class="material-symbols-outlined text-[18px]">logout</span>
-                <span class="hidden md:inline">Logout</span>
-            </a>
-        </div>
-    </nav>
+<!-- ── TOP NAV ─────────────────────────────────────────────── -->
+<nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl border-b border-primary/5 px-6 md:px-20 py-4 flex justify-between items-center">
+  <div class="flex items-center gap-6">
+    <a href="/" class="font-serif text-xl tracking-[0.2em] text-primary font-semibold">LUMINA GRAND</a>
+  </div>
+  <div class="flex items-center gap-4">
+    <span class="hidden md:block text-xs text-on-surface-variant uppercase tracking-widest">
+      Welcome, <span id="nav-username" class="text-secondary font-semibold">{{ user.username }}</span>
+    </span>
+    <a href="/logout" class="flex items-center gap-1 text-xs text-on-surface-variant hover:text-secondary transition-colors uppercase tracking-widest">
+      <span class="material-symbols-outlined text-[18px]">logout</span>
+      <span class="hidden md:inline">Logout</span>
+    </a>
+  </div>
+</nav>
 
-    <!-- ── HERO ────────────────────────────────────────────────── -->
-    <section class="relative h-[65vh] w-full overflow-hidden flex items-end justify-center">
-        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7nIUXiuMtHwYUdKrrFBWQepvuxzHDFIIcwNQ-AAsHoi0X7c9MMWtzGFLKwa2pq7GEb1hQ6jXgS7Rbr56vwRyM8bqf8tdqDVMR1s5vXf-4R1QD2U1d2Tjp0BTzZCSi-9lclqGh8c44JUr2QRUSrC9y3GK9NwjhnNpGN4P_-ZMZqwvOhf6cNwXE4rYYaAn21mRfh_mmef1Ereh6vXV16u2PJPHHhumzM7zgUavJ90Nhx0b7QpeO0Sv4-9kIEh0SQLFbxuJD1WmjM10"
-            alt="Lumina Grand Suite" class="absolute inset-0 w-full h-full object-cover scale-105" id="hero-img" />
-        <div class="absolute inset-0 bg-gradient-to-b from-primary/50 via-primary/20 to-primary/80"></div>
-        <div class="relative z-10 text-center pb-24 px-6">
-            <p class="text-secondary-fixed text-[11px] font-bold tracking-[0.6em] uppercase mb-4">The Collection</p>
-            <h1 class="font-serif text-5xl md:text-7xl text-white leading-tight mb-4">Our Rooms &amp; Suites</h1>
-            <p class="text-white/70 text-base md:text-lg max-w-xl mx-auto font-light">Each space is a private world —
-                crafted for the discerning traveller.</p>
-        </div>
-    </section>
+<!-- ── HERO ────────────────────────────────────────────────── -->
+<section class="relative h-[65vh] w-full overflow-hidden flex items-end justify-center">
+  <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7nIUXiuMtHwYUdKrrFBWQepvuxzHDFIIcwNQ-AAsHoi0X7c9MMWtzGFLKwa2pq7GEb1hQ6jXgS7Rbr56vwRyM8bqf8tdqDVMR1s5vXf-4R1QD2U1d2Tjp0BTzZCSi-9lclqGh8c44JUr2QRUSrC9y3GK9NwjhnNpGN4P_-ZMZqwvOhf6cNwXE4rYYaAn21mRfh_mmef1Ereh6vXV16u2PJPHHhumzM7zgUavJ90Nhx0b7QpeO0Sv4-9kIEh0SQLFbxuJD1WmjM10"
+       alt="Lumina Grand Suite" class="absolute inset-0 w-full h-full object-cover scale-105" id="hero-img"/>
+  <div class="absolute inset-0 bg-gradient-to-b from-primary/50 via-primary/20 to-primary/80"></div>
+  <div class="relative z-10 text-center pb-24 px-6">
+    <p class="text-secondary-fixed text-[11px] font-bold tracking-[0.6em] uppercase mb-4">The Collection</p>
+    <h1 class="font-serif text-5xl md:text-7xl text-white leading-tight mb-4">Our Rooms &amp; Suites</h1>
+    <p class="text-white/70 text-base md:text-lg max-w-xl mx-auto font-light">Each space is a private world — crafted for the discerning traveller.</p>
+  </div>
+</section>
 
-    <!-- ── FILTER + SEARCH BAR ────────────────────────────────── -->
-    <section class="sticky top-[72px] z-40 bg-white/90 backdrop-blur-xl border-b border-primary/5 px-6 md:px-20 py-4">
-        <div class="max-w-[1280px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            <!-- Search -->
-            <div class="relative group flex-1 max-w-xs">
-                <span
-                    class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-primary/30 group-focus-within:text-primary transition-colors text-[20px]">search</span>
-                <input id="search-input" type="text" placeholder="Search rooms..." value="{{ search_query }}"
-                    class="pl-7 pr-4 py-2.5 bg-transparent border-b border-primary/10 focus:border-primary focus:ring-0 w-full placeholder:text-primary/30 text-primary text-sm outline-none transition-all" />
-            </div>
-            <!-- Category Filters -->
-            <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
-                <button data-filter="all"
-                    class="filter-btn px-5 py-2 rounded-full text-[11px] font-bold tracking-widest uppercase transition-all
+<!-- ── FILTER + SEARCH BAR ────────────────────────────────── -->
+<section class="sticky top-[72px] z-40 bg-white/90 backdrop-blur-xl border-b border-primary/5 px-6 md:px-20 py-4">
+  <div class="max-w-[1280px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+    <!-- Search -->
+    <div class="relative group flex-1 max-w-xs">
+      <span class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-primary/30 group-focus-within:text-primary transition-colors text-[20px]">search</span>
+      <input id="search-input" type="text" placeholder="Search rooms..."
+             value="{{ search_query }}"
+             class="pl-7 pr-4 py-2.5 bg-transparent border-b border-primary/10 focus:border-primary focus:ring-0 w-full placeholder:text-primary/30 text-primary text-sm outline-none transition-all"/>
+    </div>
+    <!-- Category Filters -->
+    <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+      <button data-filter="all"
+              class="filter-btn px-5 py-2 rounded-full text-[11px] font-bold tracking-widest uppercase transition-all
                      {% if not active_category %}bg-primary text-white shadow-lg{% else %}bg-white border border-primary/10 text-primary/60 hover:text-primary hover:border-primary{% endif %}">
-                    All
-                </button>
-                {% for cat in ['Superior','Deluxe','Suite'] %}
-                <button data-filter="{{ cat }}"
-                    class="filter-btn px-5 py-2 rounded-full text-[11px] font-bold tracking-widest uppercase transition-all
+        All
+      </button>
+      {% for cat in ['Superior','Deluxe','Suite'] %}
+      <button data-filter="{{ cat }}"
+              class="filter-btn px-5 py-2 rounded-full text-[11px] font-bold tracking-widest uppercase transition-all
                      {% if active_category == cat %}bg-primary text-white shadow-lg{% else %}bg-white border border-primary/10 text-primary/60 hover:text-primary hover:border-primary{% endif %}">
-                    {{ cat }}
-                </button>
-                {% endfor %}
-            </div>
+        {{ cat }}
+      </button>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ── ROOMS GRID ──────────────────────────────────────────── -->
+<main class="py-16 px-6 md:px-20 max-w-[1280px] mx-auto">
+  <!-- Result count -->
+  <p class="text-xs text-on-surface-variant uppercase tracking-widest mb-10" id="result-count">
+    Showing <span id="count-number">{{ rooms|length }}</span> room{{ 's' if rooms|length != 1 }}
+  </p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="rooms-grid">
+    {% if rooms %}
+      {% for room in rooms %}
+      <div class="room-card group relative aspect-[4/5] overflow-hidden rounded-2xl luxury-shadow cursor-pointer card-enter"
+           data-id="{{ room.id }}"
+           data-category="{{ room.category }}"
+           data-name="{{ room.name | lower }}"
+           data-index="{{ loop.index0 }}">
+
+        <img src="{{ room.image or 'https://via.placeholder.com/600x750?text=No+Image' }}"
+             alt="{{ room.name }}"
+             class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"/>
+
+        <!-- Badge: status + sisa kamar -->
+        <div class="absolute top-6 left-6 z-10 flex flex-col gap-1.5">
+          {% set remaining = room_remaining.get(room.id, 0) %}
+          {% if remaining > 0 %}
+          <span class="bg-secondary-fixed/90 text-on-secondary-fixed text-[10px] font-bold px-3 py-1.5 rounded tracking-[0.2em] uppercase">Available</span>
+          {% if remaining <= 2 %}
+          <span class="bg-red-500/90 text-white text-[10px] font-bold px-3 py-1.5 rounded tracking-[0.2em] uppercase">Only {{ remaining }} left!</span>
+          {% else %}
+          <span class="bg-black/50 text-white text-[10px] font-bold px-3 py-1.5 rounded tracking-[0.2em] uppercase">{{ remaining }} rooms left</span>
+          {% endif %}
+          {% else %}
+          <span class="bg-primary/80 text-white text-[10px] font-bold px-3 py-1.5 rounded tracking-[0.2em] uppercase">Fully Booked</span>
+          {% endif %}
         </div>
-    </section>
 
-    <!-- ── ROOMS GRID ──────────────────────────────────────────── -->
-    <main class="py-16 px-6 md:px-20 max-w-[1280px] mx-auto">
-        <!-- Result count -->
-        <p class="text-xs text-on-surface-variant uppercase tracking-widest mb-10" id="result-count">
-            Showing <span id="count-number">{{ rooms|length }}</span> room{{ 's' if rooms|length != 1 }}
-        </p>
+        <!-- Price badge -->
+        <div class="absolute top-6 right-6 z-10">
+          <div class="glass-panel text-primary px-3 py-2 rounded-lg text-center min-w-[70px]" title="Rp {{ '{:,.0f}'.format(room.price) }} / malam">
+            <p class="text-[10px] uppercase tracking-tighter opacity-60">From</p>
+            <p class="font-bold text-base leading-none">
+                        {% if room.price >= 1000000 %}
+                          Rp {{ "%.1f"|format(room.price / 1000000) }}jt
+                        {% else %}
+                          Rp {{ "{:,.0f}".format(room.price) }}
+                        {% endif %}
+                      </p>
+          </div>
+        </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="rooms-grid">
-            {% if rooms %}
-            {% for room in rooms %}
-            {% set delay = loop.index0 * 80 %}
-            <div class="room-card group relative aspect-[4/5] overflow-hidden rounded-2xl luxury-shadow cursor-pointer card-enter"
-                data-id="{{ room.id }}" data-category="{{ room.category }}" data-name="{{ room.name | lower }}"
-                style="animation-delay: {{ delay }}ms">
+        <!-- Slide-up Info Panel -->
+        <div class="absolute inset-x-4 bottom-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 z-10">
+          <div class="glass-panel p-6 rounded-xl border border-white/40 shadow-2xl">
+            <h3 class="font-serif text-2xl text-primary mb-2">{{ room.name }}</h3>
+            <div class="flex items-center gap-4 text-[10px] text-primary/60 tracking-widest uppercase mb-4">
+              <span class="flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm">group</span> {{ room.guests }} Guests
+              </span>
+              <span class="flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm">bed</span> {{ room.bed_type }}
+              </span>
+            </div>
+            <p class="text-[12px] text-primary/60 mb-5 leading-relaxed line-clamp-2">{{ room.description }}</p>
+            <div class="flex gap-3">
+              <a href="/rooms/detail/{{ room.id }}" class="btn-detail flex-1 py-3 text-[10px] font-bold tracking-[0.2em] uppercase border border-primary text-primary hover:bg-primary hover:text-white transition-all text-center">
+                Details
+              </a>
+              {% set remaining = room_remaining.get(room.id, 0) %}
+              {% if remaining > 0 %}
+              <button class="btn-reserve flex-1 py-3 text-[10px] font-bold tracking-[0.2em] uppercase bg-primary text-white hover:bg-secondary transition-all"
+                      data-id="{{ room.id }}" data-name="{{ room.name }}" data-price="{{ room.price }}">
+                Reserve
+              </button>
+              {% else %}
+              <button class="flex-1 py-3 text-[10px] font-bold tracking-[0.2em] uppercase bg-primary/30 text-white cursor-not-allowed" disabled>
+                Fully Booked
+              </button>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <!-- Empty State -->
+      <div class="col-span-3 text-center py-24" id="empty-state">
+        <span class="material-symbols-outlined text-6xl text-outline-variant mb-6 block">hotel</span>
+        <h3 class="font-serif text-3xl text-primary mb-3">No Rooms Found</h3>
+        <p class="text-on-surface-variant text-sm">Try adjusting your filters or search query.</p>
+      </div>
+    {% endif %}
+  </div>
+</main>
 
-                <img src="{{ room.image or 'https://via.placeholder.com/600x750?text=No+Image' }}" alt="{{ room.name }}"
-                    class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
+<!-- ── BOOKING MODAL ───────────────────────────────────────── -->
+<div id="bookingModal" class="hidden fixed inset-0 z-50 items-center justify-center p-6">
+  <!-- Backdrop -->
+  <div id="modal-backdrop" class="absolute inset-0 bg-primary/60 backdrop-blur-sm"></div>
+  <!-- Panel -->
+  <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-md p-8 z-10 animate-in fade-in zoom-in duration-300">
+    <button id="modal-close" class="absolute top-5 right-5 text-on-surface-variant hover:text-primary transition-colors">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+    <h2 class="font-serif text-3xl text-primary mb-1">Reserve Your Suite</h2>
+    <p id="modal-room-name" class="text-secondary text-xs font-bold uppercase tracking-widest mb-6"></p>
 
-                <!-- Badge: status -->
-                <div class="absolute top-6 left-6 z-10">
-                    {% if room.status == 'available' %}
-                    <span
-                        class="bg-secondary-fixed/90 text-on-secondary-fixed text-[10px] font-bold px-3 py-1.5 rounded tracking-[0.2em] uppercase">Available</span>
+    <form id="booking-form" class="space-y-5">
+      <input type="hidden" id="modal-room-id"/>
+      <div>
+        <label class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant block mb-1">Check-In</label>
+        <input type="date" id="booking-checkin" required
+               class="w-full border-b border-outline-variant py-3 bg-transparent focus:ring-0 focus:border-secondary text-primary text-sm outline-none"/>
+      </div>
+      <div>
+        <label class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant block mb-1">Check-Out</label>
+        <input type="date" id="booking-checkout" required
+               class="w-full border-b border-outline-variant py-3 bg-transparent focus:ring-0 focus:border-secondary text-primary text-sm outline-none"/>
+      </div>
+      <!-- Summary -->
+      <div id="booking-summary" class="hidden bg-surface-container-low rounded-xl p-4">
+        <div class="flex justify-between text-xs uppercase tracking-widest text-on-surface-variant mb-2">
+          <span>Nights</span><span id="summary-nights" class="font-bold text-primary">—</span>
+        </div>
+        <div class="flex justify-between text-xs uppercase tracking-widest text-on-surface-variant">
+          <span>Total</span><span id="summary-total" class="font-bold text-secondary text-base">—</span>
+        </div>
+      </div>
+      <p id="booking-error" class="text-red-500 text-xs hidden"></p>
+      <button type="submit" id="booking-submit"
+              class="w-full py-4 bg-secondary text-on-secondary-fixed font-bold text-[11px] uppercase tracking-[0.2em] hover:bg-[#8a7000] active:scale-[0.98] transition-all duration-200">
+        Confirm Reservation
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- ── TOAST CONTAINER ────────────────────────────────────── -->
+<div id="toast-container" class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-3 items-center pointer-events-none"></div>
+
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
+
+    <!-- ── MY BOOKINGS ────────────────────────────────────────── -->
+    <section class="py-16 px-6 md:px-20 max-w-[1280px] mx-auto border-t border-primary/5">
+
+        <div class="flex items-center justify-between mb-10">
+            <div>
+                <p class="text-[11px] font-bold tracking-[0.5em] uppercase text-secondary mb-2">Your History</p>
+                <h2 class="font-serif text-4xl text-primary">My Bookings</h2>
+            </div>
+            <span class="bg-primary text-secondary-fixed text-xs font-bold px-4 py-2 rounded-full tracking-widest uppercase">
+                {{ my_bookings|length }} reservation{{ 's' if my_bookings|length != 1 }}
+            </span>
+        </div>
+
+        {% if my_bookings %}
+
+        <!-- Desktop Table -->
+        <div class="hidden md:block overflow-hidden rounded-2xl border border-primary/5 luxury-shadow">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="bg-primary text-white">
+                        <th class="text-left px-6 py-4 font-label-md text-[11px] uppercase tracking-widest text-white/60">#</th>
+                        <th class="text-left px-6 py-4 font-label-md text-[11px] uppercase tracking-widest text-white/60">Room</th>
+                        <th class="text-left px-6 py-4 font-label-md text-[11px] uppercase tracking-widest text-white/60">Check-In</th>
+                        <th class="text-left px-6 py-4 font-label-md text-[11px] uppercase tracking-widest text-white/60">Check-Out</th>
+                        <th class="text-left px-6 py-4 font-label-md text-[11px] uppercase tracking-widest text-white/60">Total</th>
+                        <th class="text-left px-6 py-4 font-label-md text-[11px] uppercase tracking-widest text-white/60">Status</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-primary/5 bg-white">
+                    {% for b in my_bookings %}
+                    <tr class="hover:bg-surface-container-low transition-colors">
+                        <td class="px-6 py-5 text-on-surface-variant font-mono text-xs">#{{ b.id }}</td>
+                        <td class="px-6 py-5">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center flex-shrink-0">
+                                    <span class="material-symbols-outlined text-secondary text-[16px]">bed</span>
+                                </div>
+                                <span class="font-semibold text-primary text-sm">{{ b.room_name }}</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-5 text-on-surface-variant text-sm">{{ b.check_in }}</td>
+                        <td class="px-6 py-5 text-on-surface-variant text-sm">{{ b.check_out }}</td>
+                        <td class="px-6 py-5">
+                            <span class="font-bold text-secondary">Rp {{ "{:,.0f}".format(b.total_payment) }}</span>
+                        </td>
+                        <td class="px-6 py-5">
+                            {% if b.status == "Confirmed" %}
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-green-50 text-green-700 border border-green-200">
+                                <span class="w-1.5 h-1.5 rounded-full bg-green-500 inline-block"></span> Confirmed
+                            </span>
+                            {% elif b.status == "Pending" %}
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-yellow-50 text-yellow-700 border border-yellow-200">
+                                <span class="w-1.5 h-1.5 rounded-full bg-yellow-400 inline-block"></span> Pending
+                            </span>
+                            {% elif b.status == "Cancelled" %}
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-50 text-red-700 border border-red-200">
+                                <span class="w-1.5 h-1.5 rounded-full bg-red-500 inline-block"></span> Cancelled
+                            </span>
+                            {% else %}
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-surface-container text-on-surface-variant border border-outline-variant">
+                                {{ b.status }}
+                            </span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Mobile Cards -->
+        <div class="md:hidden space-y-4">
+            {% for b in my_bookings %}
+            <div class="bg-white rounded-2xl border border-primary/5 luxury-shadow p-5">
+                <div class="flex items-start justify-between mb-4">
+                    <div>
+                        <p class="text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Booking #{{ b.id }}</p>
+                        <p class="font-serif text-xl text-primary">{{ b.room_name }}</p>
+                    </div>
+                    {% if b.status == "Confirmed" %}
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-green-50 text-green-700 border border-green-200">
+                        <span class="w-1.5 h-1.5 rounded-full bg-green-500 inline-block"></span> Confirmed
+                    </span>
+                    {% elif b.status == "Pending" %}
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-yellow-50 text-yellow-700 border border-yellow-200">
+                        <span class="w-1.5 h-1.5 rounded-full bg-yellow-400 inline-block"></span> Pending
+                    </span>
                     {% else %}
-                    <span
-                        class="bg-primary/80 text-white text-[10px] font-bold px-3 py-1.5 rounded tracking-[0.2em] uppercase">Booked</span>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-surface-container text-on-surface-variant border border-outline-variant">
+                        {{ b.status }}
+                    </span>
                     {% endif %}
                 </div>
-
-                <!-- Price badge -->
-                <div class="absolute top-6 right-6 z-10">
-                    <div class="glass-panel text-primary px-3 py-2 rounded-lg text-center min-w-[70px]">
-                        <p class="text-[10px] uppercase tracking-tighter opacity-60">From</p>
-                        <p class="font-bold text-lg leading-none">${{ room.price }}</p>
+                <div class="grid grid-cols-3 gap-3 pt-4 border-t border-primary/5">
+                    <div>
+                        <p class="text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Check-In</p>
+                        <p class="text-sm font-medium text-primary">{{ b.check_in }}</p>
                     </div>
-                </div>
-
-                <!-- Slide-up Info Panel -->
-                <div
-                    class="absolute inset-x-4 bottom-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 z-10">
-                    <div class="glass-panel p-6 rounded-xl border border-white/40 shadow-2xl">
-                        <h3 class="font-serif text-2xl text-primary mb-2">{{ room.name }}</h3>
-                        <div class="flex items-center gap-4 text-[10px] text-primary/60 tracking-widest uppercase mb-4">
-                            <span class="flex items-center gap-1">
-                                <span class="material-symbols-outlined text-sm">group</span> {{ room.guests }} Guests
-                            </span>
-                            <span class="flex items-center gap-1">
-                                <span class="material-symbols-outlined text-sm">bed</span> {{ room.bed_type }}
-                            </span>
-                        </div>
-                        <p class="text-[12px] text-primary/60 mb-5 leading-relaxed line-clamp-2">{{ room.description }}
-                        </p>
-                        <div class="flex gap-3">
-                            <button
-                                class="btn-detail flex-1 py-3 text-[10px] font-bold tracking-[0.2em] uppercase border border-primary text-primary hover:bg-primary hover:text-white transition-all"
-                                data-id="{{ room.id }}">
-                                Details
-                            </button>
-                            {% if room.status == 'available' %}
-                            <button
-                                class="btn-reserve flex-1 py-3 text-[10px] font-bold tracking-[0.2em] uppercase bg-primary text-white hover:bg-secondary transition-all"
-                                data-id="{{ room.id }}" data-name="{{ room.name }}" data-price="{{ room.price }}">
-                                Reserve
-                            </button>
-                            {% else %}
-                            <button
-                                class="flex-1 py-3 text-[10px] font-bold tracking-[0.2em] uppercase bg-primary/30 text-white cursor-not-allowed"
-                                disabled>
-                                Unavailable
-                            </button>
-                            {% endif %}
-                        </div>
+                    <div>
+                        <p class="text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Check-Out</p>
+                        <p class="text-sm font-medium text-primary">{{ b.check_out }}</p>
+                    </div>
+                    <div>
+                        <p class="text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Total</p>
+                        <p class="text-sm font-bold text-secondary">Rp {{ "{:,.0f}".format(b.total_payment) }}</p>
                     </div>
                 </div>
             </div>
             {% endfor %}
-            {% else %}
-            <!-- Empty State -->
-            <div class="col-span-3 text-center py-24" id="empty-state">
-                <span class="material-symbols-outlined text-6xl text-outline-variant mb-6 block">hotel</span>
-                <h3 class="font-serif text-3xl text-primary mb-3">No Rooms Found</h3>
-                <p class="text-on-surface-variant text-sm">Try adjusting your filters or search query.</p>
-            </div>
-            {% endif %}
         </div>
-    </main>
 
-    <!-- ── BOOKING MODAL ───────────────────────────────────────── -->
-    <div id="bookingModal" class="hidden fixed inset-0 z-50 items-center justify-center p-6">
-        <!-- Backdrop -->
-        <div id="modal-backdrop" class="absolute inset-0 bg-primary/60 backdrop-blur-sm"></div>
-        <!-- Panel -->
-        <div
-            class="relative bg-white rounded-2xl shadow-2xl w-full max-w-md p-8 z-10 animate-in fade-in zoom-in duration-300">
-            <button id="modal-close"
-                class="absolute top-5 right-5 text-on-surface-variant hover:text-primary transition-colors">
-                <span class="material-symbols-outlined">close</span>
-            </button>
-            <h2 class="font-serif text-3xl text-primary mb-1">Reserve Your Suite</h2>
-            <p id="modal-room-name" class="text-secondary text-xs font-bold uppercase tracking-widest mb-6"></p>
-
-            <form id="booking-form" class="space-y-5">
-                <input type="hidden" id="modal-room-id" />
-                <div>
-                    <label
-                        class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant block mb-1">Check-In</label>
-                    <input type="date" id="booking-checkin" required
-                        class="w-full border-b border-outline-variant py-3 bg-transparent focus:ring-0 focus:border-secondary text-primary text-sm outline-none" />
-                </div>
-                <div>
-                    <label
-                        class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant block mb-1">Check-Out</label>
-                    <input type="date" id="booking-checkout" required
-                        class="w-full border-b border-outline-variant py-3 bg-transparent focus:ring-0 focus:border-secondary text-primary text-sm outline-none" />
-                </div>
-                <!-- Summary -->
-                <div id="booking-summary" class="hidden bg-surface-container-low rounded-xl p-4">
-                    <div class="flex justify-between text-xs uppercase tracking-widest text-on-surface-variant mb-2">
-                        <span>Nights</span><span id="summary-nights" class="font-bold text-primary">—</span>
-                    </div>
-                    <div class="flex justify-between text-xs uppercase tracking-widest text-on-surface-variant">
-                        <span>Total</span><span id="summary-total" class="font-bold text-secondary text-base">—</span>
-                    </div>
-                </div>
-                <p id="booking-error" class="text-red-500 text-xs hidden"></p>
-                <button type="submit" id="booking-submit"
-                    class="w-full py-4 bg-secondary text-on-secondary-fixed font-bold text-[11px] uppercase tracking-[0.2em] hover:bg-[#8a7000] active:scale-[0.98] transition-all duration-200">
-                    Confirm Reservation
-                </button>
-            </form>
+        {% else %}
+        <!-- Empty state -->
+        <div class="text-center py-20 bg-white rounded-2xl border border-primary/5">
+            <span class="material-symbols-outlined text-6xl text-outline-variant mb-4 block">calendar_clock</span>
+            <h3 class="font-serif text-2xl text-primary mb-2">No Bookings Yet</h3>
+            <p class="text-on-surface-variant text-sm mb-6">You have not made any reservations yet. Browse our rooms and book your stay.</p>
+            <a href="#rooms-grid" class="inline-block px-6 py-3 bg-secondary text-white text-[11px] font-bold uppercase tracking-widest rounded-full hover:bg-[#8a7000] transition-all">
+                Browse Rooms
+            </a>
         </div>
-    </div>
+        {% endif %}
 
-    <!-- ── TOAST CONTAINER ────────────────────────────────────── -->
-    <div id="toast-container"
-        class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-3 items-center pointer-events-none">
-    </div>
+    </section>
 
-    <!-- ── FOOTER ─────────────────────────────────────────────── -->
-    <footer class="bg-primary text-white mt-24 py-16 px-6 md:px-20">
-        <div class="max-w-[1280px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <span class="font-serif text-2xl tracking-widest text-secondary-fixed">LUMINA GRAND</span>
-            <p class="text-white/30 text-[10px] uppercase tracking-[0.4em]">© 2024 Lumina Grand Luxury Resorts. All
-                Rights Reserved.</p>
-        </div>
-    </footer>
+<footer class="bg-primary text-white mt-24 py-16 px-6 md:px-20">
+  <div class="max-w-[1280px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+    <span class="font-serif text-2xl tracking-widest text-secondary-fixed">LUMINA GRAND</span>
+    <p class="text-white/30 text-[10px] uppercase tracking-[0.4em]">© 2024 Lumina Grand Luxury Resorts. All Rights Reserved.</p>
+  </div>
+</footer>
 
 
-    <!-- ═══════════════════════════════════════════════════════════
+<!-- ═══════════════════════════════════════════════════════════
      KAMAR.HTML — JAVASCRIPT LOGIC
 ════════════════════════════════════════════════════════════ -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
+<script>
+document.addEventListener('DOMContentLoaded', () => {
 
-            // ── Hero Ken Burns ────────────────────────────────────────
-            const heroImg = document.getElementById('hero-img');
-            if (heroImg) {
-                heroImg.style.transition = 'transform 12s ease-out';
-                setTimeout(() => { heroImg.style.transform = 'scale(1)'; }, 100);
+  // ── Hero Ken Burns ────────────────────────────────────────
+  const heroImg = document.getElementById('hero-img');
+  if (heroImg) {
+    heroImg.style.transition = 'transform 12s ease-out';
+    setTimeout(() => { heroImg.style.transform = 'scale(1)'; }, 100);
+  }
+
+  // ── Toast Helper ─────────────────────────────────────────
+  function showToast(message, type = 'success') {
+    const toast = document.createElement('div');
+    toast.className = [
+      'pointer-events-auto px-8 py-4 rounded-full shadow-2xl text-sm font-semibold tracking-wider uppercase',
+      'transition-all duration-500 opacity-0 translate-y-4',
+      type === 'success' ? 'bg-[#735c00] text-white' : 'bg-[#ba1a1a] text-white'
+    ].join(' ');
+    toast.textContent = message;
+    document.getElementById('toast-container').appendChild(toast);
+    requestAnimationFrame(() => {
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateY(0)';
+    });
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(16px)';
+      setTimeout(() => toast.remove(), 500);
+    }, 3000);
+  }
+
+  // ── Client-Side Filter & Search ───────────────────────────
+  const cards        = document.querySelectorAll('.room-card');
+  const filterBtns   = document.querySelectorAll('.filter-btn');
+  const searchInput  = document.getElementById('search-input');
+  const countNumber  = document.getElementById('count-number');
+
+  let activeFilter = '{{ active_category | lower }}' || 'all';
+
+  function applyFilters() {
+    const q = searchInput.value.toLowerCase().trim();
+    let visible = 0;
+
+    cards.forEach(card => {
+      const matchFilter = activeFilter === 'all' || card.dataset.category.toLowerCase() === activeFilter;
+      const matchSearch = !q || card.dataset.name.includes(q);
+      const show = matchFilter && matchSearch;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    countNumber.textContent = visible;
+
+    const empty = document.getElementById('empty-state');
+    if (empty) empty.style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  // Filter buttons
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => {
+        b.classList.remove('bg-primary', 'text-white', 'shadow-lg');
+        b.classList.add('bg-white', 'border', 'border-primary/10', 'text-primary/60');
+      });
+      btn.classList.add('bg-primary', 'text-white', 'shadow-lg');
+      btn.classList.remove('bg-white', 'border', 'border-primary/10', 'text-primary/60');
+      activeFilter = btn.dataset.filter === 'all' ? 'all' : btn.dataset.filter.toLowerCase();
+      applyFilters();
+    });
+  });
+
+  // Search input with debounce
+  let searchTimer;
+  searchInput.addEventListener('input', () => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(applyFilters, 250);
+  });
+
+  // ── Booking Modal ─────────────────────────────────────────
+  const modal          = document.getElementById('bookingModal');
+  const modalClose     = document.getElementById('modal-close');
+  const modalBackdrop  = document.getElementById('modal-backdrop');
+  const modalRoomName  = document.getElementById('modal-room-name');
+  const modalRoomId    = document.getElementById('modal-room-id');
+  const bookingForm    = document.getElementById('booking-form');
+  const bookingError   = document.getElementById('booking-error');
+  const bookingSubmit  = document.getElementById('booking-submit');
+  const bookingCheckin = document.getElementById('booking-checkin');
+  const bookingCheckout= document.getElementById('booking-checkout');
+  const bookingSummary = document.getElementById('booking-summary');
+  const summaryNights  = document.getElementById('summary-nights');
+  const summaryTotal   = document.getElementById('summary-total');
+
+  let currentRoomPrice = 0;
+
+  // Set min date to today
+  const today = new Date().toISOString().split('T')[0];
+  bookingCheckin.min  = today;
+  bookingCheckout.min = today;
+
+  function openModal(roomId, roomName, roomPrice) {
+    modalRoomName.textContent = roomName;
+    modalRoomId.value         = roomId;
+    currentRoomPrice          = parseInt(roomPrice);
+    bookingError.classList.add('hidden');
+    bookingSummary.classList.add('hidden');
+    bookingCheckin.value  = '';
+    bookingCheckout.value = '';
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  modalClose.addEventListener('click',    closeModal);
+  modalBackdrop.addEventListener('click', closeModal);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // Auto-calculate nights & total
+  function updateSummary() {
+    const ci = new Date(bookingCheckin.value);
+    const co = new Date(bookingCheckout.value);
+    if (bookingCheckin.value && bookingCheckout.value && co > ci) {
+      const nights = Math.round((co - ci) / (1000 * 60 * 60 * 24));
+      summaryNights.textContent = nights + ' night' + (nights > 1 ? 's' : '');
+      summaryTotal.textContent  = 'Rp ' + (nights * currentRoomPrice).toLocaleString('id-ID');
+      bookingSummary.classList.remove('hidden');
+    } else {
+      bookingSummary.classList.add('hidden');
+    }
+  }
+
+  bookingCheckin.addEventListener('change', () => {
+    bookingCheckout.min = bookingCheckin.value;
+    updateSummary();
+  });
+  bookingCheckout.addEventListener('change', updateSummary);
+
+  // Wire Reserve buttons
+  document.querySelectorAll('.btn-reserve').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      openModal(btn.dataset.id, btn.dataset.name, btn.dataset.price);
+    });
+  });
+
+  // Wire Details buttons (fetch from /rooms/<id> API)
+  document.querySelectorAll('.btn-detail').forEach(btn => {
+    btn.addEventListener('click', async e => {
+      e.stopPropagation();
+      try {
+        const res  = await fetch(`/rooms/${btn.dataset.id}`);
+        const room = await res.json();
+        showToast(`${room.name} — Rp ${Number(room.price).toLocaleString('id-ID')}/malam | ${room.category}`, 'success');
+      } catch {
+        showToast('Could not load room details.', 'error');
+      }
+    });
+  });
+
+  // ── Booking Form Submit ───────────────────────────────────
+  bookingForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    bookingError.classList.add('hidden');
+
+    const roomId   = modalRoomId.value;
+    const checkIn  = bookingCheckin.value;
+    const checkOut = bookingCheckout.value;
+
+    // Client validation
+    if (!checkIn || !checkOut) {
+      bookingError.textContent = 'Please select both check-in and check-out dates.';
+      bookingError.classList.remove('hidden');
+      return;
+    }
+    if (new Date(checkOut) <= new Date(checkIn)) {
+      bookingError.textContent = 'Check-out must be after check-in.';
+      bookingError.classList.remove('hidden');
+      return;
+    }
+
+    // Loading
+    const originalText = bookingSubmit.textContent;
+    bookingSubmit.disabled   = true;
+    bookingSubmit.textContent = 'Processing...';
+    bookingSubmit.style.opacity = '0.7';
+
+    try {
+      const res = await fetch(`/book/${roomId}`, {
+        method : 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body   : new URLSearchParams({ check_in: checkIn, check_out: checkOut }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        closeModal();
+        showToast('Reservation confirmed! Booking #' + data.booking_id, 'success');
+
+        // Update badge sisa kamar & tombol
+        const card = document.querySelector(`.room-card[data-id="${roomId}"]`);
+        if (card) {
+          const remaining = typeof data.remaining !== 'undefined' ? data.remaining : -1;
+          const badgeWrap = card.querySelector('.absolute.top-6.left-6');
+          const badges    = badgeWrap ? badgeWrap.querySelectorAll('span') : [];
+
+          if (remaining <= 0) {
+            // Fully booked — ganti semua badge
+            if (badgeWrap) badgeWrap.innerHTML = '<span class="bg-primary/80 text-white text-[10px] font-bold px-3 py-1.5 rounded tracking-[0.2em] uppercase">Fully Booked</span>';
+            const reserveBtn = card.querySelector('.btn-reserve');
+            if (reserveBtn) {
+              reserveBtn.textContent = 'Fully Booked';
+              reserveBtn.disabled    = true;
+              reserveBtn.className   = 'flex-1 py-3 text-[10px] font-bold tracking-[0.2em] uppercase bg-primary/30 text-white cursor-not-allowed';
             }
-
-            // ── Toast Helper ─────────────────────────────────────────
-            function showToast(message, type = 'success') {
-                const toast = document.createElement('div');
-                toast.className = [
-                    'pointer-events-auto px-8 py-4 rounded-full shadow-2xl text-sm font-semibold tracking-wider uppercase',
-                    'transition-all duration-500 opacity-0 translate-y-4',
-                    type === 'success' ? 'bg-[#735c00] text-white' : 'bg-[#ba1a1a] text-white'
-                ].join(' ');
-                toast.textContent = message;
-                document.getElementById('toast-container').appendChild(toast);
-                requestAnimationFrame(() => {
-                    toast.style.opacity = '1';
-                    toast.style.transform = 'translateY(0)';
-                });
-                setTimeout(() => {
-                    toast.style.opacity = '0';
-                    toast.style.transform = 'translateY(16px)';
-                    setTimeout(() => toast.remove(), 500);
-                }, 3000);
+          } else if (badges.length >= 2) {
+            // Update badge sisa saja
+            if (remaining <= 2) {
+              badges[1].textContent = 'Only ' + remaining + ' left!';
+              badges[1].className   = 'bg-red-500/90 text-white text-[10px] font-bold px-3 py-1.5 rounded tracking-[0.2em] uppercase';
+            } else {
+              badges[1].textContent = remaining + ' rooms left';
             }
+          }
+          // Reload my bookings section setelah sebentar
+          setTimeout(() => window.location.reload(), 1500);
+        }
+      } else {
+        bookingError.textContent = data.error || 'Booking failed. Please try again.';
+        bookingError.classList.remove('hidden');
+        bookingSubmit.disabled  = false;
+        bookingSubmit.textContent = originalText;
+        bookingSubmit.style.opacity = '1';
+      }
+    } catch {
+      bookingError.textContent = 'Network error. Please try again.';
+      bookingError.classList.remove('hidden');
+      bookingSubmit.disabled  = false;
+      bookingSubmit.textContent = originalText;
+      bookingSubmit.style.opacity = '1';
+    }
+  });
 
-            // ── Client-Side Filter & Search ───────────────────────────
-            const cards = document.querySelectorAll('.room-card');
-            const filterBtns = document.querySelectorAll('.filter-btn');
-            const searchInput = document.getElementById('search-input');
-            const countNumber = document.getElementById('count-number');
+  // ── Scroll Reveal ─────────────────────────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
 
-            let activeFilter = '{{ active_category | lower }}' || 'all';
+  cards.forEach((card, i) => {
+    const index = parseInt(card.dataset.index ?? i);
+    const delay = index * 80;
+    card.style.opacity    = '0';
+    card.style.transform  = 'translateY(24px)';
+    card.style.transition = `opacity 0.6s ease ${delay}ms, transform 0.6s ease ${delay}ms`;
+    observer.observe(card);
+  });
 
-            function applyFilters() {
-                const q = searchInput.value.toLowerCase().trim();
-                let visible = 0;
-
-                cards.forEach(card => {
-                    const matchFilter = activeFilter === 'all' || card.dataset.category.toLowerCase() === activeFilter;
-                    const matchSearch = !q || card.dataset.name.includes(q);
-                    const show = matchFilter && matchSearch;
-                    card.style.display = show ? '' : 'none';
-                    if (show) visible++;
-                });
-
-                countNumber.textContent = visible;
-
-                const empty = document.getElementById('empty-state');
-                if (empty) empty.style.display = visible === 0 ? 'block' : 'none';
-            }
-
-            // Filter buttons
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    filterBtns.forEach(b => {
-                        b.classList.remove('bg-primary', 'text-white', 'shadow-lg');
-                        b.classList.add('bg-white', 'border', 'border-primary/10', 'text-primary/60');
-                    });
-                    btn.classList.add('bg-primary', 'text-white', 'shadow-lg');
-                    btn.classList.remove('bg-white', 'border', 'border-primary/10', 'text-primary/60');
-                    activeFilter = btn.dataset.filter === 'all' ? 'all' : btn.dataset.filter.toLowerCase();
-                    applyFilters();
-                });
-            });
-
-            // Search input with debounce
-            let searchTimer;
-            searchInput.addEventListener('input', () => {
-                clearTimeout(searchTimer);
-                searchTimer = setTimeout(applyFilters, 250);
-            });
-
-            // ── Booking Modal ─────────────────────────────────────────
-            const modal = document.getElementById('bookingModal');
-            const modalClose = document.getElementById('modal-close');
-            const modalBackdrop = document.getElementById('modal-backdrop');
-            const modalRoomName = document.getElementById('modal-room-name');
-            const modalRoomId = document.getElementById('modal-room-id');
-            const bookingForm = document.getElementById('booking-form');
-            const bookingError = document.getElementById('booking-error');
-            const bookingSubmit = document.getElementById('booking-submit');
-            const bookingCheckin = document.getElementById('booking-checkin');
-            const bookingCheckout = document.getElementById('booking-checkout');
-            const bookingSummary = document.getElementById('booking-summary');
-            const summaryNights = document.getElementById('summary-nights');
-            const summaryTotal = document.getElementById('summary-total');
-
-            let currentRoomPrice = 0;
-
-            // Set min date to today
-            const today = new Date().toISOString().split('T')[0];
-            bookingCheckin.min = today;
-            bookingCheckout.min = today;
-
-            function openModal(roomId, roomName, roomPrice) {
-                modalRoomName.textContent = roomName;
-                modalRoomId.value = roomId;
-                currentRoomPrice = parseInt(roomPrice);
-                bookingError.classList.add('hidden');
-                bookingSummary.classList.add('hidden');
-                bookingCheckin.value = '';
-                bookingCheckout.value = '';
-                modal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeModal() {
-                modal.classList.add('hidden');
-                document.body.style.overflow = '';
-            }
-
-            modalClose.addEventListener('click', closeModal);
-            modalBackdrop.addEventListener('click', closeModal);
-            document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-            // Auto-calculate nights & total
-            function updateSummary() {
-                const ci = new Date(bookingCheckin.value);
-                const co = new Date(bookingCheckout.value);
-                if (bookingCheckin.value && bookingCheckout.value && co > ci) {
-                    const nights = Math.round((co - ci) / (1000 * 60 * 60 * 24));
-                    summaryNights.textContent = nights + ' night' + (nights > 1 ? 's' : '');
-                    summaryTotal.textContent = '$' + (nights * currentRoomPrice).toLocaleString();
-                    bookingSummary.classList.remove('hidden');
-                } else {
-                    bookingSummary.classList.add('hidden');
-                }
-            }
-
-            bookingCheckin.addEventListener('change', () => {
-                bookingCheckout.min = bookingCheckin.value;
-                updateSummary();
-            });
-            bookingCheckout.addEventListener('change', updateSummary);
-
-            // Wire Reserve buttons
-            document.querySelectorAll('.btn-reserve').forEach(btn => {
-                btn.addEventListener('click', e => {
-                    e.stopPropagation();
-                    openModal(btn.dataset.id, btn.dataset.name, btn.dataset.price);
-                });
-            });
-
-            // Wire Details buttons (fetch from /rooms/<id> API)
-            document.querySelectorAll('.btn-detail').forEach(btn => {
-                btn.addEventListener('click', async e => {
-                    e.stopPropagation();
-                    try {
-                        const res = await fetch(`/rooms/${btn.dataset.id}`);
-                        const room = await res.json();
-                        showToast(`${room.name} — $${room.price}/night | ${room.category}`, 'success');
-                    } catch {
-                        showToast('Could not load room details.', 'error');
-                    }
-                });
-            });
-
-            // ── Booking Form Submit ───────────────────────────────────
-            bookingForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                bookingError.classList.add('hidden');
-
-                const roomId = modalRoomId.value;
-                const checkIn = bookingCheckin.value;
-                const checkOut = bookingCheckout.value;
-
-                // Client validation
-                if (!checkIn || !checkOut) {
-                    bookingError.textContent = 'Please select both check-in and check-out dates.';
-                    bookingError.classList.remove('hidden');
-                    return;
-                }
-                if (new Date(checkOut) <= new Date(checkIn)) {
-                    bookingError.textContent = 'Check-out must be after check-in.';
-                    bookingError.classList.remove('hidden');
-                    return;
-                }
-
-                // Loading
-                const originalText = bookingSubmit.textContent;
-                bookingSubmit.disabled = true;
-                bookingSubmit.textContent = 'Processing...';
-                bookingSubmit.style.opacity = '0.7';
-
-                try {
-                    const res = await fetch(`/book/${roomId}`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                        body: new URLSearchParams({ check_in: checkIn, check_out: checkOut }),
-                    });
-
-                    const data = await res.json();
-
-                    if (res.ok) {
-                        closeModal();
-                        showToast('Reservation confirmed! Booking #' + data.booking_id, 'success');
-                        // Update card badge to "Booked"
-                        const card = document.querySelector(`.room-card[data-id="${roomId}"]`);
-                        if (card) {
-                            const badge = card.querySelector('.absolute.top-6.left-6 span');
-                            if (badge) {
-                                badge.textContent = 'Booked';
-                                badge.className = 'bg-primary/80 text-white text-[10px] font-bold px-3 py-1.5 rounded tracking-[0.2em] uppercase';
-                            }
-                            const reserveBtn = card.querySelector('.btn-reserve');
-                            if (reserveBtn) {
-                                reserveBtn.textContent = 'Unavailable';
-                                reserveBtn.disabled = true;
-                                reserveBtn.className = reserveBtn.className.replace('bg-primary', 'bg-primary/30').replace('cursor-pointer', 'cursor-not-allowed');
-                            }
-                        }
-                    } else {
-                        bookingError.textContent = data.error || 'Booking failed. Please try again.';
-                        bookingError.classList.remove('hidden');
-                        bookingSubmit.disabled = false;
-                        bookingSubmit.textContent = originalText;
-                        bookingSubmit.style.opacity = '1';
-                    }
-                } catch {
-                    bookingError.textContent = 'Network error. Please try again.';
-                    bookingError.classList.remove('hidden');
-                    bookingSubmit.disabled = false;
-                    bookingSubmit.textContent = originalText;
-                    bookingSubmit.style.opacity = '1';
-                }
-            });
-
-            // ── Scroll Reveal ─────────────────────────────────────────
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            cards.forEach(card => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(24px)';
-                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(card);
-            });
-
-        });
-    </script>
+});
+</script>
 </body>
-
 </html>

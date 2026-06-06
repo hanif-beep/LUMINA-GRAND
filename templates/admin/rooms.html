@@ -1,599 +1,1845 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lumina Grand — Rooms</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --navy: #0F172A; --navy-mid: #1E293B; --navy-light: #273549;
-    --gold: #D4AF37; --gold-light: #E8CC6A;
-    --gold-dim: rgba(212,175,55,0.15); --gold-border: rgba(212,175,55,0.3);
-    --white: #FFFFFF; --surface: #F8F7F4; --surface-2: #F0EDE6;
-    --text-primary: #0F172A; --text-secondary: #64748B; --text-muted: #94A3B8;
-    --green: #059669; --yellow: #D97706; --blue: #2563EB; --red: #DC2626;
-    --sidebar-w: 260px; --header-h: 80px; --radius: 16px; --radius-sm: 10px;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'Plus Jakarta Sans',sans-serif; background:var(--surface); color:var(--text-primary); display:flex; min-height:100vh; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lumina Grand — Rooms</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0F172A;
+      --navy-mid: #1E293B;
+      --navy-light: #273549;
+      --gold: #D4AF37;
+      --gold-light: #E8CC6A;
+      --gold-dim: rgba(212, 175, 55, 0.15);
+      --gold-border: rgba(212, 175, 55, 0.3);
+      --white: #FFFFFF;
+      --surface: #F8F7F4;
+      --surface-2: #F0EDE6;
+      --text-primary: #0F172A;
+      --text-secondary: #64748B;
+      --text-muted: #94A3B8;
+      --green: #059669;
+      --yellow: #D97706;
+      --blue: #2563EB;
+      --red: #DC2626;
+      --sidebar-w: 260px;
+      --header-h: 80px;
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
 
-  /* SIDEBAR */
-  .sidebar { width:var(--sidebar-w); background:var(--navy); min-height:100vh; position:fixed; top:0; left:0; display:flex; flex-direction:column; z-index:100; border-right:1px solid rgba(212,175,55,0.12); }
-  .sidebar-logo { padding:32px 24px 28px; border-bottom:1px solid rgba(212,175,55,0.12); }
-  .sidebar-logo .wordmark { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:600; color:var(--white); letter-spacing:0.08em; text-transform:uppercase; }
-  .sidebar-logo .wordmark span { color:var(--gold); }
-  .sidebar-logo .tagline { font-size:10px; color:var(--text-muted); letter-spacing:0.2em; text-transform:uppercase; margin-top:4px; }
-  .sidebar-nav { flex:1; padding:24px 16px; display:flex; flex-direction:column; gap:4px; }
-  .nav-section-label { font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-muted); padding:12px 8px 6px; margin-top:8px; }
-  .nav-item { display:flex; align-items:center; gap:12px; padding:11px 14px; border-radius:var(--radius-sm); cursor:pointer; transition:all 0.2s; color:rgba(255,255,255,0.55); font-size:13.5px; font-weight:500; position:relative; text-decoration:none; }
-  .nav-item:hover { color:rgba(255,255,255,0.9); background:rgba(212,175,55,0.08); }
-  .nav-item.active { color:var(--gold); background:var(--gold-dim); }
-  .nav-item.active::before { content:''; position:absolute; left:0; top:50%; transform:translateY(-50%); width:3px; height:60%; background:var(--gold); border-radius:0 3px 3px 0; }
-  .nav-item svg { flex-shrink:0; width:18px; height:18px; }
-  .sidebar-bottom { padding:16px; border-top:1px solid rgba(212,175,55,0.12); }
-  .admin-profile { display:flex; align-items:center; gap:10px; padding:10px; border-radius:var(--radius-sm); cursor:pointer; transition:background 0.2s; }
-  .admin-profile:hover { background:rgba(255,255,255,0.05); }
-  .avatar-circle { width:36px; height:36px; background:linear-gradient(135deg,var(--gold),#B8960C); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:var(--navy); flex-shrink:0; }
-  .admin-info .name { font-size:13px; font-weight:600; color:var(--white); }
-  .admin-info .role { font-size:11px; color:var(--text-muted); }
-  .logout-btn { display:flex; align-items:center; gap:8px; margin-top:8px; padding:8px 10px; border-radius:var(--radius-sm); cursor:pointer; color:rgba(255,255,255,0.4); font-size:13px; transition:color 0.2s; }
-  .logout-btn:hover { color:#F87171; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  /* MAIN */
-  .main { margin-left:var(--sidebar-w); flex:1; display:flex; flex-direction:column; }
-  .header { height:var(--header-h); background:rgba(248,247,244,0.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--surface-2); display:flex; align-items:center; justify-content:space-between; padding:0 36px; position:sticky; top:0; z-index:50; }
-  .header-left .greeting { font-size:20px; font-weight:700; color:var(--navy); letter-spacing:-0.02em; }
-  .header-left .subtitle { font-size:13px; color:var(--text-secondary); margin-top:2px; }
-  .header-right { display:flex; align-items:center; gap:16px; }
-  .search-bar { display:flex; align-items:center; gap:8px; background:var(--white); border:1px solid var(--surface-2); border-radius:40px; padding:8px 16px; width:220px; transition:border-color 0.2s,box-shadow 0.2s; }
-  .search-bar:focus-within { border-color:var(--gold-border); box-shadow:0 0 0 3px rgba(212,175,55,0.1); }
-  .search-bar input { border:none; outline:none; font-size:13px; background:transparent; color:var(--text-primary); width:100%; font-family:inherit; }
-  .search-bar input::placeholder { color:var(--text-muted); }
-  .icon-btn { width:38px; height:38px; background:var(--white); border:1px solid var(--surface-2); border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--text-secondary); transition:all 0.2s; position:relative; }
-  .icon-btn:hover { border-color:var(--gold-border); color:var(--gold); }
-  .notif-dot { width:8px; height:8px; background:var(--gold); border-radius:50%; position:absolute; top:5px; right:5px; border:2px solid var(--white); }
-  .header-avatar { width:38px; height:38px; background:linear-gradient(135deg,var(--gold),#B8960C); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:var(--navy); cursor:pointer; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--surface);
+      color: var(--text-primary);
+      display: flex;
+      min-height: 100vh;
+    }
 
-  /* CONTENT */
-  .content { padding:32px 36px 48px; display:flex; flex-direction:column; gap:24px; }
-  .section-title { font-size:16px; font-weight:700; color:var(--navy); letter-spacing:-0.01em; margin-bottom:16px; }
-  .section-title span { font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--gold); font-size:18px; }
+    /* SIDEBAR */
+    .sidebar {
+      width: var(--sidebar-w);
+      background: var(--navy);
+      min-height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+      border-right: 1px solid rgba(212, 175, 55, 0.12);
+    }
 
-  /* SUMMARY STATS */
-  .summary-row { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
-  .summary-card { background:var(--white); border:1px solid rgba(15,23,42,0.06); border-radius:var(--radius-sm); padding:16px 20px; display:flex; align-items:center; gap:14px; box-shadow:0 1px 3px rgba(15,23,42,0.05); animation:fadeUp 0.4s ease both; }
-  .summary-card:nth-child(1){animation-delay:0.05s} .summary-card:nth-child(2){animation-delay:0.10s} .summary-card:nth-child(3){animation-delay:0.15s} .summary-card:nth-child(4){animation-delay:0.20s}
-  .summary-icon { width:40px; height:40px; border-radius:10px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
-  .si-total { background:rgba(15,23,42,0.06); color:var(--navy); }
-  .si-avail { background:rgba(5,150,105,0.1); color:#059669; }
-  .si-occup { background:var(--gold-dim); color:#A08020; }
-  .si-maint { background:rgba(220,38,38,0.08); color:#DC2626; }
-  .summary-info .s-val { font-size:22px; font-weight:800; color:var(--navy); letter-spacing:-0.03em; }
-  .summary-info .s-lbl { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-muted); margin-top:2px; }
+    .sidebar-logo {
+      padding: 32px 24px 28px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+    }
 
-  /* TOOLBAR */
-  .toolbar { display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
-  .toolbar-left { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
-  .filter-btn { display:flex; align-items:center; gap:6px; padding:8px 14px; border-radius:8px; cursor:pointer; font-size:13px; font-weight:500; font-family:inherit; border:1px solid var(--surface-2); background:var(--white); color:var(--text-secondary); transition:all 0.2s; }
-  .filter-btn:hover { border-color:var(--gold-border); color:var(--navy); }
-  .filter-btn.active { background:var(--gold-dim); border-color:var(--gold-border); color:var(--gold); font-weight:600; }
-  .filter-btn .dot { width:7px; height:7px; border-radius:50%; }
-  .view-toggle { display:flex; background:var(--white); border:1px solid var(--surface-2); border-radius:8px; overflow:hidden; }
-  .view-btn { padding:8px 12px; cursor:pointer; border:none; background:transparent; color:var(--text-muted); transition:all 0.15s; font-family:inherit; display:flex; align-items:center; }
-  .view-btn.active { background:var(--navy); color:var(--gold); }
-  .btn-gold { font-size:13px; font-weight:600; background:linear-gradient(135deg,var(--gold),#C9A227); color:var(--navy); border:none; padding:9px 20px; border-radius:8px; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:6px; transition:opacity 0.2s; }
-  .btn-gold:hover { opacity:0.85; }
+    .sidebar-logo .wordmark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
-  /* GRID */
-  .rooms-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
-  .room-card { background:var(--white); border:1px solid rgba(15,23,42,0.06); border-radius:var(--radius); overflow:hidden; box-shadow:0 1px 4px rgba(15,23,42,0.06); transition:transform 0.2s,box-shadow 0.2s; animation:fadeUp 0.45s ease both; }
-  .room-card:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(15,23,42,0.1); }
-  .room-card:nth-child(1){animation-delay:0.05s} .room-card:nth-child(2){animation-delay:0.10s} .room-card:nth-child(3){animation-delay:0.15s}
-  .room-card:nth-child(4){animation-delay:0.20s} .room-card:nth-child(5){animation-delay:0.25s} .room-card:nth-child(6){animation-delay:0.30s}
+    .sidebar-logo .wordmark span {
+      color: var(--gold);
+    }
 
-  .room-card-img { height:160px; position:relative; overflow:hidden; }
-  .room-img-1 { background:linear-gradient(135deg,#0F172A 0%,#1E3A5F 50%,#0F172A 100%); }
-  .room-img-2 { background:linear-gradient(135deg,#1a2a1a 0%,#2d4a2d 50%,#1a2a1a 100%); }
-  .room-img-3 { background:linear-gradient(135deg,#0a1628 0%,#1a3a5c 50%,#0f2744 100%); }
-  .room-img-4 { background:linear-gradient(135deg,#1a1a2e 0%,#2d2d4a 50%,#1a1a2e 100%); }
-  .room-img-5 { background:linear-gradient(135deg,#1e1a14 0%,#3a3020 50%,#1e1a14 100%); }
-  .room-img-6 { background:linear-gradient(135deg,#1a1a1a 0%,#2d2d2d 50%,#1a1a1a 100%); }
+    .sidebar-logo .tagline {
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
 
-  .room-card-img::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 40% at 50% 60%,rgba(212,175,55,0.08) 0%,transparent 70%),repeating-linear-gradient(90deg,transparent,transparent 40px,rgba(255,255,255,0.015) 40px,rgba(255,255,255,0.015) 41px); }
-  .room-card-img::after { content:''; position:absolute; bottom:0; left:0; right:0; height:60px; background:linear-gradient(to top,rgba(15,23,42,0.5),transparent); }
-  .room-number-overlay { position:absolute; top:12px; left:12px; z-index:2; font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:600; color:rgba(255,255,255,0.15); letter-spacing:0.05em; line-height:1; pointer-events:none; }
-  .room-floor-badge { position:absolute; bottom:12px; left:12px; z-index:2; display:flex; align-items:center; gap:6px; background:rgba(15,23,42,0.7); backdrop-filter:blur(8px); border-radius:20px; padding:4px 10px; font-size:11px; font-weight:600; color:rgba(255,255,255,0.8); }
-  .room-status-pill { position:absolute; top:12px; right:12px; z-index:2; font-size:10px; font-weight:700; letter-spacing:0.08em; padding:4px 10px; border-radius:20px; text-transform:uppercase; }
-  .pill-available { background:rgba(5,150,105,0.9); color:#fff; }
-  .pill-occupied  { background:rgba(15,23,42,0.85); color:var(--gold); }
-  .pill-reserved  { background:rgba(212,175,55,0.9); color:var(--navy); }
-  .pill-maintenance { background:rgba(220,38,38,0.85); color:#fff; }
+    .sidebar-nav {
+      flex: 1;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
 
-  .room-card-body { padding:18px 20px 20px; }
-  .room-card-top { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:10px; }
-  .room-name { font-size:15px; font-weight:700; color:var(--navy); }
-  .room-subtype { font-size:12px; color:var(--text-muted); margin-top:2px; }
-  .room-type-tag { font-size:11px; font-weight:600; color:var(--gold); background:var(--gold-dim); padding:3px 9px; border-radius:20px; white-space:nowrap; }
-  .room-price { font-size:18px; font-weight:800; color:var(--navy); letter-spacing:-0.02em; }
-  .room-price span { font-size:12px; font-weight:500; color:var(--text-muted); }
-  .room-amenities { display:flex; flex-wrap:wrap; gap:6px; margin:12px 0; }
-  .amenity-tag { display:flex; align-items:center; gap:4px; font-size:11px; color:var(--text-secondary); font-weight:500; background:var(--surface); padding:3px 9px; border-radius:6px; }
-  .room-card-footer { display:flex; gap:8px; margin-top:14px; padding-top:14px; border-top:1px solid var(--surface-2); }
-  .btn-outline { flex:1; padding:8px; border-radius:8px; cursor:pointer; font-size:12px; font-weight:600; font-family:inherit; border:1px solid var(--surface-2); background:transparent; color:var(--text-secondary); transition:all 0.2s; }
-  .btn-outline:hover { border-color:var(--gold-border); color:var(--navy); }
-  .btn-primary-sm { flex:1; padding:8px; border-radius:8px; cursor:pointer; font-size:12px; font-weight:600; font-family:inherit; border:none; background:var(--navy); color:var(--gold); transition:opacity 0.2s; }
-  .btn-primary-sm:hover { opacity:0.85; }
+    .nav-section-label {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 12px 8px 6px;
+      margin-top: 8px;
+    }
 
-  /* TABLE */
-  .table-card { background:var(--white); border:1px solid rgba(15,23,42,0.06); border-radius:var(--radius); overflow:hidden; box-shadow:0 1px 3px rgba(15,23,42,0.06); animation:fadeUp 0.45s 0.1s ease both; }
-  .table-card-header { padding:20px 24px 16px; border-bottom:1px solid var(--surface-2); display:flex; align-items:center; justify-content:space-between; }
-  table { width:100%; border-collapse:collapse; }
-  thead th { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-muted); text-align:left; padding:10px 20px; background:var(--surface); border-bottom:1px solid var(--surface-2); }
-  tbody tr { border-bottom:1px solid var(--surface-2); transition:background 0.15s; }
-  tbody tr:last-child { border-bottom:none; }
-  tbody tr:hover { background:#FAFAF8; }
-  tbody td { padding:13px 20px; font-size:13px; color:var(--text-primary); vertical-align:middle; }
-  .room-id { font-family:'Cormorant Garamond',serif; font-size:16px; font-weight:600; color:var(--navy); }
-  .cell-name { font-weight:600; }
-  .cell-type { color:var(--text-secondary); }
-  .cell-price { font-weight:700; color:var(--navy); }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 14px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s;
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 13.5px;
+      font-weight: 500;
+      position: relative;
+      text-decoration: none;
+    }
 
-  .status-badge { display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:600; padding:4px 10px; border-radius:20px; letter-spacing:0.04em; }
-  .status-dot { width:5px; height:5px; border-radius:50%; }
-  .s-available { background:rgba(5,150,105,0.1); color:#059669; } .s-available .status-dot { background:#059669; }
-  .s-occupied  { background:rgba(15,23,42,0.07); color:var(--navy); } .s-occupied .status-dot { background:var(--navy); }
-  .s-reserved  { background:rgba(212,175,55,0.15); color:#A08020; } .s-reserved .status-dot { background:var(--gold); }
-  .s-maintenance { background:rgba(220,38,38,0.1); color:#DC2626; } .s-maintenance .status-dot { background:#DC2626; }
+    .nav-item:hover {
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(212, 175, 55, 0.08);
+    }
 
-  .action-btns { display:flex; gap:6px; }
-  .btn-icon { width:30px; height:30px; border-radius:6px; cursor:pointer; display:flex; align-items:center; justify-content:center; border:1px solid var(--surface-2); background:transparent; color:var(--text-muted); transition:all 0.2s; }
-  .btn-icon:hover { border-color:var(--gold-border); color:var(--gold); background:var(--gold-dim); }
-  .btn-icon.danger:hover { border-color:rgba(220,38,38,0.3); color:#DC2626; background:rgba(220,38,38,0.06); }
+    .nav-item.active {
+      color: var(--gold);
+      background: var(--gold-dim);
+    }
 
-  /* VIEW SECTIONS */
-  .view-section { display:none; }
-  .view-section.active { display:block; }
+    .nav-item.active::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 60%;
+      background: var(--gold);
+      border-radius: 0 3px 3px 0;
+    }
 
-  /* MODAL */
-  .modal-overlay { display:none; position:fixed; inset:0; background:rgba(15,23,42,0.6); backdrop-filter:blur(4px); z-index:200; align-items:center; justify-content:center; }
-  .modal-overlay.open { display:flex; }
-  .modal { background:var(--white); border-radius:var(--radius); width:520px; max-width:95vw; max-height:90vh; overflow-y:auto; box-shadow:0 24px 60px rgba(15,23,42,0.25); animation:modalIn 0.25s ease; }
-  @keyframes modalIn { from{opacity:0;transform:translateY(20px) scale(0.97)} to{opacity:1;transform:none} }
-  .modal-header { padding:24px 28px 20px; border-bottom:1px solid var(--surface-2); display:flex; align-items:center; justify-content:space-between; }
-  .modal-title { font-size:17px; font-weight:700; color:var(--navy); }
-  .modal-close { width:32px; height:32px; border-radius:8px; border:1px solid var(--surface-2); background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--text-muted); transition:all 0.2s; }
-  .modal-close:hover { background:var(--surface); color:var(--navy); }
-  .modal-body { padding:24px 28px; display:flex; flex-direction:column; gap:18px; }
-  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-  .form-group { display:flex; flex-direction:column; gap:6px; }
-  .form-group.full { grid-column:1/-1; }
-  .form-label { font-size:12px; font-weight:600; color:var(--text-secondary); letter-spacing:0.04em; }
-  .form-input,.form-select { padding:9px 12px; border-radius:8px; border:1px solid var(--surface-2); background:var(--white); font-size:13px; font-family:inherit; color:var(--text-primary); outline:none; transition:border-color 0.2s,box-shadow 0.2s; }
-  .form-input:focus,.form-select:focus { border-color:var(--gold-border); box-shadow:0 0 0 3px rgba(212,175,55,0.1); }
-  .modal-footer { padding:16px 28px 24px; display:flex; gap:10px; justify-content:flex-end; }
-  .btn-cancel { padding:9px 20px; border-radius:8px; cursor:pointer; font-size:13px; font-weight:600; font-family:inherit; border:1px solid var(--surface-2); background:transparent; color:var(--text-secondary); transition:all 0.2s; }
-  .btn-cancel:hover { background:var(--surface); }
+    .nav-item svg {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+    }
 
-  @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+    .sidebar-bottom {
+      padding: 16px;
+      border-top: 1px solid rgba(212, 175, 55, 0.12);
+    }
 
-  /* LOCKED NAV ITEM */
-  .nav-locked { opacity: 0.45; cursor: not-allowed; }
-  .nav-locked:hover { background: rgba(220,38,38,0.06) !important; color: #F87171 !important; opacity: 0.6; }
-  .nav-lock-badge { margin-left: auto; font-size: 12px; }
+    .admin-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
 
-  /* ACCESS DENIED TOAST */
-  .access-toast {
-    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px);
-    background: #1E293B; color: #fff; border: 1px solid rgba(220,38,38,0.4);
-    border-radius: 10px; padding: 12px 20px; display: flex; align-items: center; gap: 10px;
-    font-size: 13px; font-weight: 500; z-index: 9999; box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-    transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s;
-    opacity: 0; pointer-events: none; white-space: nowrap;
-  }
-  .access-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-  .access-toast-icon { width: 28px; height: 28px; background: rgba(220,38,38,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #F87171; flex-shrink: 0; }
-  .access-toast strong { color: #F87171; }
-</style>
+    .admin-profile:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .avatar-circle {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--gold), #B8960C);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+      flex-shrink: 0;
+    }
+
+    .admin-info .name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .admin-info .role {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .logout-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+
+    .logout-btn:hover {
+      color: #F87171;
+    }
+
+    /* MAIN */
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      height: var(--header-h);
+      background: rgba(248, 247, 244, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--surface-2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 36px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .header-left .greeting {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+    }
+
+    .header-left .subtitle {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--white);
+      border: 1px solid var(--surface-2);
+      border-radius: 40px;
+      padding: 8px 16px;
+      width: 220px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .search-bar:focus-within {
+      border-color: var(--gold-border);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+    }
+
+    .search-bar input {
+      border: none;
+      outline: none;
+      font-size: 13px;
+      background: transparent;
+      color: var(--text-primary);
+      width: 100%;
+      font-family: inherit;
+    }
+
+    .search-bar input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .icon-btn {
+      width: 38px;
+      height: 38px;
+      background: var(--white);
+      border: 1px solid var(--surface-2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .icon-btn:hover {
+      border-color: var(--gold-border);
+      color: var(--gold);
+    }
+
+    .notif-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      border: 2px solid var(--white);
+    }
+
+    .header-avatar {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--gold), #B8960C);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+      cursor: pointer;
+    }
+
+    /* CONTENT */
+    .content {
+      padding: 32px 36px 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+    }
+
+    .section-title span {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--gold);
+      font-size: 18px;
+    }
+
+    /* SUMMARY STATS */
+    .summary-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .summary-card {
+      background: var(--white);
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+      animation: fadeUp 0.4s ease both;
+    }
+
+    .summary-card:nth-child(1) {
+      animation-delay: 0.05s
+    }
+
+    .summary-card:nth-child(2) {
+      animation-delay: 0.10s
+    }
+
+    .summary-card:nth-child(3) {
+      animation-delay: 0.15s
+    }
+
+    .summary-card:nth-child(4) {
+      animation-delay: 0.20s
+    }
+
+    .summary-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .si-total {
+      background: rgba(15, 23, 42, 0.06);
+      color: var(--navy);
+    }
+
+    .si-avail {
+      background: rgba(5, 150, 105, 0.1);
+      color: #059669;
+    }
+
+    .si-occup {
+      background: var(--gold-dim);
+      color: #A08020;
+    }
+
+    .si-maint {
+      background: rgba(220, 38, 38, 0.08);
+      color: #DC2626;
+    }
+
+    .summary-info .s-val {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.03em;
+    }
+
+    .summary-info .s-lbl {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* TOOLBAR */
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: inherit;
+      border: 1px solid var(--surface-2);
+      background: var(--white);
+      color: var(--text-secondary);
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--gold-border);
+      color: var(--navy);
+    }
+
+    .filter-btn.active {
+      background: var(--gold-dim);
+      border-color: var(--gold-border);
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .filter-btn .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+    }
+
+    .view-toggle {
+      display: flex;
+      background: var(--white);
+      border: 1px solid var(--surface-2);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .view-btn {
+      padding: 8px 12px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      transition: all 0.15s;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+    }
+
+    .view-btn.active {
+      background: var(--navy);
+      color: var(--gold);
+    }
+
+    .btn-gold {
+      font-size: 13px;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--gold), #C9A227);
+      color: var(--navy);
+      border: none;
+      padding: 9px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity 0.2s;
+    }
+
+    .btn-gold:hover {
+      opacity: 0.85;
+    }
+
+    /* GRID */
+    .rooms-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .room-card {
+      background: var(--white);
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: fadeUp 0.45s ease both;
+    }
+
+    .room-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.1);
+    }
+
+    .room-card:nth-child(1) {
+      animation-delay: 0.05s
+    }
+
+    .room-card:nth-child(2) {
+      animation-delay: 0.10s
+    }
+
+    .room-card:nth-child(3) {
+      animation-delay: 0.15s
+    }
+
+    .room-card:nth-child(4) {
+      animation-delay: 0.20s
+    }
+
+    .room-card:nth-child(5) {
+      animation-delay: 0.25s
+    }
+
+    .room-card:nth-child(6) {
+      animation-delay: 0.30s
+    }
+
+    .room-card-img {
+      height: 160px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .room-img-1 {
+      background: linear-gradient(135deg, #0F172A 0%, #1E3A5F 50%, #0F172A 100%);
+    }
+
+    .room-img-2 {
+      background: linear-gradient(135deg, #1a2a1a 0%, #2d4a2d 50%, #1a2a1a 100%);
+    }
+
+    .room-img-3 {
+      background: linear-gradient(135deg, #0a1628 0%, #1a3a5c 50%, #0f2744 100%);
+    }
+
+    .room-img-4 {
+      background: linear-gradient(135deg, #1a1a2e 0%, #2d2d4a 50%, #1a1a2e 100%);
+    }
+
+    .room-img-5 {
+      background: linear-gradient(135deg, #1e1a14 0%, #3a3020 50%, #1e1a14 100%);
+    }
+
+    .room-img-6 {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+    }
+
+    .room-card-img::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 40% at 50% 60%, rgba(212, 175, 55, 0.08) 0%, transparent 70%), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255, 255, 255, 0.015) 40px, rgba(255, 255, 255, 0.015) 41px);
+    }
+
+    .room-card-img::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: linear-gradient(to top, rgba(15, 23, 42, 0.5), transparent);
+    }
+
+    .room-number-overlay {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 2;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.15);
+      letter-spacing: 0.05em;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .room-floor-badge {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .room-status-pill {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 2;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+
+    .pill-available {
+      background: rgba(5, 150, 105, 0.9);
+      color: #fff;
+    }
+
+    .pill-occupied {
+      background: rgba(15, 23, 42, 0.85);
+      color: var(--gold);
+    }
+
+    .pill-reserved {
+      background: rgba(212, 175, 55, 0.9);
+      color: var(--navy);
+    }
+
+    .pill-maintenance {
+      background: rgba(220, 38, 38, 0.85);
+      color: #fff;
+    }
+
+    .room-card-body {
+      padding: 18px 20px 20px;
+    }
+
+    .room-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .room-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .room-subtype {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .room-type-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gold);
+      background: var(--gold-dim);
+      padding: 3px 9px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .room-price {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+    }
+
+    .room-price span {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .room-amenities {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 12px 0;
+    }
+
+    .amenity-tag {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-weight: 500;
+      background: var(--surface);
+      padding: 3px 9px;
+      border-radius: 6px;
+    }
+
+    .room-card-footer {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--surface-2);
+    }
+
+    .btn-outline {
+      flex: 1;
+      padding: 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: inherit;
+      border: 1px solid var(--surface-2);
+      background: transparent;
+      color: var(--text-secondary);
+      transition: all 0.2s;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold-border);
+      color: var(--navy);
+    }
+
+    .btn-primary-sm {
+      flex: 1;
+      padding: 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: inherit;
+      border: none;
+      background: var(--navy);
+      color: var(--gold);
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary-sm:hover {
+      opacity: 0.85;
+    }
+
+    /* TABLE */
+    .table-card {
+      background: var(--white);
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+      animation: fadeUp 0.45s 0.1s ease both;
+    }
+
+    .table-card-header {
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid var(--surface-2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead th {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      text-align: left;
+      padding: 10px 20px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--surface-2);
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--surface-2);
+      transition: background 0.15s;
+    }
+
+    tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    tbody tr:hover {
+      background: #FAFAF8;
+    }
+
+    tbody td {
+      padding: 13px 20px;
+      font-size: 13px;
+      color: var(--text-primary);
+      vertical-align: middle;
+    }
+
+    .room-id {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .cell-name {
+      font-weight: 600;
+    }
+
+    .cell-type {
+      color: var(--text-secondary);
+    }
+
+    .cell-price {
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.04em;
+    }
+
+    .status-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+    }
+
+    .s-available {
+      background: rgba(5, 150, 105, 0.1);
+      color: #059669;
+    }
+
+    .s-available .status-dot {
+      background: #059669;
+    }
+
+    .s-occupied {
+      background: rgba(15, 23, 42, 0.07);
+      color: var(--navy);
+    }
+
+    .s-occupied .status-dot {
+      background: var(--navy);
+    }
+
+    .s-reserved {
+      background: rgba(212, 175, 55, 0.15);
+      color: #A08020;
+    }
+
+    .s-reserved .status-dot {
+      background: var(--gold);
+    }
+
+    .s-maintenance {
+      background: rgba(220, 38, 38, 0.1);
+      color: #DC2626;
+    }
+
+    .s-maintenance .status-dot {
+      background: #DC2626;
+    }
+
+    .action-btns {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--surface-2);
+      background: transparent;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .btn-icon:hover {
+      border-color: var(--gold-border);
+      color: var(--gold);
+      background: var(--gold-dim);
+    }
+
+    .btn-icon.danger:hover {
+      border-color: rgba(220, 38, 38, 0.3);
+      color: #DC2626;
+      background: rgba(220, 38, 38, 0.06);
+    }
+
+    /* VIEW SECTIONS */
+    .view-section {
+      display: none;
+    }
+
+    .view-section.active {
+      display: block;
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--white);
+      border-radius: var(--radius);
+      width: 520px;
+      max-width: 95vw;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.25);
+      animation: modalIn 0.25s ease;
+    }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.97)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    .modal-header {
+      padding: 24px 28px 20px;
+      border-bottom: 1px solid var(--surface-2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .modal-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1px solid var(--surface-2);
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .modal-close:hover {
+      background: var(--surface);
+      color: var(--navy);
+    }
+
+    .modal-body {
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full {
+      grid-column: 1/-1;
+    }
+
+    .form-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      letter-spacing: 0.04em;
+    }
+
+    .form-input,
+    .form-select {
+      padding: 9px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--surface-2);
+      background: var(--white);
+      font-size: 13px;
+      font-family: inherit;
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-input:focus,
+    .form-select:focus {
+      border-color: var(--gold-border);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+    }
+
+    .modal-footer {
+      padding: 16px 28px 24px;
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .btn-cancel {
+      padding: 9px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      border: 1px solid var(--surface-2);
+      background: transparent;
+      color: var(--text-secondary);
+      transition: all 0.2s;
+    }
+
+    .btn-cancel:hover {
+      background: var(--surface);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    /* LOCKED NAV ITEM */
+    .nav-locked {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .nav-locked:hover {
+      background: rgba(220, 38, 38, 0.06) !important;
+      color: #F87171 !important;
+      opacity: 0.6;
+    }
+
+    .nav-lock-badge {
+      margin-left: auto;
+      font-size: 12px;
+    }
+
+    /* ACCESS DENIED TOAST */
+    .access-toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: #1E293B;
+      color: #fff;
+      border: 1px solid rgba(220, 38, 38, 0.4);
+      border-radius: 10px;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      z-index: 9999;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s;
+      opacity: 0;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .access-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .access-toast-icon {
+      width: 28px;
+      height: 28px;
+      background: rgba(220, 38, 38, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #F87171;
+      flex-shrink: 0;
+    }
+
+    .access-toast strong {
+      color: #F87171;
+    }
+  </style>
 </head>
+
 <body>
 
-<aside class="sidebar">
-  <div class="sidebar-logo">
-    <div class="wordmark">Lumina <span>Grand</span></div>
-    <div class="tagline">Hotel Management System</div>
-  </div>
-  <nav class="sidebar-nav">
-    <div class="nav-section-label">Operations</div>
-    <a class="nav-item" href="lumina-grand-dashboard.html">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
-      Dashboard
-    </a>
-    <a class="nav-item active" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      Rooms
-    </a>
-    <a class="nav-item" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-      Bookings
-    </a>
-    <a class="nav-item nav-locked" href="#" onclick="showAccessDenied(event)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-      Staff
-      <span class="nav-lock-badge">&#128274;</span>
-    </a>
-  </nav>
-  <div class="sidebar-bottom">
-    <div class="admin-profile">
-      <div class="avatar-circle">AD</div>
-      <div class="admin-info">
-        <div class="name">Administrator</div>
-        <div class="role">General Manager</div>
-      </div>
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="wordmark">Lumina <span>Grand</span></div>
+      <div class="tagline">Hotel Management System</div>
     </div>
-    <div class="logout-btn">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-      Logout
-    </div>
-  </div>
-</aside>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Operations</div>
+      <a class="nav-item" href="/dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <rect x="3" y="3" width="7" height="7" rx="1.5" />
+          <rect x="14" y="3" width="7" height="7" rx="1.5" />
+          <rect x="3" y="14" width="7" height="7" rx="1.5" />
+          <rect x="14" y="14" width="7" height="7" rx="1.5" />
+        </svg>
+        Dashboard
+      </a>
+      <a class="nav-item active" href="/admin/rooms">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z" />
+          <polyline points="9 22 9 12 15 12 15 22" />
+        </svg>
+        Rooms
+      </a>
+      <a class="nav-item" href="/bookings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        Bookings
+      </a>
+      {% if current_user.role == 'super_admin' %}
+      <a class="nav-item" href="{{ url_for('staff') }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M23 21v-2a4 4 0 00-3-3.87" />
+          <path d="M16 3.13a4 4 0 010 7.75" />
+        </svg>
+        Staff
+      </a>
+      {% else %}
+      <a class="nav-item nav-locked" href="#" onclick="showAccessDenied(event)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M23 21v-2a4 4 0 00-3-3.87" />
+          <path d="M16 3.13a4 4 0 010 7.75" />
+        </svg>
+        Staff
+        <span class="nav-lock-badge">&#128274;</span>
+      </a>
+      {% endif %}
 
-<main class="main">
-  <header class="header">
-    <div class="header-left">
-      <div class="greeting">Room Management</div>
-      <div class="subtitle">Manage all hotel rooms, types, pricing, and availability.</div>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="admin-profile">
+        <div class="avatar-circle">AD</div>
+        <div class="admin-info">
+          <div class="name">Administrator</div>
+          <div class="role">General Manager</div>
+        </div>
+      </div>
+      <a href="/logout"class="logout-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+          <polyline points="16 17 21 12 16 7" />
+          <line x1="21" y1="12" x2="9" y2="12" />
+        </svg>
+        Logout
+      </a>
     </div>
-    <div class="header-right">
-      <div class="search-bar">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input type="text" placeholder="Search rooms…" id="searchInput" oninput="filterRooms()">
-      </div>
-      <div class="icon-btn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
-        <div class="notif-dot"></div>
-      </div>
-      <div class="header-avatar">AD</div>
-    </div>
-  </header>
+  </aside>
 
-  <div class="content">
+  <main class="main">
+    <header class="header">
+      <div class="header-left">
+        <div class="greeting">Room Management</div>
+        <div class="subtitle">Manage all hotel rooms, types, pricing, and availability.</div>
+      </div>
+      <div class="header-right">
+        <div class="search-bar">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <input type="text" placeholder="Search rooms…" id="searchInput" oninput="filterRooms()">
+        </div>
+        <div class="icon-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" />
+            <path d="M13.73 21a2 2 0 01-3.46 0" />
+          </svg>
+          <div class="notif-dot"></div>
+        </div>
+        <div class="header-avatar">AD</div>
+      </div>
+    </header>
 
-    <!-- SUMMARY -->
-    <div class="summary-row">
-      <div class="summary-card">
-        <div class="summary-icon si-total">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        </div>
-        <div class="summary-info"><div class="s-val">125</div><div class="s-lbl">Total Rooms</div></div>
-      </div>
-      <div class="summary-card">
-        <div class="summary-icon si-avail">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <div class="summary-info"><div class="s-val">32</div><div class="s-lbl">Available</div></div>
-      </div>
-      <div class="summary-card">
-        <div class="summary-icon si-occup">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-        </div>
-        <div class="summary-info"><div class="s-val">86</div><div class="s-lbl">Occupied</div></div>
-      </div>
-      <div class="summary-card">
-        <div class="summary-icon si-maint">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
-        </div>
-        <div class="summary-info"><div class="s-val">7</div><div class="s-lbl">Maintenance</div></div>
-      </div>
-    </div>
+    <div class="content">
 
-    <!-- TOOLBAR -->
-    <div class="toolbar">
-      <div class="toolbar-left">
-        <button class="filter-btn active" onclick="setFilter('all',this)">All Rooms</button>
-        <button class="filter-btn" onclick="setFilter('available',this)"><span class="dot" style="background:#059669"></span>Available</button>
-        <button class="filter-btn" onclick="setFilter('occupied',this)"><span class="dot" style="background:#0F172A"></span>Occupied</button>
-        <button class="filter-btn" onclick="setFilter('reserved',this)"><span class="dot" style="background:#D4AF37"></span>Reserved</button>
-        <button class="filter-btn" onclick="setFilter('maintenance',this)"><span class="dot" style="background:#DC2626"></span>Maintenance</button>
+      <!-- SUMMARY -->
+      <div class="summary-row">
+        <div class="summary-card">
+          <div class="summary-icon si-total">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+          </div>
+          <div class="summary-info">
+            <div class="s-val">125</div>
+            <div class="s-lbl">Total Rooms</div>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-icon si-avail">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </div>
+          <div class="summary-info">
+            <div class="s-val">32</div>
+            <div class="s-lbl">Available</div>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-icon si-occup">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+            </svg>
+          </div>
+          <div class="summary-info">
+            <div class="s-val">86</div>
+            <div class="s-lbl">Occupied</div>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-icon si-maint">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path
+                d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" />
+            </svg>
+          </div>
+          <div class="summary-info">
+            <div class="s-val">7</div>
+            <div class="s-lbl">Maintenance</div>
+          </div>
+        </div>
       </div>
-      <div style="display:flex;align-items:center;gap:10px">
-        <div class="view-toggle">
-          <button class="view-btn active" id="gridViewBtn" onclick="setView('grid')" title="Grid">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+
+      <!-- TOOLBAR -->
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <button class="filter-btn active" onclick="setFilter('all',this)">All Rooms</button>
+          <button class="filter-btn" onclick="setFilter('available',this)"><span class="dot"
+              style="background:#059669"></span>Available</button>
+          <button class="filter-btn" onclick="setFilter('occupied',this)"><span class="dot"
+              style="background:#0F172A"></span>Occupied</button>
+          <button class="filter-btn" onclick="setFilter('reserved',this)"><span class="dot"
+              style="background:#D4AF37"></span>Reserved</button>
+          <button class="filter-btn" onclick="setFilter('maintenance',this)"><span class="dot"
+              style="background:#DC2626"></span>Maintenance</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="view-toggle">
+            <button class="view-btn active" id="gridViewBtn" onclick="setView('grid')" title="Grid">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7" rx="1" />
+                <rect x="14" y="3" width="7" height="7" rx="1" />
+                <rect x="3" y="14" width="7" height="7" rx="1" />
+                <rect x="14" y="14" width="7" height="7" rx="1" />
+              </svg>
+            </button>
+            <button class="view-btn" id="tableViewBtn" onclick="setView('table')" title="Table">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+              </svg>
+            </button>
+          </div>
+          <button class="btn-gold" onclick="openModal()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+            Add Room
           </button>
-          <button class="view-btn" id="tableViewBtn" onclick="setView('table')" title="Table">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-          </button>
         </div>
-        <button class="btn-gold" onclick="openModal()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Add Room
+      </div>
+
+      <!-- GRID VIEW -->
+      <div id="gridView" class="view-section active">
+        <div class="rooms-grid" id="roomsGrid">
+
+          <div class="room-card" data-status="occupied">
+            <div class="room-card-img room-img-1">
+              <div class="room-number-overlay">101</div>
+              <span class="room-status-pill pill-occupied">Occupied</span>
+              <div class="room-floor-badge">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 9l9-7 9 7v11H3z" />
+                </svg>Floor 1
+              </div>
+            </div>
+            <div class="room-card-body">
+              <div class="room-card-top">
+                <div>
+                  <div class="room-name">Room 101</div>
+                  <div class="room-subtype">Presidential Suite</div>
+                </div>
+                <div class="room-type-tag">Suite</div>
+              </div>
+              <div class="room-price">$850 <span>/ night</span></div>
+              <div class="room-amenities">
+                <span class="amenity-tag">👥 4 Guests</span><span class="amenity-tag">🛏 King Bed</span><span
+                  class="amenity-tag">🌊 Ocean View</span><span class="amenity-tag">🛁 Jacuzzi</span>
+              </div>
+              <div class="room-card-footer"><button class="btn-outline">Edit</button><button class="btn-primary-sm">View
+                  Details</button></div>
+            </div>
+          </div>
+
+          <div class="room-card" data-status="available">
+            <div class="room-card-img room-img-2">
+              <div class="room-number-overlay">202</div>
+              <span class="room-status-pill pill-available">Available</span>
+              <div class="room-floor-badge">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 9l9-7 9 7v11H3z" />
+                </svg>Floor 2
+              </div>
+            </div>
+            <div class="room-card-body">
+              <div class="room-card-top">
+                <div>
+                  <div class="room-name">Room 202</div>
+                  <div class="room-subtype">Grand Suite</div>
+                </div>
+                <div class="room-type-tag">Suite</div>
+              </div>
+              <div class="room-price">$620 <span>/ night</span></div>
+              <div class="room-amenities">
+                <span class="amenity-tag">👥 2 Guests</span><span class="amenity-tag">🛏 King Bed</span><span
+                  class="amenity-tag">🌿 Garden View</span><span class="amenity-tag">🍳 Kitchenette</span>
+              </div>
+              <div class="room-card-footer"><button class="btn-outline">Edit</button><button class="btn-primary-sm">View
+                  Details</button></div>
+            </div>
+          </div>
+
+          <div class="room-card" data-status="reserved">
+            <div class="room-card-img room-img-3">
+              <div class="room-number-overlay">305</div>
+              <span class="room-status-pill pill-reserved">Reserved</span>
+              <div class="room-floor-badge">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 9l9-7 9 7v11H3z" />
+                </svg>Floor 3
+              </div>
+            </div>
+            <div class="room-card-body">
+              <div class="room-card-top">
+                <div>
+                  <div class="room-name">Room 305</div>
+                  <div class="room-subtype">Deluxe Ocean View</div>
+                </div>
+                <div class="room-type-tag">Deluxe</div>
+              </div>
+              <div class="room-price">$420 <span>/ night</span></div>
+              <div class="room-amenities">
+                <span class="amenity-tag">👥 2 Guests</span><span class="amenity-tag">🛏 Queen Bed</span><span
+                  class="amenity-tag">🌊 Ocean View</span><span class="amenity-tag">📺 Smart TV</span>
+              </div>
+              <div class="room-card-footer"><button class="btn-outline">Edit</button><button class="btn-primary-sm">View
+                  Details</button></div>
+            </div>
+          </div>
+
+          <div class="room-card" data-status="available">
+            <div class="room-card-img room-img-4">
+              <div class="room-number-overlay">412</div>
+              <span class="room-status-pill pill-available">Available</span>
+              <div class="room-floor-badge">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 9l9-7 9 7v11H3z" />
+                </svg>Floor 4
+              </div>
+            </div>
+            <div class="room-card-body">
+              <div class="room-card-top">
+                <div>
+                  <div class="room-name">Room 412</div>
+                  <div class="room-subtype">Superior Room</div>
+                </div>
+                <div class="room-type-tag">Superior</div>
+              </div>
+              <div class="room-price">$280 <span>/ night</span></div>
+              <div class="room-amenities">
+                <span class="amenity-tag">👥 2 Guests</span><span class="amenity-tag">🛏 Double Bed</span><span
+                  class="amenity-tag">🏙 City View</span><span class="amenity-tag">☕ Mini Bar</span>
+              </div>
+              <div class="room-card-footer"><button class="btn-outline">Edit</button><button class="btn-primary-sm">View
+                  Details</button></div>
+            </div>
+          </div>
+
+          <div class="room-card" data-status="maintenance">
+            <div class="room-card-img room-img-5">
+              <div class="room-number-overlay">508</div>
+              <span class="room-status-pill pill-maintenance">Maintenance</span>
+              <div class="room-floor-badge">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 9l9-7 9 7v11H3z" />
+                </svg>Floor 5
+              </div>
+            </div>
+            <div class="room-card-body">
+              <div class="room-card-top">
+                <div>
+                  <div class="room-name">Room 508</div>
+                  <div class="room-subtype">Classic Room</div>
+                </div>
+                <div class="room-type-tag">Classic</div>
+              </div>
+              <div class="room-price">$180 <span>/ night</span></div>
+              <div class="room-amenities">
+                <span class="amenity-tag">👥 2 Guests</span><span class="amenity-tag">🛏 Twin Bed</span><span
+                  class="amenity-tag">📶 Free WiFi</span><span class="amenity-tag">🅿 Parking</span>
+              </div>
+              <div class="room-card-footer"><button class="btn-outline">Edit</button><button class="btn-primary-sm">View
+                  Details</button></div>
+            </div>
+          </div>
+
+          <div class="room-card" data-status="occupied">
+            <div class="room-card-img room-img-6">
+              <div class="room-number-overlay">601</div>
+              <span class="room-status-pill pill-occupied">Occupied</span>
+              <div class="room-floor-badge">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 9l9-7 9 7v11H3z" />
+                </svg>Floor 6
+              </div>
+            </div>
+            <div class="room-card-body">
+              <div class="room-card-top">
+                <div>
+                  <div class="room-name">Room 601</div>
+                  <div class="room-subtype">Grand Suite</div>
+                </div>
+                <div class="room-type-tag">Suite</div>
+              </div>
+              <div class="room-price">$620 <span>/ night</span></div>
+              <div class="room-amenities">
+                <span class="amenity-tag">👥 3 Guests</span><span class="amenity-tag">🛏 King Bed</span><span
+                  class="amenity-tag">🌄 Panoramic</span><span class="amenity-tag">🛁 Bathtub</span>
+              </div>
+              <div class="room-card-footer"><button class="btn-outline">Edit</button><button class="btn-primary-sm">View
+                  Details</button></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TABLE VIEW -->
+      <div id="tableView" class="view-section">
+        <div class="table-card">
+          <div class="table-card-header">
+            <div>
+              <div class="section-title" style="margin-bottom:0"><span>All</span> Rooms</div>
+              <div style="font-size:12px;color:var(--text-muted);margin-top:3px">Complete room inventory</div>
+            </div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Room No.</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Floor</th>
+                <th>Capacity</th>
+                <th>Price / Night</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <tr data-status="occupied">
+                <td><span class="room-id">101</span></td>
+                <td><span class="cell-name">Room 101</span></td>
+                <td><span class="cell-type">Presidential Suite</span></td>
+                <td>1</td>
+                <td>👥 4</td>
+                <td><span class="cell-price">$850</span></td>
+                <td><span class="status-badge s-occupied"><span class="status-dot"></span>Occupied</span></td>
+                <td>
+                  <div class="action-btns">
+                    <button class="btn-icon" title="Edit"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
+                        <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
+                      </svg></button>
+                    <button class="btn-icon danger" title="Delete"><svg width="13" height="13" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6" />
+                        <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
+                        <path d="M10 11v6M14 11v6" />
+                      </svg></button>
+                  </div>
+                </td>
+              </tr>
+              <tr data-status="available">
+                <td><span class="room-id">202</span></td>
+                <td><span class="cell-name">Room 202</span></td>
+                <td><span class="cell-type">Grand Suite</span></td>
+                <td>2</td>
+                <td>👥 2</td>
+                <td><span class="cell-price">$620</span></td>
+                <td><span class="status-badge s-available"><span class="status-dot"></span>Available</span></td>
+                <td>
+                  <div class="action-btns">
+                    <button class="btn-icon" title="Edit"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
+                        <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
+                      </svg></button>
+                    <button class="btn-icon danger" title="Delete"><svg width="13" height="13" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6" />
+                        <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
+                        <path d="M10 11v6M14 11v6" />
+                      </svg></button>
+                  </div>
+                </td>
+              </tr>
+              <tr data-status="reserved">
+                <td><span class="room-id">305</span></td>
+                <td><span class="cell-name">Room 305</span></td>
+                <td><span class="cell-type">Deluxe Ocean View</span></td>
+                <td>3</td>
+                <td>👥 2</td>
+                <td><span class="cell-price">$420</span></td>
+                <td><span class="status-badge s-reserved"><span class="status-dot"></span>Reserved</span></td>
+                <td>
+                  <div class="action-btns">
+                    <button class="btn-icon" title="Edit"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
+                        <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
+                      </svg></button>
+                    <button class="btn-icon danger" title="Delete"><svg width="13" height="13" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6" />
+                        <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
+                        <path d="M10 11v6M14 11v6" />
+                      </svg></button>
+                  </div>
+                </td>
+              </tr>
+              <tr data-status="available">
+                <td><span class="room-id">412</span></td>
+                <td><span class="cell-name">Room 412</span></td>
+                <td><span class="cell-type">Superior Room</span></td>
+                <td>4</td>
+                <td>👥 2</td>
+                <td><span class="cell-price">$280</span></td>
+                <td><span class="status-badge s-available"><span class="status-dot"></span>Available</span></td>
+                <td>
+                  <div class="action-btns">
+                    <button class="btn-icon" title="Edit"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
+                        <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
+                      </svg></button>
+                    <button class="btn-icon danger" title="Delete"><svg width="13" height="13" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6" />
+                        <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
+                        <path d="M10 11v6M14 11v6" />
+                      </svg></button>
+                  </div>
+                </td>
+              </tr>
+              <tr data-status="maintenance">
+                <td><span class="room-id">508</span></td>
+                <td><span class="cell-name">Room 508</span></td>
+                <td><span class="cell-type">Classic Room</span></td>
+                <td>5</td>
+                <td>👥 2</td>
+                <td><span class="cell-price">$180</span></td>
+                <td><span class="status-badge s-maintenance"><span class="status-dot"></span>Maintenance</span></td>
+                <td>
+                  <div class="action-btns">
+                    <button class="btn-icon" title="Edit"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
+                        <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
+                      </svg></button>
+                    <button class="btn-icon danger" title="Delete"><svg width="13" height="13" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6" />
+                        <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
+                        <path d="M10 11v6M14 11v6" />
+                      </svg></button>
+                  </div>
+                </td>
+              </tr>
+              <tr data-status="occupied">
+                <td><span class="room-id">601</span></td>
+                <td><span class="cell-name">Room 601</span></td>
+                <td><span class="cell-type">Grand Suite</span></td>
+                <td>6</td>
+                <td>👥 3</td>
+                <td><span class="cell-price">$620</span></td>
+                <td><span class="status-badge s-occupied"><span class="status-dot"></span>Occupied</span></td>
+                <td>
+                  <div class="action-btns">
+                    <button class="btn-icon" title="Edit"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
+                        <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
+                      </svg></button>
+                    <button class="btn-icon danger" title="Delete"><svg width="13" height="13" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6" />
+                        <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
+                        <path d="M10 11v6M14 11v6" />
+                      </svg></button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="addModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">Add New Room</div>
+        <button class="modal-close" onclick="closeModal()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Room Number</label><input type="text" class="form-input"
+              placeholder="e.g. 301"></div>
+          <div class="form-group"><label class="form-label">Floor</label><input type="number" class="form-input"
+              placeholder="e.g. 3"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Room Type</label><select class="form-select">
+              <option>Presidential Suite</option>
+              <option>Grand Suite</option>
+              <option>Deluxe Ocean View</option>
+              <option>Superior Room</option>
+              <option>Classic Room</option>
+            </select></div>
+          <div class="form-group"><label class="form-label">Category</label><select class="form-select">
+              <option>Suite</option>
+              <option>Deluxe</option>
+              <option>Superior</option>
+              <option>Classic</option>
+            </select></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Price / Night (USD)</label><input type="number"
+              class="form-input" placeholder="e.g. 450"></div>
+          <div class="form-group"><label class="form-label">Capacity (Guests)</label><input type="number"
+              class="form-input" placeholder="e.g. 2"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Bed Type</label><select class="form-select">
+              <option>King Bed</option>
+              <option>Queen Bed</option>
+              <option>Double Bed</option>
+              <option>Twin Bed</option>
+            </select></div>
+          <div class="form-group"><label class="form-label">Status</label><select class="form-select">
+              <option>Available</option>
+              <option>Occupied</option>
+              <option>Reserved</option>
+              <option>Maintenance</option>
+            </select></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group full"><label class="form-label">View Type</label><select class="form-select">
+              <option>Ocean View</option>
+              <option>Garden View</option>
+              <option>City View</option>
+              <option>Panoramic View</option>
+              <option>Pool View</option>
+            </select></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+        <button class="btn-gold" onclick="closeModal()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+          Save Room
         </button>
       </div>
     </div>
-
-    <!-- GRID VIEW -->
-    <div id="gridView" class="view-section active">
-      <div class="rooms-grid" id="roomsGrid">
-
-        <div class="room-card" data-status="occupied">
-          <div class="room-card-img room-img-1">
-            <div class="room-number-overlay">101</div>
-            <span class="room-status-pill pill-occupied">Occupied</span>
-            <div class="room-floor-badge">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11H3z"/></svg>Floor 1
-            </div>
-          </div>
-          <div class="room-card-body">
-            <div class="room-card-top">
-              <div><div class="room-name">Room 101</div><div class="room-subtype">Presidential Suite</div></div>
-              <div class="room-type-tag">Suite</div>
-            </div>
-            <div class="room-price">$850 <span>/ night</span></div>
-            <div class="room-amenities">
-              <span class="amenity-tag">👥 4 Guests</span><span class="amenity-tag">🛏 King Bed</span><span class="amenity-tag">🌊 Ocean View</span><span class="amenity-tag">🛁 Jacuzzi</span>
-            </div>
-            <div class="room-card-footer"><button class="btn-outline">Edit</button><button class="btn-primary-sm">View Details</button></div>
-          </div>
-        </div>
-
-        <div class="room-card" data-status="available">
-          <div class="room-card-img room-img-2">
-            <div class="room-number-overlay">202</div>
-            <span class="room-status-pill pill-available">Available</span>
-            <div class="room-floor-badge">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11H3z"/></svg>Floor 2
-            </div>
-          </div>
-          <div class="room-card-body">
-            <div class="room-card-top">
-              <div><div class="room-name">Room 202</div><div class="room-subtype">Grand Suite</div></div>
-              <div class="room-type-tag">Suite</div>
-            </div>
-            <div class="room-price">$620 <span>/ night</span></div>
-            <div class="room-amenities">
-              <span class="amenity-tag">👥 2 Guests</span><span class="amenity-tag">🛏 King Bed</span><span class="amenity-tag">🌿 Garden View</span><span class="amenity-tag">🍳 Kitchenette</span>
-            </div>
-            <div class="room-card-footer"><button class="btn-outline">Edit</button><button class="btn-primary-sm">View Details</button></div>
-          </div>
-        </div>
-
-        <div class="room-card" data-status="reserved">
-          <div class="room-card-img room-img-3">
-            <div class="room-number-overlay">305</div>
-            <span class="room-status-pill pill-reserved">Reserved</span>
-            <div class="room-floor-badge">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11H3z"/></svg>Floor 3
-            </div>
-          </div>
-          <div class="room-card-body">
-            <div class="room-card-top">
-              <div><div class="room-name">Room 305</div><div class="room-subtype">Deluxe Ocean View</div></div>
-              <div class="room-type-tag">Deluxe</div>
-            </div>
-            <div class="room-price">$420 <span>/ night</span></div>
-            <div class="room-amenities">
-              <span class="amenity-tag">👥 2 Guests</span><span class="amenity-tag">🛏 Queen Bed</span><span class="amenity-tag">🌊 Ocean View</span><span class="amenity-tag">📺 Smart TV</span>
-            </div>
-            <div class="room-card-footer"><button class="btn-outline">Edit</button><button class="btn-primary-sm">View Details</button></div>
-          </div>
-        </div>
-
-        <div class="room-card" data-status="available">
-          <div class="room-card-img room-img-4">
-            <div class="room-number-overlay">412</div>
-            <span class="room-status-pill pill-available">Available</span>
-            <div class="room-floor-badge">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11H3z"/></svg>Floor 4
-            </div>
-          </div>
-          <div class="room-card-body">
-            <div class="room-card-top">
-              <div><div class="room-name">Room 412</div><div class="room-subtype">Superior Room</div></div>
-              <div class="room-type-tag">Superior</div>
-            </div>
-            <div class="room-price">$280 <span>/ night</span></div>
-            <div class="room-amenities">
-              <span class="amenity-tag">👥 2 Guests</span><span class="amenity-tag">🛏 Double Bed</span><span class="amenity-tag">🏙 City View</span><span class="amenity-tag">☕ Mini Bar</span>
-            </div>
-            <div class="room-card-footer"><button class="btn-outline">Edit</button><button class="btn-primary-sm">View Details</button></div>
-          </div>
-        </div>
-
-        <div class="room-card" data-status="maintenance">
-          <div class="room-card-img room-img-5">
-            <div class="room-number-overlay">508</div>
-            <span class="room-status-pill pill-maintenance">Maintenance</span>
-            <div class="room-floor-badge">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11H3z"/></svg>Floor 5
-            </div>
-          </div>
-          <div class="room-card-body">
-            <div class="room-card-top">
-              <div><div class="room-name">Room 508</div><div class="room-subtype">Classic Room</div></div>
-              <div class="room-type-tag">Classic</div>
-            </div>
-            <div class="room-price">$180 <span>/ night</span></div>
-            <div class="room-amenities">
-              <span class="amenity-tag">👥 2 Guests</span><span class="amenity-tag">🛏 Twin Bed</span><span class="amenity-tag">📶 Free WiFi</span><span class="amenity-tag">🅿 Parking</span>
-            </div>
-            <div class="room-card-footer"><button class="btn-outline">Edit</button><button class="btn-primary-sm">View Details</button></div>
-          </div>
-        </div>
-
-        <div class="room-card" data-status="occupied">
-          <div class="room-card-img room-img-6">
-            <div class="room-number-overlay">601</div>
-            <span class="room-status-pill pill-occupied">Occupied</span>
-            <div class="room-floor-badge">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11H3z"/></svg>Floor 6
-            </div>
-          </div>
-          <div class="room-card-body">
-            <div class="room-card-top">
-              <div><div class="room-name">Room 601</div><div class="room-subtype">Grand Suite</div></div>
-              <div class="room-type-tag">Suite</div>
-            </div>
-            <div class="room-price">$620 <span>/ night</span></div>
-            <div class="room-amenities">
-              <span class="amenity-tag">👥 3 Guests</span><span class="amenity-tag">🛏 King Bed</span><span class="amenity-tag">🌄 Panoramic</span><span class="amenity-tag">🛁 Bathtub</span>
-            </div>
-            <div class="room-card-footer"><button class="btn-outline">Edit</button><button class="btn-primary-sm">View Details</button></div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- TABLE VIEW -->
-    <div id="tableView" class="view-section">
-      <div class="table-card">
-        <div class="table-card-header">
-          <div>
-            <div class="section-title" style="margin-bottom:0"><span>All</span> Rooms</div>
-            <div style="font-size:12px;color:var(--text-muted);margin-top:3px">Complete room inventory</div>
-          </div>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Room No.</th><th>Name</th><th>Type</th><th>Floor</th><th>Capacity</th><th>Price / Night</th><th>Status</th><th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="tableBody">
-            <tr data-status="occupied">
-              <td><span class="room-id">101</span></td><td><span class="cell-name">Room 101</span></td><td><span class="cell-type">Presidential Suite</span></td><td>1</td><td>👥 4</td><td><span class="cell-price">$850</span></td>
-              <td><span class="status-badge s-occupied"><span class="status-dot"></span>Occupied</span></td>
-              <td><div class="action-btns">
-                <button class="btn-icon" title="Edit"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
-                <button class="btn-icon danger" title="Delete"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></button>
-              </div></td>
-            </tr>
-            <tr data-status="available">
-              <td><span class="room-id">202</span></td><td><span class="cell-name">Room 202</span></td><td><span class="cell-type">Grand Suite</span></td><td>2</td><td>👥 2</td><td><span class="cell-price">$620</span></td>
-              <td><span class="status-badge s-available"><span class="status-dot"></span>Available</span></td>
-              <td><div class="action-btns">
-                <button class="btn-icon" title="Edit"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
-                <button class="btn-icon danger" title="Delete"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></button>
-              </div></td>
-            </tr>
-            <tr data-status="reserved">
-              <td><span class="room-id">305</span></td><td><span class="cell-name">Room 305</span></td><td><span class="cell-type">Deluxe Ocean View</span></td><td>3</td><td>👥 2</td><td><span class="cell-price">$420</span></td>
-              <td><span class="status-badge s-reserved"><span class="status-dot"></span>Reserved</span></td>
-              <td><div class="action-btns">
-                <button class="btn-icon" title="Edit"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
-                <button class="btn-icon danger" title="Delete"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></button>
-              </div></td>
-            </tr>
-            <tr data-status="available">
-              <td><span class="room-id">412</span></td><td><span class="cell-name">Room 412</span></td><td><span class="cell-type">Superior Room</span></td><td>4</td><td>👥 2</td><td><span class="cell-price">$280</span></td>
-              <td><span class="status-badge s-available"><span class="status-dot"></span>Available</span></td>
-              <td><div class="action-btns">
-                <button class="btn-icon" title="Edit"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
-                <button class="btn-icon danger" title="Delete"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></button>
-              </div></td>
-            </tr>
-            <tr data-status="maintenance">
-              <td><span class="room-id">508</span></td><td><span class="cell-name">Room 508</span></td><td><span class="cell-type">Classic Room</span></td><td>5</td><td>👥 2</td><td><span class="cell-price">$180</span></td>
-              <td><span class="status-badge s-maintenance"><span class="status-dot"></span>Maintenance</span></td>
-              <td><div class="action-btns">
-                <button class="btn-icon" title="Edit"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
-                <button class="btn-icon danger" title="Delete"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></button>
-              </div></td>
-            </tr>
-            <tr data-status="occupied">
-              <td><span class="room-id">601</span></td><td><span class="cell-name">Room 601</span></td><td><span class="cell-type">Grand Suite</span></td><td>6</td><td>👥 3</td><td><span class="cell-price">$620</span></td>
-              <td><span class="status-badge s-occupied"><span class="status-dot"></span>Occupied</span></td>
-              <td><div class="action-btns">
-                <button class="btn-icon" title="Edit"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
-                <button class="btn-icon danger" title="Delete"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></button>
-              </div></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
   </div>
-</main>
 
-<!-- MODAL -->
-<div class="modal-overlay" id="addModal">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title">Add New Room</div>
-      <button class="modal-close" onclick="closeModal()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
+  <script>
+    function setView(v) {
+      document.getElementById('gridView').classList.toggle('active', v === 'grid');
+      document.getElementById('tableView').classList.toggle('active', v === 'table');
+      document.getElementById('gridViewBtn').classList.toggle('active', v === 'grid');
+      document.getElementById('tableViewBtn').classList.toggle('active', v === 'table');
+    }
+    function setFilter(status, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('#roomsGrid .room-card').forEach(c => { c.style.display = (status === 'all' || c.dataset.status === status) ? '' : 'none'; });
+      document.querySelectorAll('#tableBody tr').forEach(r => { r.style.display = (status === 'all' || r.dataset.status === status) ? '' : 'none'; });
+    }
+    function filterRooms() {
+      const q = document.getElementById('searchInput').value.toLowerCase();
+      document.querySelectorAll('#roomsGrid .room-card').forEach(c => { c.style.display = c.innerText.toLowerCase().includes(q) ? '' : 'none'; });
+      document.querySelectorAll('#tableBody tr').forEach(r => { r.style.display = r.innerText.toLowerCase().includes(q) ? '' : 'none'; });
+    }
+    function openModal() { document.getElementById('addModal').classList.add('open'); }
+    function closeModal() { document.getElementById('addModal').classList.remove('open'); }
+    document.getElementById('addModal').addEventListener('click', function (e) { if (e.target === this) closeModal(); });
+  </script>
+
+  <div class="access-toast" id="accessToast">
+    <div class="access-toast-icon">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <rect x="3" y="11" width="18" height="11" rx="2" />
+        <path d="M7 11V7a5 5 0 0110 0v4" />
+      </svg>
     </div>
-    <div class="modal-body">
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">Room Number</label><input type="text" class="form-input" placeholder="e.g. 301"></div>
-        <div class="form-group"><label class="form-label">Floor</label><input type="number" class="form-input" placeholder="e.g. 3"></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">Room Type</label><select class="form-select"><option>Presidential Suite</option><option>Grand Suite</option><option>Deluxe Ocean View</option><option>Superior Room</option><option>Classic Room</option></select></div>
-        <div class="form-group"><label class="form-label">Category</label><select class="form-select"><option>Suite</option><option>Deluxe</option><option>Superior</option><option>Classic</option></select></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">Price / Night (USD)</label><input type="number" class="form-input" placeholder="e.g. 450"></div>
-        <div class="form-group"><label class="form-label">Capacity (Guests)</label><input type="number" class="form-input" placeholder="e.g. 2"></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">Bed Type</label><select class="form-select"><option>King Bed</option><option>Queen Bed</option><option>Double Bed</option><option>Twin Bed</option></select></div>
-        <div class="form-group"><label class="form-label">Status</label><select class="form-select"><option>Available</option><option>Occupied</option><option>Reserved</option><option>Maintenance</option></select></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group full"><label class="form-label">View Type</label><select class="form-select"><option>Ocean View</option><option>Garden View</option><option>City View</option><option>Panoramic View</option><option>Pool View</option></select></div>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
-      <button class="btn-gold" onclick="closeModal()">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-        Save Room
-      </button>
-    </div>
+    <div><strong>Access Denied</strong> — Staff management is restricted to Superadmin only.</div>
   </div>
-</div>
-
-<script>
-  function setView(v) {
-    document.getElementById('gridView').classList.toggle('active', v==='grid');
-    document.getElementById('tableView').classList.toggle('active', v==='table');
-    document.getElementById('gridViewBtn').classList.toggle('active', v==='grid');
-    document.getElementById('tableViewBtn').classList.toggle('active', v==='table');
-  }
-  function setFilter(status, btn) {
-    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('#roomsGrid .room-card').forEach(c=>{ c.style.display=(status==='all'||c.dataset.status===status)?'':'none'; });
-    document.querySelectorAll('#tableBody tr').forEach(r=>{ r.style.display=(status==='all'||r.dataset.status===status)?'':'none'; });
-  }
-  function filterRooms() {
-    const q=document.getElementById('searchInput').value.toLowerCase();
-    document.querySelectorAll('#roomsGrid .room-card').forEach(c=>{ c.style.display=c.innerText.toLowerCase().includes(q)?'':'none'; });
-    document.querySelectorAll('#tableBody tr').forEach(r=>{ r.style.display=r.innerText.toLowerCase().includes(q)?'':'none'; });
-  }
-  function openModal() { document.getElementById('addModal').classList.add('open'); }
-  function closeModal() { document.getElementById('addModal').classList.remove('open'); }
-  document.getElementById('addModal').addEventListener('click',function(e){ if(e.target===this)closeModal(); });
-</script>
-
-<div class="access-toast" id="accessToast">
-  <div class="access-toast-icon">
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-  </div>
-  <div><strong>Access Denied</strong> — Staff management is restricted to Superadmin only.</div>
-</div>
-<script>
-  function showAccessDenied(e) {
-    e.preventDefault();
-    const toast = document.getElementById("accessToast");
-    toast.classList.add("show");
-    setTimeout(() => toast.classList.remove("show"), 3000);
-  }
-</script>
+  <script>
+    function showAccessDenied(e) {
+      e.preventDefault();
+      const toast = document.getElementById("accessToast");
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 3000);
+    }
+  </script>
 </body>
+
 </html>

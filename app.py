@@ -37,6 +37,7 @@ class Room(db.Model):
     guests      = db.Column(db.Integer,     default=2)
     bed_type    = db.Column(db.String(50),  default='King')
     category    = db.Column(db.String(50),  default='Superior')   # Superior / Deluxe / Suite
+    total_rooms = db.Column(db.Integer,     default=5)   # jumlah unit kamar yang tersedia
 
 
 class Booking(db.Model):
@@ -92,7 +93,12 @@ def login():
 
         if user and user.password == password:
             login_user(user)
-            # ✅ Redirect ke halaman kamar setelah login
+
+            # Admin & Super Admin -> Dashboard
+            if user.role in ['admin', 'super_admin']:
+                return redirect(url_for('dashboard'))
+
+            # User biasa -> Rooms
             return redirect(url_for('rooms'))
 
         # Login gagal → kembalikan halaman login dengan status 401
@@ -135,6 +141,18 @@ def rooms():
 
     all_rooms = query.all()
 
+    # Ambil booking milik user yang sedang login
+    my_bookings = Booking.query.filter_by(guest_name=current_user.username).order_by(Booking.id.desc()).all()
+
+    # Hitung sisa kamar per room (tanpa filter tanggal — total unit - active bookings)
+    room_remaining = {}
+    for r in all_rooms:
+        active = Booking.query.filter(
+            Booking.room_name == r.name,
+            Booking.status.in_(['Pending', 'Confirmed'])
+        ).count()
+        room_remaining[r.id] = max(0, (r.total_rooms or 1) - active)
+
     return render_template(
         '/user/Kamar.html',
         rooms=all_rooms,
@@ -142,7 +160,32 @@ def rooms():
         active_category=category,
         active_status=status,
         search_query=q,
+        my_bookings=my_bookings,
+        room_remaining=room_remaining,
     )
+
+@app.route('/admin/rooms')
+@login_required
+def admin_rooms():
+    if current_user.role not in ['admin', 'super_admin']:
+        return 'Access Denied', 403
+
+    rooms = Room.query.all()
+    return render_template('admin/rooms.html', rooms=rooms)
+
+
+@app.route('/rooms/detail/<int:room_id>')
+@login_required
+def room_detail_page(room_id):
+    """Halaman detail kamar — render template sesuai kategori."""
+    room = Room.query.get_or_404(room_id)
+    template_map = {
+        'Deluxe' : '/user/detail_deluxe.html',
+        'Suite'  : '/user/detail_suite.html',
+        'Superior': '/user/detail_superior.html',
+    }
+    template = template_map.get(room.category, '/user/detail_deluxe.html')
+    return render_template(template, room=room, user=current_user)
 
 
 @app.route('/rooms/<int:room_id>')
@@ -163,20 +206,54 @@ def room_detail(room_id):
     })
 
 
+@app.route('/rooms/<int:room_id>/availability')
+@login_required
+def room_availability(room_id):
+    """Return remaining units for a room on given dates."""
+    room      = Room.query.get_or_404(room_id)
+    check_in  = request.args.get('check_in', '')
+    check_out = request.args.get('check_out', '')
+
+    if not check_in or not check_out:
+        return jsonify({'total': room.total_rooms, 'booked': 0, 'remaining': room.total_rooms})
+
+    active = Booking.query.filter(
+        Booking.room_name == room.name,
+        Booking.status.in_(['Pending', 'Confirmed']),
+        Booking.check_in  < check_out,
+        Booking.check_out > check_in,
+    ).count()
+
+    total     = room.total_rooms or 1
+    remaining = max(0, total - active)
+    return jsonify({'total': total, 'booked': active, 'remaining': remaining})
+
+
 @app.route('/book/<int:room_id>', methods=['POST'])
 @login_required
 def book_room(room_id):
     """Proses reservasi kamar oleh user yang sudah login."""
     room = Room.query.get_or_404(room_id)
 
-    if room.status != 'available':
-        return jsonify({'error': 'Room is not available'}), 400
-
     check_in  = request.form.get('check_in')
     check_out = request.form.get('check_out')
 
     if not check_in or not check_out:
         return jsonify({'error': 'Check-in and check-out dates are required'}), 400
+
+    # Hitung booking aktif (Pending/Confirmed) yang overlap dengan tanggal yang dipilih
+    active_bookings = Booking.query.filter(
+        Booking.room_name == room.name,
+        Booking.status.in_(['Pending', 'Confirmed']),
+        Booking.check_in  < check_out,
+        Booking.check_out > check_in,
+    ).count()
+
+    total_units = room.total_rooms or 1
+    remaining   = total_units - active_bookings
+
+    if remaining <= 0:
+        return jsonify({'error': 'No rooms available for the selected dates'}), 400
 
     booking = Booking(
         guest_name    = current_user.username,
@@ -187,11 +264,15 @@ def book_room(room_id):
         status        = 'Pending',
     )
 
-    room.status = 'booked'
     db.session.add(booking)
     db.session.commit()
 
-    return jsonify({'message': 'Booking successful', 'booking_id': booking.id})
+    # Update status room berdasarkan sisa unit
+    new_active = active_bookings + 1
+    room.status = 'available' if new_active < total_units else 'booked'
+    db.session.commit()
+
+    return jsonify({'message': 'Booking successful', 'booking_id': booking.id, 'remaining': total_units - new_active})
 
 
 # ── ADMIN ROUTES ───────────────────────────────────────────────
@@ -202,7 +283,7 @@ def dashboard():
     if current_user.role not in ['admin', 'super_admin']:
         return 'Access Denied', 403
     rooms = Room.query.all()
-    return render_template('Dashboard.html', rooms=rooms)
+    return render_template('admin/Dashboard.html', rooms=rooms)
 
 
 @app.route('/add_room', methods=['GET', 'POST'])
@@ -235,7 +316,7 @@ def bookings():
     if current_user.role not in ['admin', 'super_admin']:
         return 'Access Denied', 403
     all_bookings = Booking.query.all()
-    return render_template('booking.html', bookings=all_bookings)
+    return render_template('admin/booking.html', bookings=all_bookings)
 
 
 @app.route('/staff')
@@ -244,12 +325,24 @@ def staff():
     if current_user.role != 'super_admin':
         return 'Access Denied', 403
     staff_members = User.query.filter(User.role.in_(['admin', 'staff'])).all()
-    return render_template('staff.html', staff_members=staff_members)
+    return render_template('admin/staff.html', staff_members=staff_members)
 
 
 # ── SEED DATABASE ──────────────────────────────────────────────
 with app.app_context():
     db.create_all()
+
+    admin = User.query.filter_by(email='superadmin@gmail.com').first()
+
+    if not admin:
+        admin = User(
+            username='Super Admin',
+            email='superadmin@gmail.com',
+            password='superadmin123',
+            role='super_admin'
+        )
+        db.session.add(admin)
+        db.session.commit()
 
     # ── Auto-migrate: tambah kolom baru jika belum ada ─────────
     # Diperlukan jika hotel.db sudah ada sebelum kolom baru ditambahkan
@@ -267,6 +360,43 @@ with app.app_context():
         if 'category' not in existing:
             conn.execute(text("ALTER TABLE room ADD COLUMN category VARCHAR(50) DEFAULT 'Superior'"))
             conn.commit()
+        if 'total_rooms' not in existing:
+            conn.execute(text('ALTER TABLE room ADD COLUMN total_rooms INTEGER DEFAULT 5'))
+            conn.commit()
+
+    # Update harga lama (USD) ke IDR jika masih kecil (<= 2000)
+    old_price_rooms = Room.query.filter(Room.price <= 2000).all()
+    price_map = {
+        'Superior Room'    : 1150000,
+        'Deluxe Room': 1850000,
+        'Junior Suite'     : 2750000,
+    }
+    for r in old_price_rooms:
+        if r.name in price_map:
+            r.price = price_map[r.name]
+    if old_price_rooms:
+        db.session.commit()
+
+    # Rename 'Deluxe Ocean View' -> 'Deluxe Room' jika masih ada di DB
+    deluxe_old = Room.query.filter_by(name='Deluxe Ocean View').first()
+    if deluxe_old:
+        deluxe_old.name        = 'Deluxe Room'
+        deluxe_old.description = 'Kamar deluxe luas dengan interior premium, ranjang king-size, dan fasilitas lengkap untuk kenyamanan menginap terbaik.'
+        db.session.commit()
+
+    # Update gambar lama (googleusercontent) ke Unsplash yang stabil
+    image_map = {
+        'Superior Room'    : 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80',
+        'Deluxe Room': 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80',
+        'Junior Suite'     : 'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80',
+    }
+    changed = False
+    for r in Room.query.all():
+        if r.name in image_map and (not r.image or 'googleusercontent' in r.image or 'lh3.google' in r.image):
+            r.image = image_map[r.name]
+            changed = True
+    if changed:
+        db.session.commit()
 
     # Seed sample booking jika belum ada
     if not Booking.query.first():
@@ -281,28 +411,29 @@ with app.app_context():
     if not Room.query.first():
         sample_rooms = [
             Room(
-                name='Superior Room', price=450,
-                description='A comfortable room with modern amenities and city view.',
-                image='https://lh3.googleusercontent.com/aida-public/AB6AXuDXciBEBnOsvNcjv9R8BlOMS1djvsmVc8ouAaj6o4rIpidMKn1E535kgLfs7B6k_HcvNXRLHx9q6P9qKZTlSFMio_suaCscsZDVgFICbn-Ma8GNMqyTIjFoJYqN7JcqQtSTQgt7znVhNaW9SsT1yHRrxAkM-u2LYUwmxaJJKr4mgZRIVMumWf3J1WPfQroILEnXwiiQQMTNWhYIYjy-0jZt7CJ58O9wK0vpkfd61Z1hs4Hln9vPGuYXAhM4ilcZguHLlTnuDFkrEIY',
+                name='Superior Room',
+                price=1150000,
+                description='Kamar nyaman dengan sentuhan modern, pemandangan kota, dan fasilitas lengkap untuk istirahat berkualitas.',
+                image='https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80',
                 status='available', guests=2, bed_type='Queen', category='Superior',
             ),
             Room(
-                name='Deluxe Ocean View', price=680,
-                description='Stunning ocean panorama with private balcony and king-size bed.',
-                image='https://lh3.googleusercontent.com/aida/ADBb0uhivCtf76RBYYmZAf_CEtOnhIMj-K-3J_pU4ke9nyvFVw-oX4MhG6aOxAAHfxyBIFxA1uJRZQ2i8E1C9NoLnSbFO-63g-Q9vk18Bh_w1Pn68u7Tl94XPx6WUXjuBQweykPRNvTw08xqYwp5kr9FCNL6lfNZvqMQcQ5ZiwAMnKlWZuE-YlxQSbjDDtFEqeTBdgr9m8lCfRl37oHkOxX7zGdWUuHzeOijt7DGSpzp1IRJ3osTKiSZzuRoqXo',
+                name='Deluxe Room',
+                price=1900000,
+                description='Kamar deluxe luas dengan interior premium, ranjang king-size, dan fasilitas lengkap untuk kenyamanan menginap terbaik.',
+                image='https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80',
                 status='available', guests=2, bed_type='King', category='Deluxe',
             ),
             Room(
-                name='Junior Suite', price=920,
-                description='Spacious suite with living area, soaking tub, and espresso machine.',
-                image='https://lh3.googleusercontent.com/aida-public/AB6AXuASgiCQLN7_7ofWgO0-HwsQ78vS90EDKMyT5aQ_iNk5bz_mLVDMjPhTvPKGRyp8esuSZxgMbkDrz4cdozngH-uIpbQnv5NYzBxixxE4AFVNwfSSQRiSSH2Y4UEYyQYNAmSSw2hX1nVEpbWPkaR-AHuxme7LwWlgpg6IkrY3fLq5X00tAFLcBoqaTXcAkjCDwzQLGlW53aeYlNzftIvvqOElZV09vdwvZYTkSCF3sXQD4GJjZ3AALRHgcZWg9MNHCieRScq-ffd1MFg',
+                name='Junior Suite',
+                price=2800000,
+                description='Suite luas dengan ruang tamu terpisah, bathtub rendam mewah, dan mesin espresso premium untuk kenyamanan maksimal.',
+                image='https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80',
                 status='available', guests=3, bed_type='King', category='Suite',
             ),
         ]
         db.session.add_all(sample_rooms)
         db.session.commit()
 
-
 if __name__ == '__main__':
     app.run(debug=True)
-

@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── 1. Toggle Password Visibility ──────────────────────────
   const togglePass = document.querySelector('button[type="button"]');
-  const passInput  = document.querySelector('#password');
+  const passInput = document.querySelector('#password');
 
   if (togglePass && passInput) {
     togglePass.addEventListener('click', () => {
@@ -75,35 +75,34 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ── 5. Submit Handler ──────────────────────────────────────
-  const form   = document.getElementById('login-form') || document.querySelector('form');
-  const btn    = form?.querySelector('button[type="submit"]');
+  const form = document.getElementById('login-form') || document.querySelector('form');
+  const btn = form?.querySelector('button[type="submit"]');
 
   if (!form || !btn) return;
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const email    = document.getElementById('email')?.value.trim();
+    const email = document.getElementById('email')?.value.trim();
     const password = document.getElementById('password')?.value;
 
     if (!validateLogin(email, password)) return;
 
     // Loading state
     const originalHTML = btn.innerHTML;
-    btn.disabled   = true;
-    btn.innerHTML  = '<span class="material-symbols-outlined animate-spin text-[18px] mr-2">autorenew</span> Signing in...';
+    btn.disabled = true;
+    btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[18px] mr-2">autorenew</span> Signing in...';
     btn.style.opacity = '0.8';
 
     try {
       const res = await fetch('/login', {
-        method : 'POST',
+        method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body   : new URLSearchParams({ email, password }),
+        body: new URLSearchParams({ email, password }),
       });
 
       if (res.redirected) {
-        // Flask redirect ke '/' → kita arahkan ke /rooms
-        window.location.href = '/rooms';
+        window.location.href = res.url;
         return;
       }
 
@@ -114,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = '/rooms';
       } else {
         showError('password', 'Invalid email or password. Please try again.');
-        btn.disabled  = false;
+        btn.disabled = false;
         btn.innerHTML = originalHTML;
         btn.style.opacity = '1';
       }
@@ -122,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (err) {
       console.error('Login error:', err);
       showError('email', 'Network error. Please try again.');
-      btn.disabled  = false;
+      btn.disabled = false;
       btn.innerHTML = originalHTML;
       btn.style.opacity = '1';
     }
@@ -131,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── 6. Smooth Hero Image Ken Burns ────────────────────────
   const heroImg = document.querySelector('section:first-child img');
   if (heroImg) {
-    heroImg.style.transform  = 'scale(1.05)';
+    heroImg.style.transform = 'scale(1.05)';
     heroImg.style.transition = 'transform 12s ease-out';
     setTimeout(() => { heroImg.style.transform = 'scale(1)'; }, 100);
   }

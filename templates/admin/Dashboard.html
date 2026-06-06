@@ -1,1080 +1,1604 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lumina Grand — Admin Dashboard</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --navy: #0F172A;
-    --navy-mid: #1E293B;
-    --navy-light: #273549;
-    --gold: #D4AF37;
-    --gold-light: #E8CC6A;
-    --gold-dim: rgba(212,175,55,0.15);
-    --gold-border: rgba(212,175,55,0.3);
-    --white: #FFFFFF;
-    --surface: #F8F7F4;
-    --surface-2: #F0EDE6;
-    --text-primary: #0F172A;
-    --text-secondary: #64748B;
-    --text-muted: #94A3B8;
-    --green: #059669;
-    --yellow: #D97706;
-    --blue: #2563EB;
-    --red: #DC2626;
-    --sidebar-w: 260px;
-    --header-h: 80px;
-    --radius: 16px;
-    --radius-sm: 10px;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lumina Grand — Admin Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0F172A;
+      --navy-mid: #1E293B;
+      --navy-light: #273549;
+      --gold: #D4AF37;
+      --gold-light: #E8CC6A;
+      --gold-dim: rgba(212, 175, 55, 0.15);
+      --gold-border: rgba(212, 175, 55, 0.3);
+      --white: #FFFFFF;
+      --surface: #F8F7F4;
+      --surface-2: #F0EDE6;
+      --text-primary: #0F172A;
+      --text-secondary: #64748B;
+      --text-muted: #94A3B8;
+      --green: #059669;
+      --yellow: #D97706;
+      --blue: #2563EB;
+      --red: #DC2626;
+      --sidebar-w: 260px;
+      --header-h: 80px;
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background: var(--surface);
-    color: var(--text-primary);
-    display: flex;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--surface);
+      color: var(--text-primary);
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-  /* ── SIDEBAR ── */
-  .sidebar {
-    width: var(--sidebar-w);
-    background: var(--navy);
-    min-height: 100vh;
-    position: fixed;
-    top: 0; left: 0;
-    display: flex;
-    flex-direction: column;
-    z-index: 100;
-    border-right: 1px solid rgba(212,175,55,0.12);
-  }
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      background: var(--navy);
+      min-height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+      border-right: 1px solid rgba(212, 175, 55, 0.12);
+    }
 
-  .sidebar-logo {
-    padding: 32px 24px 28px;
-    border-bottom: 1px solid rgba(212,175,55,0.12);
-  }
-  .sidebar-logo .wordmark {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--white);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-  .sidebar-logo .wordmark span {
-    color: var(--gold);
-  }
-  .sidebar-logo .tagline {
-    font-size: 10px;
-    color: var(--text-muted);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-top: 4px;
-  }
+    .sidebar-logo {
+      padding: 32px 24px 28px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+    }
 
-  .sidebar-nav {
-    flex: 1;
-    padding: 24px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  .nav-section-label {
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    padding: 12px 8px 6px;
-    margin-top: 8px;
-  }
+    .sidebar-logo .wordmark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
-  .nav-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 11px 14px;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: all 0.2s;
-    color: rgba(255,255,255,0.55);
-    font-size: 13.5px;
-    font-weight: 500;
-    position: relative;
-    text-decoration: none;
-  }
-  .nav-item:hover {
-    color: rgba(255,255,255,0.9);
-    background: rgba(212,175,55,0.08);
-  }
-  .nav-item.active {
-    color: var(--gold);
-    background: var(--gold-dim);
-  }
-  .nav-item.active::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 50%;
-    transform: translateY(-50%);
-    width: 3px; height: 60%;
-    background: var(--gold);
-    border-radius: 0 3px 3px 0;
-  }
-  .nav-item svg { flex-shrink: 0; width: 18px; height: 18px; }
+    .sidebar-logo .wordmark span {
+      color: var(--gold);
+    }
 
-  .sidebar-bottom {
-    padding: 16px;
-    border-top: 1px solid rgba(212,175,55,0.12);
-  }
-  .admin-profile {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 10px;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  .admin-profile:hover { background: rgba(255,255,255,0.05); }
-  .avatar-circle {
-    width: 36px; height: 36px;
-    background: linear-gradient(135deg, var(--gold), #B8960C);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 700; color: var(--navy);
-    flex-shrink: 0;
-  }
-  .admin-info .name { font-size: 13px; font-weight: 600; color: var(--white); }
-  .admin-info .role { font-size: 11px; color: var(--text-muted); }
-  .logout-btn {
-    display: flex; align-items: center; gap: 8px;
-    margin-top: 8px; padding: 8px 10px;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    color: rgba(255,255,255,0.4);
-    font-size: 13px;
-    transition: color 0.2s;
-  }
-  .logout-btn:hover { color: #F87171; }
+    .sidebar-logo .tagline {
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
 
-  /* ── MAIN CONTENT ── */
-  .main {
-    margin-left: var(--sidebar-w);
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
+    .sidebar-nav {
+      flex: 1;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
 
-  /* ── HEADER ── */
-  .header {
-    height: var(--header-h);
-    background: rgba(248,247,244,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--surface-2);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 36px;
-    position: sticky;
-    top: 0;
-    z-index: 50;
-  }
-  .header-left .greeting {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--navy);
-    letter-spacing: -0.02em;
-  }
-  .header-left .subtitle {
-    font-size: 13px;
-    color: var(--text-secondary);
-    margin-top: 2px;
-  }
-  .header-right {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  .search-bar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--white);
-    border: 1px solid var(--surface-2);
-    border-radius: 40px;
-    padding: 8px 16px;
-    width: 220px;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-  .search-bar:focus-within {
-    border-color: var(--gold-border);
-    box-shadow: 0 0 0 3px rgba(212,175,55,0.1);
-  }
-  .search-bar input {
-    border: none; outline: none;
-    font-size: 13px; background: transparent;
-    color: var(--text-primary);
-    width: 100%;
-    font-family: inherit;
-  }
-  .search-bar input::placeholder { color: var(--text-muted); }
-  .icon-btn {
-    width: 38px; height: 38px;
-    background: var(--white);
-    border: 1px solid var(--surface-2);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    color: var(--text-secondary);
-    transition: all 0.2s;
-    position: relative;
-  }
-  .icon-btn:hover { border-color: var(--gold-border); color: var(--gold); }
-  .notif-dot {
-    width: 8px; height: 8px;
-    background: var(--gold);
-    border-radius: 50%;
-    position: absolute;
-    top: 5px; right: 5px;
-    border: 2px solid var(--white);
-  }
-  .header-avatar {
-    width: 38px; height: 38px;
-    background: linear-gradient(135deg, var(--gold), #B8960C);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 700; color: var(--navy);
-    cursor: pointer;
-  }
+    .nav-section-label {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 12px 8px 6px;
+      margin-top: 8px;
+    }
 
-  /* ── PAGE CONTENT ── */
-  .content {
-    padding: 32px 36px 48px;
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-  }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 14px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s;
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 13.5px;
+      font-weight: 500;
+      position: relative;
+      text-decoration: none;
+    }
 
-  /* ── SECTION TITLES ── */
-  .section-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--navy);
-    letter-spacing: -0.01em;
-    margin-bottom: 16px;
-  }
-  .section-title span {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    color: var(--gold);
-    font-size: 18px;
-  }
+    .nav-item:hover {
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(212, 175, 55, 0.08);
+    }
 
-  /* ── STAT CARDS ── */
-  .stat-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-  }
-  .stat-card {
-    background: var(--white);
-    border: 1px solid rgba(15,23,42,0.06);
-    border-radius: var(--radius);
-    padding: 24px;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(15,23,42,0.06), 0 4px 16px rgba(15,23,42,0.04);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .stat-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(15,23,42,0.1);
-  }
-  .stat-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--gold), var(--gold-light));
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-  .stat-card:hover::before { opacity: 1; }
-  .stat-card-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 16px;
-  }
-  .stat-label {
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-secondary);
-  }
-  .stat-icon {
-    width: 40px; height: 40px;
-    background: var(--gold-dim);
-    border-radius: var(--radius-sm);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--gold);
-  }
-  .stat-value {
-    font-size: 32px;
-    font-weight: 800;
-    color: var(--navy);
-    letter-spacing: -0.03em;
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-  .stat-trend {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 12px;
-    font-weight: 600;
-  }
-  .stat-trend.up { color: var(--green); }
-  .stat-trend.down { color: var(--red); }
-  .stat-period { font-size: 11px; color: var(--text-muted); margin-left: 4px; font-weight: 400; }
+    .nav-item.active {
+      color: var(--gold);
+      background: var(--gold-dim);
+    }
 
-  /* ── GLASS CARD ── */
-  .glass-card {
-    background: rgba(255,255,255,0.85);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.9);
-    border-radius: var(--radius);
-    box-shadow: 0 2px 16px rgba(15,23,42,0.06);
-  }
+    .nav-item.active::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 60%;
+      background: var(--gold);
+      border-radius: 0 3px 3px 0;
+    }
+
+    .nav-item svg {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+    }
+
+    .sidebar-bottom {
+      padding: 16px;
+      border-top: 1px solid rgba(212, 175, 55, 0.12);
+    }
+
+    .admin-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 10px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .admin-profile:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .avatar-circle {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--gold), #B8960C);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+      flex-shrink: 0;
+    }
+
+    .admin-info .name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .admin-info .role {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .logout-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+
+    .logout-btn:hover {
+      color: #F87171;
+    }
+
+    /* ── MAIN CONTENT ── */
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      height: var(--header-h);
+      background: rgba(248, 247, 244, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--surface-2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 36px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .header-left .greeting {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+    }
+
+    .header-left .subtitle {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--white);
+      border: 1px solid var(--surface-2);
+      border-radius: 40px;
+      padding: 8px 16px;
+      width: 220px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .search-bar:focus-within {
+      border-color: var(--gold-border);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+    }
+
+    .search-bar input {
+      border: none;
+      outline: none;
+      font-size: 13px;
+      background: transparent;
+      color: var(--text-primary);
+      width: 100%;
+      font-family: inherit;
+    }
+
+    .search-bar input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .icon-btn {
+      width: 38px;
+      height: 38px;
+      background: var(--white);
+      border: 1px solid var(--surface-2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .icon-btn:hover {
+      border-color: var(--gold-border);
+      color: var(--gold);
+    }
+
+    .notif-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      border: 2px solid var(--white);
+    }
+
+    .header-avatar {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--gold), #B8960C);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+      cursor: pointer;
+    }
+
+    /* ── PAGE CONTENT ── */
+    .content {
+      padding: 32px 36px 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    /* ── SECTION TITLES ── */
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+    }
+
+    .section-title span {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--gold);
+      font-size: 18px;
+    }
+
+    /* ── STAT CARDS ── */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .stat-card {
+      background: var(--white);
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      border-radius: var(--radius);
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 4px 16px rgba(15, 23, 42, 0.04);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.1);
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .stat-card:hover::before {
+      opacity: 1;
+    }
+
+    .stat-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-secondary);
+    }
+
+    .stat-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--gold-dim);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+    }
+
+    .stat-value {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-trend {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .stat-trend.up {
+      color: var(--green);
+    }
+
+    .stat-trend.down {
+      color: var(--red);
+    }
+
+    .stat-period {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-left: 4px;
+      font-weight: 400;
+    }
+
+    /* ── GLASS CARD ── */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: var(--radius);
+      box-shadow: 0 2px 16px rgba(15, 23, 42, 0.06);
+    }
 
 
 
-  /* ── BOTTOM GRID ── */
-  .bottom-grid {
-    display: grid;
-    grid-template-columns: 1fr 340px;
-    gap: 20px;
-  }
+    /* ── BOTTOM GRID ── */
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 20px;
+    }
 
-  /* ── TABLE ── */
-  .table-card {
-    background: var(--white);
-    border: 1px solid rgba(15,23,42,0.06);
-    border-radius: var(--radius);
-    box-shadow: 0 1px 3px rgba(15,23,42,0.06);
-    overflow: hidden;
-  }
-  .table-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 24px 16px;
-    border-bottom: 1px solid var(--surface-2);
-  }
-  .btn-gold {
-    font-size: 12px;
-    font-weight: 600;
-    background: linear-gradient(135deg, var(--gold), #C9A227);
-    color: var(--navy);
-    border: none;
-    padding: 7px 16px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-family: inherit;
-    letter-spacing: 0.02em;
-    transition: opacity 0.2s;
-  }
-  .btn-gold:hover { opacity: 0.85; }
+    /* ── TABLE ── */
+    .table-card {
+      background: var(--white);
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      border-radius: var(--radius);
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+      overflow: hidden;
+    }
 
-  table { width: 100%; border-collapse: collapse; }
-  thead th {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-muted);
-    text-align: left;
-    padding: 10px 24px;
-    background: var(--surface);
-    border-bottom: 1px solid var(--surface-2);
-  }
-  tbody tr {
-    border-bottom: 1px solid var(--surface-2);
-    transition: background 0.15s;
-  }
-  tbody tr:last-child { border-bottom: none; }
-  tbody tr:hover { background: #FAFAF8; }
-  tbody td {
-    padding: 13px 24px;
-    font-size: 13px;
-    color: var(--text-primary);
-    vertical-align: middle;
-  }
-  .booking-id { font-weight: 700; color: var(--navy); font-family: 'Cormorant Garamond', serif; font-size: 15px; }
-  .guest-name { font-weight: 600; }
-  .room-type { color: var(--text-secondary); }
-  .status-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 4px 10px;
-    border-radius: 20px;
-    letter-spacing: 0.04em;
-  }
-  .status-dot { width: 5px; height: 5px; border-radius: 50%; }
-  .status-confirmed { background: rgba(5,150,105,0.1); color: #059669; }
-  .status-confirmed .status-dot { background: #059669; }
-  .status-pending { background: rgba(217,119,6,0.1); color: #D97706; }
-  .status-pending .status-dot { background: #D97706; }
-  .status-completed { background: rgba(37,99,235,0.1); color: #2563EB; }
-  .status-completed .status-dot { background: #2563EB; }
-  .status-cancelled { background: rgba(220,38,38,0.1); color: #DC2626; }
-  .status-cancelled .status-dot { background: #DC2626; }
-  .btn-view {
-    font-size: 12px;
-    font-weight: 600;
-    background: transparent;
-    border: 1px solid var(--gold-border);
-    color: var(--gold);
-    padding: 5px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-family: inherit;
-    transition: all 0.2s;
-  }
-  .btn-view:hover { background: var(--gold-dim); }
+    .table-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid var(--surface-2);
+    }
 
-  /* ── RIGHT SIDEBAR PANELS ── */
-  .right-panels { display: flex; flex-direction: column; gap: 20px; }
+    .btn-gold {
+      font-size: 12px;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--gold), #C9A227);
+      color: var(--navy);
+      border: none;
+      padding: 7px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: inherit;
+      letter-spacing: 0.02em;
+      transition: opacity 0.2s;
+    }
 
-  /* ── ROOM STATUS ── */
-  .room-status-card {
-    background: var(--white);
-    border: 1px solid rgba(15,23,42,0.06);
-    border-radius: var(--radius);
-    padding: 20px 22px;
-    box-shadow: 0 1px 3px rgba(15,23,42,0.06);
-  }
-  .room-status-list { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
-  .room-status-item { display: flex; flex-direction: column; gap: 6px; }
-  .room-status-row { display: flex; align-items: center; justify-content: space-between; }
-  .room-status-label { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; }
-  .room-status-icon {
-    width: 26px; height: 26px;
-    border-radius: 6px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 12px;
-  }
-  .rs-available { background: rgba(5,150,105,0.12); color: #059669; }
-  .rs-occupied { background: rgba(15,23,42,0.08); color: var(--navy); }
-  .rs-reserved { background: rgba(212,175,55,0.15); color: #A08020; }
-  .rs-maintenance { background: rgba(220,38,38,0.1); color: #DC2626; }
-  .room-count { font-size: 14px; font-weight: 700; color: var(--navy); }
-  .progress-bar {
-    height: 4px;
-    background: var(--surface-2);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%;
-    border-radius: 4px;
-    transition: width 1s ease;
-  }
-  .fill-green { background: #059669; }
-  .fill-navy { background: var(--navy); }
-  .fill-gold { background: var(--gold); }
-  .fill-red { background: #DC2626; }
+    .btn-gold:hover {
+      opacity: 0.85;
+    }
 
-  /* ── ACTIVITY FEED ── */
-  .activity-card {
-    background: var(--white);
-    border: 1px solid rgba(15,23,42,0.06);
-    border-radius: var(--radius);
-    padding: 20px 22px;
-    box-shadow: 0 1px 3px rgba(15,23,42,0.06);
-  }
-  .activity-list { display: flex; flex-direction: column; margin-top: 16px; }
-  .activity-item {
-    display: flex;
-    gap: 12px;
-    padding: 10px 0;
-    position: relative;
-  }
-  .activity-item:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    left: 13px;
-    top: 36px;
-    bottom: -4px;
-    width: 1px;
-    background: var(--surface-2);
-  }
-  .activity-dot {
-    width: 26px; height: 26px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    font-size: 11px;
-    margin-top: 2px;
-  }
-  .activity-body .act-title { font-size: 13px; font-weight: 600; color: var(--navy); }
-  .activity-body .act-detail { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
-  .activity-body .act-time { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
 
-  /* ── QUICK ACTIONS + INSIGHTS ── */
-  .four-col {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr) 1fr;
-    gap: 20px;
-  }
-  .actions-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-  .action-card {
-    background: var(--navy);
-    border-radius: var(--radius);
-    padding: 22px 20px;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-  .action-card::before {
-    content: '';
-    position: absolute;
-    top: -30px; right: -30px;
-    width: 100px; height: 100px;
-    background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .action-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(15,23,42,0.25); }
-  .action-icon {
-    width: 40px; height: 40px;
-    background: var(--gold-dim);
-    border-radius: var(--radius-sm);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--gold);
-    margin-bottom: 14px;
-  }
-  .action-title { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
-  .action-desc { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.5; }
-  .action-arrow {
-    margin-top: 14px;
-    color: var(--gold);
-    font-size: 18px;
-    display: block;
-  }
+    thead th {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      text-align: left;
+      padding: 10px 24px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--surface-2);
+    }
 
-  /* ── INSIGHTS ── */
-  .insights-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-  }
-  .insight-card {
-    background: var(--white);
-    border: 1px solid rgba(15,23,42,0.06);
-    border-radius: var(--radius);
-    padding: 20px;
-    box-shadow: 0 1px 3px rgba(15,23,42,0.06);
-    transition: transform 0.2s;
-  }
-  .insight-card:hover { transform: translateY(-2px); }
-  .insight-icon {
-    width: 36px; height: 36px;
-    background: var(--gold-dim);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    color: var(--gold);
-    margin-bottom: 12px;
-  }
-  .insight-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 6px; }
-  .insight-value { font-size: 18px; font-weight: 800; color: var(--navy); letter-spacing: -0.02em; }
-  .insight-sub { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+    tbody tr {
+      border-bottom: 1px solid var(--surface-2);
+      transition: background 0.15s;
+    }
 
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .stat-card    { animation: fadeUp 0.5s ease both; }
-  .stat-card:nth-child(1) { animation-delay: 0.05s; }
-  .stat-card:nth-child(2) { animation-delay: 0.10s; }
-  .stat-card:nth-child(3) { animation-delay: 0.15s; }
-  .stat-card:nth-child(4) { animation-delay: 0.20s; }
-  .chart-card   { animation: fadeUp 0.5s 0.25s ease both; }
-  .table-card, .room-status-card, .activity-card { animation: fadeUp 0.5s 0.3s ease both; }
-  .action-card  { animation: fadeUp 0.5s ease both; }
-  .action-card:nth-child(1) { animation-delay: 0.35s; }
-  .action-card:nth-child(2) { animation-delay: 0.40s; }
-  .action-card:nth-child(3) { animation-delay: 0.45s; }
-  .insight-card { animation: fadeUp 0.5s 0.5s ease both; }
+    tbody tr:last-child {
+      border-bottom: none;
+    }
 
-  /* LOCKED NAV ITEM */
-  .nav-locked { opacity: 0.45; cursor: not-allowed; }
-  .nav-locked:hover { background: rgba(220,38,38,0.06) !important; color: #F87171 !important; opacity: 0.6; }
-  .nav-lock-badge { margin-left: auto; font-size: 12px; }
+    tbody tr:hover {
+      background: #FAFAF8;
+    }
 
-  /* ACCESS DENIED TOAST */
-  .access-toast {
-    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px);
-    background: #1E293B; color: #fff; border: 1px solid rgba(220,38,38,0.4);
-    border-radius: 10px; padding: 12px 20px; display: flex; align-items: center; gap: 10px;
-    font-size: 13px; font-weight: 500; z-index: 9999; box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-    transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s;
-    opacity: 0; pointer-events: none; white-space: nowrap;
-  }
-  .access-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-  .access-toast-icon { width: 28px; height: 28px; background: rgba(220,38,38,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #F87171; flex-shrink: 0; }
-  .access-toast strong { color: #F87171; }
-</style>
+    tbody td {
+      padding: 13px 24px;
+      font-size: 13px;
+      color: var(--text-primary);
+      vertical-align: middle;
+    }
+
+    .booking-id {
+      font-weight: 700;
+      color: var(--navy);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+    }
+
+    .guest-name {
+      font-weight: 600;
+    }
+
+    .room-type {
+      color: var(--text-secondary);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.04em;
+    }
+
+    .status-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+    }
+
+    .status-confirmed {
+      background: rgba(5, 150, 105, 0.1);
+      color: #059669;
+    }
+
+    .status-confirmed .status-dot {
+      background: #059669;
+    }
+
+    .status-pending {
+      background: rgba(217, 119, 6, 0.1);
+      color: #D97706;
+    }
+
+    .status-pending .status-dot {
+      background: #D97706;
+    }
+
+    .status-completed {
+      background: rgba(37, 99, 235, 0.1);
+      color: #2563EB;
+    }
+
+    .status-completed .status-dot {
+      background: #2563EB;
+    }
+
+    .status-cancelled {
+      background: rgba(220, 38, 38, 0.1);
+      color: #DC2626;
+    }
+
+    .status-cancelled .status-dot {
+      background: #DC2626;
+    }
+
+    .btn-view {
+      font-size: 12px;
+      font-weight: 600;
+      background: transparent;
+      border: 1px solid var(--gold-border);
+      color: var(--gold);
+      padding: 5px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    .btn-view:hover {
+      background: var(--gold-dim);
+    }
+
+    /* ── RIGHT SIDEBAR PANELS ── */
+    .right-panels {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* ── ROOM STATUS ── */
+    .room-status-card {
+      background: var(--white);
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+    }
+
+    .room-status-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .room-status-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .room-status-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .room-status-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .room-status-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .rs-available {
+      background: rgba(5, 150, 105, 0.12);
+      color: #059669;
+    }
+
+    .rs-occupied {
+      background: rgba(15, 23, 42, 0.08);
+      color: var(--navy);
+    }
+
+    .rs-reserved {
+      background: rgba(212, 175, 55, 0.15);
+      color: #A08020;
+    }
+
+    .rs-maintenance {
+      background: rgba(220, 38, 38, 0.1);
+      color: #DC2626;
+    }
+
+    .room-count {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .progress-bar {
+      height: 4px;
+      background: var(--surface-2);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 1s ease;
+    }
+
+    .fill-green {
+      background: #059669;
+    }
+
+    .fill-navy {
+      background: var(--navy);
+    }
+
+    .fill-gold {
+      background: var(--gold);
+    }
+
+    .fill-red {
+      background: #DC2626;
+    }
+
+    /* ── ACTIVITY FEED ── */
+    .activity-card {
+      background: var(--white);
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+    }
+
+    .activity-list {
+      display: flex;
+      flex-direction: column;
+      margin-top: 16px;
+    }
+
+    .activity-item {
+      display: flex;
+      gap: 12px;
+      padding: 10px 0;
+      position: relative;
+    }
+
+    .activity-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 13px;
+      top: 36px;
+      bottom: -4px;
+      width: 1px;
+      background: var(--surface-2);
+    }
+
+    .activity-dot {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    .activity-body .act-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .activity-body .act-detail {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    .activity-body .act-time {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    /* ── QUICK ACTIONS + INSIGHTS ── */
+    .four-col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr) 1fr;
+      gap: 20px;
+    }
+
+    .actions-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .action-card {
+      background: var(--navy);
+      border-radius: var(--radius);
+      padding: 22px 20px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .action-card::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .action-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.25);
+    }
+
+    .action-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--gold-dim);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    .action-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .action-desc {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.5;
+    }
+
+    .action-arrow {
+      margin-top: 14px;
+      color: var(--gold);
+      font-size: 18px;
+      display: block;
+    }
+
+    /* ── INSIGHTS ── */
+    .insights-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .insight-card {
+      background: var(--white);
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+      transition: transform 0.2s;
+    }
+
+    .insight-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .insight-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--gold-dim);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .insight-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .insight-value {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+    }
+
+    .insight-sub {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .stat-card {
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .stat-card:nth-child(1) {
+      animation-delay: 0.05s;
+    }
+
+    .stat-card:nth-child(2) {
+      animation-delay: 0.10s;
+    }
+
+    .stat-card:nth-child(3) {
+      animation-delay: 0.15s;
+    }
+
+    .stat-card:nth-child(4) {
+      animation-delay: 0.20s;
+    }
+
+    .chart-card {
+      animation: fadeUp 0.5s 0.25s ease both;
+    }
+
+    .table-card,
+    .room-status-card,
+    .activity-card {
+      animation: fadeUp 0.5s 0.3s ease both;
+    }
+
+    .action-card {
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .action-card:nth-child(1) {
+      animation-delay: 0.35s;
+    }
+
+    .action-card:nth-child(2) {
+      animation-delay: 0.40s;
+    }
+
+    .action-card:nth-child(3) {
+      animation-delay: 0.45s;
+    }
+
+    .insight-card {
+      animation: fadeUp 0.5s 0.5s ease both;
+    }
+
+    /* LOCKED NAV ITEM */
+    .nav-locked {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .nav-locked:hover {
+      background: rgba(220, 38, 38, 0.06) !important;
+      color: #F87171 !important;
+      opacity: 0.6;
+    }
+
+    .nav-lock-badge {
+      margin-left: auto;
+      font-size: 12px;
+    }
+
+    /* ACCESS DENIED TOAST */
+    .access-toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: #1E293B;
+      color: #fff;
+      border: 1px solid rgba(220, 38, 38, 0.4);
+      border-radius: 10px;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      z-index: 9999;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s;
+      opacity: 0;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .access-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .access-toast-icon {
+      width: 28px;
+      height: 28px;
+      background: rgba(220, 38, 38, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #F87171;
+      flex-shrink: 0;
+    }
+
+    .access-toast strong {
+      color: #F87171;
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- SIDEBAR -->
-<aside class="sidebar">
-  <div class="sidebar-logo">
-    <div class="wordmark">Lumina <span>Grand</span></div>
-    <div class="tagline">Hotel Management System</div>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="wordmark">Lumina <span>Grand</span></div>
+      <div class="tagline">Hotel Management System</div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Operations</div>
+
+      <a class="nav-item active" href="/dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <rect x="3" y="3" width="7" height="7" rx="1.5" />
+          <rect x="14" y="3" width="7" height="7" rx="1.5" />
+          <rect x="3" y="14" width="7" height="7" rx="1.5" />
+          <rect x="14" y="14" width="7" height="7" rx="1.5" />
+        </svg>
+        Dashboard
+      </a>
+
+      <a class="nav-item" href="/admin/rooms">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z" />
+          <polyline points="9 22 9 12 15 12 15 22" />
+        </svg>
+        Rooms
+      </a>
+
+      <a class="nav-item" href="/bookings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        Bookings
+      </a>
+
+      {% if current_user.role == 'super_admin' %}
+      <a class="nav-item" href="{{ url_for('staff') }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M23 21v-2a4 4 0 00-3-3.87" />
+          <path d="M16 3.13a4 4 0 010 7.75" />
+        </svg>
+        Staff
+      </a>
+      {% else %}
+      <a class="nav-item nav-locked" href="#" onclick="showAccessDenied(event)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M23 21v-2a4 4 0 00-3-3.87" />
+          <path d="M16 3.13a4 4 0 010 7.75" />
+        </svg>
+        Staff
+        <span class="nav-lock-badge">&#128274;</span>
+      </a>
+      {% endif %}
+
+
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="admin-profile">
+        <div class="avatar-circle">AD</div>
+        <div class="admin-info">
+          <div class="name">Administrator</div>
+          <div class="role">General Manager</div>
+        </div>
+      </div>
+      <a href="/logout"class="logout-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+          <polyline points="16 17 21 12 16 7" />
+          <line x1="21" y1="12" x2="9" y2="12" />
+        </svg>
+        Logout
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-left">
+        <div class="greeting">Welcome back, Administrator</div>
+        <div class="subtitle">Monitor hotel operations, occupancy, and guest satisfaction.</div>
+      </div>
+      <div class="header-right">
+        <div class="search-bar">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <input type="text" placeholder="Search bookings, guests…">
+        </div>
+        <div class="icon-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" />
+            <path d="M13.73 21a2 2 0 01-3.46 0" />
+          </svg>
+          <div class="notif-dot"></div>
+        </div>
+        <div class="header-avatar">AD</div>
+      </div>
+    </header>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+      <!-- STAT CARDS -->
+      <div>
+        <div class="section-title"><span>Performance</span> Overview</div>
+        <div class="stat-grid">
+
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <div class="stat-label">Total Rooms</div>
+              <div class="stat-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z" />
+                  <polyline points="9 22 9 12 15 12 15 22" />
+                </svg>
+              </div>
+            </div>
+            <div class="stat-value">125</div>
+            <div class="stat-trend up">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="18 15 12 9 6 15" />
+              </svg>
+              +3 new
+              <span class="stat-period">this month</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <div class="stat-label">Active Bookings</div>
+              <div class="stat-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+            </div>
+            <div class="stat-value">86</div>
+            <div class="stat-trend up">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="18 15 12 9 6 15" />
+              </svg>
+              +12%
+              <span class="stat-period">vs last week</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <div class="stat-label">Occupancy Rate</div>
+              <div class="stat-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 8v4l3 3" />
+                </svg>
+              </div>
+            </div>
+            <div class="stat-value">92%</div>
+            <div class="stat-trend up">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="18 15 12 9 6 15" />
+              </svg>
+              +5.2%
+              <span class="stat-period">vs last month</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <div class="stat-label">Monthly Revenue</div>
+              <div class="stat-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <line x1="12" y1="1" x2="12" y2="23" />
+                  <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+                </svg>
+              </div>
+            </div>
+            <div class="stat-value" style="font-size:22px;">$15,800</div>
+            <div class="stat-trend up">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="18 15 12 9 6 15" />
+              </svg>
+              +18.3%
+              <span class="stat-period">vs last month</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+      <!-- BOOKINGS TABLE + RIGHT PANELS -->
+      <div class="bottom-grid">
+
+        <!-- TABLE -->
+        <div class="table-card">
+          <div class="table-header">
+            <div>
+              <div class="section-title" style="margin-bottom:0"><span>Recent</span> Bookings</div>
+              <div style="font-size:12px;color:var(--text-muted);margin-top:3px">Latest 5 reservations</div>
+            </div>
+            <button class="btn-gold">+ New Booking</button>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Booking ID</th>
+                <th>Guest Name</th>
+                <th>Room Type</th>
+                <th>Check-In</th>
+                <th>Check-Out</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="booking-id">#LG-4801</span></td>
+                <td><span class="guest-name">Aryan Pratama</span></td>
+                <td><span class="room-type">Grand Suite</span></td>
+                <td>02 Jun 2025</td>
+                <td>06 Jun 2025</td>
+                <td><span class="status-badge status-confirmed"><span class="status-dot"></span>Confirmed</span></td>
+                <td><button class="btn-view">View Details</button></td>
+              </tr>
+              <tr>
+                <td><span class="booking-id">#LG-4800</span></td>
+                <td><span class="guest-name">Siti Rahmawati</span></td>
+                <td><span class="room-type">Deluxe Ocean</span></td>
+                <td>03 Jun 2025</td>
+                <td>07 Jun 2025</td>
+                <td><span class="status-badge status-pending"><span class="status-dot"></span>Pending</span></td>
+                <td><button class="btn-view">View Details</button></td>
+              </tr>
+              <tr>
+                <td><span class="booking-id">#LG-4799</span></td>
+                <td><span class="guest-name">David Chen</span></td>
+                <td><span class="room-type">Presidential Suite</span></td>
+                <td>28 May 2025</td>
+                <td>01 Jun 2025</td>
+                <td><span class="status-badge status-completed"><span class="status-dot"></span>Completed</span></td>
+                <td><button class="btn-view">View Details</button></td>
+              </tr>
+              <tr>
+                <td><span class="booking-id">#LG-4798</span></td>
+                <td><span class="guest-name">Maria Santos</span></td>
+                <td><span class="room-type">Superior Room</span></td>
+                <td>30 May 2025</td>
+                <td>03 Jun 2025</td>
+                <td><span class="status-badge status-confirmed"><span class="status-dot"></span>Confirmed</span></td>
+                <td><button class="btn-view">View Details</button></td>
+              </tr>
+              <tr>
+                <td><span class="booking-id">#LG-4797</span></td>
+                <td><span class="guest-name">Budi Santoso</span></td>
+                <td><span class="room-type">Classic Room</span></td>
+                <td>25 May 2025</td>
+                <td>28 May 2025</td>
+                <td><span class="status-badge status-cancelled"><span class="status-dot"></span>Cancelled</span></td>
+                <td><button class="btn-view">View Details</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- RIGHT PANELS -->
+        <div class="right-panels">
+
+          <!-- Room Status -->
+          <div class="room-status-card">
+            <div class="section-title" style="margin-bottom:0"><span>Room</span> Status</div>
+            <div class="room-status-list">
+
+              <div class="room-status-item">
+                <div class="room-status-row">
+                  <div class="room-status-label">
+                    <div class="room-status-icon rs-available">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    </div>
+                    Available
+                  </div>
+                  <span class="room-count">32</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill fill-green" style="width:26%"></div>
+                </div>
+              </div>
+
+              <div class="room-status-item">
+                <div class="room-status-row">
+                  <div class="room-status-label">
+                    <div class="room-status-icon rs-occupied">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                      </svg>
+                    </div>
+                    Occupied
+                  </div>
+                  <span class="room-count">68</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill fill-navy" style="width:54%"></div>
+                </div>
+              </div>
+
+              <div class="room-status-item">
+                <div class="room-status-row">
+                  <div class="room-status-label">
+                    <div class="room-status-icon rs-reserved">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path
+                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    Reserved
+                  </div>
+                  <span class="room-count">18</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill fill-gold" style="width:14%"></div>
+                </div>
+              </div>
+
+              <div class="room-status-item">
+                <div class="room-status-row">
+                  <div class="room-status-label">
+                    <div class="room-status-icon rs-maintenance">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path
+                          d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" />
+                      </svg>
+                    </div>
+                    Maintenance
+                  </div>
+                  <span class="room-count">7</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill fill-red" style="width:6%"></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Activity Feed -->
+          <div class="activity-card">
+            <div class="section-title" style="margin-bottom:0"><span>Recent</span> Activity</div>
+            <div class="activity-list">
+
+              <div class="activity-item">
+                <div class="activity-dot" style="background:rgba(5,150,105,0.12);color:#059669">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div class="activity-body">
+                  <div class="act-title">New Booking #LG-4801</div>
+                  <div class="act-detail">Aryan Pratama · Grand Suite</div>
+                  <div class="act-time">2 minutes ago</div>
+                </div>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-dot" style="background:rgba(212,175,55,0.12);color:#A08020">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4" />
+                    <polyline points="10 17 15 12 10 7" />
+                    <line x1="15" y1="12" x2="3" y2="12" />
+                  </svg>
+                </div>
+                <div class="activity-body">
+                  <div class="act-title">Guest Check-In</div>
+                  <div class="act-detail">Maria Santos · Room 412</div>
+                  <div class="act-time">18 minutes ago</div>
+                </div>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-dot" style="background:rgba(37,99,235,0.1);color:#2563EB">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+                    <polyline points="16 17 21 12 16 7" />
+                    <line x1="21" y1="12" x2="9" y2="12" />
+                  </svg>
+                </div>
+                <div class="activity-body">
+                  <div class="act-title">Guest Check-Out</div>
+                  <div class="act-detail">David Chen · Presidential Suite</div>
+                  <div class="act-time">1 hour ago</div>
+                </div>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-dot" style="background:rgba(220,38,38,0.1);color:#DC2626">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="15" y1="9" x2="9" y2="15" />
+                    <line x1="9" y1="9" x2="15" y2="15" />
+                  </svg>
+                </div>
+                <div class="activity-body">
+                  <div class="act-title">Booking Cancelled</div>
+                  <div class="act-detail">Budi Santoso · #LG-4797</div>
+                  <div class="act-time">3 hours ago</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- QUICK ACTIONS -->
+      <div>
+        <div class="section-title"><span>Quick</span> Actions</div>
+        <div class="actions-row">
+
+          <div class="action-card">
+            <div class="action-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+            </div>
+            <div class="action-title">Add Room</div>
+            <div class="action-desc">Register a new room, configure type, floor, and amenities.</div>
+            <span class="action-arrow">→</span>
+          </div>
+
+          <div class="action-card">
+            <div class="action-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <div class="action-title">Create Booking</div>
+            <div class="action-desc">Manually create a guest reservation and assign a room.</div>
+            <span class="action-arrow">→</span>
+          </div>
+
+          <div class="action-card">
+            <div class="action-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                <path d="M16 3.13a4 4 0 010 7.75" />
+              </svg>
+            </div>
+            <div class="action-title">Manage Staff</div>
+            <div class="action-desc">View, add or update staff roles, schedules, and permissions.</div>
+            <span class="action-arrow">→</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- INSIGHTS -->
+      <div>
+        <div class="section-title"><span>Hotel</span> Insights</div>
+        <div class="insights-row">
+
+          <div class="insight-card">
+            <div class="insight-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+            </div>
+            <div class="insight-label">Most Booked</div>
+            <div class="insight-value">Grand Suite</div>
+            <div class="insight-sub">38 reservations this month</div>
+          </div>
+
+          <div class="insight-card">
+            <div class="insight-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+              </svg>
+            </div>
+            <div class="insight-label">Highest Occupancy</div>
+            <div class="insight-value">Ocean View</div>
+            <div class="insight-sub">97% occupancy rate</div>
+          </div>
+
+          <div class="insight-card">
+            <div class="insight-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+            </div>
+            <div class="insight-label">Avg. Guest Stay</div>
+            <div class="insight-value">3.4 Nights</div>
+            <div class="insight-sub">+0.3 vs last month</div>
+          </div>
+
+          <div class="insight-card">
+            <div class="insight-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            </div>
+            <div class="insight-label">Guest Satisfaction</div>
+            <div class="insight-value">4.8 / 5.0</div>
+            <div class="insight-sub">Based on 412 reviews</div>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </main>
+
+
+  <div class="access-toast" id="accessToast">
+    <div class="access-toast-icon">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <rect x="3" y="11" width="18" height="11" rx="2" />
+        <path d="M7 11V7a5 5 0 0110 0v4" />
+      </svg>
+    </div>
+    <div><strong>Access Denied</strong> — Staff management is restricted to Superadmin only.</div>
   </div>
-
-  <nav class="sidebar-nav">
-    <div class="nav-section-label">Operations</div>
-
-    <a class="nav-item active" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
-      Dashboard
-    </a>
-
-    <a class="nav-item" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      Rooms
-    </a>
-
-    <a class="nav-item" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-      Bookings
-    </a>
-
-    <a class="nav-item nav-locked" href="#" onclick="showAccessDenied(event)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-      Staff
-      <span class="nav-lock-badge">&#128274;</span>
-    </a>
-
-
-  </nav>
-
-  <div class="sidebar-bottom">
-    <div class="admin-profile">
-      <div class="avatar-circle">AD</div>
-      <div class="admin-info">
-        <div class="name">Administrator</div>
-        <div class="role">General Manager</div>
-      </div>
-    </div>
-    <div class="logout-btn">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-      Logout
-    </div>
-  </div>
-</aside>
-
-<!-- MAIN -->
-<main class="main">
-
-  <!-- HEADER -->
-  <header class="header">
-    <div class="header-left">
-      <div class="greeting">Welcome back, Administrator</div>
-      <div class="subtitle">Monitor hotel operations, occupancy, and guest satisfaction.</div>
-    </div>
-    <div class="header-right">
-      <div class="search-bar">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input type="text" placeholder="Search bookings, guests…">
-      </div>
-      <div class="icon-btn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
-        <div class="notif-dot"></div>
-      </div>
-      <div class="header-avatar">AD</div>
-    </div>
-  </header>
-
-  <!-- CONTENT -->
-  <div class="content">
-
-    <!-- STAT CARDS -->
-    <div>
-      <div class="section-title"><span>Performance</span> Overview</div>
-      <div class="stat-grid">
-
-        <div class="stat-card">
-          <div class="stat-card-header">
-            <div class="stat-label">Total Rooms</div>
-            <div class="stat-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            </div>
-          </div>
-          <div class="stat-value">125</div>
-          <div class="stat-trend up">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
-            +3 new
-            <span class="stat-period">this month</span>
-          </div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-card-header">
-            <div class="stat-label">Active Bookings</div>
-            <div class="stat-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-            </div>
-          </div>
-          <div class="stat-value">86</div>
-          <div class="stat-trend up">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
-            +12%
-            <span class="stat-period">vs last week</span>
-          </div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-card-header">
-            <div class="stat-label">Occupancy Rate</div>
-            <div class="stat-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-            </div>
-          </div>
-          <div class="stat-value">92%</div>
-          <div class="stat-trend up">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
-            +5.2%
-            <span class="stat-period">vs last month</span>
-          </div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-card-header">
-            <div class="stat-label">Monthly Revenue</div>
-            <div class="stat-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-            </div>
-          </div>
-          <div class="stat-value" style="font-size:22px;">$15,800</div>
-          <div class="stat-trend up">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
-            +18.3%
-            <span class="stat-period">vs last month</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-
-
-    <!-- BOOKINGS TABLE + RIGHT PANELS -->
-    <div class="bottom-grid">
-
-      <!-- TABLE -->
-      <div class="table-card">
-        <div class="table-header">
-          <div>
-            <div class="section-title" style="margin-bottom:0"><span>Recent</span> Bookings</div>
-            <div style="font-size:12px;color:var(--text-muted);margin-top:3px">Latest 5 reservations</div>
-          </div>
-          <button class="btn-gold">+ New Booking</button>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Booking ID</th>
-              <th>Guest Name</th>
-              <th>Room Type</th>
-              <th>Check-In</th>
-              <th>Check-Out</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><span class="booking-id">#LG-4801</span></td>
-              <td><span class="guest-name">Aryan Pratama</span></td>
-              <td><span class="room-type">Grand Suite</span></td>
-              <td>02 Jun 2025</td>
-              <td>06 Jun 2025</td>
-              <td><span class="status-badge status-confirmed"><span class="status-dot"></span>Confirmed</span></td>
-              <td><button class="btn-view">View Details</button></td>
-            </tr>
-            <tr>
-              <td><span class="booking-id">#LG-4800</span></td>
-              <td><span class="guest-name">Siti Rahmawati</span></td>
-              <td><span class="room-type">Deluxe Ocean</span></td>
-              <td>03 Jun 2025</td>
-              <td>07 Jun 2025</td>
-              <td><span class="status-badge status-pending"><span class="status-dot"></span>Pending</span></td>
-              <td><button class="btn-view">View Details</button></td>
-            </tr>
-            <tr>
-              <td><span class="booking-id">#LG-4799</span></td>
-              <td><span class="guest-name">David Chen</span></td>
-              <td><span class="room-type">Presidential Suite</span></td>
-              <td>28 May 2025</td>
-              <td>01 Jun 2025</td>
-              <td><span class="status-badge status-completed"><span class="status-dot"></span>Completed</span></td>
-              <td><button class="btn-view">View Details</button></td>
-            </tr>
-            <tr>
-              <td><span class="booking-id">#LG-4798</span></td>
-              <td><span class="guest-name">Maria Santos</span></td>
-              <td><span class="room-type">Superior Room</span></td>
-              <td>30 May 2025</td>
-              <td>03 Jun 2025</td>
-              <td><span class="status-badge status-confirmed"><span class="status-dot"></span>Confirmed</span></td>
-              <td><button class="btn-view">View Details</button></td>
-            </tr>
-            <tr>
-              <td><span class="booking-id">#LG-4797</span></td>
-              <td><span class="guest-name">Budi Santoso</span></td>
-              <td><span class="room-type">Classic Room</span></td>
-              <td>25 May 2025</td>
-              <td>28 May 2025</td>
-              <td><span class="status-badge status-cancelled"><span class="status-dot"></span>Cancelled</span></td>
-              <td><button class="btn-view">View Details</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- RIGHT PANELS -->
-      <div class="right-panels">
-
-        <!-- Room Status -->
-        <div class="room-status-card">
-          <div class="section-title" style="margin-bottom:0"><span>Room</span> Status</div>
-          <div class="room-status-list">
-
-            <div class="room-status-item">
-              <div class="room-status-row">
-                <div class="room-status-label">
-                  <div class="room-status-icon rs-available">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  </div>
-                  Available
-                </div>
-                <span class="room-count">32</span>
-              </div>
-              <div class="progress-bar"><div class="progress-fill fill-green" style="width:26%"></div></div>
-            </div>
-
-            <div class="room-status-item">
-              <div class="room-status-row">
-                <div class="room-status-label">
-                  <div class="room-status-icon rs-occupied">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-                  </div>
-                  Occupied
-                </div>
-                <span class="room-count">68</span>
-              </div>
-              <div class="progress-bar"><div class="progress-fill fill-navy" style="width:54%"></div></div>
-            </div>
-
-            <div class="room-status-item">
-              <div class="room-status-row">
-                <div class="room-status-label">
-                  <div class="room-status-icon rs-reserved">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                  </div>
-                  Reserved
-                </div>
-                <span class="room-count">18</span>
-              </div>
-              <div class="progress-bar"><div class="progress-fill fill-gold" style="width:14%"></div></div>
-            </div>
-
-            <div class="room-status-item">
-              <div class="room-status-row">
-                <div class="room-status-label">
-                  <div class="room-status-icon rs-maintenance">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
-                  </div>
-                  Maintenance
-                </div>
-                <span class="room-count">7</span>
-              </div>
-              <div class="progress-bar"><div class="progress-fill fill-red" style="width:6%"></div></div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Activity Feed -->
-        <div class="activity-card">
-          <div class="section-title" style="margin-bottom:0"><span>Recent</span> Activity</div>
-          <div class="activity-list">
-
-            <div class="activity-item">
-              <div class="activity-dot" style="background:rgba(5,150,105,0.12);color:#059669">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-              </div>
-              <div class="activity-body">
-                <div class="act-title">New Booking #LG-4801</div>
-                <div class="act-detail">Aryan Pratama · Grand Suite</div>
-                <div class="act-time">2 minutes ago</div>
-              </div>
-            </div>
-
-            <div class="activity-item">
-              <div class="activity-dot" style="background:rgba(212,175,55,0.12);color:#A08020">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
-              </div>
-              <div class="activity-body">
-                <div class="act-title">Guest Check-In</div>
-                <div class="act-detail">Maria Santos · Room 412</div>
-                <div class="act-time">18 minutes ago</div>
-              </div>
-            </div>
-
-            <div class="activity-item">
-              <div class="activity-dot" style="background:rgba(37,99,235,0.1);color:#2563EB">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-              </div>
-              <div class="activity-body">
-                <div class="act-title">Guest Check-Out</div>
-                <div class="act-detail">David Chen · Presidential Suite</div>
-                <div class="act-time">1 hour ago</div>
-              </div>
-            </div>
-
-            <div class="activity-item">
-              <div class="activity-dot" style="background:rgba(220,38,38,0.1);color:#DC2626">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
-              </div>
-              <div class="activity-body">
-                <div class="act-title">Booking Cancelled</div>
-                <div class="act-detail">Budi Santoso · #LG-4797</div>
-                <div class="act-time">3 hours ago</div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- QUICK ACTIONS -->
-    <div>
-      <div class="section-title"><span>Quick</span> Actions</div>
-      <div class="actions-row">
-
-        <div class="action-card">
-          <div class="action-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          </div>
-          <div class="action-title">Add Room</div>
-          <div class="action-desc">Register a new room, configure type, floor, and amenities.</div>
-          <span class="action-arrow">→</span>
-        </div>
-
-        <div class="action-card">
-          <div class="action-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-          </div>
-          <div class="action-title">Create Booking</div>
-          <div class="action-desc">Manually create a guest reservation and assign a room.</div>
-          <span class="action-arrow">→</span>
-        </div>
-
-        <div class="action-card">
-          <div class="action-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-          </div>
-          <div class="action-title">Manage Staff</div>
-          <div class="action-desc">View, add or update staff roles, schedules, and permissions.</div>
-          <span class="action-arrow">→</span>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- INSIGHTS -->
-    <div>
-      <div class="section-title"><span>Hotel</span> Insights</div>
-      <div class="insights-row">
-
-        <div class="insight-card">
-          <div class="insight-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          </div>
-          <div class="insight-label">Most Booked</div>
-          <div class="insight-value">Grand Suite</div>
-          <div class="insight-sub">38 reservations this month</div>
-        </div>
-
-        <div class="insight-card">
-          <div class="insight-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </div>
-          <div class="insight-label">Highest Occupancy</div>
-          <div class="insight-value">Ocean View</div>
-          <div class="insight-sub">97% occupancy rate</div>
-        </div>
-
-        <div class="insight-card">
-          <div class="insight-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <div class="insight-label">Avg. Guest Stay</div>
-          <div class="insight-value">3.4 Nights</div>
-          <div class="insight-sub">+0.3 vs last month</div>
-        </div>
-
-        <div class="insight-card">
-          <div class="insight-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          </div>
-          <div class="insight-label">Guest Satisfaction</div>
-          <div class="insight-value">4.8 / 5.0</div>
-          <div class="insight-sub">Based on 412 reviews</div>
-        </div>
-
-      </div>
-    </div>
-
-  </div><!-- /content -->
-</main>
-
-
-<div class="access-toast" id="accessToast">
-  <div class="access-toast-icon">
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-  </div>
-  <div><strong>Access Denied</strong> — Staff management is restricted to Superadmin only.</div>
-</div>
-<script>
-  function showAccessDenied(e) {
-    e.preventDefault();
-    const toast = document.getElementById("accessToast");
-    toast.classList.add("show");
-    setTimeout(() => toast.classList.remove("show"), 3000);
-  }
-</script>
+  <script>
+    function showAccessDenied(e) {
+      e.preventDefault();
+      const toast = document.getElementById("accessToast");
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 3000);
+    }
+  </script>
 </body>
+
 </html>
