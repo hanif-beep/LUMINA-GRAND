@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html class="scroll-smooth" lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,104 +6,40 @@
     <title>Lumina Grand | Luxury Hotels &amp; Resorts</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap"
         rel="stylesheet" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet" />
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
-                    "colors": {
-                        "on-secondary-fixed": "#241a00",
-                        "on-tertiary-container": "#848688",
-                        "surface-variant": "#e2e2e2",
-                        "on-tertiary": "#ffffff",
-                        "on-primary": "#ffffff",
-                        "on-primary-container": "#6f88ad",
-                        "on-surface-variant": "#43474e",
-                        "on-secondary": "#ffffff",
-                        "tertiary-container": "#1c1f20",
-                        "primary-container": "#001f3f",
-                        "surface-container-highest": "#e2e2e2",
-                        "tertiary-fixed-dim": "#c5c7c8",
-                        "on-error": "#ffffff",
-                        "on-error-container": "#93000a",
-                        "outline": "#74777f",
-                        "on-tertiary-fixed-variant": "#454748",
-                        "inverse-on-surface": "#f0f1f1",
-                        "primary-fixed-dim": "#afc8f0",
-                        "outline-variant": "#c4c6cf",
-                        "surface": "#f9f9f9",
-                        "tertiary-fixed": "#e1e3e4",
-                        "secondary-fixed-dim": "#e9c349",
-                        "tertiary": "#040607",
-                        "surface-container-high": "#e8e8e8",
-                        "on-primary-fixed": "#001c3a",
-                        "on-primary-fixed-variant": "#2f486a",
-                        "secondary-container": "#fed65b",
-                        "inverse-surface": "#2f3131",
-                        "on-tertiary-fixed": "#191c1d",
-                        "secondary-fixed": "#ffe088",
-                        "error-container": "#ffdad6",
-                        "on-secondary-container": "#745c00",
-                        "inverse-primary": "#afc8f0",
-                        "surface-container-low": "#f3f3f4",
-                        "on-background": "#1a1c1c",
-                        "surface-tint": "#476083",
-                        "surface-dim": "#dadada",
-                        "secondary": "#735c00",
-                        "error": "#ba1a1a",
-                        "on-surface": "#1a1c1c",
-                        "primary-fixed": "#d4e3ff",
-                        "on-secondary-fixed-variant": "#574500",
-                        "surface-bright": "#f9f9f9",
-                        "primary": "#000613",
-                        "background": "#f9f9f9",
-                        "surface-container": "#eeeeee",
-                        "surface-container-lowest": "#ffffff"
+                    colors: {
+                        "navy": "#000613",
+                        "navy-soft": "#0B142B",
+                        "navy-line": "rgba(255,255,255,0.12)",
+                        "gold": "#C9A227",
+                        "gold-soft": "#E9C349",
+                        "linen": "#F3EFE6",
+                        "linen-dim": "#EAE3D3",
+                        "ink": "#1A1C1C",
+                        "ink-soft": "#5B5F66",
                     },
-                    "borderRadius": {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
-                    },
-                    "spacing": {
+                    spacing: {
                         "stack-sm": "24px",
                         "margin-mobile": "20px",
-                        "unit": "8px",
                         "margin-desktop": "64px",
                         "stack-md": "48px",
                         "gutter": "32px",
                         "container-max": "1280px",
-                        "stack-lg": "80px"
+                        "stack-lg": "96px"
                     },
-                    "fontFamily": {
-                        "headline-lg": ["Plus Jakarta Sans"],
-                        "display-lg": ["Plus Jakarta Sans"],
-                        "body-lg": ["Plus Jakarta Sans"],
-                        "body-md": ["Plus Jakarta Sans"],
-                        "headline-md": ["Plus Jakarta Sans"],
-                        "label-md": ["Plus Jakarta Sans"],
-                        "display-lg-mobile": ["Plus Jakarta Sans"],
-                        "label-sm": ["Plus Jakarta Sans"]
+                    fontFamily: {
+                        "serif-display": ["Cormorant Garamond", "serif"],
+                        "sans": ["Plus Jakarta Sans", "sans-serif"],
                     },
-                    "fontSize": {
-                        "headline-lg": ["32px", { "lineHeight": "1.3", "letterSpacing": "0.02em", "fontWeight": "400" }],
-                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "0.05em", "fontWeight": "300" }],
-                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
-                        "body-md": ["16px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
-                        "headline-md": ["24px", { "lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500" }],
-                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600" }],
-                        "display-lg-mobile": ["40px", { "lineHeight": "1.2", "letterSpacing": "0.03em", "fontWeight": "300" }],
-                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500" }]
-                    }
                 },
             },
         }
@@ -114,318 +49,376 @@
             font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
         }
 
+        body { min-height: max(884px, 100dvh); }
+
         .glass-nav {
-            background: rgba(0, 6, 19, 0.4);
-            backdrop-filter: blur(12px);
+            background: rgba(0, 6, 19, 0.35);
+            backdrop-filter: blur(14px);
         }
 
         .hero-gradient {
-            background: linear-gradient(to bottom, rgba(0, 6, 19, 0.6) 0%, rgba(0, 6, 19, 0.2) 50%, rgba(0, 6, 19, 0.8) 100%);
+            background: linear-gradient(to bottom, rgba(0, 6, 19, 0.55) 0%, rgba(0, 6, 19, 0.15) 45%, rgba(0, 6, 19, 0.9) 100%);
         }
-    </style>
-    <style>
-        body {
-            min-height: max(884px, 100dvh);
+
+        /* Editorial page-number marks for the Experiences rail */
+        .exp-mark {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+        }
+
+        .exp-track::-webkit-scrollbar { height: 4px; }
+        .exp-track::-webkit-scrollbar-track { background: rgba(255,255,255,0.08); }
+        .exp-track::-webkit-scrollbar-thumb { background: #C9A227; border-radius: 4px; }
+
+        .room-price::after {
+            content: '';
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal { animation: fadeUp 0.7s ease both; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { animation: none; }
         }
     </style>
 </head>
 
-<body class="bg-background text-on-background font-body-md">
+<body class="bg-linen text-ink font-sans">
+
     <!-- TopAppBar -->
-    <nav class="fixed top-0 w-full z-50 glass-nav">
-        <div
-            class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-6 max-w-container-max mx-auto">
-            <div class="flex items-center gap-4">
-                <span class="material-symbols-outlined text-secondary-fixed cursor-pointer" data-icon="menu">menu</span>
-                <span
-                    class="font-display-lg text-[24px] md:text-display-lg tracking-widest text-secondary-fixed uppercase">LUMINA
-                    GRAND</span>
-            </div>
+    <nav class="fixed top-0 w-full z-50 glass-nav transition-colors duration-300" id="mainNav">
+        <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-6 max-w-container-max mx-auto">
+            <span class="font-serif-display text-[22px] md:text-[26px] tracking-[0.18em] text-gold-soft uppercase">
+                Lumina <span class="text-white not-italic">Grand</span>
+            </span>
+
             <div class="hidden md:flex gap-gutter items-center">
-                <a class="font-label-md text-label-md text-on-primary hover:text-secondary-fixed transition-colors cursor-pointer"
-                    href="#rooms">ROOMS</a>
-                <a class="font-label-md text-label-md text-on-primary hover:text-secondary-fixed transition-colors cursor-pointer"
-                    href="#facilities">FACILITIES</a>
-                <a class="font-label-md text-label-md text-on-primary hover:text-secondary-fixed transition-colors cursor-pointer"
-                    href="#experiences">EXPERIENCES</a>
+                <a class="text-[13px] font-semibold tracking-[0.12em] text-white/80 hover:text-gold-soft transition-colors uppercase" href="#rooms">Rooms</a>
+                <a class="text-[13px] font-semibold tracking-[0.12em] text-white/80 hover:text-gold-soft transition-colors uppercase" href="#facilities">Facilities</a>
+                <a class="text-[13px] font-semibold tracking-[0.12em] text-white/80 hover:text-gold-soft transition-colors uppercase" href="#experiences">Experiences</a>
             </div>
+
             <div class="flex items-center">
-                <button
-                    class="font-label-md text-label-md text-secondary-fixed hover:opacity-80 transition-opacity cursor-pointer active:scale-95 duration-200"><a href="/login">LOGIN</a></button>
+                <a href="/login" class="text-[13px] font-bold tracking-[0.12em] text-gold-soft hover:text-white transition-colors uppercase border border-gold-soft/40 px-5 py-2 rounded-full hover:border-gold-soft active:scale-95 duration-200">
+                    Login
+                </a>
             </div>
         </div>
     </nav>
+
     <!-- Hero Section -->
     <header class="relative h-screen w-full overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <img alt="Luxury Hotel Lobby" class="w-full h-full object-cover"
-                data-alt="A breathtaking view of a grand luxury hotel lobby with soaring ceilings and architectural marble columns. The scene is illuminated by soft, golden light filtering through massive floor-to-ceiling windows, creating a warm and sophisticated atmosphere. Contemporary minimalist furniture in deep navy and cream is arranged symmetrically on polished stone floors. The overall aesthetic is one of quiet luxury, serene elegance, and architectural precision, aligning with a high-end hospitality brand."
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpHJJRctR0DzKWYJ1Tvl24wEXeVdbbM1p923prBZM1LAsDVQ5QRnejLTDTZvnA9eJyudACL2MWOTVCma1rMaoB9EnMrdEMUXK4Plb1X0WJ20P2I2FSgWKhX3JE7IaW2Y2PSArkvAvHVj8fnhpgds3RmTBvY8aJdZ9lZK8chxQj3cX4_w2iBP482MpUzyConxQbc1Z9Cbiz0z09G7NpNeZP4-9ujAOMOwOCP7PW_ZkhgkU2vTCNRSCTzFQF7KAc9zE44axNA8y3mB4" />
+            <img alt="Lumina Grand hotel lobby" class="w-full h-full object-cover"
+                src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1600&q=80" />
             <div class="absolute inset-0 hero-gradient"></div>
         </div>
-        <div
-            class="relative z-10 flex flex-col justify-end h-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pb-stack-lg">
-            <div class="max-w-3xl space-y-stack-sm">
-                <h1
-                    class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-primary">
+        <div class="relative z-10 flex flex-col justify-end h-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pb-stack-lg">
+            <div class="max-w-3xl space-y-stack-sm reveal">
+                <span class="text-gold-soft text-[12px] font-semibold tracking-[0.3em] uppercase">Jakarta · Est. 1924</span>
+                <h1 class="font-serif-display font-light text-[44px] md:text-[76px] leading-[1.08] text-white">
                     Experience Unrivaled Elegance
                 </h1>
-                <p class="font-body-lg text-body-lg text-on-primary/80 max-w-xl">
-                    Discover a sanctuary of luxury and comfort in the heart of the city, where every detail is
-                    meticulously curated for your arrival.
+                <p class="text-[16px] md:text-[18px] leading-relaxed text-white/75 max-w-xl">
+                    A sanctuary of quiet luxury in the heart of the city — three rooms, one philosophy: every detail considered, nothing left to chance.
                 </p>
                 <div class="pt-stack-sm">
-                    <button
-                        class="bg-secondary-fixed text-on-secondary-fixed px-10 py-4 font-label-md text-label-md tracking-widest hover:brightness-110 transition-all active:scale-95">
-                        BOOK NOW
-                    </button>
+                    <a href="/login" class="inline-block bg-gold-soft text-navy px-10 py-4 text-[13px] font-bold tracking-[0.18em] uppercase hover:bg-white transition-all active:scale-95">
+                        Book Now
+                    </a>
                 </div>
             </div>
         </div>
+        <div class="absolute bottom-8 right-margin-mobile md:right-margin-desktop z-10 hidden md:flex items-center gap-3 text-white/50 text-[11px] tracking-[0.2em] uppercase">
+            <span class="w-8 h-px bg-white/30"></span>
+            Scroll
+        </div>
     </header>
+
     <!-- Exquisite Stays (Rooms) -->
-    <section class="py-stack-lg bg-surface" id="rooms">
+    <section class="py-stack-lg bg-linen" id="rooms">
         <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
             <div class="flex flex-col md:flex-row md:justify-between md:items-end mb-stack-md gap-gutter">
                 <div class="space-y-2">
-                    <span
-                        class="text-secondary font-label-sm text-label-sm tracking-[0.2em] uppercase">Accommodations</span>
-                    <h2 class="font-headline-lg text-headline-lg text-primary">Exquisite Stays</h2>
+                    <span class="text-gold text-[12px] font-semibold tracking-[0.3em] uppercase">Accommodations</span>
+                    <h2 class="font-serif-display text-[36px] md:text-[44px] text-navy leading-none">Three Rooms, Three Moods</h2>
                 </div>
-                <button
-                    class="text-primary font-label-md text-label-md border-b border-primary hover:text-secondary hover:border-secondary transition-colors pb-1 self-start md:self-auto">
-                    VIEW ALL ROOMS
-                </button>
+                <p class="text-ink-soft text-[14px] max-w-sm">Every category is limited in number, so each guest enjoys genuine quiet and space — never a corridor of identical doors.</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
-                <!-- Room Card 1 -->
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+                <!-- Superior Room -->
                 <div class="group cursor-pointer">
-                    <div class="relative aspect-[4/3] overflow-hidden mb-6 bg-surface-container">
-                        <img alt="Deluxe Suite"
+                    <div class="relative aspect-[4/5] overflow-hidden mb-5 bg-navy/5">
+                        <img alt="Superior Room"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                            data-alt="A hyper-luxurious master bedroom in a high-end hotel suite. The design features a palette of deep navy blues and warm gold accents, with a king-sized bed dressed in pristine white linens. Floor-to-ceiling windows offer a soft-focus view of a modern city skyline at dusk. The lighting is cinematic and low-key, emphasizing the rich textures of velvet and polished wood. The mood is intimate, exclusive, and supremely comfortable."
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIf88O9-OStwtGunn5Rt1BPzu07Nw3wnXuDj2Iq3hDnQP8v60FRFWVqzCEhVfbHYqj7RD1--0PWGxLKDJ5v6Sc10_jhjlSr3dDX6aa2Hhd5bRFQijgp6o8oD_EFmemjpPWMevncco6N3enYEraQs5zyVGl_hroMZRRzhr42627nW7MrLZkhbA5CrIiQn1GdNvssRKpiRJ_MfPy87sqJMYn_HC1smpYYGPKj8ClVMzWZGVWJJAo_RszN7kcBgtg_iVoMKeYlPsLfkI" />
-                        <div class="absolute top-4 right-4 bg-primary px-3 py-1">
-                            <span class="text-on-primary font-label-sm text-label-sm">EXCLUSIVE</span>
+                            src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80" />
+                        <div class="absolute top-4 left-4 bg-navy/80 backdrop-blur-sm px-3 py-1">
+                            <span class="text-white text-[10px] font-semibold tracking-[0.15em] uppercase">2 Guests · Queen</span>
                         </div>
                     </div>
                     <div class="flex justify-between items-start">
                         <div>
-                            <h3 class="font-headline-md text-headline-md text-primary mb-1">Deluxe Suite</h3>
-                            <div class="flex items-center gap-1 text-secondary">
-                                <span class="material-symbols-outlined text-[16px]" data-icon="star" data-weight="fill"
-                                    style="font-variation-settings: 'FILL' 1;">star</span>
-                                <span class="font-label-sm text-label-sm">4.9 (124 reviews)</span>
-                            </div>
+                            <h3 class="font-serif-display text-[22px] text-navy mb-1">Superior Room</h3>
+                            <p class="text-ink-soft text-[13px]">City view, modern comfort</p>
                         </div>
-                        <div class="text-right">
-                            <div class="font-headline-md text-headline-md text-primary">$450</div>
-                            <div class="font-label-sm text-label-sm text-outline uppercase">per night</div>
+                        <div class="text-right shrink-0">
+                            <div class="font-serif-display text-[20px] text-navy">Rp 1.15jt</div>
+                            <div class="text-[10px] text-ink-soft uppercase tracking-[0.1em]">per night</div>
                         </div>
                     </div>
                 </div>
-                <!-- Room Card 2 -->
+
+                <!-- Deluxe Room -->
                 <div class="group cursor-pointer">
-                    <div class="relative aspect-[4/3] overflow-hidden mb-6 bg-surface-container">
-                        <img alt="Ocean View Room"
+                    <div class="relative aspect-[4/5] overflow-hidden mb-5 bg-navy/5">
+                        <img alt="Deluxe Room"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                            data-alt="A minimalist and airy hotel room with a spectacular panoramic view of a calm, sapphire-blue ocean. The interior is decorated in light neutrals and natural textures, with gold-toned reading lamps providing a warm focus point. Soft, daylight illuminates the space, creating a bright and serene atmosphere. The overall style is modern minimalist luxury, emphasizing the natural beauty of the destination through expansive glass walls."
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD06-ZLNCxzXtzclrRktagXOYtbipOylWy7iuDq1LeNdvGNG_P2OLrrbIuCP3_WnVHUuWi0nv7HAniud59-tkPSWlExJs3Ygxfnh5LHyXAz-tW5s2wDYyx9Ne_LvZ3B0eFEDWp-dLcCDs-VWGpv0V8TwkoE14Q4DAJZCS_x-stOqXOvFnXSBixfIswXcR4DJ_1WTfF_X1hHUK2Ps2KsqN0L9L7luxq_n2InZsvvg8lVc2s8zH7nWQs9vvC3FJl3CoKAXdDjrBMC9KY" />
+                            src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80" />
+                        <div class="absolute top-4 right-4 bg-gold-soft px-3 py-1">
+                            <span class="text-navy text-[10px] font-bold tracking-[0.15em] uppercase">Most Booked</span>
+                        </div>
+                        <div class="absolute top-4 left-4 bg-navy/80 backdrop-blur-sm px-3 py-1">
+                            <span class="text-white text-[10px] font-semibold tracking-[0.15em] uppercase">2 Guests · King</span>
+                        </div>
                     </div>
                     <div class="flex justify-between items-start">
                         <div>
-                            <h3 class="font-headline-md text-headline-md text-primary mb-1">Ocean View Room</h3>
-                            <div class="flex items-center gap-1 text-secondary">
-                                <span class="material-symbols-outlined text-[16px]" data-icon="star" data-weight="fill"
-                                    style="font-variation-settings: 'FILL' 1;">star</span>
-                                <span class="font-label-sm text-label-sm">4.8 (98 reviews)</span>
-                            </div>
+                            <h3 class="font-serif-display text-[22px] text-navy mb-1">Deluxe Room</h3>
+                            <p class="text-ink-soft text-[13px]">Premium interior, king-size bed</p>
                         </div>
-                        <div class="text-right">
-                            <div class="font-headline-md text-headline-md text-primary">$380</div>
-                            <div class="font-label-sm text-label-sm text-outline uppercase">per night</div>
+                        <div class="text-right shrink-0">
+                            <div class="font-serif-display text-[20px] text-navy">Rp 1.9jt</div>
+                            <div class="text-[10px] text-ink-soft uppercase tracking-[0.1em]">per night</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Junior Suite -->
+                <div class="group cursor-pointer">
+                    <div class="relative aspect-[4/5] overflow-hidden mb-5 bg-navy/5">
+                        <img alt="Junior Suite"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80" />
+                        <div class="absolute top-4 left-4 bg-navy/80 backdrop-blur-sm px-3 py-1">
+                            <span class="text-white text-[10px] font-semibold tracking-[0.15em] uppercase">3 Guests · King</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="font-serif-display text-[22px] text-navy mb-1">Junior Suite</h3>
+                            <p class="text-ink-soft text-[13px]">Separate living area, espresso bar</p>
+                        </div>
+                        <div class="text-right shrink-0">
+                            <div class="font-serif-display text-[20px] text-navy">Rp 2.8jt</div>
+                            <div class="text-[10px] text-ink-soft uppercase tracking-[0.1em]">per night</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Facilities (Bento Grid) -->
-    <section class="py-stack-lg bg-primary text-on-primary" id="facilities">
+
+    <!-- Facilities -->
+    <section class="py-stack-lg bg-navy text-white" id="facilities">
         <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
             <div class="mb-stack-md text-center">
-                <span class="text-secondary-fixed font-label-sm text-label-sm tracking-[0.2em] uppercase">Our
-                    Amenities</span>
-                <h2 class="font-headline-lg text-headline-lg mt-2">World-Class Facilities</h2>
+                <span class="text-gold-soft text-[12px] font-semibold tracking-[0.3em] uppercase">Our Amenities</span>
+                <h2 class="font-serif-display text-[36px] md:text-[44px] mt-2">World-Class Facilities</h2>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-gutter auto-rows-[160px]">
-                <!-- WiFi -->
-                <div
-                    class="bg-tertiary-container flex flex-col items-center justify-center p-6 border border-on-primary-fixed-variant/20 hover:border-secondary-fixed transition-colors">
-                    <span class="material-symbols-outlined text-secondary-fixed text-[32px] mb-4"
-                        data-icon="wifi">wifi</span>
-                    <span class="font-label-md text-label-md uppercase tracking-widest text-center">Ultra Fast
-                        WiFi</span>
+                <div class="bg-navy-soft flex flex-col items-center justify-center p-6 border border-navy-line hover:border-gold-soft transition-colors">
+                    <span class="material-symbols-outlined text-gold-soft text-[32px] mb-4">wifi</span>
+                    <span class="text-[12px] font-semibold uppercase tracking-[0.15em] text-center">Ultra Fast WiFi</span>
                 </div>
-                <!-- Pool -->
-                <div class="bg-tertiary-container col-span-2 row-span-2 relative overflow-hidden group">
-                    <img alt="Pool"
+                <div class="bg-navy-soft col-span-2 row-span-2 relative overflow-hidden group">
+                    <img alt="Infinity pool at Lumina Grand"
                         class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-1000"
-                        data-alt="An expansive infinity pool at dusk, where the water perfectly reflects a deep indigo sky. The surrounding deck is made of sleek dark stone with elegant gold-rimmed lounge chairs. Soft, submerged lighting gives the pool a mystical cyan glow. The scene is shot from a low angle to emphasize the architectural lines and the feeling of endless serenity. The overall vibe is high-end, quiet luxury, and modern architectural beauty."
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMi7YY6jAiFPTCIaSHu2KhJAZlUcxwgpqdncxQ8JzZRo2OSJF1YddWejl-DWUXU1bsd0Lp9S8_Mk9zYuFzqXtj5dDrAg3nI5SxeqBR0J65XzResgLHpBhHbrnk1rJVGNrErFQWrf0hF1OVgT-632JapNeGNPDRdYlgWCZaVoZH2kZp0F4XwNc8ybtwZId6Y_t5lbyZ2KylrIqBc_v5eQRcuiQtITegLcCGLohV07hDFEscBZ4EgoBIy1Nax_fWzF-uKaAeReao46U" />
-                    <div
-                        class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex flex-col justify-end p-gutter">
-                        <span class="material-symbols-outlined text-secondary-fixed text-[32px] mb-2"
-                            data-icon="pool">pool</span>
-                        <span class="font-headline-md text-headline-md">Infinity Pool</span>
+                        src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=900&q=80" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy/90 to-transparent flex flex-col justify-end p-gutter">
+                        <span class="material-symbols-outlined text-gold-soft text-[32px] mb-2">pool</span>
+                        <span class="font-serif-display text-[22px]">Infinity Pool</span>
                     </div>
                 </div>
-                <!-- Dining -->
-                <div
-                    class="bg-tertiary-container flex flex-col items-center justify-center p-6 border border-on-primary-fixed-variant/20 hover:border-secondary-fixed transition-colors">
-                    <span class="material-symbols-outlined text-secondary-fixed text-[32px] mb-4"
-                        data-icon="restaurant">restaurant</span>
-                    <span class="font-label-md text-label-md uppercase tracking-widest text-center">Fine Dining</span>
+                <div class="bg-navy-soft flex flex-col items-center justify-center p-6 border border-navy-line hover:border-gold-soft transition-colors">
+                    <span class="material-symbols-outlined text-gold-soft text-[32px] mb-4">restaurant</span>
+                    <span class="text-[12px] font-semibold uppercase tracking-[0.15em] text-center">Fine Dining</span>
                 </div>
-                <!-- Fitness -->
-                <div
-                    class="bg-tertiary-container flex flex-col items-center justify-center p-6 border border-on-primary-fixed-variant/20 hover:border-secondary-fixed transition-colors">
-                    <span class="material-symbols-outlined text-secondary-fixed text-[32px] mb-4"
-                        data-icon="fitness_center">fitness_center</span>
-                    <span class="font-label-md text-label-md uppercase tracking-widest text-center">Fitness Hub</span>
+                <div class="bg-navy-soft flex flex-col items-center justify-center p-6 border border-navy-line hover:border-gold-soft transition-colors">
+                    <span class="material-symbols-outlined text-gold-soft text-[32px] mb-4">fitness_center</span>
+                    <span class="text-[12px] font-semibold uppercase tracking-[0.15em] text-center">Fitness Hub</span>
                 </div>
-                <!-- Parking -->
-                <div
-                    class="bg-tertiary-container flex flex-col items-center justify-center p-6 border border-on-primary-fixed-variant/20 hover:border-secondary-fixed transition-colors">
-                    <span class="material-symbols-outlined text-secondary-fixed text-[32px] mb-4"
-                        data-icon="local_parking">local_parking</span>
-                    <span class="font-label-md text-label-md uppercase tracking-widest text-center">Secure
-                        Parking</span>
+                <div class="bg-navy-soft flex flex-col items-center justify-center p-6 border border-navy-line hover:border-gold-soft transition-colors">
+                    <span class="material-symbols-outlined text-gold-soft text-[32px] mb-4">local_parking</span>
+                    <span class="text-[12px] font-semibold uppercase tracking-[0.15em] text-center">Secure Parking</span>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Testimonial Section -->
+
+    <!-- Experiences -->
+    <section class="py-stack-lg bg-linen-dim" id="experiences">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-stack-md">
+            <span class="text-gold text-[12px] font-semibold tracking-[0.3em] uppercase">A Day at Lumina Grand</span>
+            <h2 class="font-serif-display text-[36px] md:text-[44px] text-navy leading-none mt-2 max-w-2xl">Curated Experiences, Hour by Hour</h2>
+        </div>
+
+        <div class="exp-track flex gap-gutter overflow-x-auto pb-6 px-margin-mobile md:px-margin-desktop snap-x snap-mandatory">
+            <!-- Experience 1 -->
+            <div class="snap-start shrink-0 w-[280px] md:w-[320px] bg-white">
+                <div class="relative aspect-[4/5] overflow-hidden">
+                    <img alt="Morning yoga terrace"
+                        class="w-full h-full object-cover"
+                        src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=700&q=80" />
+                    <span class="exp-mark absolute top-4 left-4 text-white text-[40px] leading-none drop-shadow-md">I.</span>
+                </div>
+                <div class="p-5">
+                    <span class="text-gold text-[11px] font-semibold tracking-[0.2em] uppercase">06:30 — Sunrise</span>
+                    <h3 class="font-serif-display text-[20px] text-navy mt-1 mb-2">Terrace Yoga &amp; Stillness</h3>
+                    <p class="text-ink-soft text-[13px] leading-relaxed">Begin where the light begins — a private rooftop session above the city, before the day asks anything of you.</p>
+                </div>
+            </div>
+
+            <!-- Experience 2 -->
+            <div class="snap-start shrink-0 w-[280px] md:w-[320px] bg-white">
+                <div class="relative aspect-[4/5] overflow-hidden">
+                    <img alt="Chef's table dining experience"
+                        class="w-full h-full object-cover"
+                        src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=700&q=80" />
+                    <span class="exp-mark absolute top-4 left-4 text-white text-[40px] leading-none drop-shadow-md">II.</span>
+                </div>
+                <div class="p-5">
+                    <span class="text-gold text-[11px] font-semibold tracking-[0.2em] uppercase">13:00 — Midday</span>
+                    <h3 class="font-serif-display text-[20px] text-navy mt-1 mb-2">Chef's Table Tasting</h3>
+                    <p class="text-ink-soft text-[13px] leading-relaxed">A seasonal six-course narrative, plated within view of the open kitchen, paired by our resident sommelier.</p>
+                </div>
+            </div>
+
+            <!-- Experience 3 -->
+            <div class="snap-start shrink-0 w-[280px] md:w-[320px] bg-white">
+                <div class="relative aspect-[4/5] overflow-hidden">
+                    <img alt="Spa treatment room"
+                        class="w-full h-full object-cover"
+                        src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=700&q=80" />
+                    <span class="exp-mark absolute top-4 left-4 text-white text-[40px] leading-none drop-shadow-md">III.</span>
+                </div>
+                <div class="p-5">
+                    <span class="text-gold text-[11px] font-semibold tracking-[0.2em] uppercase">16:00 — Afternoon</span>
+                    <h3 class="font-serif-display text-[20px] text-navy mt-1 mb-2">The Quiet Room, Spa Ritual</h3>
+                    <p class="text-ink-soft text-[13px] leading-relaxed">Heat, water, and silence in sequence — a 90-minute ritual designed to undo the week before it ends.</p>
+                </div>
+            </div>
+
+            <!-- Experience 4 -->
+            <div class="snap-start shrink-0 w-[280px] md:w-[320px] bg-white">
+                <div class="relative aspect-[4/5] overflow-hidden">
+                    <img alt="Rooftop bar at sunset"
+                        class="w-full h-full object-cover"
+                        src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=700&q=80" />
+                    <span class="exp-mark absolute top-4 left-4 text-white text-[40px] leading-none drop-shadow-md">IV.</span>
+                </div>
+                <div class="p-5">
+                    <span class="text-gold text-[11px] font-semibold tracking-[0.2em] uppercase">19:30 — Evening</span>
+                    <h3 class="font-serif-display text-[20px] text-navy mt-1 mb-2">Rooftop &amp; City Lights</h3>
+                    <p class="text-ink-soft text-[13px] leading-relaxed">Signature cocktails and a skyline that turns gold at dusk — the day's last and longest moment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial -->
     <section class="py-[120px] bg-white relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-64 h-64 bg-secondary-fixed opacity-5 rounded-full -mr-32 -mt-32"></div>
+        <div class="absolute top-0 right-0 w-64 h-64 bg-gold opacity-5 rounded-full -mr-32 -mt-32"></div>
         <div class="max-w-[800px] mx-auto px-margin-mobile text-center relative z-10">
-            <span class="material-symbols-outlined text-secondary text-[48px] mb-stack-sm block"
-                data-icon="format_quote">format_quote</span>
-            <blockquote
-                class="font-headline-lg text-headline-lg md:text-[40px] md:leading-[1.4] text-primary italic mb-stack-sm">
-                "From the moment we arrived, the service was impeccable. Lumina Grand isn't just a hotel; it's a
-                meticulously crafted experience where elegance meets genuine hospitality."
+            <span class="material-symbols-outlined text-gold text-[40px] mb-stack-sm block">format_quote</span>
+            <blockquote class="font-serif-display text-[28px] md:text-[36px] leading-[1.4] text-navy italic mb-stack-sm">
+                "From the moment we arrived, the service was impeccable. Lumina Grand isn't just a hotel — it's a meticulously crafted experience where elegance meets genuine hospitality."
             </blockquote>
             <cite class="not-italic">
-                <span class="block font-label-md text-label-md tracking-widest text-primary uppercase">Eleanor
-                    Vanderbilt</span>
-                <span class="block font-label-sm text-label-sm text-outline uppercase mt-1">Connoisseur Traveler</span>
+                <span class="block text-[13px] font-bold tracking-[0.15em] text-navy uppercase">Eleanor Vanderbilt</span>
+                <span class="block text-[11px] text-ink-soft uppercase tracking-[0.1em] mt-1">Connoisseur Traveler</span>
             </cite>
         </div>
     </section>
-    <!-- Booking CTA / Simple Contact -->
-    <section class="py-stack-lg bg-surface-container">
+
+    <!-- Booking CTA -->
+    <section class="py-stack-lg bg-linen-dim">
         <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center">
-            <h2 class="font-headline-lg text-headline-lg text-primary mb-stack-sm">Ready for your sanctuary?</h2>
+            <h2 class="font-serif-display text-[36px] md:text-[44px] text-navy mb-stack-sm">Ready for your sanctuary?</h2>
             <div class="flex flex-col md:flex-row justify-center items-center gap-gutter">
-                <button
-                    class="bg-primary text-on-primary px-12 py-5 font-label-md text-label-md tracking-widest hover:bg-primary/90 transition-all w-full md:w-auto">
-                    CHECK AVAILABILITY
-                </button>
-                <button
-                    class="border border-primary text-primary px-12 py-5 font-label-md text-label-md tracking-widest hover:bg-primary hover:text-on-primary transition-all w-full md:w-auto">
-                    CONTACT CONCIERGE
-                </button>
+                <a href="/login" class="bg-navy text-white px-12 py-5 text-[13px] font-bold tracking-[0.18em] uppercase hover:bg-navy-soft transition-all w-full md:w-auto">
+                    Check Availability
+                </a>
+                <a href="/login" class="border border-navy text-navy px-12 py-5 text-[13px] font-bold tracking-[0.18em] uppercase hover:bg-navy hover:text-white transition-all w-full md:w-auto">
+                    Contact Concierge
+                </a>
             </div>
         </div>
     </section>
+
     <!-- Footer -->
-    <footer class="bg-primary text-on-primary-fixed-variant border-t border-on-primary-fixed-variant">
-        <div
-            class="max-w-container-max mx-auto px-margin-desktop py-stack-md flex flex-col md:flex-row justify-between items-center gap-gutter w-full">
-            <div class="flex flex-col items-center md:items-start gap-4">
-                <span class="font-headline-md text-headline-md text-secondary-fixed uppercase">LUMINA GRAND</span>
-                <p class="font-label-sm text-label-sm opacity-60 text-center md:text-left">© 2024 LUMINA GRAND HOTELS
-                    &amp; RESORTS. ALL RIGHTS RESERVED.</p>
+    <footer class="bg-navy text-white/60 border-t border-navy-line">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-md flex flex-col md:flex-row justify-between items-center gap-gutter w-full">
+            <div class="flex flex-col items-center md:items-start gap-3">
+                <span class="font-serif-display text-[20px] text-gold-soft uppercase tracking-[0.1em]">Lumina Grand</span>
+                <p class="text-[11px] opacity-70 text-center md:text-left tracking-[0.05em]">© 2026 Lumina Grand Hotels &amp; Resorts. All rights reserved.</p>
             </div>
             <div class="flex flex-wrap justify-center gap-gutter">
-                <a class="font-label-sm text-label-sm text-on-primary-fixed-variant hover:text-on-primary transition-colors uppercase tracking-widest"
-                    href="#">ROOMS</a>
-                <a class="font-label-sm text-label-sm text-on-primary-fixed-variant hover:text-on-primary transition-colors uppercase tracking-widest"
-                    href="#">FACILITIES</a>
-                <a class="font-label-sm text-label-sm text-on-primary-fixed-variant hover:text-on-primary transition-colors uppercase tracking-widest"
-                    href="#">RESERVATIONS</a>
-                <a class="font-label-sm text-label-sm text-on-primary-fixed-variant hover:text-on-primary transition-colors uppercase tracking-widest"
-                    href="#">PRIVACY POLICY</a>
-                <a class="font-label-sm text-label-sm text-on-primary-fixed-variant hover:text-on-primary transition-colors uppercase tracking-widest"
-                    href="#">CONTACT</a>
-            </div>
-            <div class="flex gap-4">
-                <span
-                    class="material-symbols-outlined text-secondary-fixed cursor-pointer hover:opacity-80 transition-opacity"
-                    data-icon="share">share</span>
-                <span
-                    class="material-symbols-outlined text-secondary-fixed cursor-pointer hover:opacity-80 transition-opacity"
-                    data-icon="language">language</span>
+                <a class="text-[11px] hover:text-white transition-colors uppercase tracking-[0.15em]" href="#rooms">Rooms</a>
+                <a class="text-[11px] hover:text-white transition-colors uppercase tracking-[0.15em]" href="#facilities">Facilities</a>
+                <a class="text-[11px] hover:text-white transition-colors uppercase tracking-[0.15em]" href="#experiences">Experiences</a>
+                <a class="text-[11px] hover:text-white transition-colors uppercase tracking-[0.15em]" href="/login">Reservations</a>
             </div>
         </div>
     </footer>
+
     <script>
-
+        // Active nav link highlight on scroll
         const navLinks = document.querySelectorAll('a[href="#rooms"], a[href="#facilities"], a[href="#experiences"]');
+        const navTopLinks = document.querySelectorAll('nav a[href^="#"]');
 
-        // ── Fungsi set active ─────────────────────────────────────
         function setActive(activeLink) {
-            navLinks.forEach(link => {
-            link.classList.remove('text-secondary-fixed', 'border-b', 'border-secondary-fixed');
-            link.classList.add('text-on-primary');
+            navTopLinks.forEach(link => {
+                link.classList.remove('text-gold-soft');
+                link.classList.add('text-white/80');
             });
-            activeLink.classList.add('text-secondary-fixed', 'border-b', 'border-secondary-fixed');
-            activeLink.classList.remove('text-on-primary');
+            activeLink.classList.add('text-gold-soft');
+            activeLink.classList.remove('text-white/80');
         }
 
-        // ── Klik manual ───────────────────────────────────────────
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => setActive(link));
-        });
+        navTopLinks.forEach(link => link.addEventListener('click', () => setActive(link)));
 
-        // ── Auto-highlight saat scroll ────────────────────────────
         const sections = ['rooms', 'facilities', 'experiences'];
-
         window.addEventListener('scroll', () => {
             let current = '';
             sections.forEach(id => {
-            const section = document.getElementById(id);
-            if (section && section.getBoundingClientRect().top <= 120) {
-                current = id;
-            }
+                const section = document.getElementById(id);
+                if (section && section.getBoundingClientRect().top <= 120) current = id;
             });
             if (current) {
-            const activeLink = document.querySelector(`a[href="#${current}"]`);
-            if (activeLink) setActive(activeLink);
+                const activeLink = document.querySelector(`nav a[href="#${current}"]`);
+                if (activeLink) setActive(activeLink);
             }
         });
 
-        // Subtle scroll reveal effect for headers
+        // Nav background on scroll
+        const nav = document.getElementById('mainNav');
         window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.classList.add('shadow-lg');
-                nav.style.backgroundColor = "rgba(0, 6, 19, 0.95)";
+            if (window.scrollY > 80) {
+                nav.style.backgroundColor = 'rgba(0, 6, 19, 0.92)';
             } else {
-                nav.classList.remove('shadow-lg');
-                nav.style.backgroundColor = "rgba(0, 6, 19, 0.4)";
+                nav.style.backgroundColor = 'rgba(0, 6, 19, 0.35)';
             }
         });
 
-        // Simple button interaction
-        document.querySelectorAll('button').forEach(btn => {
-            btn.addEventListener('mousedown', () => {
-                btn.style.transform = 'scale(0.95)';
-            });
-            btn.addEventListener('mouseup', () => {
-                btn.style.transform = 'scale(1)';
-            });
+        // Button press feedback
+        document.querySelectorAll('button, a.inline-block, a.bg-navy, a.border-navy').forEach(btn => {
+            btn.addEventListener('mousedown', () => { btn.style.transform = 'scale(0.96)'; });
+            btn.addEventListener('mouseup', () => { btn.style.transform = 'scale(1)'; });
+            btn.addEventListener('mouseleave', () => { btn.style.transform = 'scale(1)'; });
         });
     </script>
 </body>

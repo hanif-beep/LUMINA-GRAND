@@ -225,6 +225,7 @@
       color: rgba(255, 255, 255, 0.4);
       font-size: 13px;
       transition: color 0.2s;
+      text-decoration: none;
     }
 
     .logout-btn:hover {
@@ -239,7 +240,6 @@
       flex-direction: column;
     }
 
-    /* ── HEADER ── */
     .header {
       height: var(--header-h);
       background: rgba(248, 247, 244, 0.92);
@@ -319,71 +319,6 @@
 
     .search-bar input::placeholder {
       color: var(--text-muted);
-    }
-
-    .icon-btn {
-      width: 38px;
-      height: 38px;
-      background: var(--white);
-      border: 1px solid var(--surface-2);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      color: var(--text-secondary);
-      transition: all 0.2s;
-      position: relative;
-    }
-
-    .icon-btn:hover {
-      border-color: var(--gold-border);
-      color: var(--gold);
-    }
-
-    .notif-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--gold);
-      border-radius: 50%;
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      border: 2px solid var(--white);
-    }
-
-    .header-avatar {
-      width: 38px;
-      height: 38px;
-      background: linear-gradient(135deg, var(--gold), #B8960C);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--navy);
-      cursor: pointer;
-      position: relative;
-    }
-
-    .header-avatar::after {
-      content: '★';
-      position: absolute;
-      bottom: -2px;
-      right: -2px;
-      width: 14px;
-      height: 14px;
-      background: var(--gold);
-      border-radius: 50%;
-      font-size: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 2px solid var(--surface);
-      color: var(--navy);
-      line-height: 14px;
-      text-align: center;
     }
 
     /* ── CONTENT ── */
@@ -631,31 +566,6 @@
       box-shadow: 0 8px 24px rgba(15, 23, 42, 0.09);
     }
 
-    .staff-card:nth-child(1) {
-      animation-delay: 0.05s
-    }
-
-    .staff-card:nth-child(2) {
-      animation-delay: 0.10s
-    }
-
-    .staff-card:nth-child(3) {
-      animation-delay: 0.15s
-    }
-
-    .staff-card:nth-child(4) {
-      animation-delay: 0.20s
-    }
-
-    .staff-card:nth-child(5) {
-      animation-delay: 0.25s
-    }
-
-    .staff-card:nth-child(6) {
-      animation-delay: 0.30s
-    }
-
-    /* superadmin card gold accent */
     .staff-card.is-superadmin {
       border-color: var(--gold-border);
     }
@@ -756,29 +666,14 @@
       color: var(--navy);
     }
 
-    .role-manager {
+    .role-admin {
       background: rgba(15, 23, 42, 0.08);
       color: var(--navy);
     }
 
-    .role-frontdesk {
+    .role-staff {
       background: rgba(37, 99, 235, 0.1);
       color: #1D4ED8;
-    }
-
-    .role-housekeeping {
-      background: rgba(5, 150, 105, 0.1);
-      color: #047857;
-    }
-
-    .role-finance {
-      background: rgba(109, 40, 217, 0.1);
-      color: #6D28D9;
-    }
-
-    .role-security {
-      background: rgba(190, 24, 93, 0.1);
-      color: #BE185D;
     }
 
     .staff-name {
@@ -812,8 +707,6 @@
       border-top: 1px solid var(--surface-2);
       border-bottom: 1px solid var(--surface-2);
     }
-
-    .meta-item {}
 
     .meta-label {
       font-size: 10px;
@@ -891,109 +784,44 @@
       background: rgba(220, 38, 38, 0.06);
     }
 
-    /* PERMISSIONS PANEL */
-    .permissions-card {
+    /* EMPTY STATE — saat belum ada staff sama sekali */
+    .staff-empty {
+      grid-column: 1 / -1;
       background: var(--white);
-      border: 1px solid rgba(15, 23, 42, 0.06);
+      border: 1.5px dashed var(--surface-2);
       border-radius: var(--radius);
-      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
-      overflow: hidden;
-      animation: fadeUp 0.45s 0.3s ease both;
+      padding: 56px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      text-align: center;
+      animation: fadeUp 0.4s ease both;
     }
 
-    .permissions-header {
-      padding: 20px 24px 16px;
-      border-bottom: 1px solid var(--surface-2);
+    .staff-empty-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-border);
+      border-radius: 16px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
+      color: var(--gold);
     }
 
-    .permissions-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-    }
-
-    .perm-col {
-      padding: 16px 20px;
-      border-right: 1px solid var(--surface-2);
-    }
-
-    .perm-col:last-child {
-      border-right: none;
-    }
-
-    .perm-col-title {
-      font-size: 11px;
+    .staff-empty-title {
+      font-size: 16px;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
+      color: var(--navy);
+    }
+
+    .staff-empty-sub {
+      font-size: 13px;
       color: var(--text-muted);
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--surface-2);
-    }
-
-    .perm-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 7px 0;
-      border-bottom: 1px solid rgba(15, 23, 42, 0.03);
-    }
-
-    .perm-row:last-child {
-      border-bottom: none;
-    }
-
-    .perm-name {
-      font-size: 12px;
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
-
-    .perm-toggle {
-      width: 32px;
-      height: 18px;
-      border-radius: 20px;
-      position: relative;
-      cursor: pointer;
-      transition: background 0.2s;
-      flex-shrink: 0;
-    }
-
-    .perm-toggle.on {
-      background: var(--gold);
-    }
-
-    .perm-toggle.off {
-      background: #E2E8F0;
-    }
-
-    .perm-toggle.on.locked {
-      background: rgba(212, 175, 55, 0.5);
-      cursor: not-allowed;
-    }
-
-    .perm-toggle::after {
-      content: '';
-      position: absolute;
-      top: 2px;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: var(--white);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-      transition: left 0.2s;
-    }
-
-    .perm-toggle.on::after {
-      left: 16px;
-    }
-
-    .perm-toggle.off::after {
-      left: 2px;
+      max-width: 360px;
+      line-height: 1.6;
     }
 
     /* AUDIT LOG */
@@ -1016,6 +844,13 @@
 
     .audit-list {
       padding: 4px 0;
+    }
+
+    .audit-empty {
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
     }
 
     .audit-item {
@@ -1227,36 +1062,6 @@
       box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
     }
 
-    .perm-check-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-
-    .perm-check {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 10px;
-      border-radius: 7px;
-      background: var(--surface);
-      cursor: pointer;
-    }
-
-    .perm-check input[type=checkbox] {
-      accent-color: var(--gold);
-      width: 14px;
-      height: 14px;
-      cursor: pointer;
-    }
-
-    .perm-check label {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text-secondary);
-      cursor: pointer;
-    }
-
     .modal-footer {
       padding: 16px 28px 24px;
       display: flex;
@@ -1372,19 +1177,14 @@
           <path d="M23 21v-2a4 4 0 00-3-3.87" />
           <path d="M16 3.13a4 4 0 010 7.75" />
         </svg>
-
         Staff
-
-        {% if current_user.role == 'admin' %}
-        <span class="lock-icon">🔒</span>
-        {% endif %}
       </a>
     </nav>
     <div class="sidebar-bottom">
       <div class="admin-profile">
-        <div class="avatar-circle">SA</div>
+        <div class="avatar-circle">{{ current_user.username.split()|map('first')|map('upper')|join('') }}</div>
         <div class="admin-info">
-          <div class="name">Super Admin</div>
+          <div class="name">{{ current_user.username }}</div>
           <div class="role">System Administrator</div>
           <div class="superadmin-badge">
             <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor">
@@ -1394,7 +1194,7 @@
           </div>
         </div>
       </div>
-      <a href="/logout"class="logout-btn">
+      <a href="/logout" class="logout-btn">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
           <polyline points="16 17 21 12 16 7" />
@@ -1426,16 +1226,8 @@
             <circle cx="11" cy="11" r="8" />
             <line x1="21" y1="21" x2="16.65" y2="16.65" />
           </svg>
-          <input type="text" placeholder="Search staff…" id="searchInput" oninput="filterStaff()">
+          <input type="text" id="searchInput" placeholder="Search staff…" oninput="filterStaff()">
         </div>
-        <div class="icon-btn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" />
-            <path d="M13.73 21a2 2 0 01-3.46 0" />
-          </svg>
-          <div class="notif-dot"></div>
-        </div>
-        <div class="header-avatar">SA</div>
       </div>
     </header>
 
@@ -1455,7 +1247,9 @@
         </div>
       </div>
 
-      <!-- SUMMARY -->
+      {% set total_staff = staff_members | length %}
+
+      <!-- SUMMARY — dihitung dari database, nol semua kalau belum ada data -->
       <div class="summary-row">
         <div class="summary-card">
           <div class="s-icon si-total">
@@ -1467,7 +1261,7 @@
             </svg>
           </div>
           <div class="s-info">
-            <div class="s-val">24</div>
+            <div class="s-val">{{ total_staff }}</div>
             <div class="s-lbl">Total Staff</div>
           </div>
         </div>
@@ -1478,7 +1272,7 @@
             </svg>
           </div>
           <div class="s-info">
-            <div class="s-val">19</div>
+            <div class="s-val">{{ total_staff }}</div>
             <div class="s-lbl">Active Today</div>
           </div>
         </div>
@@ -1490,7 +1284,7 @@
             </svg>
           </div>
           <div class="s-info">
-            <div class="s-val">6</div>
+            <div class="s-val">0</div>
             <div class="s-lbl">Departments</div>
           </div>
         </div>
@@ -1503,7 +1297,7 @@
             </svg>
           </div>
           <div class="s-info">
-            <div class="s-val">3</div>
+            <div class="s-val">{{ total_staff }}</div>
             <div class="s-lbl">New This Month</div>
           </div>
         </div>
@@ -1513,11 +1307,8 @@
       <div class="toolbar">
         <div class="toolbar-left">
           <button class="filter-btn active" onclick="setFilter('all',this)">All Staff</button>
-          <button class="filter-btn" onclick="setFilter('superadmin',this)">Superadmin</button>
-          <button class="filter-btn" onclick="setFilter('manager',this)">Manager</button>
-          <button class="filter-btn" onclick="setFilter('frontdesk',this)">Front Desk</button>
-          <button class="filter-btn" onclick="setFilter('housekeeping',this)">Housekeeping</button>
-          <button class="filter-btn" onclick="setFilter('finance',this)">Finance</button>
+          <button class="filter-btn" onclick="setFilter('admin',this)">Admin</button>
+          <button class="filter-btn" onclick="setFilter('staff',this)">Staff</button>
         </div>
         <button class="btn-gold" onclick="openAddModal()">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -1531,472 +1322,81 @@
       <!-- STAFF GRID -->
       <div class="staff-grid" id="staffGrid">
 
-        <!-- SUPERADMIN -->
-        <div class="staff-card is-superadmin" data-dept="superadmin">
+        {% if staff_members %}
+        {% for s in staff_members %}
+        {%- set initials = s.username.split()[:2] | map('first') | map('upper') | join('') -%}
+        {%- set role_lower = s.role | lower -%}
+        <div class="staff-card {% if role_lower == 'super_admin' %}is-superadmin{% endif %}"
+          data-role="{{ role_lower }}">
           <div class="staff-card-top">
             <div class="staff-avatar-wrap">
-              <div class="staff-avatar av-gold">SA</div>
+              <div
+                class="staff-avatar {% if role_lower == 'super_admin' %}av-gold{% elif role_lower == 'admin' %}av-navy{% else %}av-blue{% endif %}">
+                {{ initials }}</div>
               <div class="online-dot dot-online"></div>
             </div>
+            {% if role_lower == 'super_admin' %}
             <span class="staff-role-badge role-superadmin">★ Superadmin</span>
+            {% elif role_lower == 'admin' %}
+            <span class="staff-role-badge role-admin">Admin</span>
+            {% else %}
+            <span class="staff-role-badge role-staff">Staff</span>
+            {% endif %}
           </div>
-          <div class="staff-name">Super Admin</div>
-          <div class="staff-position">System Administrator</div>
-          <div class="staff-dept">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M3 9l9-7 9 7v11H3z" />
-            </svg>
-            All Departments
-          </div>
+          <div class="staff-name">{{ s.username }}</div>
+          <div class="staff-position">{{ s.role | capitalize }}</div>
           <div class="staff-meta">
             <div class="meta-item">
-              <div class="meta-label">Joined</div>
-              <div class="meta-value">Jan 2023</div>
-            </div>
-            <div class="meta-item">
-              <div class="meta-label">Last Active</div>
-              <div class="meta-value">Now</div>
-            </div>
-            <div class="meta-item">
               <div class="meta-label">Email</div>
-              <div class="meta-value" style="font-size:11px">superadmin@lumina.com</div>
+              <div class="meta-value" style="font-size:11px">{{ s.email }}</div>
             </div>
             <div class="meta-item">
-              <div class="meta-label">Access Level</div>
-              <div class="meta-value">Full</div>
+              <div class="meta-label">Role</div>
+              <div class="meta-value">{{ s.role | capitalize }}</div>
             </div>
           </div>
           <div class="staff-card-footer">
-            <button class="btn-sm-outline" onclick="openPermModal('Super Admin','Superadmin')">Permissions</button>
-            <button class="btn-sm-navy" onclick="openEditModal('Super Admin')">Edit</button>
-          </div>
-        </div>
-
-        <!-- MANAGER -->
-        <div class="staff-card" data-dept="manager">
-          <div class="staff-card-top">
-            <div class="staff-avatar-wrap">
-              <div class="staff-avatar av-navy">RP</div>
-              <div class="online-dot dot-online"></div>
-            </div>
-            <span class="staff-role-badge role-manager">Manager</span>
-          </div>
-          <div class="staff-name">Rizky Putranto</div>
-          <div class="staff-position">General Manager</div>
-          <div class="staff-dept">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M3 9l9-7 9 7v11H3z" />
-            </svg>
-            Operations
-          </div>
-          <div class="staff-meta">
-            <div class="meta-item">
-              <div class="meta-label">Joined</div>
-              <div class="meta-value">Mar 2023</div>
-            </div>
-            <div class="meta-item">
-              <div class="meta-label">Last Active</div>
-              <div class="meta-value">2h ago</div>
-            </div>
-            <div class="meta-item">
-              <div class="meta-label">Email</div>
-              <div class="meta-value" style="font-size:11px">r.putranto@lumina.com</div>
-            </div>
-            <div class="meta-item">
-              <div class="meta-label">Access Level</div>
-              <div class="meta-value">High</div>
-            </div>
-          </div>
-          <div class="staff-card-footer">
-            <button class="btn-sm-outline" onclick="openPermModal('Rizky Putranto','Manager')">Permissions</button>
-            <button class="btn-sm-navy" onclick="openEditModal('Rizky Putranto')">Edit</button>
-            <button class="btn-sm-danger" onclick="openDeleteModal('Rizky Putranto')">
+            <button class="btn-sm-navy" onclick="openEditModal('{{ s.username|e }}', '{{ s.role }}', {{ s.id }})">
+              Edit
+            </button>
+            {% if s.id != current_user.id %}
+            <button class="btn-sm-danger" onclick="openDeleteModal('{{ s.username | e }}', {{ s.id }})">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="3 6 5 6 21 6" />
                 <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
               </svg>
             </button>
+            {% endif %}
           </div>
         </div>
-
-        <!-- FRONT DESK -->
-        <div class="staff-card" data-dept="frontdesk">
-          <div class="staff-card-top">
-            <div class="staff-avatar-wrap">
-              <div class="staff-avatar av-blue">DW</div>
-              <div class="online-dot dot-online"></div>
-            </div>
-            <span class="staff-role-badge role-frontdesk">Front Desk</span>
-          </div>
-          <div class="staff-name">Dewi Wulandari</div>
-          <div class="staff-position">Senior Receptionist</div>
-          <div class="staff-dept">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M3 9l9-7 9 7v11H3z" />
+        {% endfor %}
+        {% else %}
+        <!-- EMPTY STATE: belum ada staff di database -->
+        <div class="staff-empty">
+          <div class="staff-empty-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 00-3-3.87" />
+              <path d="M16 3.13a4 4 0 010 7.75" />
             </svg>
-            Guest Services
           </div>
-          <div class="staff-meta">
-            <div class="meta-item">
-              <div class="meta-label">Joined</div>
-              <div class="meta-value">Jun 2023</div>
-            </div>
-            <div class="meta-item">
-              <div class="meta-label">Last Active</div>
-              <div class="meta-value">5m ago</div>
-            </div>
-            <div class="meta-item">
-              <div class="meta-label">Email</div>
-              <div class="meta-value" style="font-size:11px">d.wulandari@lumina.com</div>
-            </div>
-            <div class="meta-item">
-              <div class="meta-label">Access Level</div>
-              <div class="meta-value">Medium</div>
-            </div>
-          </div>
-          <div class="staff-card-footer">
-            <button class="btn-sm-outline" onclick="openPermModal('Dewi Wulandari','Front Desk')">Permissions</button>
-            <button class="btn-sm-navy" onclick="openEditModal('Dewi Wulandari')">Edit</button>
-            <button class="btn-sm-danger" onclick="openDeleteModal('Dewi Wulandari')">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="3 6 5 6 21 6" />
-                <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        <!-- HOUSEKEEPING -->
-        <div class="staff-card" data-dept="housekeeping">
-          <div class="staff-card-top">
-            <div class="staff-avatar-wrap">
-              <div class="staff-avatar av-green">BH</div>
-              <div class="online-dot dot-leave"></div>
-            </div>
-            <span class="staff-role-badge role-housekeeping">Housekeeping</span>
-          </div>
-          <div class="staff-name">Bayu Hermawan</div>
-          <div class="staff-position">Housekeeping Supervisor</div>
-          <div class="staff-dept">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M3 9l9-7 9 7v11H3z" />
+          <div class="staff-empty-title">No staff added yet</div>
+          <div class="staff-empty-sub">Akun admin dan staff yang kamu tambahkan akan muncul di sini. Klik "Add Staff"
+            untuk mulai membangun tim kamu.</div>
+          <button class="btn-gold" style="margin-top:6px" onclick="openAddModal()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
             </svg>
-            Housekeeping
-          </div>
-          <div class="staff-meta">
-            <div class="meta-item">
-              <div class="meta-label">Joined</div>
-              <div class="meta-value">Feb 2023</div>
-            </div>
-            <div class="meta-item">
-              <div class="meta-label">Last Active</div>
-              <div class="meta-value">On Leave</div>
-            </div>
-            <div class="meta-item">
-              <div class="meta-label">Email</div>
-              <div class="meta-value" style="font-size:11px">b.hermawan@lumina.com</div>
-            </div>
-            <div class="meta-item">
-              <div class="meta-label">Access Level</div>
-              <div class="meta-value">Limited</div>
-            </div>
-          </div>
-          <div class="staff-card-footer">
-            <button class="btn-sm-outline" onclick="openPermModal('Bayu Hermawan','Housekeeping')">Permissions</button>
-            <button class="btn-sm-navy" onclick="openEditModal('Bayu Hermawan')">Edit</button>
-            <button class="btn-sm-danger" onclick="openDeleteModal('Bayu Hermawan')">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="3 6 5 6 21 6" />
-                <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        <!-- FINANCE -->
-        <div class="staff-card" data-dept="finance">
-          <div class="staff-card-top">
-            <div class="staff-avatar-wrap">
-              <div class="staff-avatar av-purple">NF</div>
-              <div class="online-dot dot-online"></div>
-            </div>
-            <span class="staff-role-badge role-finance">Finance</span>
-          </div>
-          <div class="staff-name">Nadia Fitriani</div>
-          <div class="staff-position">Finance Manager</div>
-          <div class="staff-dept">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M3 9l9-7 9 7v11H3z" />
-            </svg>
-            Finance & Accounting
-          </div>
-          <div class="staff-meta">
-            <div class="meta-item">
-              <div class="meta-label">Joined</div>
-              <div class="meta-value">Apr 2023</div>
-            </div>
-            <div class="meta-item">
-              <div class="meta-label">Last Active</div>
-              <div class="meta-value">1h ago</div>
-            </div>
-            <div class="meta-item">
-              <div class="meta-label">Email</div>
-              <div class="meta-value" style="font-size:11px">n.fitriani@lumina.com</div>
-            </div>
-            <div class="meta-item">
-              <div class="meta-label">Access Level</div>
-              <div class="meta-value">High</div>
-            </div>
-          </div>
-          <div class="staff-card-footer">
-            <button class="btn-sm-outline" onclick="openPermModal('Nadia Fitriani','Finance')">Permissions</button>
-            <button class="btn-sm-navy" onclick="openEditModal('Nadia Fitriani')">Edit</button>
-            <button class="btn-sm-danger" onclick="openDeleteModal('Nadia Fitriani')">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="3 6 5 6 21 6" />
-                <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        <!-- SECURITY -->
-        <div class="staff-card" data-dept="security">
-          <div class="staff-card-top">
-            <div class="staff-avatar-wrap">
-              <div class="staff-avatar av-rose">AK</div>
-              <div class="online-dot dot-offline"></div>
-            </div>
-            <span class="staff-role-badge role-security">Security</span>
-          </div>
-          <div class="staff-name">Andi Kurniawan</div>
-          <div class="staff-position">Head of Security</div>
-          <div class="staff-dept">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M3 9l9-7 9 7v11H3z" />
-            </svg>
-            Security
-          </div>
-          <div class="staff-meta">
-            <div class="meta-item">
-              <div class="meta-label">Joined</div>
-              <div class="meta-value">May 2024</div>
-            </div>
-            <div class="meta-item">
-              <div class="meta-label">Last Active</div>
-              <div class="meta-value">Yesterday</div>
-            </div>
-            <div class="meta-item">
-              <div class="meta-label">Email</div>
-              <div class="meta-value" style="font-size:11px">a.kurniawan@lumina.com</div>
-            </div>
-            <div class="meta-item">
-              <div class="meta-label">Access Level</div>
-              <div class="meta-value">Medium</div>
-            </div>
-          </div>
-          <div class="staff-card-footer">
-            <button class="btn-sm-outline" onclick="openPermModal('Andi Kurniawan','Security')">Permissions</button>
-            <button class="btn-sm-navy" onclick="openEditModal('Andi Kurniawan')">Edit</button>
-            <button class="btn-sm-danger" onclick="openDeleteModal('Andi Kurniawan')">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="3 6 5 6 21 6" />
-                <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
-              </svg>
-            </button>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- PERMISSIONS TABLE -->
-      <div class="permissions-card">
-        <div class="permissions-header">
-          <div>
-            <div class="section-title" style="margin-bottom:0"><span>Role</span> Permissions</div>
-            <div style="font-size:12px;color:var(--text-muted);margin-top:3px">Access control per role — only editable
-              by Superadmin</div>
-          </div>
-          <button class="btn-gold" style="font-size:12px;padding:7px 14px">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
-              <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
-            </svg>
-            Edit Permissions
+            Add Staff
           </button>
         </div>
-        <div class="permissions-grid">
-          <div class="perm-col">
-            <div class="perm-col-title">Superadmin</div>
-            <div class="perm-row"><span class="perm-name">View Dashboard</span>
-              <div class="perm-toggle on locked"></div>
-            </div>
-            <div class="perm-row"><span class="perm-name">Manage Staff</span>
-              <div class="perm-toggle on locked"></div>
-            </div>
-            <div class="perm-row"><span class="perm-name">Manage Rooms</span>
-              <div class="perm-toggle on locked"></div>
-            </div>
-            <div class="perm-row"><span class="perm-name">Manage Bookings</span>
-              <div class="perm-toggle on locked"></div>
-            </div>
-            <div class="perm-row"><span class="perm-name">View Reports</span>
-              <div class="perm-toggle on locked"></div>
-            </div>
-            <div class="perm-row"><span class="perm-name">Edit Permissions</span>
-              <div class="perm-toggle on locked"></div>
-            </div>
-            <div class="perm-row"><span class="perm-name">Delete Records</span>
-              <div class="perm-toggle on locked"></div>
-            </div>
-          </div>
-          <div class="perm-col">
-            <div class="perm-col-title">Manager</div>
-            <div class="perm-row"><span class="perm-name">View Dashboard</span>
-              <div class="perm-toggle on" onclick="togglePerm(this)"></div>
-            </div>
-            <div class="perm-row"><span class="perm-name">Manage Staff</span>
-              <div class="perm-toggle off" onclick="togglePerm(this)"></div>
-            </div>
-            <div class="perm-row"><span class="perm-name">Manage Rooms</span>
-              <div class="perm-toggle on" onclick="togglePerm(this)"></div>
-            </div>
-            <div class="perm-row"><span class="perm-name">Manage Bookings</span>
-              <div class="perm-toggle on" onclick="togglePerm(this)"></div>
-            </div>
-            <div class="perm-row"><span class="perm-name">View Reports</span>
-              <div class="perm-toggle on" onclick="togglePerm(this)"></div>
-            </div>
-            <div class="perm-row"><span class="perm-name">Edit Permissions</span>
-              <div class="perm-toggle off" onclick="togglePerm(this)"></div>
-            </div>
-            <div class="perm-row"><span class="perm-name">Delete Records</span>
-              <div class="perm-toggle off" onclick="togglePerm(this)"></div>
-            </div>
-          </div>
-          <div class="perm-col">
-            <div class="perm-col-title">Front Desk</div>
-            <div class="perm-row"><span class="perm-name">View Dashboard</span>
-              <div class="perm-toggle on" onclick="togglePerm(this)"></div>
-            </div>
-            <div class="perm-row"><span class="perm-name">Manage Staff</span>
-              <div class="perm-toggle off" onclick="togglePerm(this)"></div>
-            </div>
-            <div class="perm-row"><span class="perm-name">Manage Rooms</span>
-              <div class="perm-toggle off" onclick="togglePerm(this)"></div>
-            </div>
-            <div class="perm-row"><span class="perm-name">Manage Bookings</span>
-              <div class="perm-toggle on" onclick="togglePerm(this)"></div>
-            </div>
-            <div class="perm-row"><span class="perm-name">View Reports</span>
-              <div class="perm-toggle off" onclick="togglePerm(this)"></div>
-            </div>
-            <div class="perm-row"><span class="perm-name">Edit Permissions</span>
-              <div class="perm-toggle off" onclick="togglePerm(this)"></div>
-            </div>
-            <div class="perm-row"><span class="perm-name">Delete Records</span>
-              <div class="perm-toggle off" onclick="togglePerm(this)"></div>
-            </div>
-          </div>
-          <div class="perm-col">
-            <div class="perm-col-title">Housekeeping / Others</div>
-            <div class="perm-row"><span class="perm-name">View Dashboard</span>
-              <div class="perm-toggle on" onclick="togglePerm(this)"></div>
-            </div>
-            <div class="perm-row"><span class="perm-name">Manage Staff</span>
-              <div class="perm-toggle off" onclick="togglePerm(this)"></div>
-            </div>
-            <div class="perm-row"><span class="perm-name">Manage Rooms</span>
-              <div class="perm-toggle on" onclick="togglePerm(this)"></div>
-            </div>
-            <div class="perm-row"><span class="perm-name">Manage Bookings</span>
-              <div class="perm-toggle off" onclick="togglePerm(this)"></div>
-            </div>
-            <div class="perm-row"><span class="perm-name">View Reports</span>
-              <div class="perm-toggle off" onclick="togglePerm(this)"></div>
-            </div>
-            <div class="perm-row"><span class="perm-name">Edit Permissions</span>
-              <div class="perm-toggle off" onclick="togglePerm(this)"></div>
-            </div>
-            <div class="perm-row"><span class="perm-name">Delete Records</span>
-              <div class="perm-toggle off" onclick="togglePerm(this)"></div>
-            </div>
-          </div>
-        </div>
+        {% endif %}
+
       </div>
 
-      <!-- AUDIT LOG -->
-      <div class="audit-card">
-        <div class="audit-header">
-          <div>
-            <div class="section-title" style="margin-bottom:0"><span>Audit</span> Log</div>
-            <div style="font-size:12px;color:var(--text-muted);margin-top:3px">All staff-related actions — visible to
-              Superadmin only</div>
-          </div>
-        </div>
-        <div class="audit-list">
-          <div class="audit-item">
-            <div class="audit-icon ai-add"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2.5">
-                <line x1="12" y1="5" x2="12" y2="19" />
-                <line x1="5" y1="12" x2="19" y2="12" />
-              </svg></div>
-            <div class="audit-body">
-              <div class="audit-action">New Staff Added</div>
-              <div class="audit-detail">Andi Kurniawan added as Head of Security by Super Admin</div>
-            </div>
-            <div class="audit-time">Today, 09:14</div>
-          </div>
-          <div class="audit-item">
-            <div class="audit-icon ai-perm"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2">
-                <rect x="3" y="11" width="18" height="11" rx="2" />
-                <path d="M7 11V7a5 5 0 0110 0v4" />
-              </svg></div>
-            <div class="audit-body">
-              <div class="audit-action">Permission Updated</div>
-              <div class="audit-detail">Front Desk — "Manage Bookings" toggled ON by Super Admin</div>
-            </div>
-            <div class="audit-time">Today, 08:47</div>
-          </div>
-          <div class="audit-item">
-            <div class="audit-icon ai-edit"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2">
-                <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
-                <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
-              </svg></div>
-            <div class="audit-body">
-              <div class="audit-action">Staff Profile Edited</div>
-              <div class="audit-detail">Nadia Fitriani's access level updated to High by Super Admin</div>
-            </div>
-            <div class="audit-time">Yesterday, 16:30</div>
-          </div>
-          <div class="audit-item">
-            <div class="audit-icon ai-delete"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2">
-                <polyline points="3 6 5 6 21 6" />
-                <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
-              </svg></div>
-            <div class="audit-body">
-              <div class="audit-action">Staff Account Removed</div>
-              <div class="audit-detail">Hendra Saputra (Front Desk) removed by Super Admin</div>
-            </div>
-            <div class="audit-time">Yesterday, 11:05</div>
-          </div>
-          <div class="audit-item">
-            <div class="audit-icon ai-perm"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2">
-                <rect x="3" y="11" width="18" height="11" rx="2" />
-                <path d="M7 11V7a5 5 0 0110 0v4" />
-              </svg></div>
-            <div class="audit-body">
-              <div class="audit-action">Role Changed</div>
-              <div class="audit-detail">Rizky Putranto promoted from Supervisor to General Manager</div>
-            </div>
-            <div class="audit-time">2 days ago</div>
-          </div>
-        </div>
-      </div>
+      
 
     </div>
   </main>
@@ -2004,184 +1404,105 @@
   <!-- ADD STAFF MODAL -->
   <div class="modal-overlay" id="addModal">
     <div class="modal">
-      <div class="modal-header">
-        <div>
-          <div class="modal-title">Add New Staff</div>
-          <div class="modal-subtitle">Fill in the staff member's details and assign a role</div>
-        </div>
-        <button class="modal-close" onclick="closeModal('addModal')"><svg width="14" height="14" viewBox="0 0 24 24"
-            fill="none" stroke="currentColor" stroke-width="2.5">
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </svg></button>
-      </div>
-      <div class="modal-body">
-        <div class="form-section-label">Personal Information</div>
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">First Name</label><input type="text" class="form-input"
-              placeholder="e.g. Budi"></div>
-          <div class="form-group"><label class="form-label">Last Name</label><input type="text" class="form-input"
-              placeholder="e.g. Santoso"></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input"
-              placeholder="staff@lumina.com"></div>
-          <div class="form-group"><label class="form-label">Phone Number</label><input type="text" class="form-input"
-              placeholder="+62 8xx-xxxx-xxxx"></div>
-        </div>
-        <div class="form-section-label">Role & Access</div>
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">Department</label>
-            <select class="form-select">
-              <option>Operations</option>
-              <option>Guest Services</option>
-              <option>Housekeeping</option>
-              <option>Finance & Accounting</option>
-              <option>Security</option>
-            </select>
+      <form method="POST" action="{{ url_for('add_staff') }}">
+        <div class="modal-header">
+          <div>
+            <div class="modal-title">Add New Staff</div>
+            <div class="modal-subtitle">Fill in the staff member's details and assign a role</div>
           </div>
-          <div class="form-group"><label class="form-label">Role</label>
-            <select class="form-select">
-              <option>Manager</option>
-              <option>Front Desk</option>
-              <option>Housekeeping</option>
-              <option>Finance</option>
-              <option>Security</option>
-            </select>
+          <button type="button" class="modal-close" onclick="closeModal('addModal')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-section-label">Account Information</div>
+          <div class="form-row">
+            <div class="form-group full">
+              <label class="form-label">Full Name</label>
+              <input type="text" name="username" class="form-input" placeholder="e.g. Budi Santoso" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" name="email" class="form-input" placeholder="staff@lumina.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Password</label>
+              <input type="password" name="password" class="form-input" placeholder="Set initial password" required>
+            </div>
+          </div>
+          <div class="form-section-label">Role & Access</div>
+          <div class="form-row">
+            <div class="form-group full">
+              <label class="form-label">Role</label>
+              <select name="role" class="form-select">
+                <option value="admin">Admin — General Manager</option>
+                <option value="staff">Staff</option>
+              </select>
+            </div>
           </div>
         </div>
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">Position Title</label><input type="text" class="form-input"
-              placeholder="e.g. Senior Receptionist"></div>
-          <div class="form-group"><label class="form-label">Access Level</label>
-            <select class="form-select">
-              <option>Limited</option>
-              <option>Medium</option>
-              <option>High</option>
-            </select>
-          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-cancel" onclick="closeModal('addModal')">Cancel</button>
+          <button type="submit" class="btn-gold">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            Add Staff
+          </button>
         </div>
-        <div class="form-section-label">Permissions</div>
-        <div class="perm-check-grid">
-          <div class="perm-check"><input type="checkbox" id="p1" checked><label for="p1">View Dashboard</label></div>
-          <div class="perm-check"><input type="checkbox" id="p2"><label for="p2">Manage Staff</label></div>
-          <div class="perm-check"><input type="checkbox" id="p3"><label for="p3">Manage Rooms</label></div>
-          <div class="perm-check"><input type="checkbox" id="p4" checked><label for="p4">Manage Bookings</label></div>
-          <div class="perm-check"><input type="checkbox" id="p5"><label for="p5">View Reports</label></div>
-          <div class="perm-check"><input type="checkbox" id="p6"><label for="p6">Delete Records</label></div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn-cancel" onclick="closeModal('addModal')">Cancel</button>
-        <button class="btn-gold" onclick="closeModal('addModal')">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
-          Add Staff
-        </button>
-      </div>
+      </form>
     </div>
   </div>
 
   <!-- EDIT MODAL -->
   <div class="modal-overlay" id="editModal">
     <div class="modal">
-      <div class="modal-header">
-        <div>
-          <div class="modal-title">Edit Staff — <span id="editName"></span></div>
-          <div class="modal-subtitle">Update staff profile and access</div>
-        </div>
-        <button class="modal-close" onclick="closeModal('editModal')"><svg width="14" height="14" viewBox="0 0 24 24"
-            fill="none" stroke="currentColor" stroke-width="2.5">
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </svg></button>
-      </div>
-      <div class="modal-body">
-        <div class="form-section-label">Personal Information</div>
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">Full Name</label><input type="text" class="form-input"
-              id="editNameInput"></div>
-          <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input"
-              placeholder="staff@lumina.com"></div>
-        </div>
-        <div class="form-section-label">Role & Access</div>
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">Role</label>
-            <select class="form-select">
-              <option>Manager</option>
-              <option>Front Desk</option>
-              <option>Housekeeping</option>
-              <option>Finance</option>
-              <option>Security</option>
-            </select>
+      <form method="POST" id="editForm" action="">
+        <div class="modal-header">
+          <div>
+            <div class="modal-title">Edit Staff — <span id="editName"></span></div>
+            <div class="modal-subtitle">Update staff profile and access</div>
           </div>
-          <div class="form-group"><label class="form-label">Access Level</label>
-            <select class="form-select">
-              <option>Limited</option>
-              <option>Medium</option>
-              <option selected>High</option>
-            </select>
+          <button type="button" class="modal-close" onclick="closeModal('editModal')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-section-label">Account Information</div>
+          <div class="form-row">
+            <div class="form-group full">
+              <label class="form-label">Full Name</label>
+              <input type="text" name="username" class="form-input" id="editNameInput" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group full">
+              <label class="form-label">Role</label>
+              <select name="role" class="form-select" id="editRoleInput">
+                <option value="admin">Admin — General Manager</option>
+                <option value="staff">Staff</option>
+              </select>
+            </div>
           </div>
         </div>
-        <div class="form-row">
-          <div class="form-group full"><label class="form-label">Status</label>
-            <select class="form-select">
-              <option>Active</option>
-              <option>On Leave</option>
-              <option>Inactive</option>
-            </select>
-          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-cancel" onclick="closeModal('editModal')">Cancel</button>
+          <button type="submit" class="btn-gold">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            Save Changes
+          </button>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn-cancel" onclick="closeModal('editModal')">Cancel</button>
-        <button class="btn-gold" onclick="closeModal('editModal')">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
-          Save Changes
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- PERMISSIONS MODAL -->
-  <div class="modal-overlay" id="permModal">
-    <div class="modal">
-      <div class="modal-header">
-        <div>
-          <div class="modal-title">Permissions — <span id="permName"></span></div>
-          <div class="modal-subtitle" id="permRoleLabel"></div>
-        </div>
-        <button class="modal-close" onclick="closeModal('permModal')"><svg width="14" height="14" viewBox="0 0 24 24"
-            fill="none" stroke="currentColor" stroke-width="2.5">
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </svg></button>
-      </div>
-      <div class="modal-body">
-        <div class="form-section-label">Access Controls</div>
-        <div class="perm-check-grid">
-          <div class="perm-check"><input type="checkbox" id="mp1" checked><label for="mp1">View Dashboard</label></div>
-          <div class="perm-check"><input type="checkbox" id="mp2"><label for="mp2">Manage Staff</label></div>
-          <div class="perm-check"><input type="checkbox" id="mp3" checked><label for="mp3">Manage Rooms</label></div>
-          <div class="perm-check"><input type="checkbox" id="mp4" checked><label for="mp4">Manage Bookings</label></div>
-          <div class="perm-check"><input type="checkbox" id="mp5" checked><label for="mp5">View Reports</label></div>
-          <div class="perm-check"><input type="checkbox" id="mp6"><label for="mp6">Edit Permissions</label></div>
-          <div class="perm-check"><input type="checkbox" id="mp7"><label for="mp7">Delete Records</label></div>
-          <div class="perm-check"><input type="checkbox" id="mp8"><label for="mp8">Export Data</label></div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn-cancel" onclick="closeModal('permModal')">Cancel</button>
-        <button class="btn-gold" onclick="closeModal('permModal')">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
-          Save Permissions
-        </button>
-      </div>
+      </form>
     </div>
   </div>
 
@@ -2203,23 +1524,25 @@
       </div>
       <div class="modal-footer" style="justify-content:center;gap:12px;padding-top:20px">
         <button class="btn-cancel" onclick="closeModal('deleteModal')">Cancel</button>
-        <button class="btn-danger" onclick="closeModal('deleteModal')">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="3 6 5 6 21 6" />
-            <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
-          </svg>
-          Yes, Remove Staff
-        </button>
+        <form method="POST" id="deleteForm" action="" style="display:inline">
+          <button type="submit" class="btn-danger">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="3 6 5 6 21 6" />
+              <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
+            </svg>
+            Yes, Remove Staff
+          </button>
+        </form>
       </div>
     </div>
   </div>
 
   <script>
-    function setFilter(dept, btn) {
+    function setFilter(role, btn) {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       document.querySelectorAll('#staffGrid .staff-card').forEach(c => {
-        c.style.display = (dept === 'all' || c.dataset.dept === dept) ? '' : 'none';
+        c.style.display = (role === 'all' || c.dataset.role === role) ? '' : 'none';
       });
     }
 
@@ -2231,32 +1554,26 @@
     }
 
     function openAddModal() { document.getElementById('addModal').classList.add('open'); }
-    function openEditModal(name) {
+
+    function openEditModal(name, role, id) {
       document.getElementById('editName').textContent = name;
       document.getElementById('editNameInput').value = name;
+      document.getElementById('editRoleInput').value = role;
+      document.getElementById('editForm').action = '/staff/' + id + '/edit';
       document.getElementById('editModal').classList.add('open');
     }
-    function openPermModal(name, role) {
-      document.getElementById('permName').textContent = name;
-      document.getElementById('permRoleLabel').textContent = 'Role: ' + role;
-      document.getElementById('permModal').classList.add('open');
-    }
-    function openDeleteModal(name) {
+
+    function openDeleteModal(name, id) {
       document.getElementById('deleteName').textContent = name;
+      document.getElementById('deleteForm').action = '/staff/' + id + '/delete';
       document.getElementById('deleteModal').classList.add('open');
     }
+
     function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
-    // Close on backdrop click
     document.querySelectorAll('.modal-overlay').forEach(overlay => {
       overlay.addEventListener('click', function (e) { if (e.target === this) this.classList.remove('open'); });
     });
-
-    // Permission toggles
-    function togglePerm(el) {
-      el.classList.toggle('on');
-      el.classList.toggle('off');
-    }
   </script>
 </body>
 

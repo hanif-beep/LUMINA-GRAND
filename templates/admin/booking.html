@@ -34,18 +34,14 @@
       --radius-sm: 10px;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       background: var(--surface);
       color: var(--text-primary);
-      display: flex;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     /* SIDEBAR */
@@ -54,8 +50,7 @@
       background: var(--navy);
       min-height: 100vh;
       position: fixed;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       display: flex;
       flex-direction: column;
       z-index: 100;
@@ -69,20 +64,16 @@
 
     .sidebar-logo .wordmark {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 22px;
-      font-weight: 600;
+      font-size: 22px; font-weight: 600;
       color: var(--white);
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
-    .sidebar-logo .wordmark span {
-      color: var(--gold);
-    }
+    .sidebar-logo .wordmark span { color: var(--gold); }
 
     .sidebar-logo .tagline {
-      font-size: 10px;
-      color: var(--text-muted);
+      font-size: 10px; color: var(--text-muted);
       letter-spacing: 0.2em;
       text-transform: uppercase;
       margin-top: 4px;
@@ -91,38 +82,29 @@
     .sidebar-nav {
       flex: 1;
       padding: 24px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
+      display: flex; flex-direction: column; gap: 4px;
     }
 
     .nav-section-label {
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      padding: 12px 8px 6px;
-      margin-top: 8px;
+      font-size: 10px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--text-muted);
+      padding: 12px 8px 6px; margin-top: 8px;
     }
 
     .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      display: flex; align-items: center; gap: 12px;
       padding: 11px 14px;
       border-radius: var(--radius-sm);
       cursor: pointer;
       transition: all 0.2s;
-      color: rgba(255, 255, 255, 0.55);
-      font-size: 13.5px;
-      font-weight: 500;
-      position: relative;
-      text-decoration: none;
+      color: rgba(255,255,255,0.55);
+      font-size: 13.5px; font-weight: 500;
+      position: relative; text-decoration: none;
     }
 
     .nav-item:hover {
-      color: rgba(255, 255, 255, 0.9);
-      background: rgba(212, 175, 55, 0.08);
+      color: rgba(255,255,255,0.9);
+      background: rgba(212,175,55,0.08);
     }
 
     .nav-item.active {
@@ -132,1769 +114,1091 @@
 
     .nav-item.active::before {
       content: '';
-      position: absolute;
-      left: 0;
-      top: 50%;
+      position: absolute; left: 0; top: 50%;
       transform: translateY(-50%);
-      width: 3px;
-      height: 60%;
+      width: 3px; height: 60%;
       background: var(--gold);
       border-radius: 0 3px 3px 0;
     }
 
-    .nav-item svg {
-      flex-shrink: 0;
-      width: 18px;
-      height: 18px;
-    }
+    .nav-item svg { flex-shrink: 0; width: 18px; height: 18px; }
 
     .sidebar-bottom {
       padding: 16px;
-      border-top: 1px solid rgba(212, 175, 55, 0.12);
+      border-top: 1px solid rgba(212,175,55,0.12);
     }
 
     .admin-profile {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      transition: background 0.2s;
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px; border-radius: var(--radius-sm);
+      cursor: pointer; transition: background 0.2s;
     }
 
-    .admin-profile:hover {
-      background: rgba(255, 255, 255, 0.05);
-    }
+    .admin-profile:hover { background: rgba(255,255,255,0.05); }
 
     .avatar-circle {
-      width: 36px;
-      height: 36px;
+      width: 36px; height: 36px;
       background: linear-gradient(135deg, var(--gold), #B8960C);
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--navy);
-      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700;
+      color: var(--navy); flex-shrink: 0;
     }
 
-    .admin-info .name {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--white);
-    }
-
-    .admin-info .role {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
+    .admin-info .name { font-size: 13px; font-weight: 600; color: var(--white); }
+    .admin-info .role { font-size: 11px; color: var(--text-muted); }
 
     .logout-btn {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 8px;
-      padding: 8px 10px;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      color: rgba(255, 255, 255, 0.4);
-      font-size: 13px;
-      transition: color 0.2s;
+      display: flex; align-items: center; gap: 8px;
+      margin-top: 8px; padding: 8px 10px;
+      border-radius: var(--radius-sm); cursor: pointer;
+      color: rgba(255,255,255,0.4); font-size: 13px;
+      transition: color 0.2s; text-decoration: none;
     }
 
-    .logout-btn:hover {
-      color: #F87171;
-    }
+    .logout-btn:hover { color: #F87171; }
 
     /* MAIN */
-    .main {
-      margin-left: var(--sidebar-w);
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
+    .main { margin-left: var(--sidebar-w); flex: 1; display: flex; flex-direction: column; }
 
     .header {
       height: var(--header-h);
-      background: rgba(248, 247, 244, 0.92);
+      background: rgba(248,247,244,0.92);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--surface-2);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      display: flex; align-items: center; justify-content: space-between;
       padding: 0 36px;
-      position: sticky;
-      top: 0;
-      z-index: 50;
+      position: sticky; top: 0; z-index: 50;
     }
 
     .header-left .greeting {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--navy);
-      letter-spacing: -0.02em;
+      font-size: 20px; font-weight: 700;
+      color: var(--navy); letter-spacing: -0.02em;
     }
 
-    .header-left .subtitle {
-      font-size: 13px;
-      color: var(--text-secondary);
-      margin-top: 2px;
-    }
-
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
+    .header-left .subtitle { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
 
     .search-bar {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      display: flex; align-items: center; gap: 8px;
       background: var(--white);
       border: 1px solid var(--surface-2);
-      border-radius: 40px;
-      padding: 8px 16px;
-      width: 220px;
+      border-radius: 40px; padding: 8px 16px; width: 240px;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
 
     .search-bar:focus-within {
       border-color: var(--gold-border);
-      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.1);
     }
 
     .search-bar input {
-      border: none;
-      outline: none;
-      font-size: 13px;
-      background: transparent;
-      color: var(--text-primary);
-      width: 100%;
-      font-family: inherit;
+      border: none; outline: none; font-size: 13px;
+      background: transparent; color: var(--text-primary);
+      width: 100%; font-family: inherit;
     }
 
-    .search-bar input::placeholder {
-      color: var(--text-muted);
-    }
-
-    .icon-btn {
-      width: 38px;
-      height: 38px;
-      background: var(--white);
-      border: 1px solid var(--surface-2);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      color: var(--text-secondary);
-      transition: all 0.2s;
-      position: relative;
-    }
-
-    .icon-btn:hover {
-      border-color: var(--gold-border);
-      color: var(--gold);
-    }
-
-    .notif-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--gold);
-      border-radius: 50%;
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      border: 2px solid var(--white);
-    }
-
-    .header-avatar {
-      width: 38px;
-      height: 38px;
-      background: linear-gradient(135deg, var(--gold), #B8960C);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--navy);
-      cursor: pointer;
-    }
+    .search-bar input::placeholder { color: var(--text-muted); }
 
     /* CONTENT */
-    .content {
-      padding: 32px 36px 48px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .section-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--navy);
-      letter-spacing: -0.01em;
-      margin-bottom: 16px;
-    }
-
-    .section-title span {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      color: var(--gold);
-      font-size: 18px;
-    }
+    .content { padding: 32px 36px 48px; display: flex; flex-direction: column; gap: 24px; }
 
     /* SUMMARY CARDS */
-    .summary-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
+    .summary-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 
     .summary-card {
       background: var(--white);
-      border: 1px solid rgba(15, 23, 42, 0.06);
+      border: 1px solid rgba(15,23,42,0.06);
       border-radius: var(--radius-sm);
       padding: 16px 20px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+      display: flex; align-items: center; gap: 14px;
+      box-shadow: 0 1px 3px rgba(15,23,42,0.05);
       animation: fadeUp 0.4s ease both;
     }
 
-    .summary-card:nth-child(1) {
-      animation-delay: 0.05s
-    }
-
-    .summary-card:nth-child(2) {
-      animation-delay: 0.10s
-    }
-
-    .summary-card:nth-child(3) {
-      animation-delay: 0.15s
-    }
-
-    .summary-card:nth-child(4) {
-      animation-delay: 0.20s
-    }
+    .summary-card:nth-child(1) { animation-delay: 0.05s }
+    .summary-card:nth-child(2) { animation-delay: 0.10s }
+    .summary-card:nth-child(3) { animation-delay: 0.15s }
+    .summary-card:nth-child(4) { animation-delay: 0.20s }
 
     .s-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 40px; height: 40px; border-radius: 10px;
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
     }
 
-    .si-all {
-      background: rgba(15, 23, 42, 0.06);
-      color: var(--navy);
-    }
+    .si-all { background: rgba(15,23,42,0.06); color: var(--navy); }
+    .si-confirmed { background: rgba(5,150,105,0.1); color: #059669; }
+    .si-pending { background: rgba(217,119,6,0.1); color: #D97706; }
+    .si-cancelled { background: rgba(220,38,38,0.08); color: #DC2626; }
 
-    .si-confirmed {
-      background: rgba(5, 150, 105, 0.1);
-      color: #059669;
-    }
-
-    .si-pending {
-      background: rgba(217, 119, 6, 0.1);
-      color: #D97706;
-    }
-
-    .si-cancelled {
-      background: rgba(220, 38, 38, 0.08);
-      color: #DC2626;
-    }
-
-    .s-info .s-val {
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--navy);
-      letter-spacing: -0.03em;
-    }
-
+    .s-info .s-val { font-size: 22px; font-weight: 800; color: var(--navy); letter-spacing: -0.03em; }
     .s-info .s-lbl {
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-      margin-top: 2px;
+      font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--text-muted); margin-top: 2px;
     }
 
     /* TOOLBAR */
     .toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 16px; flex-wrap: wrap;
     }
 
-    .toolbar-left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
+    .toolbar-left { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 
     .filter-btn {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 500;
-      font-family: inherit;
+      display: flex; align-items: center; gap: 6px;
+      padding: 8px 14px; border-radius: 8px; cursor: pointer;
+      font-size: 13px; font-weight: 500; font-family: inherit;
       border: 1px solid var(--surface-2);
-      background: var(--white);
-      color: var(--text-secondary);
+      background: var(--white); color: var(--text-secondary);
       transition: all 0.2s;
     }
 
-    .filter-btn:hover {
-      border-color: var(--gold-border);
-      color: var(--navy);
-    }
+    .filter-btn:hover { border-color: var(--gold-border); color: var(--navy); }
 
     .filter-btn.active {
       background: var(--gold-dim);
       border-color: var(--gold-border);
-      color: var(--gold);
-      font-weight: 600;
+      color: var(--gold); font-weight: 600;
     }
 
-    .fdot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-    }
-
-    .toolbar-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    /* DATE RANGE */
-    .date-range {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--white);
-      border: 1px solid var(--surface-2);
-      border-radius: 8px;
-      padding: 8px 14px;
-      font-size: 13px;
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: border-color 0.2s;
-    }
-
-    .date-range:hover {
-      border-color: var(--gold-border);
-    }
+    .fdot { width: 7px; height: 7px; border-radius: 50%; }
 
     .btn-gold {
-      font-size: 13px;
-      font-weight: 600;
+      font-size: 13px; font-weight: 600;
       background: linear-gradient(135deg, var(--gold), #C9A227);
-      color: var(--navy);
-      border: none;
-      padding: 9px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-family: inherit;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      color: var(--navy); border: none;
+      padding: 9px 20px; border-radius: 8px;
+      cursor: pointer; font-family: inherit;
+      display: flex; align-items: center; gap: 6px;
       transition: opacity 0.2s;
     }
 
-    .btn-gold:hover {
-      opacity: 0.85;
-    }
+    .btn-gold:hover { opacity: 0.85; }
 
-    /* MAIN TABLE CARD */
+    /* TABLE CARD */
     .table-card {
       background: var(--white);
-      border: 1px solid rgba(15, 23, 42, 0.06);
+      border: 1px solid rgba(15,23,42,0.06);
       border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+      overflow-x: auto; overflow-y: hidden;
+      box-shadow: 0 1px 3px rgba(15,23,42,0.06);
       animation: fadeUp 0.45s 0.25s ease both;
     }
 
     .table-card-header {
       padding: 20px 24px 16px;
       border-bottom: 1px solid var(--surface-2);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      display: flex; align-items: center; justify-content: space-between;
     }
 
-    .table-meta {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-top: 3px;
+    .section-title {
+      font-size: 16px; font-weight: 700;
+      color: var(--navy); letter-spacing: -0.01em;
+      margin-bottom: 0;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
+    .section-title span {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; color: var(--gold); font-size: 18px;
     }
+
+    .table-meta { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
+
+    table { width: 100%; border-collapse: collapse; }
 
     thead th {
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-      text-align: left;
+      font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--text-muted); text-align: left;
       padding: 10px 20px;
       background: var(--surface);
       border-bottom: 1px solid var(--surface-2);
       white-space: nowrap;
     }
 
-    thead th.sortable {
-      cursor: pointer;
-      user-select: none;
-    }
-
-    thead th.sortable:hover {
-      color: var(--navy);
-    }
-
-    thead th .sort-icon {
-      margin-left: 4px;
-      opacity: 0.4;
-    }
-
     tbody tr {
       border-bottom: 1px solid var(--surface-2);
-      transition: background 0.15s;
-      cursor: pointer;
+      transition: background 0.15s; cursor: pointer;
     }
 
-    tbody tr:last-child {
-      border-bottom: none;
-    }
-
-    tbody tr:hover {
-      background: #FAFAF8;
-    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #FAFAF8; }
 
     tbody td {
-      padding: 14px 20px;
-      font-size: 13px;
-      color: var(--text-primary);
-      vertical-align: middle;
+      padding: 14px 20px; font-size: 13px;
+      color: var(--text-primary); vertical-align: middle;
     }
 
     .booking-id {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--navy);
+      font-size: 16px; font-weight: 600; color: var(--navy);
     }
 
-    .guest-cell {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+    .guest-cell { display: flex; align-items: center; gap: 10px; }
 
     .guest-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
+      width: 32px; height: 32px; border-radius: 50%;
       background: linear-gradient(135deg, var(--navy), var(--navy-mid));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--gold);
-      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; color: var(--gold); flex-shrink: 0;
     }
 
-    .guest-name {
-      font-weight: 600;
-      color: var(--navy);
-    }
-
-    .guest-email {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 1px;
-    }
+    .guest-name { font-weight: 600; color: var(--navy); }
+    .guest-email { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
 
     .room-pill {
       display: inline-block;
-      background: var(--surface);
-      color: var(--text-secondary);
-      font-size: 12px;
-      font-weight: 500;
-      padding: 3px 9px;
-      border-radius: 6px;
+      background: var(--surface); color: var(--text-secondary);
+      font-size: 12px; font-weight: 500;
+      padding: 3px 9px; border-radius: 6px;
     }
 
-    .date-cell {
-      font-size: 13px;
-      color: var(--text-primary);
-    }
+    .date-cell { font-size: 13px; color: var(--text-primary); }
+    .date-cell .nights { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
 
-    .date-cell .nights {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 1px;
-    }
-
-    .price-cell {
-      font-weight: 700;
-      color: var(--navy);
-    }
+    .price-cell { font-weight: 700; color: var(--navy); }
 
     .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 20px;
-      letter-spacing: 0.04em;
-      white-space: nowrap;
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 11px; font-weight: 600;
+      padding: 4px 10px; border-radius: 20px;
+      letter-spacing: 0.04em; white-space: nowrap;
     }
 
-    .sdot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-    }
+    .sdot { width: 5px; height: 5px; border-radius: 50%; }
 
-    .s-confirmed {
-      background: rgba(5, 150, 105, 0.1);
-      color: #059669;
-    }
+    .s-confirmed { background: rgba(5,150,105,0.1); color: #059669; }
+    .s-confirmed .sdot { background: #059669; }
 
-    .s-confirmed .sdot {
-      background: #059669;
-    }
+    .s-pending { background: rgba(217,119,6,0.1); color: #D97706; }
+    .s-pending .sdot { background: #D97706; }
 
-    .s-pending {
-      background: rgba(217, 119, 6, 0.1);
-      color: #D97706;
-    }
+    .s-completed { background: rgba(37,99,235,0.1); color: #2563EB; }
+    .s-completed .sdot { background: #2563EB; }
 
-    .s-pending .sdot {
-      background: #D97706;
-    }
+    .s-cancelled { background: rgba(220,38,38,0.1); color: #DC2626; }
+    .s-cancelled .sdot { background: #DC2626; }
 
-    .s-completed {
-      background: rgba(37, 99, 235, 0.1);
-      color: #2563EB;
-    }
-
-    .s-completed .sdot {
-      background: #2563EB;
-    }
-
-    .s-cancelled {
-      background: rgba(220, 38, 38, 0.1);
-      color: #DC2626;
-    }
-
-    .s-cancelled .sdot {
-      background: #DC2626;
-    }
-
-    .action-btns {
-      display: flex;
-      gap: 6px;
-    }
+    .action-btns { display: flex; gap: 6px; }
 
     .btn-icon {
-      width: 30px;
-      height: 30px;
-      border-radius: 6px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--surface-2);
-      background: transparent;
-      color: var(--text-muted);
-      transition: all 0.2s;
+      width: 30px; height: 30px; border-radius: 6px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--surface-2); background: transparent;
+      color: var(--text-muted); transition: all 0.2s;
     }
 
     .btn-icon:hover {
-      border-color: var(--gold-border);
-      color: var(--gold);
+      border-color: var(--gold-border); color: var(--gold);
       background: var(--gold-dim);
     }
 
     .btn-icon.danger:hover {
-      border-color: rgba(220, 38, 38, 0.3);
-      color: #DC2626;
-      background: rgba(220, 38, 38, 0.06);
+      border-color: rgba(220,38,38,0.3); color: #DC2626;
+      background: rgba(220,38,38,0.06);
     }
 
-    /* PAGINATION */
-    .pagination {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 24px;
-      border-top: 1px solid var(--surface-2);
+    /* EMPTY STATE */
+    .empty-state {
+      padding: 60px 24px; text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
     }
 
-    .page-info {
-      font-size: 13px;
+    .empty-icon {
+      width: 56px; height: 56px; background: var(--surface);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
       color: var(--text-muted);
     }
 
-    .page-btns {
-      display: flex;
-      gap: 6px;
+    .empty-title { font-size: 15px; font-weight: 700; color: var(--navy); }
+    .empty-sub { font-size: 13px; color: var(--text-muted); }
+
+    /* PAGINATION */
+    .pagination {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 24px; border-top: 1px solid var(--surface-2);
     }
+
+    .page-info { font-size: 13px; color: var(--text-muted); }
+    .page-btns { display: flex; gap: 6px; }
 
     .page-btn {
-      width: 32px;
-      height: 32px;
-      border-radius: 7px;
-      border: 1px solid var(--surface-2);
-      background: var(--white);
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 500;
+      width: 32px; height: 32px; border-radius: 7px;
+      border: 1px solid var(--surface-2); background: var(--white);
+      cursor: pointer; font-size: 13px; font-weight: 500;
       color: var(--text-secondary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-      font-family: inherit;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; font-family: inherit;
     }
 
-    .page-btn:hover {
-      border-color: var(--gold-border);
-      color: var(--navy);
-    }
-
-    .page-btn.active {
-      background: var(--navy);
-      color: var(--gold);
-      border-color: var(--navy);
-    }
+    .page-btn:hover { border-color: var(--gold-border); color: var(--navy); }
+    .page-btn.active { background: var(--navy); color: var(--gold); border-color: var(--navy); }
 
     /* MODAL */
     .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.6);
+      display: none; position: fixed; inset: 0;
+      background: rgba(15,23,42,0.6);
       backdrop-filter: blur(4px);
-      z-index: 200;
-      align-items: center;
-      justify-content: center;
+      z-index: 200; align-items: center; justify-content: center;
     }
 
-    .modal-overlay.open {
-      display: flex;
-    }
+    .modal-overlay.open { display: flex; }
 
     .modal {
-      background: var(--white);
-      border-radius: var(--radius);
-      width: 580px;
-      max-width: 95vw;
-      max-height: 90vh;
+      background: var(--white); border-radius: var(--radius);
+      width: 580px; max-width: 95vw; max-height: 90vh;
       overflow-y: auto;
-      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.25);
+      box-shadow: 0 24px 60px rgba(15,23,42,0.25);
       animation: modalIn 0.25s ease;
     }
 
     @keyframes modalIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px) scale(0.97)
-      }
-
-      to {
-        opacity: 1;
-        transform: none
-      }
+      from { opacity: 0; transform: translateY(20px) scale(0.97) }
+      to { opacity: 1; transform: none }
     }
 
     .modal-header {
       padding: 24px 28px 20px;
       border-bottom: 1px solid var(--surface-2);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      display: flex; align-items: center; justify-content: space-between;
     }
 
-    .modal-title {
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--navy);
-    }
-
-    .modal-subtitle {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
+    .modal-title { font-size: 17px; font-weight: 700; color: var(--navy); }
+    .modal-subtitle { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
 
     .modal-close {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      border: 1px solid var(--surface-2);
-      background: transparent;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-muted);
-      transition: all 0.2s;
+      width: 32px; height: 32px; border-radius: 8px;
+      border: 1px solid var(--surface-2); background: transparent;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); transition: all 0.2s;
     }
 
-    .modal-close:hover {
-      background: var(--surface);
-      color: var(--navy);
-    }
+    .modal-close:hover { background: var(--surface); color: var(--navy); }
 
-    .modal-body {
-      padding: 24px 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
+    .modal-body { padding: 24px 28px; display: flex; flex-direction: column; gap: 18px; }
 
     .form-section-label {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em;
       color: var(--text-muted);
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--surface-2);
+      padding-bottom: 10px; border-bottom: 1px solid var(--surface-2);
     }
 
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1/-1; }
+
+    .form-label { font-size: 12px; font-weight: 600; color: var(--text-secondary); letter-spacing: 0.04em; }
+
+    .form-input, .form-select {
+      padding: 9px 12px; border-radius: 8px;
+      border: 1px solid var(--surface-2); background: var(--white);
+      font-size: 13px; font-family: inherit; color: var(--text-primary);
+      outline: none; transition: border-color 0.2s, box-shadow 0.2s;
     }
 
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .form-group.full {
-      grid-column: 1/-1;
-    }
-
-    .form-label {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-secondary);
-      letter-spacing: 0.04em;
-    }
-
-    .form-input,
-    .form-select {
-      padding: 9px 12px;
-      border-radius: 8px;
-      border: 1px solid var(--surface-2);
-      background: var(--white);
-      font-size: 13px;
-      font-family: inherit;
-      color: var(--text-primary);
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    .form-input:focus,
-    .form-select:focus {
+    .form-input:focus, .form-select:focus {
       border-color: var(--gold-border);
-      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.1);
     }
 
     .modal-footer {
       padding: 16px 28px 24px;
-      display: flex;
-      gap: 10px;
-      justify-content: flex-end;
+      display: flex; gap: 10px; justify-content: flex-end;
       border-top: 1px solid var(--surface-2);
     }
 
     .btn-cancel {
-      padding: 9px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 600;
-      font-family: inherit;
-      border: 1px solid var(--surface-2);
-      background: transparent;
-      color: var(--text-secondary);
-      transition: all 0.2s;
+      padding: 9px 20px; border-radius: 8px; cursor: pointer;
+      font-size: 13px; font-weight: 600; font-family: inherit;
+      border: 1px solid var(--surface-2); background: transparent;
+      color: var(--text-secondary); transition: all 0.2s;
     }
 
-    .btn-cancel:hover {
-      background: var(--surface);
-    }
+    .btn-cancel:hover { background: var(--surface); }
 
     /* DETAIL MODAL */
-    .detail-modal {
-      width: 620px;
-    }
+    .detail-modal { width: 620px; }
 
     .detail-header-info {
-      display: flex;
-      align-items: center;
-      gap: 16px;
+      display: flex; align-items: center; gap: 16px;
       padding: 20px 28px;
       background: var(--navy);
       border-radius: var(--radius) var(--radius) 0 0;
     }
 
     .detail-avatar {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
+      width: 48px; height: 48px; border-radius: 50%;
       background: linear-gradient(135deg, var(--gold), #B8960C);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 700; color: var(--navy);
     }
 
-    .detail-guest-name {
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--white);
-    }
-
+    .detail-guest-name { font-size: 17px; font-weight: 700; color: var(--white); }
     .detail-booking-id {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 14px;
-      color: var(--gold);
-      margin-top: 2px;
+      font-size: 14px; color: var(--gold); margin-top: 2px;
     }
 
-    .detail-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 4px;
-    }
-
-    .detail-item {}
-
+    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 4px; }
     .detail-label {
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-      margin-bottom: 4px;
+      font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--text-muted); margin-bottom: 4px;
     }
+    .detail-value { font-size: 14px; font-weight: 600; color: var(--navy); }
+    .detail-divider { height: 1px; background: var(--surface-2); margin: 4px 0; }
 
-    .detail-value {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--navy);
-    }
-
-    .detail-divider {
-      height: 1px;
-      background: var(--surface-2);
-      margin: 4px 0;
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(16px)
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0)
-      }
-    }
-
-    /* LOCKED NAV ITEM */
-    .nav-locked {
-      opacity: 0.45;
-      cursor: not-allowed;
-    }
-
-    .nav-locked:hover {
-      background: rgba(220, 38, 38, 0.06) !important;
-      color: #F87171 !important;
-      opacity: 0.6;
-    }
-
-    .nav-lock-badge {
-      margin-left: auto;
-      font-size: 12px;
-    }
-
-    /* ACCESS DENIED TOAST */
+    /* ACCESS TOAST */
     .access-toast {
-      position: fixed;
-      bottom: 28px;
-      left: 50%;
+      position: fixed; bottom: 28px; left: 50%;
       transform: translateX(-50%) translateY(80px);
-      background: #1E293B;
-      color: #fff;
-      border: 1px solid rgba(220, 38, 38, 0.4);
-      border-radius: 10px;
-      padding: 12px 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 13px;
-      font-weight: 500;
-      z-index: 9999;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s;
-      opacity: 0;
-      pointer-events: none;
-      white-space: nowrap;
+      background: #1E293B; color: #fff;
+      border: 1px solid rgba(220,38,38,0.4);
+      border-radius: 10px; padding: 12px 20px;
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13px; font-weight: 500;
+      z-index: 9999; box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s;
+      opacity: 0; pointer-events: none; white-space: nowrap;
     }
 
-    .access-toast.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
+    .access-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
     .access-toast-icon {
-      width: 28px;
-      height: 28px;
-      background: rgba(220, 38, 38, 0.15);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #F87171;
-      flex-shrink: 0;
+      width: 28px; height: 28px;
+      background: rgba(220,38,38,0.15); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #F87171; flex-shrink: 0;
     }
 
-    .access-toast strong {
-      color: #F87171;
+    .access-toast strong { color: #F87171; }
+
+    .nav-locked { opacity: 0.45; cursor: not-allowed; }
+    .nav-locked:hover { background: rgba(220,38,38,0.06) !important; color: #F87171 !important; opacity: 0.6; }
+    .nav-lock-badge { margin-left: auto; font-size: 12px; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px) }
+      to { opacity: 1; transform: translateY(0) }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="sidebar-logo">
-      <div class="wordmark">Lumina <span>Grand</span></div>
-      <div class="tagline">Hotel Management System</div>
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="wordmark">Lumina <span>Grand</span></div>
+    <div class="tagline">Hotel Management System</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Operations</div>
+    <a class="nav-item" href="/dashboard">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+        <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+        <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+        <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+      </svg>
+      Dashboard
+    </a>
+    <a class="nav-item" href="/admin/rooms">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+      Rooms
+    </a>
+    <a class="nav-item active" href="/bookings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+      </svg>
+      Bookings
+    </a>
+    {% if current_user.role == 'super_admin' %}
+    <a class="nav-item" href="{{ url_for('staff') }}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+        <path d="M16 3.13a4 4 0 010 7.75"/>
+      </svg>
+      Staff
+    </a>
+    {% else %}
+    <a class="nav-item nav-locked" href="#" onclick="showAccessDenied(event)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+        <path d="M16 3.13a4 4 0 010 7.75"/>
+      </svg>
+      Staff
+      <span class="nav-lock-badge">&#128274;</span>
+    </a>
+    {% endif %}
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="admin-profile">
+      <div class="avatar-circle">{{ current_user.username.split()|map('first')|map('upper')|join('') }}</div>
+      <div class="admin-info">
+        <div class="name">{{ current_user.username }}</div>
+        <div class="role">{% if current_user.role == 'super_admin' %}Superadmin{% else %}General Manager{% endif %}</div>
+      </div>
     </div>
-    <nav class="sidebar-nav">
-      <div class="nav-section-label">Operations</div>
-      <a class="nav-item" href="/dashboard">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <rect x="3" y="3" width="7" height="7" rx="1.5" />
-          <rect x="14" y="3" width="7" height="7" rx="1.5" />
-          <rect x="3" y="14" width="7" height="7" rx="1.5" />
-          <rect x="14" y="14" width="7" height="7" rx="1.5" />
-        </svg>
-        Dashboard
-      </a>
-      <a class="nav-item" href="/admin/rooms">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z" />
-          <polyline points="9 22 9 12 15 12 15 22" />
-        </svg>
-        Rooms
-      </a>
-      <a class="nav-item active" href="/bookings">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-        </svg>
-        Bookings
-      </a>
-      {% if current_user.role == 'super_admin' %}
-      <a class="nav-item" href="{{ url_for('staff') }}">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-          <circle cx="9" cy="7" r="4" />
-          <path d="M23 21v-2a4 4 0 00-3-3.87" />
-          <path d="M16 3.13a4 4 0 010 7.75" />
-        </svg>
-        Staff
-      </a>
-      {% else %}
-      <a class="nav-item nav-locked" href="#" onclick="showAccessDenied(event)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-          <circle cx="9" cy="7" r="4" />
-          <path d="M23 21v-2a4 4 0 00-3-3.87" />
-          <path d="M16 3.13a4 4 0 010 7.75" />
-        </svg>
-        Staff
-        <span class="nav-lock-badge">&#128274;</span>
-      </a>
-      {% endif %}
+    <a href="/logout" class="logout-btn">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
+        <polyline points="16 17 21 12 16 7"/>
+        <line x1="21" y1="12" x2="9" y2="12"/>
+      </svg>
+      Logout
+    </a>
+  </div>
+</aside>
 
-    </nav>
-    <div class="sidebar-bottom">
-      <div class="admin-profile">
-        <div class="avatar-circle">AD</div>
-        <div class="admin-info">
-          <div class="name">Administrator</div>
-          <div class="role">General Manager</div>
-        </div>
-      </div>
-      <a href="/logout"class="logout-btn">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
-          <polyline points="16 17 21 12 16 7" />
-          <line x1="21" y1="12" x2="9" y2="12" />
-        </svg>
-        Logout
-      </a>
+<!-- MAIN -->
+<main class="main">
+  <header class="header">
+    <div class="header-left">
+      <div class="greeting">Booking Management</div>
+      <div class="subtitle">View, create, and manage all guest reservations.</div>
     </div>
-  </aside>
-
-  <!-- MAIN -->
-  <main class="main">
-    <header class="header">
-      <div class="header-left">
-        <div class="greeting">Booking Management</div>
-        <div class="subtitle">View, create, and manage all guest reservations.</div>
+    <div class="header-right">
+      <div class="search-bar">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="text" id="searchInput" placeholder="Search guest or room…" oninput="filterBookings()">
       </div>
-      <div class="header-right">
-        <div class="search-bar">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2">
-            <circle cx="11" cy="11" r="8" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          </svg>
-          <input type="text" placeholder="Search bookings, guests…" id="searchInput" oninput="filterBookings()">
-        </div>
-        <div class="icon-btn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" />
-            <path d="M13.73 21a2 2 0 01-3.46 0" />
-          </svg>
-          <div class="notif-dot"></div>
-        </div>
-        <div class="header-avatar">AD</div>
-      </div>
-    </header>
-
-    <div class="content">
-
-      <!-- SUMMARY -->
-      <div class="summary-row">
-        <div class="summary-card">
-          <div class="s-icon si-all">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-          </div>
-          <div class="s-info">
-            <div class="s-val">86</div>
-            <div class="s-lbl">Total Bookings</div>
-          </div>
-        </div>
-        <div class="summary-card">
-          <div class="s-icon si-confirmed">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
-          </div>
-          <div class="s-info">
-            <div class="s-val">54</div>
-            <div class="s-lbl">Confirmed</div>
-          </div>
-        </div>
-        <div class="summary-card">
-          <div class="s-icon si-pending">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <circle cx="12" cy="12" r="10" />
-              <polyline points="12 6 12 12 16 14" />
-            </svg>
-          </div>
-          <div class="s-info">
-            <div class="s-val">18</div>
-            <div class="s-lbl">Pending</div>
-          </div>
-        </div>
-        <div class="summary-card">
-          <div class="s-icon si-cancelled">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <circle cx="12" cy="12" r="10" />
-              <line x1="15" y1="9" x2="9" y2="15" />
-              <line x1="9" y1="9" x2="15" y2="15" />
-            </svg>
-          </div>
-          <div class="s-info">
-            <div class="s-val">14</div>
-            <div class="s-lbl">Cancelled</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- TOOLBAR -->
-      <div class="toolbar">
-        <div class="toolbar-left">
-          <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
-          <button class="filter-btn" onclick="setFilter('confirmed',this)"><span class="fdot"
-              style="background:#059669"></span>Confirmed</button>
-          <button class="filter-btn" onclick="setFilter('pending',this)"><span class="fdot"
-              style="background:#D97706"></span>Pending</button>
-          <button class="filter-btn" onclick="setFilter('completed',this)"><span class="fdot"
-              style="background:#2563EB"></span>Completed</button>
-          <button class="filter-btn" onclick="setFilter('cancelled',this)"><span class="fdot"
-              style="background:#DC2626"></span>Cancelled</button>
-        </div>
-        <div class="toolbar-right">
-          <div class="date-range">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="3" y="4" width="18" height="18" rx="2" />
-              <line x1="16" y1="2" x2="16" y2="6" />
-              <line x1="8" y1="2" x2="8" y2="6" />
-              <line x1="3" y1="10" x2="21" y2="10" />
-            </svg>
-            Jun 2025
-          </div>
-          <button class="btn-gold" onclick="openCreateModal()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <line x1="12" y1="5" x2="12" y2="19" />
-              <line x1="5" y1="12" x2="19" y2="12" />
-            </svg>
-            New Booking
-          </button>
-        </div>
-      </div>
-
-      <!-- TABLE -->
-      <div class="table-card">
-        <div class="table-card-header">
-          <div>
-            <div class="section-title" style="margin-bottom:0"><span>All</span> Reservations</div>
-            <div class="table-meta">Showing <span id="rowCount">8</span> bookings</div>
-          </div>
-        </div>
-
-        <table>
-          <thead>
-            <tr>
-              <th class="sortable">Booking ID <span class="sort-icon">↕</span></th>
-              <th>Guest</th>
-              <th>Room</th>
-              <th class="sortable">Check-In <span class="sort-icon">↕</span></th>
-              <th class="sortable">Check-Out <span class="sort-icon">↕</span></th>
-              <th class="sortable">Total <span class="sort-icon">↕</span></th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="bookingTableBody">
-
-            <tr data-status="confirmed"
-              onclick="openDetailModal('LG-4801','Aryan Pratama','AP','Grand Suite','02 Jun 2025','06 Jun 2025','4 nights','$2,480','confirmed','aryan.pratama@email.com','+62 812-3456-7890')">
-              <td><span class="booking-id">#LG-4801</span></td>
-              <td>
-                <div class="guest-cell">
-                  <div class="guest-avatar">AP</div>
-                  <div>
-                    <div class="guest-name">Aryan Pratama</div>
-                    <div class="guest-email">aryan.pratama@email.com</div>
-                  </div>
-                </div>
-              </td>
-              <td><span class="room-pill">Grand Suite · 202</span></td>
-              <td>
-                <div class="date-cell">02 Jun 2025<div class="nights">Check-in</div>
-                </div>
-              </td>
-              <td>
-                <div class="date-cell">06 Jun 2025<div class="nights">4 nights</div>
-                </div>
-              </td>
-              <td><span class="price-cell">$2,480</span></td>
-              <td><span class="status-badge s-confirmed"><span class="sdot"></span>Confirmed</span></td>
-              <td onclick="event.stopPropagation()">
-                <div class="action-btns">
-                  <button class="btn-icon" title="Edit" onclick="openCreateModal()"><svg width="13" height="13"
-                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
-                      <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
-                    </svg></button>
-                  <button class="btn-icon danger" title="Cancel"><svg width="13" height="13" viewBox="0 0 24 24"
-                      fill="none" stroke="currentColor" stroke-width="2">
-                      <polyline points="3 6 5 6 21 6" />
-                      <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
-                      <path d="M10 11v6M14 11v6" />
-                    </svg></button>
-                </div>
-              </td>
-            </tr>
-
-            <tr data-status="pending"
-              onclick="openDetailModal('LG-4800','Siti Rahmawati','SR','Deluxe Ocean View','03 Jun 2025','07 Jun 2025','4 nights','$1,680','pending','siti.rahmawati@email.com','+62 813-9876-5432')">
-              <td><span class="booking-id">#LG-4800</span></td>
-              <td>
-                <div class="guest-cell">
-                  <div class="guest-avatar">SR</div>
-                  <div>
-                    <div class="guest-name">Siti Rahmawati</div>
-                    <div class="guest-email">siti.rahmawati@email.com</div>
-                  </div>
-                </div>
-              </td>
-              <td><span class="room-pill">Deluxe Ocean · 305</span></td>
-              <td>
-                <div class="date-cell">03 Jun 2025<div class="nights">Check-in</div>
-                </div>
-              </td>
-              <td>
-                <div class="date-cell">07 Jun 2025<div class="nights">4 nights</div>
-                </div>
-              </td>
-              <td><span class="price-cell">$1,680</span></td>
-              <td><span class="status-badge s-pending"><span class="sdot"></span>Pending</span></td>
-              <td onclick="event.stopPropagation()">
-                <div class="action-btns">
-                  <button class="btn-icon" title="Edit" onclick="openCreateModal()"><svg width="13" height="13"
-                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
-                      <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
-                    </svg></button>
-                  <button class="btn-icon danger" title="Cancel"><svg width="13" height="13" viewBox="0 0 24 24"
-                      fill="none" stroke="currentColor" stroke-width="2">
-                      <polyline points="3 6 5 6 21 6" />
-                      <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
-                      <path d="M10 11v6M14 11v6" />
-                    </svg></button>
-                </div>
-              </td>
-            </tr>
-
-            <tr data-status="completed"
-              onclick="openDetailModal('LG-4799','David Chen','DC','Presidential Suite','28 May 2025','01 Jun 2025','4 nights','$3,400','completed','david.chen@email.com','+65 9123-4567')">
-              <td><span class="booking-id">#LG-4799</span></td>
-              <td>
-                <div class="guest-cell">
-                  <div class="guest-avatar">DC</div>
-                  <div>
-                    <div class="guest-name">David Chen</div>
-                    <div class="guest-email">david.chen@email.com</div>
-                  </div>
-                </div>
-              </td>
-              <td><span class="room-pill">Presidential · 101</span></td>
-              <td>
-                <div class="date-cell">28 May 2025<div class="nights">Check-in</div>
-                </div>
-              </td>
-              <td>
-                <div class="date-cell">01 Jun 2025<div class="nights">4 nights</div>
-                </div>
-              </td>
-              <td><span class="price-cell">$3,400</span></td>
-              <td><span class="status-badge s-completed"><span class="sdot"></span>Completed</span></td>
-              <td onclick="event.stopPropagation()">
-                <div class="action-btns">
-                  <button class="btn-icon" title="Edit" onclick="openCreateModal()"><svg width="13" height="13"
-                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
-                      <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
-                    </svg></button>
-                  <button class="btn-icon danger" title="Delete"><svg width="13" height="13" viewBox="0 0 24 24"
-                      fill="none" stroke="currentColor" stroke-width="2">
-                      <polyline points="3 6 5 6 21 6" />
-                      <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
-                      <path d="M10 11v6M14 11v6" />
-                    </svg></button>
-                </div>
-              </td>
-            </tr>
-
-            <tr data-status="confirmed"
-              onclick="openDetailModal('LG-4798','Maria Santos','MS','Superior Room','30 May 2025','03 Jun 2025','4 nights','$1,120','confirmed','maria.santos@email.com','+63 917-234-5678')">
-              <td><span class="booking-id">#LG-4798</span></td>
-              <td>
-                <div class="guest-cell">
-                  <div class="guest-avatar">MS</div>
-                  <div>
-                    <div class="guest-name">Maria Santos</div>
-                    <div class="guest-email">maria.santos@email.com</div>
-                  </div>
-                </div>
-              </td>
-              <td><span class="room-pill">Superior · 412</span></td>
-              <td>
-                <div class="date-cell">30 May 2025<div class="nights">Check-in</div>
-                </div>
-              </td>
-              <td>
-                <div class="date-cell">03 Jun 2025<div class="nights">4 nights</div>
-                </div>
-              </td>
-              <td><span class="price-cell">$1,120</span></td>
-              <td><span class="status-badge s-confirmed"><span class="sdot"></span>Confirmed</span></td>
-              <td onclick="event.stopPropagation()">
-                <div class="action-btns">
-                  <button class="btn-icon" title="Edit" onclick="openCreateModal()"><svg width="13" height="13"
-                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
-                      <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
-                    </svg></button>
-                  <button class="btn-icon danger" title="Cancel"><svg width="13" height="13" viewBox="0 0 24 24"
-                      fill="none" stroke="currentColor" stroke-width="2">
-                      <polyline points="3 6 5 6 21 6" />
-                      <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
-                      <path d="M10 11v6M14 11v6" />
-                    </svg></button>
-                </div>
-              </td>
-            </tr>
-
-            <tr data-status="cancelled"
-              onclick="openDetailModal('LG-4797','Budi Santoso','BS','Classic Room','25 May 2025','28 May 2025','3 nights','$540','cancelled','budi.santoso@email.com','+62 856-7890-1234')">
-              <td><span class="booking-id">#LG-4797</span></td>
-              <td>
-                <div class="guest-cell">
-                  <div class="guest-avatar">BS</div>
-                  <div>
-                    <div class="guest-name">Budi Santoso</div>
-                    <div class="guest-email">budi.santoso@email.com</div>
-                  </div>
-                </div>
-              </td>
-              <td><span class="room-pill">Classic · 508</span></td>
-              <td>
-                <div class="date-cell">25 May 2025<div class="nights">Check-in</div>
-                </div>
-              </td>
-              <td>
-                <div class="date-cell">28 May 2025<div class="nights">3 nights</div>
-                </div>
-              </td>
-              <td><span class="price-cell">$540</span></td>
-              <td><span class="status-badge s-cancelled"><span class="sdot"></span>Cancelled</span></td>
-              <td onclick="event.stopPropagation()">
-                <div class="action-btns">
-                  <button class="btn-icon" title="Edit" onclick="openCreateModal()"><svg width="13" height="13"
-                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
-                      <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
-                    </svg></button>
-                  <button class="btn-icon danger" title="Delete"><svg width="13" height="13" viewBox="0 0 24 24"
-                      fill="none" stroke="currentColor" stroke-width="2">
-                      <polyline points="3 6 5 6 21 6" />
-                      <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
-                      <path d="M10 11v6M14 11v6" />
-                    </svg></button>
-                </div>
-              </td>
-            </tr>
-
-            <tr data-status="confirmed"
-              onclick="openDetailModal('LG-4796','Yuki Tanaka','YT','Grand Suite','05 Jun 2025','09 Jun 2025','4 nights','$2,480','confirmed','yuki.tanaka@email.com','+81 90-1234-5678')">
-              <td><span class="booking-id">#LG-4796</span></td>
-              <td>
-                <div class="guest-cell">
-                  <div class="guest-avatar">YT</div>
-                  <div>
-                    <div class="guest-name">Yuki Tanaka</div>
-                    <div class="guest-email">yuki.tanaka@email.com</div>
-                  </div>
-                </div>
-              </td>
-              <td><span class="room-pill">Grand Suite · 601</span></td>
-              <td>
-                <div class="date-cell">05 Jun 2025<div class="nights">Check-in</div>
-                </div>
-              </td>
-              <td>
-                <div class="date-cell">09 Jun 2025<div class="nights">4 nights</div>
-                </div>
-              </td>
-              <td><span class="price-cell">$2,480</span></td>
-              <td><span class="status-badge s-confirmed"><span class="sdot"></span>Confirmed</span></td>
-              <td onclick="event.stopPropagation()">
-                <div class="action-btns">
-                  <button class="btn-icon" title="Edit" onclick="openCreateModal()"><svg width="13" height="13"
-                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
-                      <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
-                    </svg></button>
-                  <button class="btn-icon danger" title="Cancel"><svg width="13" height="13" viewBox="0 0 24 24"
-                      fill="none" stroke="currentColor" stroke-width="2">
-                      <polyline points="3 6 5 6 21 6" />
-                      <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
-                      <path d="M10 11v6M14 11v6" />
-                    </svg></button>
-                </div>
-              </td>
-            </tr>
-
-            <tr data-status="pending"
-              onclick="openDetailModal('LG-4795','Rahul Sharma','RS','Deluxe Ocean View','08 Jun 2025','12 Jun 2025','4 nights','$1,680','pending','rahul.sharma@email.com','+91 98765-43210')">
-              <td><span class="booking-id">#LG-4795</span></td>
-              <td>
-                <div class="guest-cell">
-                  <div class="guest-avatar">RS</div>
-                  <div>
-                    <div class="guest-name">Rahul Sharma</div>
-                    <div class="guest-email">rahul.sharma@email.com</div>
-                  </div>
-                </div>
-              </td>
-              <td><span class="room-pill">Deluxe Ocean · 305</span></td>
-              <td>
-                <div class="date-cell">08 Jun 2025<div class="nights">Check-in</div>
-                </div>
-              </td>
-              <td>
-                <div class="date-cell">12 Jun 2025<div class="nights">4 nights</div>
-                </div>
-              </td>
-              <td><span class="price-cell">$1,680</span></td>
-              <td><span class="status-badge s-pending"><span class="sdot"></span>Pending</span></td>
-              <td onclick="event.stopPropagation()">
-                <div class="action-btns">
-                  <button class="btn-icon" title="Edit" onclick="openCreateModal()"><svg width="13" height="13"
-                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
-                      <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
-                    </svg></button>
-                  <button class="btn-icon danger" title="Cancel"><svg width="13" height="13" viewBox="0 0 24 24"
-                      fill="none" stroke="currentColor" stroke-width="2">
-                      <polyline points="3 6 5 6 21 6" />
-                      <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
-                      <path d="M10 11v6M14 11v6" />
-                    </svg></button>
-                </div>
-              </td>
-            </tr>
-
-            <tr data-status="completed"
-              onclick="openDetailModal('LG-4794','Sophie Laurent','SL','Presidential Suite','20 May 2025','25 May 2025','5 nights','$4,250','completed','sophie.laurent@email.com','+33 6 12 34 56 78')">
-              <td><span class="booking-id">#LG-4794</span></td>
-              <td>
-                <div class="guest-cell">
-                  <div class="guest-avatar">SL</div>
-                  <div>
-                    <div class="guest-name">Sophie Laurent</div>
-                    <div class="guest-email">sophie.laurent@email.com</div>
-                  </div>
-                </div>
-              </td>
-              <td><span class="room-pill">Presidential · 101</span></td>
-              <td>
-                <div class="date-cell">20 May 2025<div class="nights">Check-in</div>
-                </div>
-              </td>
-              <td>
-                <div class="date-cell">25 May 2025<div class="nights">5 nights</div>
-                </div>
-              </td>
-              <td><span class="price-cell">$4,250</span></td>
-              <td><span class="status-badge s-completed"><span class="sdot"></span>Completed</span></td>
-              <td onclick="event.stopPropagation()">
-                <div class="action-btns">
-                  <button class="btn-icon" title="Edit" onclick="openCreateModal()"><svg width="13" height="13"
-                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
-                      <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
-                    </svg></button>
-                  <button class="btn-icon danger" title="Delete"><svg width="13" height="13" viewBox="0 0 24 24"
-                      fill="none" stroke="currentColor" stroke-width="2">
-                      <polyline points="3 6 5 6 21 6" />
-                      <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
-                      <path d="M10 11v6M14 11v6" />
-                    </svg></button>
-                </div>
-              </td>
-            </tr>
-
-          </tbody>
-        </table>
-
-        <!-- PAGINATION -->
-        <div class="pagination">
-          <div class="page-info">Showing 1–8 of 86 bookings</div>
-          <div class="page-btns">
-            <button class="page-btn">‹</button>
-            <button class="page-btn active">1</button>
-            <button class="page-btn">2</button>
-            <button class="page-btn">3</button>
-            <button class="page-btn">…</button>
-            <button class="page-btn">11</button>
-            <button class="page-btn">›</button>
-          </div>
-        </div>
-      </div>
-
     </div>
-  </main>
+  </header>
 
-  <!-- CREATE BOOKING MODAL -->
-  <div class="modal-overlay" id="createModal">
-    <div class="modal">
-      <div class="modal-header">
-        <div>
-          <div class="modal-title">Create New Booking</div>
-          <div class="modal-subtitle">Fill in guest and room details below</div>
-        </div>
-        <button class="modal-close" onclick="closeCreateModal()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
+  <div class="content">
+
+    <!-- SUMMARY CARDS — dihitung dari data database -->
+    {% set total     = bookings | length %}
+    {% set confirmed = bookings | selectattr('status', 'equalto', 'Confirmed')  | list | length %}
+    {% set pending   = bookings | selectattr('status', 'equalto', 'Pending')    | list | length %}
+    {% set completed = bookings | selectattr('status', 'equalto', 'Completed')  | list | length %}
+    {% set cancelled = bookings | selectattr('status', 'equalto', 'Cancelled')  | list | length %}
+
+    <div class="summary-row">
+      <div class="summary-card">
+        <div class="s-icon si-all">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
           </svg>
+        </div>
+        <div class="s-info">
+          <div class="s-val">{{ total }}</div>
+          <div class="s-lbl">Total Bookings</div>
+        </div>
+      </div>
+      <div class="summary-card">
+        <div class="s-icon si-confirmed">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <div class="s-info">
+          <div class="s-val">{{ confirmed }}</div>
+          <div class="s-lbl">Confirmed</div>
+        </div>
+      </div>
+      <div class="summary-card">
+        <div class="s-icon si-pending">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <div class="s-info">
+          <div class="s-val">{{ pending }}</div>
+          <div class="s-lbl">Pending</div>
+        </div>
+      </div>
+      <div class="summary-card">
+        <div class="s-icon si-cancelled">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="15" y1="9" x2="9" y2="15"/>
+            <line x1="9" y1="9" x2="15" y2="15"/>
+          </svg>
+        </div>
+        <div class="s-info">
+          <div class="s-val">{{ cancelled }}</div>
+          <div class="s-lbl">Cancelled</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+        <button class="filter-btn" onclick="setFilter('confirmed',this)">
+          <span class="fdot" style="background:#059669"></span>Confirmed
+        </button>
+        <button class="filter-btn" onclick="setFilter('pending',this)">
+          <span class="fdot" style="background:#D97706"></span>Pending
+        </button>
+        <button class="filter-btn" onclick="setFilter('completed',this)">
+          <span class="fdot" style="background:#2563EB"></span>Completed
+        </button>
+        <button class="filter-btn" onclick="setFilter('cancelled',this)">
+          <span class="fdot" style="background:#DC2626"></span>Cancelled
         </button>
       </div>
+      <div>
+        <button class="btn-gold" onclick="openCreateModal()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="12" y1="5" x2="12" y2="19"/>
+            <line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+          New Booking
+        </button>
+      </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-card">
+      <div class="table-card-header">
+        <div>
+          <div class="section-title"><span>All</span> Reservations</div>
+          <div class="table-meta">Showing <span id="rowCount">{{ total }}</span> of {{ total }} bookings</div>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Booking ID</th>
+            <th>Guest</th>
+            <th>Room</th>
+            <th>Check-In</th>
+            <th>Check-Out</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="bookingTableBody">
+
+          {% if bookings %}
+            {% for b in bookings | sort(attribute='id', reverse=True) %}
+            {%- set initials = b.guest_name.split()[:2] | map('first') | map('upper') | join('') -%}
+            {%- set status_lower = b.status | lower -%}
+
+            {# Format tanggal: '2026-06-05' -> '05 Jun 2026' #}
+            {%- set checkin_fmt  = b.check_in  | default('-') -%}
+            {%- set checkout_fmt = b.check_out | default('-') -%}
+
+            {# Hitung malam #}
+            {%- set nights = 0 -%}
+            {%- if b.check_in and b.check_out -%}
+              {# Jinja2 tidak bisa hitung selisih date natively, tampilkan raw atau gunakan filter custom #}
+              {%- set nights_label = '' -%}
+            {%- endif -%}
+
+            <tr data-status="{{ status_lower }}"
+                onclick="openDetailModal(
+                  '{{ b.id }}',
+                  '{{ b.guest_name | e }}',
+                  '{{ initials }}',
+                  '{{ b.room_name | e }}',
+                  '{{ checkin_fmt }}',
+                  '{{ checkout_fmt }}',
+                  'Rp {{ '{:,}'.format(b.total_payment or 0) }}',
+                  '{{ status_lower }}'
+                )">
+              <td><span class="booking-id">#LG-{{ '%04d' | format(b.id) }}</span></td>
+              <td>
+                <div class="guest-cell">
+                  <div class="guest-avatar">{{ initials }}</div>
+                  <div>
+                    <div class="guest-name">{{ b.guest_name }}</div>
+                    <div class="guest-email">{{ b.room_name }}</div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="room-pill">{{ b.room_name }}</span></td>
+              <td>
+                <div class="date-cell">
+                  {{ b.check_in }}
+                  <div class="nights">Check-in</div>
+                </div>
+              </td>
+              <td>
+                <div class="date-cell">
+                  {{ b.check_out }}
+                  <div class="nights">Check-out</div>
+                </div>
+              </td>
+              <td><span class="price-cell">Rp {{ '{:,}'.format(b.total_payment or 0) }}</span></td>
+              <td>
+                {% if status_lower == 'confirmed' %}
+                  <span class="status-badge s-confirmed"><span class="sdot"></span>Confirmed</span>
+                {% elif status_lower == 'pending' %}
+                  <span class="status-badge s-pending"><span class="sdot"></span>Pending</span>
+                {% elif status_lower == 'completed' %}
+                  <span class="status-badge s-completed"><span class="sdot"></span>Completed</span>
+                {% elif status_lower == 'cancelled' %}
+                  <span class="status-badge s-cancelled"><span class="sdot"></span>Cancelled</span>
+                {% else %}
+                  <span class="status-badge s-pending"><span class="sdot"></span>{{ b.status }}</span>
+                {% endif %}
+              </td>
+              <td onclick="event.stopPropagation()">
+                <div class="action-btns">
+                  <button class="btn-icon" title="Edit"
+                    onclick="openEditModal({{ b.id }}, '{{ b.guest_name | e }}', '{{ b.room_name | e }}', '{{ b.check_in }}', '{{ b.check_out }}', '{{ b.status }}', {{ b.total_payment or 0 }})">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+                      <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                    </svg>
+                  </button>
+                  <form method="POST" action="/bookings/{{ b.id }}/delete"
+                        onsubmit="return confirm('Hapus booking #LG-{{ '%04d' | format(b.id) }}?')"
+                        onclick="event.stopPropagation()" style="display:inline">
+                    <button type="submit" class="btn-icon danger" title="Delete">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"/>
+                        <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/>
+                        <path d="M10 11v6M14 11v6"/>
+                      </svg>
+                    </button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          {% else %}
+            <tr>
+              <td colspan="8">
+                <div class="empty-state">
+                  <div class="empty-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                  </div>
+                  <div class="empty-title">No bookings yet</div>
+                  <div class="empty-sub">Booking baru akan muncul di sini secara otomatis.</div>
+                </div>
+              </td>
+            </tr>
+          {% endif %}
+
+        </tbody>
+      </table>
+
+      <div class="pagination">
+        <div class="page-info">Total {{ total }} booking</div>
+        <div class="page-btns">
+          <button class="page-btn active">1</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- CREATE BOOKING MODAL -->
+<div class="modal-overlay" id="createModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Create New Booking</div>
+        <div class="modal-subtitle">Fill in guest and room details below</div>
+      </div>
+      <button class="modal-close" onclick="closeCreateModal()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <form method="POST" action="/bookings/create">
       <div class="modal-body">
         <div class="form-section-label">Guest Information</div>
         <div class="form-row">
-          <div class="form-group"><label class="form-label">First Name</label><input type="text" class="form-input"
-              placeholder="e.g. John"></div>
-          <div class="form-group"><label class="form-label">Last Name</label><input type="text" class="form-input"
-              placeholder="e.g. Doe"></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input"
-              placeholder="guest@email.com"></div>
-          <div class="form-group"><label class="form-label">Phone Number</label><input type="text" class="form-input"
-              placeholder="+62 8xx-xxxx-xxxx"></div>
-        </div>
-        <div class="form-section-label">Room & Stay Details</div>
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">Room Type</label>
-            <select class="form-select">
-              <option>Presidential Suite</option>
-              <option>Grand Suite</option>
-              <option>Deluxe Ocean View</option>
-              <option>Superior Room</option>
-              <option>Classic Room</option>
-            </select>
+          <div class="form-group">
+            <label class="form-label">Nama Tamu</label>
+            <input type="text" name="guest_name" class="form-input" placeholder="Nama lengkap tamu" required>
           </div>
-          <div class="form-group"><label class="form-label">Room Number</label>
-            <select class="form-select">
-              <option>101</option>
-              <option>202</option>
-              <option>305</option>
-              <option>412</option>
-              <option>601</option>
+          <div class="form-group">
+            <label class="form-label">Nama Kamar</label>
+            <select name="room_name" class="form-select" required>
+              <option value="">-- Pilih Kamar --</option>
+              <option value="Superior Room">Superior Room</option>
+              <option value="Deluxe Room">Deluxe Room</option>
+              <option value="Junior Suite">Junior Suite</option>
             </select>
           </div>
         </div>
+        <div class="form-section-label">Stay Details</div>
         <div class="form-row">
-          <div class="form-group"><label class="form-label">Check-In Date</label><input type="date" class="form-input">
+          <div class="form-group">
+            <label class="form-label">Check-In</label>
+            <input type="date" name="check_in" class="form-input" required>
           </div>
-          <div class="form-group"><label class="form-label">Check-Out Date</label><input type="date" class="form-input">
+          <div class="form-group">
+            <label class="form-label">Check-Out</label>
+            <input type="date" name="check_out" class="form-input" required>
           </div>
         </div>
         <div class="form-row">
-          <div class="form-group"><label class="form-label">Number of Guests</label><input type="number"
-              class="form-input" placeholder="e.g. 2" min="1"></div>
-          <div class="form-group"><label class="form-label">Status</label>
-            <select class="form-select">
-              <option>Confirmed</option>
-              <option>Pending</option>
+          <div class="form-group">
+            <label class="form-label">Total Pembayaran (Rp)</label>
+            <input type="number" name="total_payment" class="form-input" placeholder="e.g. 1900000" min="0" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Status</label>
+            <select name="status" class="form-select">
+              <option value="Confirmed">Confirmed</option>
+              <option value="Pending">Pending</option>
             </select>
           </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group full"><label class="form-label">Special Requests</label><input type="text"
-              class="form-input" placeholder="e.g. Early check-in, extra pillows…"></div>
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn-cancel" onclick="closeCreateModal()">Cancel</button>
-        <button class="btn-gold" onclick="closeCreateModal()">
+        <button type="button" class="btn-cancel" onclick="closeCreateModal()">Cancel</button>
+        <button type="submit" class="btn-gold">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <polyline points="20 6 9 17 4 12" />
+            <polyline points="20 6 9 17 4 12"/>
           </svg>
           Create Booking
         </button>
       </div>
-    </div>
+    </form>
   </div>
+</div>
 
-  <!-- DETAIL MODAL -->
-  <div class="modal-overlay" id="detailModal">
-    <div class="modal detail-modal">
-      <div class="detail-header-info">
-        <div class="detail-avatar" id="d-avatar"></div>
-        <div>
-          <div class="detail-guest-name" id="d-name"></div>
-          <div class="detail-booking-id" id="d-id"></div>
-        </div>
-        <div style="margin-left:auto">
-          <button class="modal-close" onclick="closeDetailModal()"
-            style="border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.6)">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
-          </button>
-        </div>
+<!-- EDIT BOOKING MODAL -->
+<div class="modal-overlay" id="editModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Edit Booking</div>
+        <div class="modal-subtitle" id="editModalSubtitle">Update detail reservasi</div>
       </div>
+      <button class="modal-close" onclick="closeEditModal()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <form method="POST" id="editForm" action="">
       <div class="modal-body">
-        <div class="detail-grid">
-          <div class="detail-item">
-            <div class="detail-label">Room</div>
-            <div class="detail-value" id="d-room"></div>
+        <div class="form-section-label">Guest Information</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nama Tamu</label>
+            <input type="text" name="guest_name" id="edit_guest_name" class="form-input" required>
           </div>
-          <div class="detail-item">
-            <div class="detail-label">Status</div>
-            <div id="d-status"></div>
-          </div>
-          <div class="detail-item">
-            <div class="detail-label">Check-In</div>
-            <div class="detail-value" id="d-checkin"></div>
-          </div>
-          <div class="detail-item">
-            <div class="detail-label">Check-Out</div>
-            <div class="detail-value" id="d-checkout"></div>
-          </div>
-          <div class="detail-item">
-            <div class="detail-label">Duration</div>
-            <div class="detail-value" id="d-nights"></div>
-          </div>
-          <div class="detail-item">
-            <div class="detail-label">Total Price</div>
-            <div class="detail-value" id="d-price"></div>
+          <div class="form-group">
+            <label class="form-label">Nama Kamar</label>
+            <select name="room_name" id="edit_room_name" class="form-select" required>
+              <option value="Superior Room">Superior Room</option>
+              <option value="Deluxe Room">Deluxe Room</option>
+              <option value="Junior Suite">Junior Suite</option>
+            </select>
           </div>
         </div>
-        <div class="detail-divider"></div>
-        <div class="detail-grid">
-          <div class="detail-item">
-            <div class="detail-label">Email</div>
-            <div class="detail-value" id="d-email" style="font-size:13px;font-weight:500"></div>
+        <div class="form-section-label">Stay Details</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Check-In</label>
+            <input type="date" name="check_in" id="edit_check_in" class="form-input" required>
           </div>
-          <div class="detail-item">
-            <div class="detail-label">Phone</div>
-            <div class="detail-value" id="d-phone" style="font-size:13px;font-weight:500"></div>
+          <div class="form-group">
+            <label class="form-label">Check-Out</label>
+            <input type="date" name="check_out" id="edit_check_out" class="form-input" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Total Pembayaran (Rp)</label>
+            <input type="number" name="total_payment" id="edit_total_payment" class="form-input" min="0" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Status</label>
+            <select name="status" id="edit_status" class="form-select">
+              <option value="Confirmed">Confirmed</option>
+              <option value="Pending">Pending</option>
+              <option value="Completed">Completed</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn-cancel" onclick="closeDetailModal()">Close</button>
-        <button class="btn-gold" onclick="closeDetailModal();openCreateModal()">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
-            <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
+        <button type="button" class="btn-cancel" onclick="closeEditModal()">Cancel</button>
+        <button type="submit" class="btn-gold">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="20 6 9 17 4 12"/>
           </svg>
-          Edit Booking
+          Save Changes
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- DETAIL MODAL -->
+<div class="modal-overlay" id="detailModal">
+  <div class="modal detail-modal">
+    <div class="detail-header-info">
+      <div class="detail-avatar" id="d-avatar"></div>
+      <div>
+        <div class="detail-guest-name" id="d-name"></div>
+        <div class="detail-booking-id" id="d-id"></div>
+      </div>
+      <div style="margin-left:auto">
+        <button class="modal-close" onclick="closeDetailModal()"
+          style="border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.6)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
         </button>
       </div>
     </div>
-  </div>
-
-  <script>
-    // Filter
-    function setFilter(status, btn) {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const rows = document.querySelectorAll('#bookingTableBody tr');
-      let count = 0;
-      rows.forEach(r => {
-        const show = status === 'all' || r.dataset.status === status;
-        r.style.display = show ? '' : 'none';
-        if (show) count++;
-      });
-      document.getElementById('rowCount').textContent = count;
-    }
-
-    // Search
-    function filterBookings() {
-      const q = document.getElementById('searchInput').value.toLowerCase();
-      const rows = document.querySelectorAll('#bookingTableBody tr');
-      let count = 0;
-      rows.forEach(r => {
-        const show = r.innerText.toLowerCase().includes(q);
-        r.style.display = show ? '' : 'none';
-        if (show) count++;
-      });
-      document.getElementById('rowCount').textContent = count;
-    }
-
-    // Create modal
-    function openCreateModal() { document.getElementById('createModal').classList.add('open'); }
-    function closeCreateModal() { document.getElementById('createModal').classList.remove('open'); }
-    document.getElementById('createModal').addEventListener('click', function (e) { if (e.target === this) closeCreateModal(); });
-
-    // Detail modal
-    const statusMap = {
-      confirmed: '<span class="status-badge s-confirmed"><span class="sdot"></span>Confirmed</span>',
-      pending: '<span class="status-badge s-pending"><span class="sdot"></span>Pending</span>',
-      completed: '<span class="status-badge s-completed"><span class="sdot"></span>Completed</span>',
-      cancelled: '<span class="status-badge s-cancelled"><span class="sdot"></span>Cancelled</span>',
-    };
-    function openDetailModal(id, name, initials, room, checkin, checkout, nights, price, status, email, phone) {
-      document.getElementById('d-avatar').textContent = initials;
-      document.getElementById('d-name').textContent = name;
-      document.getElementById('d-id').textContent = '#' + id;
-      document.getElementById('d-room').textContent = room;
-      document.getElementById('d-checkin').textContent = checkin;
-      document.getElementById('d-checkout').textContent = checkout;
-      document.getElementById('d-nights').textContent = nights;
-      document.getElementById('d-price').textContent = price;
-      document.getElementById('d-status').innerHTML = statusMap[status] || status;
-      document.getElementById('d-email').textContent = email;
-      document.getElementById('d-phone').textContent = phone;
-      document.getElementById('detailModal').classList.add('open');
-    }
-    function closeDetailModal() { document.getElementById('detailModal').classList.remove('open'); }
-    document.getElementById('detailModal').addEventListener('click', function (e) { if (e.target === this) closeDetailModal(); });
-
-    // Pagination buttons (visual only)
-    document.querySelectorAll('.page-btn').forEach(btn => {
-      btn.addEventListener('click', function () {
-        document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
-        if (!['‹', '›', '…'].includes(this.textContent)) this.classList.add('active');
-      });
-    });
-  </script>
-
-  <div class="access-toast" id="accessToast">
-    <div class="access-toast-icon">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <rect x="3" y="11" width="18" height="11" rx="2" />
-        <path d="M7 11V7a5 5 0 0110 0v4" />
-      </svg>
+    <div class="modal-body">
+      <div class="detail-grid">
+        <div class="detail-item">
+          <div class="detail-label">Room</div>
+          <div class="detail-value" id="d-room"></div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Status</div>
+          <div id="d-status"></div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Check-In</div>
+          <div class="detail-value" id="d-checkin"></div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Check-Out</div>
+          <div class="detail-value" id="d-checkout"></div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Total Pembayaran</div>
+          <div class="detail-value" id="d-price"></div>
+        </div>
+      </div>
     </div>
-    <div><strong>Access Denied</strong> — Staff management is restricted to Superadmin only.</div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeDetailModal()">Close</button>
+    </div>
   </div>
-  <script>
-    function showAccessDenied(e) {
-      e.preventDefault();
-      const toast = document.getElementById("accessToast");
-      toast.classList.add("show");
-      setTimeout(() => toast.classList.remove("show"), 3000);
-    }
-  </script>
-</body>
+</div>
 
+<!-- ACCESS DENIED TOAST -->
+<div class="access-toast" id="accessToast">
+  <div class="access-toast-icon">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <rect x="3" y="11" width="18" height="11" rx="2"/>
+      <path d="M7 11V7a5 5 0 0110 0v4"/>
+    </svg>
+  </div>
+  <div><strong>Access Denied</strong> — Staff management is restricted to Superadmin only.</div>
+</div>
+
+<script>
+  // ── FILTER ──────────────────────────────────────────────────
+  function setFilter(status, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const rows = document.querySelectorAll('#bookingTableBody tr');
+    let count = 0;
+    rows.forEach(r => {
+      const show = status === 'all' || r.dataset.status === status;
+      r.style.display = show ? '' : 'none';
+      if (show) count++;
+    });
+    document.getElementById('rowCount').textContent = count;
+  }
+
+  // ── SEARCH ──────────────────────────────────────────────────
+  function filterBookings() {
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    const rows = document.querySelectorAll('#bookingTableBody tr');
+    let count = 0;
+    rows.forEach(r => {
+      const show = r.innerText.toLowerCase().includes(q);
+      r.style.display = show ? '' : 'none';
+      if (show) count++;
+    });
+    document.getElementById('rowCount').textContent = count;
+  }
+
+  // ── CREATE MODAL ────────────────────────────────────────────
+  function openCreateModal() { document.getElementById('createModal').classList.add('open'); }
+  function closeCreateModal() { document.getElementById('createModal').classList.remove('open'); }
+  document.getElementById('createModal').addEventListener('click', function(e) {
+    if (e.target === this) closeCreateModal();
+  });
+
+  // ── EDIT MODAL ──────────────────────────────────────────────
+  function openEditModal(id, guestName, roomName, checkIn, checkOut, status, totalPayment) {
+    document.getElementById('editForm').action = '/bookings/' + id + '/edit';
+    document.getElementById('editModalSubtitle').textContent = 'Booking #LG-' + String(id).padStart(4, '0');
+    document.getElementById('edit_guest_name').value   = guestName;
+    document.getElementById('edit_check_in').value     = checkIn;
+    document.getElementById('edit_check_out').value    = checkOut;
+    document.getElementById('edit_total_payment').value = totalPayment;
+
+    const roomSel = document.getElementById('edit_room_name');
+    for (let o of roomSel.options) { if (o.value === roomName) { o.selected = true; break; } }
+
+    const statusSel = document.getElementById('edit_status');
+    for (let o of statusSel.options) { if (o.value === status || o.value.toLowerCase() === status) { o.selected = true; break; } }
+
+    document.getElementById('editModal').classList.add('open');
+  }
+
+  function closeEditModal() { document.getElementById('editModal').classList.remove('open'); }
+  document.getElementById('editModal').addEventListener('click', function(e) {
+    if (e.target === this) closeEditModal();
+  });
+
+  // ── DETAIL MODAL ────────────────────────────────────────────
+  const statusMap = {
+    confirmed: '<span class="status-badge s-confirmed"><span class="sdot"></span>Confirmed</span>',
+    pending:   '<span class="status-badge s-pending"><span class="sdot"></span>Pending</span>',
+    completed: '<span class="status-badge s-completed"><span class="sdot"></span>Completed</span>',
+    cancelled: '<span class="status-badge s-cancelled"><span class="sdot"></span>Cancelled</span>',
+  };
+
+  function openDetailModal(id, name, initials, room, checkin, checkout, price, status) {
+    document.getElementById('d-avatar').textContent   = initials;
+    document.getElementById('d-name').textContent     = name;
+    document.getElementById('d-id').textContent       = '#LG-' + String(id).padStart(4, '0');
+    document.getElementById('d-room').textContent     = room;
+    document.getElementById('d-checkin').textContent  = checkin;
+    document.getElementById('d-checkout').textContent = checkout;
+    document.getElementById('d-price').textContent    = price;
+    document.getElementById('d-status').innerHTML     = statusMap[status] || status;
+    document.getElementById('detailModal').classList.add('open');
+  }
+
+  function closeDetailModal() { document.getElementById('detailModal').classList.remove('open'); }
+  document.getElementById('detailModal').addEventListener('click', function(e) {
+    if (e.target === this) closeDetailModal();
+  });
+
+  // ── ACCESS DENIED TOAST ─────────────────────────────────────
+  function showAccessDenied(e) {
+    e.preventDefault();
+    const toast = document.getElementById('accessToast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
+  }
+</script>
+
+</body>
 </html>

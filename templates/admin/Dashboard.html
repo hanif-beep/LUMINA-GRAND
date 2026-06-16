@@ -253,36 +253,10 @@
       gap: 16px;
     }
 
-    .search-bar {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--white);
-      border: 1px solid var(--surface-2);
-      border-radius: 40px;
-      padding: 8px 16px;
-      width: 220px;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
 
-    .search-bar:focus-within {
-      border-color: var(--gold-border);
-      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
-    }
 
-    .search-bar input {
-      border: none;
-      outline: none;
-      font-size: 13px;
-      background: transparent;
-      color: var(--text-primary);
-      width: 100%;
-      font-family: inherit;
-    }
 
-    .search-bar input::placeholder {
-      color: var(--text-muted);
-    }
+
 
     .icon-btn {
       width: 38px;
@@ -474,7 +448,12 @@
       border: 1px solid rgba(15, 23, 42, 0.06);
       border-radius: var(--radius);
       box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
-      overflow: hidden;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+
+    .table-card table {
+      min-width: 600px;
     }
 
     .table-header {
@@ -1112,13 +1091,15 @@
 
     <div class="sidebar-bottom">
       <div class="admin-profile">
-        <div class="avatar-circle">AD</div>
+        <div class="avatar-circle">{{ current_user.username.split()|map('first')|map('upper')|join('') }}</div>
         <div class="admin-info">
-          <div class="name">Administrator</div>
-          <div class="role">General Manager</div>
+          <div class="name">{{ current_user.username }}</div>
+          <div class="role">
+            {% if current_user.role == 'super_admin' %}Superadmin{% else %}General Manager{% endif %}
+          </div>
         </div>
       </div>
-      <a href="/logout"class="logout-btn">
+      <a href="/logout" class="logout-btn">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
           <polyline points="16 17 21 12 16 7" />
@@ -1135,25 +1116,13 @@
     <!-- HEADER -->
     <header class="header">
       <div class="header-left">
-        <div class="greeting">Welcome back, Administrator</div>
+        <div class="greeting">
+          Welcome back, {% if current_user.role == 'super_admin' %}Superadmin{% else %}Administrator{% endif %}
+        </div>
         <div class="subtitle">Monitor hotel operations, occupancy, and guest satisfaction.</div>
       </div>
       <div class="header-right">
-        <div class="search-bar">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2">
-            <circle cx="11" cy="11" r="8" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          </svg>
-          <input type="text" placeholder="Search bookings, guests…">
-        </div>
-        <div class="icon-btn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" />
-            <path d="M13.73 21a2 2 0 01-3.46 0" />
-          </svg>
-          <div class="notif-dot"></div>
-        </div>
-        <div class="header-avatar">AD</div>
+        
       </div>
     </header>
 
@@ -1175,13 +1144,13 @@
                 </svg>
               </div>
             </div>
-            <div class="stat-value">125</div>
+            <div class="stat-value">{{ total_room_units }}</div>
             <div class="stat-trend up">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <polyline points="18 15 12 9 6 15" />
               </svg>
-              +3 new
-              <span class="stat-period">this month</span>
+              {{ rooms|length }} room type{{ 's' if rooms|length != 1 else '' }}
+              <span class="stat-period">in catalog</span>
             </div>
           </div>
 
@@ -1194,13 +1163,13 @@
                 </svg>
               </div>
             </div>
-            <div class="stat-value">86</div>
+            <div class="stat-value">{{ active_bookings_count }}</div>
             <div class="stat-trend up">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <polyline points="18 15 12 9 6 15" />
               </svg>
-              +12%
-              <span class="stat-period">vs last week</span>
+              Pending + Confirmed
+              <span class="stat-period">right now</span>
             </div>
           </div>
 
@@ -1214,13 +1183,13 @@
                 </svg>
               </div>
             </div>
-            <div class="stat-value">92%</div>
+            <div class="stat-value">{{ occupancy_rate }}%</div>
             <div class="stat-trend up">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <polyline points="18 15 12 9 6 15" />
               </svg>
-              +5.2%
-              <span class="stat-period">vs last month</span>
+              {{ occupied_count }} of {{ total_room_units }} rooms
+              <span class="stat-period">occupied today</span>
             </div>
           </div>
 
@@ -1234,13 +1203,13 @@
                 </svg>
               </div>
             </div>
-            <div class="stat-value" style="font-size:22px;">$15,800</div>
+            <div class="stat-value" style="font-size:22px;">Rp {{ "{:,.0f}".format(monthly_revenue) }}</div>
             <div class="stat-trend up">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <polyline points="18 15 12 9 6 15" />
               </svg>
-              +18.3%
-              <span class="stat-period">vs last month</span>
+              Confirmed + Completed
+              <span class="stat-period">this month</span>
             </div>
           </div>
 
@@ -1259,7 +1228,6 @@
               <div class="section-title" style="margin-bottom:0"><span>Recent</span> Bookings</div>
               <div style="font-size:12px;color:var(--text-muted);margin-top:3px">Latest 5 reservations</div>
             </div>
-            <button class="btn-gold">+ New Booking</button>
           </div>
           <table>
             <thead>
@@ -1270,55 +1238,30 @@
                 <th>Check-In</th>
                 <th>Check-Out</th>
                 <th>Status</th>
-                <th>Action</th>
+                
               </tr>
             </thead>
             <tbody>
+              {% if recent_bookings %}
+              {% for b in recent_bookings %}
               <tr>
-                <td><span class="booking-id">#LG-4801</span></td>
-                <td><span class="guest-name">Aryan Pratama</span></td>
-                <td><span class="room-type">Grand Suite</span></td>
-                <td>02 Jun 2025</td>
-                <td>06 Jun 2025</td>
-                <td><span class="status-badge status-confirmed"><span class="status-dot"></span>Confirmed</span></td>
-                <td><button class="btn-view">View Details</button></td>
+                <td><span class="booking-id">#LG-{{ '%04d'|format(b.id) }}</span></td>
+                <td><span class="guest-name">{{ b.guest_name }}</span></td>
+                <td><span class="room-type">{{ b.room_name }}</span></td>
+                <td>{{ b.check_in }}</td>
+                <td>{{ b.check_out }}</td>
+                <td>
+                  <span class="status-badge status-{{ b.status|lower }}">
+                    <span class="status-dot"></span>{{ b.status }}
+                  </span>
+                </td>
               </tr>
+              {% endfor %}
+              {% else %}
               <tr>
-                <td><span class="booking-id">#LG-4800</span></td>
-                <td><span class="guest-name">Siti Rahmawati</span></td>
-                <td><span class="room-type">Deluxe Ocean</span></td>
-                <td>03 Jun 2025</td>
-                <td>07 Jun 2025</td>
-                <td><span class="status-badge status-pending"><span class="status-dot"></span>Pending</span></td>
-                <td><button class="btn-view">View Details</button></td>
+                <td colspan="7" style="text-align:center;color:var(--text-muted);padding:24px;">No bookings yet</td>
               </tr>
-              <tr>
-                <td><span class="booking-id">#LG-4799</span></td>
-                <td><span class="guest-name">David Chen</span></td>
-                <td><span class="room-type">Presidential Suite</span></td>
-                <td>28 May 2025</td>
-                <td>01 Jun 2025</td>
-                <td><span class="status-badge status-completed"><span class="status-dot"></span>Completed</span></td>
-                <td><button class="btn-view">View Details</button></td>
-              </tr>
-              <tr>
-                <td><span class="booking-id">#LG-4798</span></td>
-                <td><span class="guest-name">Maria Santos</span></td>
-                <td><span class="room-type">Superior Room</span></td>
-                <td>30 May 2025</td>
-                <td>03 Jun 2025</td>
-                <td><span class="status-badge status-confirmed"><span class="status-dot"></span>Confirmed</span></td>
-                <td><button class="btn-view">View Details</button></td>
-              </tr>
-              <tr>
-                <td><span class="booking-id">#LG-4797</span></td>
-                <td><span class="guest-name">Budi Santoso</span></td>
-                <td><span class="room-type">Classic Room</span></td>
-                <td>25 May 2025</td>
-                <td>28 May 2025</td>
-                <td><span class="status-badge status-cancelled"><span class="status-dot"></span>Cancelled</span></td>
-                <td><button class="btn-view">View Details</button></td>
-              </tr>
+              {% endif %}
             </tbody>
           </table>
         </div>
@@ -1342,10 +1285,12 @@
                     </div>
                     Available
                   </div>
-                  <span class="room-count">32</span>
+                  <span class="room-count">{{ available_count }}</span>
                 </div>
                 <div class="progress-bar">
-                  <div class="progress-fill fill-green" style="width:26%"></div>
+                  {% set pct_available = ((available_count / total_room_units * 100) | round | int) if total_room_units
+                  else 0 %}
+                  <div class="progress-fill fill-green" style="width:{{ pct_available ~ '%' }}"></div>
                 </div>
               </div>
 
@@ -1361,10 +1306,13 @@
                     </div>
                     Occupied
                   </div>
-                  <span class="room-count">68</span>
+                  <span class="room-count">{{ occupied_count }}</span>
                 </div>
                 <div class="progress-bar">
-                  <div class="progress-fill fill-navy" style="width:54%"></div>
+                  {% set pct_occupied = ((occupied_count / total_room_units * 100) | round | int) if total_room_units
+                  else 0 %}
+                  <div class="progress-fill fill-navy" style="width:{{ pct_occupied ~ '%' }}">
+                  </div>
                 </div>
               </div>
 
@@ -1380,10 +1328,12 @@
                     </div>
                     Reserved
                   </div>
-                  <span class="room-count">18</span>
+                  <span class="room-count">{{ reserved_count }}</span>
                 </div>
                 <div class="progress-bar">
-                  <div class="progress-fill fill-gold" style="width:14%"></div>
+                  {% set pct_reserved = ((reserved_count / total_room_units * 100) | round | int) if total_room_units
+                  else 0 %}
+                  <div class="progress-fill fill-gold" style="width:{{ pct_reserved ~ '%' }}"></div>
                 </div>
               </div>
 
@@ -1399,10 +1349,12 @@
                     </div>
                     Maintenance
                   </div>
-                  <span class="room-count">7</span>
+                  <span class="room-count">{{ maintenance_count }}</span>
                 </div>
                 <div class="progress-bar">
-                  <div class="progress-fill fill-red" style="width:6%"></div>
+                  {% set pct_maintenance = ((maintenance_count / total_room_units * 100) | round | int) if
+                  total_room_units else 0 %}
+                  <div class="progress-fill fill-red" style="width:{{ pct_maintenance ~ '%' }}"></div>
                 </div>
               </div>
 
@@ -1413,36 +1365,33 @@
           <div class="activity-card">
             <div class="section-title" style="margin-bottom:0"><span>Recent</span> Activity</div>
             <div class="activity-list">
-
+              {% if activity_feed %}
+              {% for a in activity_feed %}
               <div class="activity-item">
+                {% if a.status == 'Pending' %}
+                <div class="activity-dot" style="background:rgba(217,119,6,0.12);color:#D97706">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                </div>
+                <div class="activity-body">
+                  <div class="act-title">New Booking Request #LG-{{ '%04d'|format(a.booking_id) }}</div>
+                  <div class="act-detail">{{ a.guest_name }} · {{ a.room_name }}</div>
+                  <div class="act-time">{{ a.time_ago }}</div>
+                </div>
+                {% elif a.status == 'Confirmed' %}
                 <div class="activity-dot" style="background:rgba(5,150,105,0.12);color:#059669">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    <polyline points="20 6 9 17 4 12" />
                   </svg>
                 </div>
                 <div class="activity-body">
-                  <div class="act-title">New Booking #LG-4801</div>
-                  <div class="act-detail">Aryan Pratama · Grand Suite</div>
-                  <div class="act-time">2 minutes ago</div>
+                  <div class="act-title">Booking Confirmed #LG-{{ '%04d'|format(a.booking_id) }}</div>
+                  <div class="act-detail">{{ a.guest_name }} · {{ a.room_name }}</div>
+                  <div class="act-time">{{ a.time_ago }}</div>
                 </div>
-              </div>
-
-              <div class="activity-item">
-                <div class="activity-dot" style="background:rgba(212,175,55,0.12);color:#A08020">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4" />
-                    <polyline points="10 17 15 12 10 7" />
-                    <line x1="15" y1="12" x2="3" y2="12" />
-                  </svg>
-                </div>
-                <div class="activity-body">
-                  <div class="act-title">Guest Check-In</div>
-                  <div class="act-detail">Maria Santos · Room 412</div>
-                  <div class="act-time">18 minutes ago</div>
-                </div>
-              </div>
-
-              <div class="activity-item">
+                {% elif a.status == 'Completed' %}
                 <div class="activity-dot" style="background:rgba(37,99,235,0.1);color:#2563EB">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                     <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
@@ -1451,13 +1400,11 @@
                   </svg>
                 </div>
                 <div class="activity-body">
-                  <div class="act-title">Guest Check-Out</div>
-                  <div class="act-detail">David Chen · Presidential Suite</div>
-                  <div class="act-time">1 hour ago</div>
+                  <div class="act-title">Guest Checked Out — #LG-{{ '%04d'|format(a.booking_id) }}</div>
+                  <div class="act-detail">{{ a.guest_name }} · {{ a.room_name }}</div>
+                  <div class="act-time">{{ a.time_ago }}</div>
                 </div>
-              </div>
-
-              <div class="activity-item">
+                {% else %}
                 <div class="activity-dot" style="background:rgba(220,38,38,0.1);color:#DC2626">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                     <circle cx="12" cy="12" r="10" />
@@ -1466,62 +1413,23 @@
                   </svg>
                 </div>
                 <div class="activity-body">
-                  <div class="act-title">Booking Cancelled</div>
-                  <div class="act-detail">Budi Santoso · #LG-4797</div>
-                  <div class="act-time">3 hours ago</div>
+                  <div class="act-title">Booking Cancelled — #LG-{{ '%04d'|format(a.booking_id) }}</div>
+                  <div class="act-detail">{{ a.guest_name }} · {{ a.room_name }}</div>
+                  <div class="act-time">{{ a.time_ago }}</div>
                 </div>
+                {% endif %}
               </div>
-
+              {% endfor %}
+              {% else %}
+              <p style="font-size:13px;color:var(--text-muted);padding:12px 0">No recent activity</p>
+              {% endif %}
             </div>
           </div>
 
         </div>
       </div>
 
-      <!-- QUICK ACTIONS -->
-      <div>
-        <div class="section-title"><span>Quick</span> Actions</div>
-        <div class="actions-row">
-
-          <div class="action-card">
-            <div class="action-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z" />
-                <polyline points="9 22 9 12 15 12 15 22" />
-              </svg>
-            </div>
-            <div class="action-title">Add Room</div>
-            <div class="action-desc">Register a new room, configure type, floor, and amenities.</div>
-            <span class="action-arrow">→</span>
-          </div>
-
-          <div class="action-card">
-            <div class="action-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <div class="action-title">Create Booking</div>
-            <div class="action-desc">Manually create a guest reservation and assign a room.</div>
-            <span class="action-arrow">→</span>
-          </div>
-
-          <div class="action-card">
-            <div class="action-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                <circle cx="9" cy="7" r="4" />
-                <path d="M23 21v-2a4 4 0 00-3-3.87" />
-                <path d="M16 3.13a4 4 0 010 7.75" />
-              </svg>
-            </div>
-            <div class="action-title">Manage Staff</div>
-            <div class="action-desc">View, add or update staff roles, schedules, and permissions.</div>
-            <span class="action-arrow">→</span>
-          </div>
-
-        </div>
-      </div>
+      
 
       <!-- INSIGHTS -->
       <div>
@@ -1536,8 +1444,9 @@
               </svg>
             </div>
             <div class="insight-label">Most Booked</div>
-            <div class="insight-value">Grand Suite</div>
-            <div class="insight-sub">38 reservations this month</div>
+            <div class="insight-value">{{ most_booked_name }}</div>
+            <div class="insight-sub">{{ most_booked_count }} reservation{{ 's' if most_booked_count != 1 else '' }}
+              all-time</div>
           </div>
 
           <div class="insight-card">
@@ -1547,8 +1456,8 @@
               </svg>
             </div>
             <div class="insight-label">Highest Occupancy</div>
-            <div class="insight-value">Ocean View</div>
-            <div class="insight-sub">97% occupancy rate</div>
+            <div class="insight-value">{{ highest_room_name }}</div>
+            <div class="insight-sub">{{ highest_rate }}% occupancy today</div>
           </div>
 
           <div class="insight-card">
@@ -1559,20 +1468,19 @@
               </svg>
             </div>
             <div class="insight-label">Avg. Guest Stay</div>
-            <div class="insight-value">3.4 Nights</div>
-            <div class="insight-sub">+0.3 vs last month</div>
+            <div class="insight-value">{{ avg_stay }} Nights</div>
+            <div class="insight-sub">Across all bookings</div>
           </div>
 
           <div class="insight-card">
             <div class="insight-icon">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <polygon
-                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
             </div>
-            <div class="insight-label">Guest Satisfaction</div>
-            <div class="insight-value">4.8 / 5.0</div>
-            <div class="insight-sub">Based on 412 reviews</div>
+            <div class="insight-label">Total Reservations</div>
+            <div class="insight-value">{{ total_reservations }}</div>
+            <div class="insight-sub">All-time bookings recorded</div>
           </div>
 
         </div>
